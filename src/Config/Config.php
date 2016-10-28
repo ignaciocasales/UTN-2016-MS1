@@ -10,9 +10,9 @@ define("DB_PASS", "SO64nugiro");
 define("DB_HOST", "localhost");
 
 // Constantes front
-define('THEME_NAME', 'tema1');
+//define('THEME_NAME', 'tema1');
 define('ROOT', dirname(__DIR__) . "/");
-define("URL_THEME", "../Vistas/" . THEME_NAME . '/');
+define("URL_THEME", "../Vistas/");
 define("URL_CSS", URL_THEME . "css");
 define("URL_JS", URL_THEME . "js");
 
@@ -20,7 +20,7 @@ define("URL_JS", URL_THEME . "js");
 define('HOST_ROOT', __DIR__ . '/../');
 define('HOST_URL_THEME', HOST_ROOT . 'vistas/'. THEME_NAME . '/');
 
-
+/*
 echo '<p>Constante DS:' . DS . '</p>';
 echo '<p>Constante ROOT:' . ROOT . '</p>';
 echo '<p>Constante DB_NAME:' . DB_NAME . '</p>';
@@ -34,4 +34,4 @@ echo '<p>Constante THEME_NAME:' . THEME_NAME . '</p>';
 
 echo '<pre>';
 print_r($_SERVER);
-echo '</pre>';
+echo '</pre>';*/
