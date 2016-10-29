@@ -1,14 +1,16 @@
-<?php namespace Config;
+<?php
 
-    class Autoload {
-        
-        public static function iniciar() {
-            spl_autoload_register(function($classPath)
-			{
-				$class = ROOT . str_replace("\\", "/", $classPath)  . ".php";
-				//echo '<p>' . $class  . '</p>';
-				include_once($class);
-			});
-        }
+namespace Config;
+
+class Autoload
+{
+
+    public static function iniciar()
+    {
+        spl_autoload_register(function ($class) {
+            $classPath = ROOT . $class . ".php";
+            //echo '<p>' . $classPath  . '</p>';
+            include_once($classPath);
+        });
     }
-?>
+}

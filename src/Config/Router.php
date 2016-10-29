@@ -1,23 +1,28 @@
-<?php namespace Config;
+<?php
 
-    class Router {
-        
-        public static function direccionar(Request $request) {
-            $controlador = $request->getControlador() . 'Controlador';
-            $metodo = $request->getMetodo();
-            $parametros = $request->getParametros();
+namespace Config;
 
 
-            $ruta = ROOT . 'Controladores/' . $controlador . '.php';
-            
+class Router
+{
 
-            //require_once $ruta;
-            $mostrar = "Controladores\\". $controlador;
-            $controlador = new $mostrar;
-            if(!isset($parametros)) {
-                call_user_func(array($controlador, $metodo));
-            } else {
-                call_user_func_array(array($controlador, $metodo), $parametros);
-            }
+    public static function direccionar(Request $request)
+    {
+        $controlador = $request->getControlador() . 'Controladora' . '.php';
+        $metodo = $request->getMetodo();
+        $parametros = $request->getParametros();
+
+
+        $ruta = ROOT . 'Controladoras/' . $controlador;
+
+
+        require_once $ruta;
+        $mostrar = "Controladoras\\" . $controlador;
+        $controlador = new $mostrar;
+        if (!isset($parametros)) {
+            call_user_func(array($controlador, $metodo));
+        } else {
+            call_user_func_array(array($controlador, $metodo), $parametros);
         }
     }
+}

@@ -13,7 +13,10 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Favicon -->
-    <link rel="icon" href="#">
+    <link rel="icon" href="img/favicon.png">
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="estilo/estilo.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -24,3 +27,5 @@
 </head>
 
 <body>
+
+    <h1>Estoy funcionando!</h1>

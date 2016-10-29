@@ -1,20 +1,8 @@
 <?php
-require_once ('Pago.php');
-require_once ('CuentaCte.php');
 
 namespace Modelo;
 
-
-
-use Modelo;
-use Modelo;
-use Modelo;
-/**
- * @author Damian
- * @version 1.0
- * @created 22-oct-2016 05:06:30 p.m.
- */
-class MovimientoCuentaClte implements JsonSerializable
+class MovimientoCuentaCorriente
 {
 
 	private $fecha_hora;
@@ -72,15 +60,5 @@ class MovimientoCuentaClte implements JsonSerializable
     public function getCuenta(){
         return $this->m_CuentaCte = $m_CuentaCte;
     }
-    
-    public function jsonSerialize(){
-        return [
-            'fecha_hora'    => $this->fecha_hora,
-            'importe'       => $this->importe,
-            'evento_peaje'  => $this->m_EventoPeaje,
-            'evento_multa'  => $this->m_EventoMulta,
-            'cuenta'        => $this->m_CuentaCte
-        ]
-    }
+
 }
-?>
