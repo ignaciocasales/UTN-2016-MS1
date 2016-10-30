@@ -8,15 +8,14 @@ class Router
 
     public static function direccionar(Request $request)
     {
-        $controlador = $request->getControlador() . 'Controladora' . '.php';
+        $controlador = $request->getControlador() . 'Controladora';
         $metodo = $request->getMetodo();
         $parametros = $request->getParametros();
 
 
-        $ruta = ROOT . 'Controladoras/' . $controlador;
+        //$ruta = ROOT . 'Controladoras/' . $controlador . '.php';
 
-
-        require_once $ruta;
+        //require_once $ruta;
         $mostrar = "Controladoras\\" . $controlador;
         $controlador = new $mostrar;
         if (!isset($parametros)) {

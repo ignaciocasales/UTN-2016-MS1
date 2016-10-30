@@ -14,13 +14,13 @@ define("DB_HOST", "localhost");
 
 // Constantes front
 //define('THEME_NAME', 'tema1');
-define('ROOT', dirname(__DIR__) . "\\");
+define('ROOT', dirname(__DIR__) . "/");
 define("URL_THEME", "../Vistas/");
 define("URL_CSS", URL_THEME . "css");
 define("URL_JS", URL_THEME . "js");
 
 // Constantes Server
-define('HOST_ROOT', __DIR__ . '/../');
+define('HOST_ROOT', __DIR__ . '/src/');
 //define('HOST_URL_THEME', HOST_ROOT . 'vistas/'. THEME_NAME . '/');
 
 /**

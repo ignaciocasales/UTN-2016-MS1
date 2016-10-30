@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
 
 <head>
     <meta charset="utf-8">
@@ -28,4 +28,4 @@
 
 <body>
 
-    <h1>Estoy funcionando!</h1>
+    <h1>Soy el HEADER</h1>

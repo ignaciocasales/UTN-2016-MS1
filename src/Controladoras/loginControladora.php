@@ -1,11 +1,16 @@
 <?php
 
-namespace Controloadoras;
+namespace Controladoras;
 
 
 class loginControladora
 {
     public function __construct()
     {
+    }
+
+    public function index()
+    {
+        echo 'Aca va el Form';
     }
 }
