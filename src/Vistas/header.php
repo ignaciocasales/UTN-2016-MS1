@@ -7,16 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>TrafiMDQ</title>
+    <meta name="description" content="Trafi MDQ">
     <meta name="author" content="Casales,Navarro,Tacconi">
+    <!-- Favicon -->
+    <link rel="icon" href="../public_html/img/favicon.png">
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Favicon -->
-    <link rel="icon" href="img/favicon.png">
+    <link href="../public_html/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Estilos -->
-    <link rel="stylesheet" href="estilo/estilo.css">
+    <link rel="stylesheet" href="../public_html/estilo/estilo.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -26,6 +26,5 @@
     <![endif]-->
 </head>
 
-<body>
+<body class="bg-light fn-light">
 
-    <h1>Soy el HEADER</h1>

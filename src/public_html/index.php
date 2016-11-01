@@ -11,6 +11,8 @@ Config\Autoload::iniciar();
 
 include URL_THEME . 'header.php';
 
+include URL_THEME . 'navbar.php';
+
 Config\Router::direccionar(new Config\Request());
 
 include URL_THEME . 'footer.php';

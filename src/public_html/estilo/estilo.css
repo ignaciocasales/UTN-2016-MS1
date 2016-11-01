@@ -1,0 +1,36 @@
+.navbar {
+    margin-bottom: 0px;
+}
+
+.box {
+    border: medium none;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.login {
+    padding: 15px;
+    position: relative;
+    z-index: 1;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 8px;
+    min-height: 390px;
+}
+
+.login .bg {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    opacity: 0.4;
+    width: 100%;
+    height: 100%;
+}
+
+.login .bienvenida {
+    border-right: 1px solid #E3E3E3;
+    min-height: 360px;
+}
