@@ -11,6 +11,10 @@ class loginControladora
 
     public function index()
     {
-        include ("../Vistas/login.php");
+      include ("../Vistas/login.php");
+    }
+
+    public function verificar(){
+        echo 'FUNCIONA';
     }
 }

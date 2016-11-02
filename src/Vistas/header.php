@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es-ARG">
 
 <head>
     <meta charset="utf-8">
@@ -10,13 +10,13 @@
     <meta name="description" content="Trafi MDQ">
     <meta name="author" content="Casales,Navarro,Tacconi">
     <!-- Favicon -->
-    <link rel="icon" href="../public_html/img/favicon.png">
+    <link rel="icon" href="<?php echo URL_IMG . 'favicon.png';?>">
 
     <!-- Bootstrap -->
-    <link href="../public_html/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo URL_BOOTSTRAP; ?>" rel="stylesheet">
 
     <!-- Estilos -->
-    <link rel="stylesheet" href="../public_html/estilo/estilo.css">
+    <link rel="stylesheet" href="<?php echo URL_ESTILO . 'estilo.css'; ?>">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

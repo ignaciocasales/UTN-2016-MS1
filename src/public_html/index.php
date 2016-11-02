@@ -9,10 +9,11 @@ require '../Config/Autoload.php';
 
 Config\Autoload::iniciar();
 
-include URL_THEME . 'header.php';
 
-include URL_THEME . 'navbar.php';
+include URL_VISTA . 'header.php';
+
+include URL_VISTA . 'navbar.php';
 
 Config\Router::direccionar(new Config\Request());
 
-include URL_THEME . 'footer.php';
+include URL_VISTA . 'footer.php';

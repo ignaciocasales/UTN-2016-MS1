@@ -7,10 +7,10 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-4">
             <h3>Inicie Sesión</h3>
-            <form>
+            <form method="get" action="/dyd/public_html/login/verificar/">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>

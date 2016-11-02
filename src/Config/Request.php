@@ -6,13 +6,21 @@ class Request
     private $metodo;
     private $parametros;
 
+    /**
+     * Request constructor.
+     */
     public function __construct()
     {
         $metodoRequest = $this->getMetodoRequest();
 
         if ($metodoRequest == 'GET') {
 
-            echo $url = filter_input(INPUT_GET, 'url', FILTER_SANITIZE_URL);
+            $url = filter_input(INPUT_GET, 'url', FILTER_SANITIZE_URL);
+
+
+            /**
+             * $url = filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_URL);
+             */
 
 
             /**
@@ -33,10 +41,10 @@ class Request
             $ArregloUrl = array_filter($urlToArray);
 
             /**
-            echo '<pre>';
-            print_r($ArregloUrl);
-            echo '</pre>';
-            */
+             * echo '<pre>';
+             * print_r($ArregloUrl);
+             * echo '</pre>';
+             */
 
             /**
              * Filtra elementos de un array usando una función de devolución de llamada.
@@ -48,7 +56,7 @@ class Request
 
             if (empty($ArregloUrl)) {
                 // Si Arreglo Url esta vacio, cargo el controlador por defecto
-                $this->controlador = 'login';
+                $this->controlador = 'Login';
             } else {
                 // Quito el primer elemento del array y lo uso como controlador
                 $this->controlador = ucwords(array_shift($ArregloUrl));
@@ -67,6 +75,8 @@ class Request
             }
 
         } else {
+
+            $this->parametros = $_POST;
 
         }
 
