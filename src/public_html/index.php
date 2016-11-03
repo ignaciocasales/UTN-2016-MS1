@@ -9,7 +9,6 @@ require '../Config/Autoload.php';
 
 Config\Autoload::iniciar();
 
-
 include URL_VISTA . 'header.php';
 
 include URL_VISTA . 'navbar.php';

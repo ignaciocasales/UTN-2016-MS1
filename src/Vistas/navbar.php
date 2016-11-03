@@ -1,5 +1,5 @@
 <nav class="navbar navbar-default bg-pri">
-    <div class="container-fluid">
+    <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -18,8 +18,9 @@
         <div class="collapse navbar-collapse" id="responsiveMenu">
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Consultas <span class="caret"></span>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">
+                        Consultas <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Multas</a></li>
@@ -29,19 +30,29 @@
                 </li>
                 <li>
                     <a href="<?php echo URL_PUBLIC . 'index.php'; ?>">
-                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Reclamos
+                        Reclamos <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo URL_PUBLIC . 'index.php'; ?>">
+                        Añadir Vehículo <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo URL_PUBLIC . 'index.php'; ?>">
+                        Simulación <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
                     </a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="<?php echo URL_PUBLIC . 'index.php'; ?>">
-                        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Iniciar Sesión
+                        Iniciar Sesión <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
                     </a>
                 </li>
                 <li>
                     <a href="<?php echo URL_PUBLIC . 'index.php'; ?>">
-                        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Cerrar Sesión
+                        Cerrar Sesión <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
                     </a>
                 </li>
             </ul>

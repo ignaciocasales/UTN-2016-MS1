@@ -7,15 +7,16 @@ hr {
 /*Bootstrap Override.
 -------------------------------------------------- */
 .navbar {
-    margin-bottom: 0px;
+    margin-bottom: 40px;
+    margin-top: 15px;
 }
 
 .navbar-brand {
-    padding: 10px 15px 15px 15px;
+    padding: 22px 56px 15px;
 }
 
 .navbar-brand .brand {
-    width: 50px;
+    width: 80px;
 }
 
 /*Custom CSS.
@@ -23,7 +24,7 @@ hr {
 
 .bg-pri {
     background-color: white;
-    /*color: ;*/
+    /*color: white;*/
 }
 
 .bg-sec {
@@ -34,6 +35,10 @@ hr {
 .bg-body {
     background-color: white;
     /*color: ;*/
+}
+
+.navbar-default .navbar-nav > li > a {
+    /*color: white;*/
 }
 
 .box-primary {
@@ -73,6 +78,7 @@ hr {
 .login .bienvenida {
     border-right: 1px solid #E3E3E3;
 }
+
 /* Hace que los col quetengan misma altura.
 -------------------------------------------------- */
 .row {
