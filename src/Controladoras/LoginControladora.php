@@ -14,7 +14,10 @@ class loginControladora
       include ("../Vistas/login.php");
     }
 
-    public function verificar(){
+    public function verificar($usuario, $pass){
         echo 'FUNCIONA';
+        echo '<p>Usuario:' . $usuario . '</p>';
+        echo '<p>Contraseña:' . $pass . '</p>';
+
     }
 }

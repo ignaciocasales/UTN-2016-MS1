@@ -4,10 +4,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12">
-                <h3>Footer</h3>
+                <h3>Trabajo Práctico Integrador</h3>
             </div>
             <div class="col-xs-12">
-                <p>Texto del footer...</p>
+                <p>Trabajo Práctico integrador de las materias Metodología de Sistemas I, Base de Datos I, Laboratorio IV, y Programación III correspondientes a la cursada de Técnico Superior en Programación. </p>
                 <hr>
             </div>
         </div>

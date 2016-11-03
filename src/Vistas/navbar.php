@@ -18,7 +18,7 @@
         <div class="collapse navbar-collapse" id="responsiveMenu">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#">
+                    <a href="<?php echo URL_PUBLIC . 'index.php'; ?>">
                         <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Iniciar Sesión
                     </a>
                 </li>

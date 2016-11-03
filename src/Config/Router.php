@@ -12,7 +12,6 @@ class Router
         $metodo = $request->getMetodo();
         $parametros = $request->getParametros();
 
-
         //$ruta = ROOT . 'Controladoras/' . $controlador . '.php';
 
         //require_once $ruta;
