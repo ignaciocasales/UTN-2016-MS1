@@ -26,5 +26,5 @@
     <![endif]-->
 </head>
 
-<body class="bg-light fn-light">
+<body class="bg-body">
 

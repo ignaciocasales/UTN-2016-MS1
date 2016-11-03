@@ -1,22 +1,53 @@
-hr{
-    border-color: gray;
+/*HTML custom CSS.
+-------------------------------------------------- */
+hr {
+    border-color: black;
 }
+
+/*Bootstrap Override.
+-------------------------------------------------- */
 .navbar {
     margin-bottom: 0px;
 }
 
-.navbar-brand{
+.navbar-brand {
     padding: 10px 15px 15px 15px;
 }
 
 .navbar-brand .brand {
     width: 50px;
 }
-.box {
+
+/*Custom CSS.
+-------------------------------------------------- */
+
+.bg-pri {
+    background-color: white;
+    /*color: ;*/
+}
+
+.bg-sec {
+    background-color: white;
+    /*color: ;*/
+}
+
+.bg-body {
+    background-color: white;
+    /*color: ;*/
+}
+
+.box-primary {
     border: medium none;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
+.box-secondary {
+    border: medium none;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/*login CSS.
+-------------------------------------------------- */
 .login {
     padding: 15px;
     position: relative;
@@ -33,7 +64,7 @@ hr{
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #ffffff;
+    /*background-color: #ffffff;*/
     opacity: 0.4;
     width: 100%;
     height: 100%;
@@ -42,22 +73,37 @@ hr{
 .login .bienvenida {
     border-right: 1px solid #E3E3E3;
 }
+/* Hace que los col quetengan misma altura.
+-------------------------------------------------- */
+.row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+}
 
-/* Sticky footer styles
+.row > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Sticky footer styles.
 -------------------------------------------------- */
 html {
     position: relative;
     min-height: 100%;
 }
+
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 165px;
+    margin-bottom: 60px;
 }
+
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
-    height: 179px;
-    background-color: #E3E3E3;
+    height: 37px;
 }

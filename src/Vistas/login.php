@@ -1,4 +1,4 @@
-<div class="container login box">
+<div class="container login box-primary">
     <div class="bg"></div>
     <div class="row">
         <div class="hidden-xs hidden-sm col-md-8 bienvenida">
@@ -16,8 +16,14 @@
                     <label for="pass">Contraseña</label>
                     <input type="password" class="form-control" id="pass" placeholder="Ingrese su contraseña..." name="pass">
                 </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"> Recordarme
+                    </label>
+                </div>
                 <button type="submit" class="btn btn-primary pull-right">Inicie Sesión</button>
             </form>
+            <a href="%">¿Olvidaste tu contraseña?</a>
         </div>
     </div>
 </div>
