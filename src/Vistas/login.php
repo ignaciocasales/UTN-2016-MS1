@@ -6,7 +6,7 @@
             <p>La Municipalidad está planeando la informatización y automatización del pago de peajes y la registración de multas por pasaje de semáforo en rojo o exceso de velocidad en las arterias urbanas. Para cumplimentar dicha tarea se debe desarrolló inicialmente un sistema prototípico que realiza la simulación del proceso hasta tanto no se compre la infraestructura adecuada ni se realice la legislación respectiva que garantice y ponga a punto el sistema.</p>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-4">
-            <h3>Inicie Sesión</h3>
+            <h3>Iniciar Sesión</h3>
             <form method="post" action="/login/verificar/">
                 <div class="form-group">
                     <label for="usuario">Nombre de Usuario</label>
@@ -16,7 +16,7 @@
                     <label for="pass">Contraseña</label>
                     <input type="password" class="form-control" id="pass" placeholder="Ingrese su contraseña..." name="pass">
                 </div>
-                <button type="submit" class="btn btn-success pull-right">Inicie Sesión</button>
+                <button type="submit" class="btn btn-primary pull-right">Inicie Sesión</button>
             </form>
         </div>
     </div>

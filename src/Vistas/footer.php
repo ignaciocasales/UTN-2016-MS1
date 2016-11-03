@@ -1,7 +1,7 @@
 
 
-<footer class="footer box">
-    <div class="container-fluid">
+<footer class="footer">
+    <div class="container">
         <div class="row">
             <div class="col-xs-12">
                 <h3>Trabajo Práctico Integrador</h3>

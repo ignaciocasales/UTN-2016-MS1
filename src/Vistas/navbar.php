@@ -9,8 +9,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#" id="responsiveBrand">
-                Trafi MDQ
+            <a class="navbar-brand" href="<?php echo URL_PUBLIC . 'index.php'; ?>" id="responsiveBrand">
+                <img alt="Brand" src="<?php echo URL_IMG . 'traffic-lights-icon.png'; ?>" class="img-responsive brand">
             </a>
         </div>
 
