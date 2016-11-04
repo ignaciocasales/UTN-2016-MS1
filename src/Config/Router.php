@@ -15,8 +15,16 @@ class Router
         //$ruta = ROOT . 'Controladoras/' . $controlador . '.php';
 
         //require_once $ruta;
+        $controlador = self::instanciar($controlador);
+        self::ejecutar($controlador,$metodo,$parametros);
+    }
+
+    private static function instanciar($controlador){
         $mostrar = "Controladoras\\" . $controlador;
-        $controlador = new $mostrar;
+        return new $mostrar;
+    }
+
+    private static function ejecutar($controlador,$metodo,$parametros){
         if (!isset($parametros)) {
             call_user_func(array($controlador, $metodo));
         } else {

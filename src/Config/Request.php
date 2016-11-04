@@ -70,7 +70,7 @@ class Request
 
         } else {
 
-            if (!empty($_POST )) {
+            if (!empty($_POST)) {
                 $this->parametros = $_POST;
             }
 
