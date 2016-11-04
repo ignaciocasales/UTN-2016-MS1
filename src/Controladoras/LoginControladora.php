@@ -24,8 +24,9 @@ class loginControladora
         // Deberia devolver un array
 
         $v = new UsuarioBdDao();
-        $r = $v->traeTodo();
-        echo $r;
+        echo '<pre>';
+        print_r($v->traeTodo());
+        echo '<pre>';
 
 
         /*
