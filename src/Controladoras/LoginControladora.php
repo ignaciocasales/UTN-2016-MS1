@@ -19,18 +19,19 @@ class loginControladora
     public function verificar($usuario, $pass)
     {
 
-        /**
-         * Estoy trabajando en estas lineas, descomentalas si queres.
-         *
-         * $v = new UsuarioBdDao();
-         * $r=$v->traeTodo();
-         * echo $r;
-         */
+
+        // Estoy trabajando en estas lineas por motivos de testing, descomentalas si queres .
+        // Deberia devolver un array
+
+        $v = new UsuarioBdDao();
+        $r = $v->traeTodo();
+        echo $r;
 
 
+        /*
         echo 'FUNCIONA';
         echo '<p>Usuario:' . $usuario . '</p>';
         echo '<p>Contraseña:' . $pass . '</p>';
-
+        */
     }
 }
