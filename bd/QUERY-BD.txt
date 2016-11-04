@@ -1,0 +1,209 @@
+
+CREATE TABLE roles
+(
+id_roles smallint unsigned auto_increment not null,
+
+descripcion varchar(20),
+
+constraint pk_de_roles primary key(id_roles));
+
+
+CREATE TABLE usuarios
+(
+id_usuarios smallint unsigned auto_increment not null,
+
+mail varchar(50) not null,
+
+pwd varchar(32)not null,
+
+id_roles smallint unsigned ,
+
+constraint pk_de_usuario primary key(id_usuarios),
+
+constraint fk_de_rol foreign key(id_roles) references roles(id_roles)on DELETE CASCADE);
+
+
+CREATE TABLE titulares   
+(
+id_titulares smallint unsigned auto_increment not null,
+
+id_usuarios smallint unsigned,
+
+dni varchar(10) unique not null,
+
+nombre varchar(20) not null,
+
+apellido varchar(20)not null,
+
+telefono varchar(40) unique,
+
+constraint pk_de_id_titulares primary key(id_titulares),
+
+constraint fk_de_usuario foreign key(id_usuarios) references usuarios(id_usuarios)on DELETE CASCADE);
+
+
+CREATE TABLE vehiculos
+(
+id_vehiculos smallint unsigned auto_increment not null,
+
+id_titulares smallint unsigned,
+
+dominio varchar(10)not null,
+
+marca varchar(10)not null,
+
+modelo varchar(10)not null,
+
+qr varchar(100),
+
+constraint pk_de_vehiculos primary key(id_vehiculos),
+
+constraint fk_de_id_titular foreign key(id_titulares) references titulares(id_titulares)on DELETE CASCADE);
+
+
+CREATE TABLE cuentas_corrientes
+(
+id_cuentas_corrientes SMALLINT unsigned AUTO_INCREMENT not null,
+
+ fecha_ultima_acrualisacion datetime not null,
+ 
+ maximo_credito float unsigned not null,
+ 
+ saldo float unsigned not null,
+ 
+ id_vehiculos SMALLINT unsigned,
+ 
+ CONSTRAINT pk_de_id_cuentas_corrientes PRIMARY KEY(id_cuentas_corrientes),
+ 
+ CONSTRAINT fk_de_id_vehiculos FOREIGN KEY(id_vehiculos) REFERENCES vehiculos(id_vehiculos)on DELETE CASCADE);
+
+
+ CREATE TABLE sensores
+ (
+ id_sensores SMALLINT unsigned AUTO_INCREMENT,
+ 
+  fecha_alta date,
+  
+  latitud float ,
+  
+  longitud float,
+  
+  numeros_serie varchar(30) UNIQUE not null,
+  
+  CONSTRAINT pk_id_sensores PRIMARY KEY(id_sensores));
+  
+  
+  CREATE TABLE sensores_semaforos
+ (
+ id_sensores_semaforos SMALLINT unsigned AUTO_INCREMENT not null,
+ 
+  id_sensores SMALLINT unsigned,
+  
+  CONSTRAINT pk_de_id_sensores_semaforo PRIMARY KEY(id_sensores_semaforos),
+  
+  CONSTRAINT fk_de_id_de_sensores FOREIGN KEY(id_sensores) REFERENCES sensores(id_sensores)on DELETE CASCADE);
+  
+  
+  
+  CREATE TABLE sensor_peajes
+ (
+ id_sensor_peajes SMALLINT unsigned AUTO_INCREMENT not null,
+ 
+  id_sensores SMALLINT unsigned,
+  
+  CONSTRAINT pk_de_id_sensor_peajes PRIMARY KEY(id_sensor_peajes),
+  
+  CONSTRAINT fk_de_id_de_sensores_peajes FOREIGN KEY(id_sensores) REFERENCES sensores(id_sensores)on DELETE CASCADE);
+  
+  
+   CREATE TABLE eventos_multas
+ (
+ id_eventos_multas SMALLINT unsigned AUTO_INCREMENT not null,
+ 
+  fecha_hora date not null,
+  
+  foto MEDIUMBLOB,
+  
+  tipo_foto varchar(30),
+  
+  id_sensores_semaforos SMALLINT unsigned,
+  
+  CONSTRAINT pf_de_id_eventos_multas PRIMARY KEY(id_eventos_multas),
+  
+  CONSTRAINT fk_de_id_de_sensores_semaforos FOREIGN KEY(id_sensores_semaforos) REFERENCES sensores_semaforos(id_sensores_semaforos)on DELETE CASCADE);
+  
+  
+  
+  CREATE TABLE eventos_peajes
+(
+id_eventos_peajes SMALLINT unsigned AUTO_INCREMENT not null,
+
+ fecha_hora date not null,
+ 
+ foto  MEDIUMBLOB,
+ 
+ tipo varchar(50),
+ 
+ id_sensor_peajes SMALLINT unsigned,
+ 
+ CONSTRAINT pk_de_id_evento_peajes PRIMARY KEY(id_eventos_peajes),
+ 
+ CONSTRAINT fk_de_id_sensor_peajes FOREIGN KEY(id_sensor_peajes) REFERENCES sensor_peajes(id_sensor_peajes)on DELETE CASCADE);
+  
+  
+  
+ 
+  
+  CREATE TABLE movimientos_cuentas_corrientes
+(
+id_movimientos SMALLINT unsigned AUTO_INCREMENT not null,
+
+ fecha_hora datetime not null,
+ 
+ inporte float unsigned not null,
+ 
+ id_cuentas_corrientes SMALLINT unsigned ,
+ 
+ id_eventos_peajes SMALLINT unsigned ,
+ 
+ id_evento_multas SMALLINT unsigned ,
+ 
+ CONSTRAINT pk_de_id_movimientos PRIMARY KEY(id_movimientos),
+ 
+ CONSTRAINT fk_de_id_cuentas_corrientes_de_cuentas FOREIGN KEY(id_cuentas_corrientes) REFERENCES cuentas_corrientes(id_cuentas_corrientes)on DELETE CASCADE,
+ 
+ CONSTRAINT fk_de_id_eventos_peaje_peajes FOREIGN KEY(id_eventos_peajes) REFERENCES eventos_peajes(id_eventos_peajes)on DELETE CASCADE,
+ 
+ CONSTRAINT fk_de_id_evento_multa_multas FOREIGN KEY(id_evento_multas) REFERENCES eventos_multas(id_eventos_multas)on DELETE CASCADE);
+ 
+ 
+ CREATE TABLE pagos
+( 
+id_pagos SMALLINT unsigned AUTO_INCREMENT not null,
+
+ fecha date not null,
+ 
+ id_movimientos SMALLINT unsigned ,
+ 
+CONSTRAINT pk_id_pagos PRIMARY KEY(id_pagos),
+
+CONSTRAINT fk_de_id_movimientos FOREIGN KEY(id_movimientos) REFERENCES movimientos_cuentas_corrientes(id_movimientos)on DELETE CASCADE);
+
+
+
+CREATE TABLE tarifas
+(
+id_tarifas SMALLINT unsigned AUTO_INCREMENT not null,
+
+ fecha_desde date not null,
+ 
+ fecha_asta date,
+ 
+ multa float unsigned not null,
+ 
+ peaje_hora_normal date,
+ 
+ peaje_hora_pico date,
+ 
+ CONSTRAINT pk_id_de_tarifas PRIMARY KEY(id_tarifas));
+  
