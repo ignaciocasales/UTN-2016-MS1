@@ -34,8 +34,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="<?php echo URL_PUBLIC . 'index.php'; ?>">
-                        Añadir Vehículo <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                    <a href="<?php echo URL_PUBLIC ?>vehiculo/registrar">
+                        Registrar Vehiculo <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
                     </a>
                 </li>
                 <li>

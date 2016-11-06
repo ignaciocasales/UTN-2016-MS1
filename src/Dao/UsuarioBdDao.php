@@ -48,7 +48,7 @@ class UsuarioBdDao extends Conexion implements IDao
         $sentencia->execute();
 
 
-        while ($row = $sentencia->fetch()) {
+        while ($row = $sentencia->fetch(\PDO::FETCH_ASSOC)) {
             $array[] = $row;
         }
         if (!empty($array)) return $array;
@@ -56,6 +56,8 @@ class UsuarioBdDao extends Conexion implements IDao
 
     public function traeUno($valor)
     {
+        $sql = "SELECT *  FROM " . $this->tabla . "WHERE " . $this->tabla . ".dni" .  "= " . $valor;
+
         // TODO: Implement traeUno() method.
     }
 

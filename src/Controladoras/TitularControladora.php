@@ -3,13 +3,13 @@
 namespace Controladoras;
 
 
-class vehiculoControladora
+class titularControladora
 {
     function __construct()
     {
     }
 
     public function registrar(){
-        include ("../Vistas/abmVehiulos.php");
+        include ("../Vistas/abmTitular.php");
     }
 }

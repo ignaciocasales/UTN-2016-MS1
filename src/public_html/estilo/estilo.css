@@ -79,6 +79,9 @@ hr {
     border-right: 1px solid #E3E3E3;
 }
 
+.registroVehiculoLinea{
+    border-right: 1px solid #E3E3E3;
+}
 /* Hace que los col quetengan misma altura.
 -------------------------------------------------- */
 .row {
