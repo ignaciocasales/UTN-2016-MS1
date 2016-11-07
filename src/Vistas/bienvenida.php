@@ -1,3 +1,4 @@
+<?php include URL_VISTA . 'navbar.php';?>
 <div class="container login box-primary">
     <div class="bg"></div>
     <div class="row">

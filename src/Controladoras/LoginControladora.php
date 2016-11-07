@@ -2,7 +2,6 @@
 
 namespace Controladoras;
 
-use Dao\RolBdDao;
 use Dao\UsuarioBdDao;
 
 class loginControladora
@@ -19,6 +18,11 @@ class loginControladora
         } else {
             include("../Vistas/login.php");
         }
+    }
+
+    public function terminar()
+    {
+        include("../Vistas/logout.php");
     }
 
     public
@@ -41,11 +45,10 @@ class loginControladora
                 $_SESSION["mail"] = $mail;
                 $_SESSION["pwd"] = $pwd;
                 $_SESSION["rol"] = $privilegios;
-                echo "Usted se ha identifcado como:  " . $mail;
             } else {
-                echo 'datos erroneos';
             }
         }
+        header('Location: ' . URL_PUBLIC);
     }
 
     private function existe($mail, $pwd)

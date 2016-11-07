@@ -15,8 +15,6 @@ Config\Autoload::iniciar();
 
 include URL_VISTA . 'header.php';
 
-include URL_VISTA . 'navbar.php';
-
 Config\Router::direccionar(new Config\Request());
 
 include URL_VISTA . 'footer.php';

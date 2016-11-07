@@ -49,7 +49,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="<?php echo URL_PUBLIC . 'index.php'; ?>">
+                        <a href="<?php echo URL_PUBLIC . 'login/terminar'; ?>">
                             Cerrar Sesión <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
                         </a>
                     </li>
@@ -70,5 +70,3 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-
-
