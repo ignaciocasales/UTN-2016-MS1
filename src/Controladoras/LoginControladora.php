@@ -35,7 +35,7 @@ class loginControladora
                 $privilegios = 'developer';
             } else if ($rol == 2) {
                 $privilegios = 'empleado';
-            } else if ($rol == 2) {
+            } else if ($rol == 3) {
                 $privilegios = 'titular';
             }
 

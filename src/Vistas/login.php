@@ -1,8 +1,8 @@
-<?php include URL_VISTA . 'navbar.php';?>
-<div class="container login box-primary">
+<?php include URL_VISTA . 'navbar.php'; ?>
+<div class="container lower-box box-primary">
     <div class="bg"></div>
     <div class="row">
-        <div class="hidden-xs hidden-sm col-md-8 bienvenida">
+        <div class="hidden-xs hidden-sm col-md-8 box-right-content">
             <h2>Bienvenido</h2>
             <p>La Municipalidad está planeando la informatización y automatización del pago de peajes y la registración
                 de multas por pasaje de semáforo en rojo o exceso de velocidad en las arterias urbanas. Para
@@ -17,14 +17,14 @@
                     <label for="usuario">Nombre de Usuario</label>
                     <input type="email" name="mail" class="form-control" id="usuario"
                            placeholder="Ingrese su email..."
-                           title="No corresponde" maxlength="50" required>
+                           title="Introduzca su email" maxlength="50" data-toggle="tooltip" required>
                 </div>
                 <div class="form-group">
                     <label for="pass">Contraseña</label>
                     <input type="password" name="pwd" class="form-control" id="pass"
                            placeholder="Ingrese su contraseña..."
                            title="Sólo caracteres alfanumméricos" maxlength="80"
-                           pattern="[A-Za-z0-9\S]{1,80}" autofocus required>
+                           pattern="[A-Za-z0-9\S]{1,80}" data-toggle="tooltip" autofocus required>
                 </div>
                 <div class="checkbox">
                     <label>

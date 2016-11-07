@@ -1,8 +1,9 @@
-<div class="container">
+<?php include URL_VISTA . 'navbar.php'; ?>
+<div class="container box-primary">
+    <div class="bg"></div>
     <div class="row">
-        <div class="bg"></div>
-        <div class="col-xs-8 col-md-4">
-            <form class="form box-primary" style="padding: 8px;" method='GET' action="%">
+        <div class="col-xs-12">
+            <form class="form" method='GET' action="%">
                 <div class="form-group" aria-required="true">
                     <label for="Nombre">Nombre</label><br/>
                     <input type="text" name="nombre">

@@ -1,5 +1,3 @@
-
-
 <footer class="footer box-secondary bg-pri">
     <div class="container">
         <div class="row">

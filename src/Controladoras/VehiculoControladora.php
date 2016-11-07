@@ -11,6 +11,6 @@ class vehiculoControladora
 
     public function registrar()
     {
-        include("../Vistas/abmVehiulos.php");
+        include("../Vistas/abmVehiculos.php");
     }
 }

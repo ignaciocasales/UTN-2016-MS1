@@ -20,6 +20,7 @@
             if ((isset($_SESSION["mail"]) && $_SESSION["pwd"])) {
                 ?>
                 <ul class="nav navbar-nav">
+                    <?php if($_SESSION["rol"]==='titular' || $_SESSION["rol"]==='developer'){?>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">
@@ -36,6 +37,8 @@
                             Reclamos <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
                         </a>
                     </li>
+                    <?php }?>
+                    <?php if($_SESSION["rol"]==='empleado' || $_SESSION["rol"]==='developer'){?>
                     <li>
                         <a href="<?php echo URL_PUBLIC ?>vehiculo/registrar">
                             Registrar Vehiculo <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
@@ -46,6 +49,7 @@
                             Simulación <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
                         </a>
                     </li>
+                    <?php }?>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
