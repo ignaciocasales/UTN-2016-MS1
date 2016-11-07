@@ -14,16 +14,16 @@
             <form method="post" action="/login/verificar/">
                 <div class="form-group">
                     <label for="usuario">Nombre de Usuario</label>
-                    <input type="text" name="usuario" class="form-control" id="usuario"
-                           placeholder="Ingrese su nombre de usuario..."
-                           title="Sólo caracteres alfabéticos" maxlength="32" pattern="[a-zA-Z ]*" required>
+                    <input type="email" name="mail" class="form-control" id="usuario"
+                           placeholder="Ingrese su email..."
+                           title="No corresponde" maxlength="50" required>
                 </div>
                 <div class="form-group">
                     <label for="pass">Contraseña</label>
-                    <input type="password" name="pass" class="form-control" id="pass"
+                    <input type="password" name="pwd" class="form-control" id="pass"
                            placeholder="Ingrese su contraseña..."
-                           title="Sólo caracteres alfanumméricos" maxlength="25"
-                           pattern="[A-Za-z0-9\S]{1,25}" autofocus required>
+                           title="Sólo caracteres alfanumméricos" maxlength="80"
+                           pattern="[A-Za-z0-9\S]{1,80}" autofocus required>
                 </div>
                 <div class="checkbox">
                     <label>

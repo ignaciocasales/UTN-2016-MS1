@@ -2,7 +2,7 @@
     <div class="row">
         <div class="bg"></div>
         <div class="col-xs-8 col-md-4">
-            <form class="form box-primary" style="padding: 8px;" method='GET'action="%" >
+            <form class="form box-primary" style="padding: 8px;" method='GET' action="%">
                 <div class="form-group" aria-required="true">
                     <label for="Nombre">Nombre</label><br/>
                     <input type="text" name="nombre">
@@ -19,7 +19,7 @@
                     <label for="telefono">Telefono</label><br/>
                     <input type="text" name="telefono" pattern="([0-90000000]){7}" maxlength="7" required>
                 </div>
-                <button type="submit" class="btn btn-primary pull-right" >Registrar</button>
+                <button type="submit" class="btn btn-primary pull-right">Registrar</button>
             </form>
         </div>
     </div>

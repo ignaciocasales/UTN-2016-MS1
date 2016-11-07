@@ -1,5 +1,8 @@
 <?php
-//session_start();
+session_start();
+
+//$identifcador = session_id();
+//echo "El identifcador de esta sesión es: $identifcador";
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);

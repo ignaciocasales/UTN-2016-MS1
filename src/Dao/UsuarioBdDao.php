@@ -12,12 +12,52 @@ class UsuarioBdDao extends Conexion implements IDao
 
     public function agregar($valor)
     {
-        // TODO: Implement agregar() method.
+        // Guardo como string la consulta sql utilizando como values, marcadores de parámetros
+        // con nombre (:name) o signos de interrogación (?) por los cuales los valores reales
+        // serán sustituidos cuando la sentencia sea ejecutada
+
+        $sql = "INSERT INTO $this->tabla (nombre) VALUES (:nombre)";
+
+        // creo el objeto conexion
+        $obj_pdo = new Conexion();
+
+
+        // Conecto a la base de datos.
+        $conexion = $obj_pdo->conectar();
+
+
+        // Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
+        $sentencia = $conexion->prepare($sql);
+
+
+        // Reemplazo los marcadores de parametro por los valores reales utilizando el método bindParam().
+        $sentencia->bindParam(":nombre", $value);
+
+
+        // Ejecuto la sentencia.
+        $sentencia->execute();
     }
 
     public function eliminar($valor)
     {
-        // TODO: Implement eliminar() method.
+        // Guardo como string la consulta sql
+        $sql = "DELETE FROM $this->tabla WHERE id_usuarios = $valor";
+
+
+        // creo el objeto conexion
+        $obj_pdo = new Conexion();
+
+
+        // Conecto a la base de datos.
+        $conexion = $obj_pdo->conectar();
+
+
+        // Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
+        $sentencia = $conexion->prepare($sql);
+
+
+        // Ejecuto la sentencia.
+        $sentencia->execute();
     }
 
     public function actualizar($valor)
@@ -29,7 +69,7 @@ class UsuarioBdDao extends Conexion implements IDao
     {
 
         // Guardo como string la consulta sql
-        $sql = "SELECT * FROM " . $this->tabla;
+        $sql = "SELECT * FROM $this->tabla";
 
 
         // creo el objeto conexion
@@ -56,9 +96,19 @@ class UsuarioBdDao extends Conexion implements IDao
 
     public function traeUno($valor)
     {
-        $sql = "SELECT *  FROM " . $this->tabla . "WHERE " . $this->tabla . ".dni" .  "= " . $valor;
+        $sql = "SELECT * FROM $this->tabla WHERE mail =  '$valor'";
 
-        // TODO: Implement traeUno() method.
+        $obj_pdo = new Conexion();
+
+        $conexion = $obj_pdo->conectar();
+
+        $sentencia = $conexion->prepare($sql);
+
+        $sentencia->execute();
+
+        $row = $sentencia->fetch(\PDO::FETCH_ASSOC);
+
+        if (!empty($row)) return $row;
     }
 
 }

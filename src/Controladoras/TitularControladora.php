@@ -9,7 +9,8 @@ class titularControladora
     {
     }
 
-    public function registrar(){
-        include ("../Vistas/abmTitular.php");
+    public function registrar()
+    {
+        include("../Vistas/abmTitular.php");
     }
 }

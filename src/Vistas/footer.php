@@ -10,9 +10,9 @@
 </footer>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="<?php echo URL_JS . 'jquery-1.12.4.min.js'; ?>"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="../public_html/js/bootstrap.min.js"></script>
+<script src="<?php echo URL_JS . 'bootstrap.min.js'; ?>"></script>
 </body>
 
 </html>

@@ -16,23 +16,34 @@ class loginControladora
         include("../Vistas/login.php");
     }
 
-    public function verificar($usuario, $pass)
+    public function verificar($mail, $pwd)
     {
 
+        if (isset($mail) and isset($pwd)) {
+            if ($mail == "" || $pwd == "") {
+                echo "Por favor, completar usuario y clave";
+            } else if ($this->existe($mail, $pwd)) {
+                $_SESSION["mail"] = $mail;
+                $_SESSION["pwd"] = $pwd;
+                echo "Usted se ha identifcado como:  " . $mail;
+            } else {
+                echo 'datos erroneos';
+            }
+        }
+    }
 
-        // Estoy trabajando en estas lineas por motivos de testing, descomentalas si queres .
-        // Deberia devolver un array
+    private function existe($mail, $pwd)
+    {
+        $b = new UsuarioBdDao();
 
-        $v = new UsuarioBdDao();
-        echo '<pre>';
-        print_r($v->traeTodo());
-        echo '<pre>';
+        $array = $b->traeUno($mail);
 
-
-        /*
-        echo 'FUNCIONA';
-        echo '<p>Usuario:' . $usuario . '</p>';
-        echo '<p>Contraseña:' . $pass . '</p>';
-        */
+        if (!empty($array)) {
+            if ($mail == $array["mail"] && $pwd == $array["pwd"]) {
+                return true;
+            }
+        } else {
+            return false;
+        }
     }
 }
