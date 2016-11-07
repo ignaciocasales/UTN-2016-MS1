@@ -16,46 +16,57 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="responsiveMenu">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">
-                        Consultas <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Multas</a></li>
-                        <li><a href="#">Peajes</a></li>
-                        <li><a href="#">Vehículos</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="<?php echo URL_PUBLIC . 'index.php'; ?>">
-                        Reclamos <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href="<?php echo URL_PUBLIC ?>vehiculo/registrar">
-                        Registrar Vehiculo <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href="<?php echo URL_PUBLIC . 'index.php'; ?>">
-                        Simulación <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
-                    </a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="<?php echo URL_PUBLIC . 'index.php'; ?>">
-                        Iniciar Sesión <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href="<?php echo URL_PUBLIC . 'index.php'; ?>">
-                        Cerrar Sesión <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
-                    </a>
-                </li>
-            </ul>
+            <?php
+            if ((isset($_SESSION["mail"]) && $_SESSION["pwd"])) {
+                ?>
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">
+                            Consultas <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Multas</a></li>
+                            <li><a href="#">Peajes</a></li>
+                            <li><a href="#">Vehículos</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="<?php echo URL_PUBLIC . 'index.php'; ?>">
+                            Reclamos <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo URL_PUBLIC ?>vehiculo/registrar">
+                            Registrar Vehiculo <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo URL_PUBLIC . 'index.php'; ?>">
+                            Simulación <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="<?php echo URL_PUBLIC . 'index.php'; ?>">
+                            Cerrar Sesión <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                        </a>
+                    </li>
+                </ul>
+                <?php
+            } else {
+                ?>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="<?php echo URL_PUBLIC . 'index.php'; ?>">
+                            Iniciar Sesión <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                        </a>
+                    </li>
+                </ul>
+                <?php
+            }
+            ?>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>

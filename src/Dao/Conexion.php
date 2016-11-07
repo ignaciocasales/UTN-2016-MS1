@@ -4,9 +4,6 @@ namespace Dao;
 
 class Conexion
 {
-
-    # Métodos
-
     public function conectar()
     {
         //esta es mi version del conectar, creo es mas optimo y mas legible

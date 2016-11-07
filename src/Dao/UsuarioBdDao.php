@@ -6,7 +6,7 @@ namespace Dao;
 use Dao\IDao;
 use Dao\Conexion as Conexion;
 
-class UsuarioBdDao extends Conexion implements IDao
+class UsuarioBdDao extends Conexion
 {
     protected $tabla = "usuarios";
 

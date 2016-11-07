@@ -1,5 +1,5 @@
 INSERT INTO roles (descripcion)
-VALUES ('testing'), ('empleado'), ('titular');
+VALUES ('developer'), ('empleado'), ('titular');
 
 INSERT INTO usuarios (mail, pwd, id_roles)
 VALUES
