@@ -6,9 +6,17 @@ namespace Dao;
 use Dao\IDao;
 use Dao\Conexion as Conexion;
 
-class UsuarioBdDao extends Conexion
+class UsuarioBdDao extends Conexion implements IDao
 {
     protected $tabla = "usuarios";
+    private static $instancia;
+
+    public static function getInstancia(){
+        if(!self::$instancia instanceof self){
+            self::$instancia = new self();
+        }
+        return self::$instancia;
+    }
 
     public function agregar($valor)
     {
@@ -19,11 +27,11 @@ class UsuarioBdDao extends Conexion
         $sql = "INSERT INTO $this->tabla (nombre) VALUES (:nombre)";
 
         // creo el objeto conexion
-        $obj_pdo = new Conexion();
+        //$obj_pdo = new Conexion();
 
 
         // Conecto a la base de datos.
-        $conexion = $obj_pdo->conectar();
+        $conexion = Conexion::conectar();
 
 
         // Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
@@ -111,4 +119,8 @@ class UsuarioBdDao extends Conexion
         if (!empty($row)) return $row;
     }
 
+    private function mapear($dataSet)
+    {
+
+    }
 }

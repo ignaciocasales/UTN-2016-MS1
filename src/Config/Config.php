@@ -18,7 +18,7 @@ define("DB_HOST", "git.mdp.utn.edu.ar");
 // Constantes front
 define('ROOT', dirname(__DIR__) . "/");
 define("URL_VISTA", ROOT . 'Vistas/');
-define("URL_FEROZO", '//rk000697.ferozo.com/dyd/');
+define("URL_FEROZO", '//rk000697.ferozo.com/dyd');
 define("URL_PUBLIC", '//localhost/');//esta linea hay que cambiar para que funcione.
 define("URL_CSS", URL_PUBLIC . 'css/');
 define("URL_ESTILO", URL_PUBLIC . 'estilo/');

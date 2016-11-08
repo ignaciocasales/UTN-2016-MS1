@@ -4,7 +4,7 @@ namespace Dao;
 
 class Conexion
 {
-    public function conectar()
+    public static function conectar()
     {
         //esta es mi version del conectar, creo es mas optimo y mas legible
         $host = DB_HOST;

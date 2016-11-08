@@ -3,6 +3,7 @@
 namespace Controladoras;
 
 use Dao\UsuarioBdDao;
+use Dao\UsuarioJsonDao;
 
 class loginControladora
 {
@@ -39,7 +40,7 @@ class loginControladora
                 $privilegios = 'titular';
             }
 
-            if ($mail == "" || $pwd == "") {
+            if ($mail === "" || $pwd === "") {
                 echo "Por favor, completar usuario y clave";
             } else if (!is_null($rol)) {
                 $_SESSION["mail"] = $mail;
@@ -51,9 +52,10 @@ class loginControladora
         header('Location: ' . URL_PUBLIC);
     }
 
-    private function existe($mail, $pwd)
+    protected function existe($mail, $pwd)
     {
-        $dao = new UsuarioBdDao();
+        $dao = UsuarioBdDao::getInstancia();
+        //$dao = UsuarioJsonDao::getInstancia();
 
         $array = $dao->traeUno($mail);
 
