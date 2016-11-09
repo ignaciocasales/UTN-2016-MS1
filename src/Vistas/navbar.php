@@ -20,40 +20,43 @@
             if ((isset($_SESSION["mail"]) && $_SESSION["pwd"])) {
                 ?>
                 <ul class="nav navbar-nav">
-                    <?php if($_SESSION["rol"]==='titular' || $_SESSION["rol"]==='developer'){?>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">
-                            Consultas <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Multas</a></li>
-                            <li><a href="#">Peajes</a></li>
-                            <li><a href="#">Vehículos</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="/index.php">
-                            Reclamos <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                        </a>
-                    </li>
-                    <?php }?>
-                    <?php if($_SESSION["rol"]==='empleado' || $_SESSION["rol"]==='developer'){?>
-                    <li>
-                        <a href="/titular/buscarDni/">
-                            Registrar Vehiculo <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/index.php">
-                            Simulación <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
-                        </a>
-                    </li>
-                    <?php }?>
+                    <?php if ($_SESSION["rol"] === 'titular' || $_SESSION["rol"] === 'developer') { ?>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                Consultas <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Multas</a></li>
+                                <li><a href="#">Peajes</a></li>
+                                <li><a href="#">Vehículos</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/index.php">
+                                Reclamos <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                    <?php } ?>
+                    <?php if ($_SESSION["rol"] === 'empleado' || $_SESSION["rol"] === 'developer') { ?>
+                        <li>
+                            <a href="/titular/buscarDni/">
+                                Registrar Vehiculo <span class="glyphicon glyphicon-plus-sign"
+                                                         aria-hidden="true"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/index.php">
+                                Simulación <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                    <?php } ?>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="/login/terminar">                           Cerrar Sesión <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                        <a href="/logout/terminar/">
+                            Cerrar Sesión <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
                         </a>
                     </li>
                 </ul>

@@ -3,7 +3,7 @@
 namespace Dao;
 
 
-interface IDao
+interface RolIDao
 {
     public function agregar($valor);
 
@@ -13,5 +13,7 @@ interface IDao
 
     public function traeTodo();
 
-    public function traeUno($valor);
+    public function traerPorId($id);
+
+    public function mapear($dataSet);
 }

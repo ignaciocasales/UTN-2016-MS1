@@ -38,11 +38,11 @@ class Request
 
         $ArregloUrl = array_filter($urlToArray);
 
-        /**
-         * echo '<pre>';
-         * print_r($ArregloUrl);
-         * echo '</pre>';
-         */
+        /*
+        echo '<pre>';
+        print_r($ArregloUrl);
+        echo '</pre>';
+        */
 
         /**
          * Filtra elementos de un array usando una función de devolución de llamada.

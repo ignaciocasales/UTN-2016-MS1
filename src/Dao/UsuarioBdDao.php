@@ -7,7 +7,7 @@ use Dao\IDao;
 use Dao\Conexion as Conexion;
 use Modelo\Usuario;
 
-class UsuarioBdDao extends Conexion implements IDao
+class UsuarioBdDao implements UsuarioIDao
 {
     protected $tabla = "usuarios";
     protected $listado;
@@ -87,16 +87,16 @@ class UsuarioBdDao extends Conexion implements IDao
         // Ejecuto la sentencia.
         $sentencia->execute();
 
+        $row[] = $sentencia->fetchall(\PDO::FETCH_ASSOC);
 
-        while ($row = $sentencia->fetch(\PDO::FETCH_ASSOC)) {
-            $array[] = $row;
-        }
-        if (!empty($array)) return $array;
+        $this->mapear($row);
+
+        if (!empty($this->listado)) return $this->listado;
     }
 
-    public function traeUno($valor)
+    public function traerPorMail($mail)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE mail =  '$valor' LIMIT 1";
+        $sql = "SELECT * FROM $this->tabla WHERE mail =  '$mail' LIMIT 1";
 
         $conexion = Conexion::conectar();
 
@@ -111,7 +111,7 @@ class UsuarioBdDao extends Conexion implements IDao
         if (!empty($this->listado[0])) return $this->listado[0];
     }
 
-    protected function mapear($dataSet)
+    public function mapear($dataSet)
     {
         $dataSet = is_array($dataSet) ? $dataSet : [];
         $this->listado = array_map(function($p){

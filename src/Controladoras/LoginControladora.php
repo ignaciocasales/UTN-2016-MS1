@@ -47,7 +47,7 @@ class loginControladora
                 $dao = UsuarioBdDao::getInstancia();
                 //$dao = UsuarioJsonDao::getInstancia();
 
-                $usuario = $dao->traeUno($mail);
+                $usuario = $dao->traerPorMail($mail);
 
                 //existe?
                 if ($this->existe($usuario)) {
@@ -68,7 +68,6 @@ class loginControladora
         }else{
             echo 'valores no seteados';
         }
-        //require ('/index.php');
         header('Location: /index.php');
 
     }
@@ -89,7 +88,7 @@ class loginControladora
         $dao = RolBdDao::getInstancia();
         //$dao = RolJsonDao::getInstancia();
 
-        $rol = $dao->traeUno($usuario->getRol());
+        $rol = $dao->traerPorId($usuario->getRol());
 
         return $rol->getDescripcion();
     }

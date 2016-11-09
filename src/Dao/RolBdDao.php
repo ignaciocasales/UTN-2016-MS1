@@ -5,7 +5,7 @@ namespace Dao;
 
 use Modelo\Rol;
 
-class RolBdDao extends Conexion implements IDao
+class RolBdDao extends Conexion implements RolIDao
 {
     protected $tabla = "roles";
     private static $instancia;
@@ -39,9 +39,9 @@ class RolBdDao extends Conexion implements IDao
         // TODO: Implement traeTodo() method.
     }
 
-    public function traeUno($valor)
+    public function traerPorId($id)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE id_roles =  '$valor' LIMIT 1";
+        $sql = "SELECT * FROM $this->tabla WHERE id_roles =  '$id' LIMIT 1";
 
         $conexion = Conexion::conectar();
 
@@ -56,7 +56,7 @@ class RolBdDao extends Conexion implements IDao
         if (!empty($this->listado[0])) return $this->listado[0];
     }
 
-    protected function mapear($dataSet)
+    public function mapear($dataSet)
     {
         $dataSet = is_array($dataSet) ? $dataSet : [];
         $this->listado = array_map(function ($p) {
