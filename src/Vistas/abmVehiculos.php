@@ -1,4 +1,4 @@
-<?php include URL_VISTA . 'navbar.php'; ?>
+<?php include('navbar.php'); ?>
 <header>
     <h2 style="text-align: center">Registro de Vehiculo</h2>
 </header>
@@ -38,7 +38,7 @@
                                 <h3 class="panel-title">NOMBRE</h3>
                             </div>
                             <div class="panel-body">
-                                <?php echo $existe['nombre'] . ' ' .  $existe['apellido']; ?>
+                                <?php echo $existe['nombre'] . ' ' . $existe['apellido']; ?>
                             </div>
                         </div>
                     </div>

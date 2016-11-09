@@ -1,4 +1,4 @@
-<?php include URL_VISTA . 'navbar.php'; ?>
+<?php include('navbar.php'); ?>
 <div class="container lower-box box-primary">
     <div class="bg"></div>
     <div class="row">

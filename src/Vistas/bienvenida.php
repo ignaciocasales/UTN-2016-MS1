@@ -1,8 +1,8 @@
-<?php include URL_VISTA . 'navbar.php';?>
+<?php include('navbar.php'); ?>
 <div class="container lower-box box-primary">
     <div class="bg"></div>
     <div class="row">
-        <?php include ("mensaje.php")?>
+        <?php include("mensaje.php") ?>
         <div class="col-xs-12 col-sm-12 col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">

@@ -9,7 +9,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="<?php echo URL_PUBLIC . 'index.php'; ?>" id="responsiveBrand">
+            <a class="navbar-brand" href="/index.php" id="responsiveBrand">
                 <img alt="Brand" src="<?php echo URL_IMG . 'traffic-lights-icon.png'; ?>" class="img-responsive brand">
             </a>
         </div>
@@ -33,19 +33,19 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="<?php echo URL_PUBLIC . 'index.php'; ?>">
+                        <a href="/index.php">
                             Reclamos <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
                         </a>
                     </li>
                     <?php }?>
                     <?php if($_SESSION["rol"]==='empleado' || $_SESSION["rol"]==='developer'){?>
                     <li>
-                        <a href="<?php echo URL_PUBLIC ?>titular/buscarDni/">
+                        <a href="/titular/buscarDni/">
                             Registrar Vehiculo <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo URL_PUBLIC . 'index.php'; ?>">
+                        <a href="/index.php">
                             Simulación <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
                         </a>
                     </li>
@@ -53,8 +53,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="<?php echo URL_PUBLIC . 'login/terminar'; ?>">
-                            Cerrar Sesión <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                        <a href="/login/terminar">                           Cerrar Sesión <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
                         </a>
                     </li>
                 </ul>
@@ -63,7 +62,7 @@
                 ?>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="<?php echo URL_PUBLIC . 'index.php'; ?>">
+                        <a href="<?php echo '/index.php'; ?>">
                             Iniciar Sesión <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
                         </a>
                     </li>

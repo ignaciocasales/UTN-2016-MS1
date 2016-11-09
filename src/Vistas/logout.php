@@ -9,4 +9,4 @@ $_SESSION = array();
 // 4. Eliminamos el archivo de sesión del servidor
 session_destroy();
 
-header('Location: ' . URL_PUBLIC);
+header('Location: /index.php');

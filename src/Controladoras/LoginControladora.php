@@ -16,6 +16,8 @@ class loginControladora
 
     public function index()
     {
+        //Si estan seteadas las variables de sesion cargo bienvenida
+        //sino cargo login
         if ((isset($_SESSION["mail"]) && $_SESSION["pwd"])) {
             include("../Vistas/bienvenida.php");
         } else {
@@ -25,14 +27,17 @@ class loginControladora
 
     public function terminar()
     {
+        //Al presionar 'cerrar sesión' llamo a logout
         include("../Vistas/logout.php");
     }
 
     public
     function verificar($mail, $pwd)
     {
+        //estan seteadas mail y contraseña?
         if (isset($mail) && isset($pwd)) {
 
+            //estan vacias?
             if ($mail === "" || $pwd === "") {
 
                 echo "Por favor, completar usuario y clave";
@@ -44,10 +49,13 @@ class loginControladora
 
                 $usuario = $dao->traeUno($mail);
 
+                //existe?
                 if ($this->existe($usuario)) {
 
+                    //corresponde?
                     if ($mail === $usuario->getEmail() && $pwd === $usuario->getPassword()) {
 
+                        //dame los privilegios.
                         $privilegios = $this->establecerPrivilegios($usuario);
 
                         $_SESSION["mail"] = $mail;
@@ -61,7 +69,7 @@ class loginControladora
             echo 'valores no seteados';
         }
 
-        header('Location: ' . URL_PUBLIC);
+        header('Location: /index.php');
 
     }
 

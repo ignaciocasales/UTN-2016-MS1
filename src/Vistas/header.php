@@ -10,13 +10,13 @@
     <meta name="description" content="Trafi MDQ">
     <meta name="author" content="Casales,Navarro,Tacconi">
     <!-- Favicon -->
-    <link rel="icon" href="<?php echo URL_IMG . 'favicon.png'; ?>">
+    <link rel="icon" href="/img/favicon.png">
 
     <!-- Bootstrap -->
-    <link href="<?php echo URL_BOOTSTRAP; ?>" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Estilos -->
-    <link rel="stylesheet" href="<?php echo URL_ESTILO . 'estilo.css'; ?>">
+    <link rel="stylesheet" href="/estilo/estilo.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

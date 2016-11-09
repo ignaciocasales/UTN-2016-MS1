@@ -8,22 +8,24 @@ namespace Config;
  */
 
 // Constantes Base de datos.
-//La base de datos esta cargada en el servidor de la UTN con mis datos, si quieren usarla está para eso!!!
-//Sino, pueden cambiarla.
+
 define("DB_NAME", "tacconid");
 define("DB_USER", "tacconid");
 define("DB_PASS", "ppw123");
+/*
+define("DB_NAME", "casalesi");
+define("DB_USER", "casalesi");
+define("DB_PASS", "ckl123");
+*/
 define("DB_HOST", "git.mdp.utn.edu.ar");
 
 // Constantes front
 define('ROOT', dirname(__DIR__) . "/");
 define("URL_VISTA", ROOT . 'Vistas/');
-define("URL_FEROZO", '//rk000697.ferozo.com/dyd');
-define("URL_PUBLIC", '//localhost/');//esta linea hay que cambiar para que funcione.
-define("URL_CSS", URL_PUBLIC . 'css/');
-define("URL_ESTILO", URL_PUBLIC . 'estilo/');
-define("URL_JS", URL_PUBLIC . 'js/');
-define("URL_IMG", URL_PUBLIC . 'img/');
+define("URL_CSS", '/css/');
+define("URL_ESTILO", '/estilo/');
+define("URL_JS", '/js/');
+define("URL_IMG", '/img/');
 define("URL_BOOTSTRAP", URL_CSS . 'bootstrap.min.css');
 
 // Constantes Server
