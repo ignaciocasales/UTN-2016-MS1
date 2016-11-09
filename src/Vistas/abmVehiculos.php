@@ -1,4 +1,7 @@
 <?php include URL_VISTA . 'navbar.php'; ?>
+<header>
+    <h2 style="text-align: center">Registro de Vehiculo</h2>
+</header>
 <div class="container lower-box">
     <div class="bg"></div>
     <div class="row">
@@ -19,13 +22,25 @@
                             <input type="text" class="form-control" name="modelo" pattern="(?:\d*){8}" maxlength="8"
                                    required>
                         </div>
+                        <button type="submit" class="btn btn-primary">Registrar</button>
                     </div>
                     <div class="col-md-6">
-                        <label for="Titular">DNI TITULAR</label>
-                        <input type="text" class="form-control" name="dni" maxlength="8" autofocus required><br/>
-                        <button style="position:absolute; right: 50px; bottom: 100px" type="submit"
-                                class="btn btn-primary pull-right">Registrar
-                        </button>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">DNI DEL TITULAR</h3>
+                            </div>
+                            <div class="panel-body">
+                                <?php echo $existe['dni']; ?>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">NOMBRE</h3>
+                            </div>
+                            <div class="panel-body">
+                                <?php echo $existe['nombre'] . ' ' .  $existe['apellido']; ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>

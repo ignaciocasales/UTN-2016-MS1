@@ -40,7 +40,7 @@
                     <?php }?>
                     <?php if($_SESSION["rol"]==='empleado' || $_SESSION["rol"]==='developer'){?>
                     <li>
-                        <a href="<?php echo URL_PUBLIC ?>vehiculo/registrar">
+                        <a href="<?php echo URL_PUBLIC ?>titular/buscarDni/">
                             Registrar Vehiculo <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
                         </a>
                     </li>

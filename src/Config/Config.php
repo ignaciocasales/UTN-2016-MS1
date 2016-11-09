@@ -10,9 +10,9 @@ namespace Config;
 // Constantes Base de datos.
 //La base de datos esta cargada en el servidor de la UTN con mis datos, si quieren usarla está para eso!!!
 //Sino, pueden cambiarla.
-define("DB_NAME", "casalesi");
-define("DB_USER", "casalesi");
-define("DB_PASS", "ckl123");
+define("DB_NAME", "tacconid");
+define("DB_USER", "tacconid");
+define("DB_PASS", "ppw123");
 define("DB_HOST", "git.mdp.utn.edu.ar");
 
 // Constantes front
