@@ -1,5 +1,7 @@
 <?php
-session_start();
+if(empty($_SESSION)){
+    session_start();
+}
 
 //$identifcador = session_id();
 //echo "El identifcador de esta sesión es: $identifcador";
@@ -8,8 +10,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require '../Config/Config.php';
-require '../Config/Autoload.php';
+require_once '../Config/Config.php';
+require_once '../Config/Autoload.php';
 
 Config\Autoload::iniciar();
 

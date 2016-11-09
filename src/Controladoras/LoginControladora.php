@@ -19,9 +19,9 @@ class loginControladora
         //Si estan seteadas las variables de sesion cargo bienvenida
         //sino cargo login
         if ((isset($_SESSION["mail"]) && $_SESSION["pwd"])) {
-            include("../Vistas/bienvenida.php");
+            require("../Vistas/bienvenida.php");
         } else {
-            include("../Vistas/login.php");
+            require("../Vistas/login.php");
         }
     }
 
@@ -68,8 +68,8 @@ class loginControladora
         }else{
             echo 'valores no seteados';
         }
-
-        header('Location: /index.php');
+        require ('/index.php');
+        //header('Location: /index.php');
 
     }
 
