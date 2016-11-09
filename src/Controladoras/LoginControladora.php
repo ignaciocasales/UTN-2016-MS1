@@ -43,7 +43,7 @@ class loginControladora
                 //$dao = UsuarioJsonDao::getInstancia();
 
                 $usuario = $dao->traeUno($mail);
-                print_r($usuario);
+
                 if ($this->existe($usuario)) {
 
                     if ($mail === $usuario->getEmail() && $pwd === $usuario->getPassword()) {
