@@ -3,8 +3,21 @@
 namespace Dao;
 
 
+use Modelo\Rol;
+
 class RolBdDao extends Conexion implements IDao
 {
+    protected $tabla = "roles";
+    private static $instancia;
+    protected $listado;
+
+    public static function getInstancia()
+    {
+        if (!self::$instancia instanceof self) {
+            self::$instancia = new self();
+        }
+        return self::$instancia;
+    }
 
     public function agregar($valor)
     {
@@ -28,18 +41,26 @@ class RolBdDao extends Conexion implements IDao
 
     public function traeUno($valor)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE descripcion =  '$valor'";
+        $sql = "SELECT * FROM $this->tabla WHERE id_roles =  '$valor' LIMIT 1";
 
-        $obj_pdo = new Conexion();
-
-        $conexion = $obj_pdo->conectar();
+        $conexion = Conexion::conectar();
 
         $sentencia = $conexion->prepare($sql);
 
         $sentencia->execute();
 
-        $row = $sentencia->fetch(\PDO::FETCH_ASSOC);
+        $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
 
-        if (!empty($row)) return $row;
+        $this->mapear($dataSet);
+
+        if (!empty($this->listado[0])) return $this->listado[0];
+    }
+
+    protected function mapear($dataSet)
+    {
+        $dataSet = is_array($dataSet) ? $dataSet : [];
+        $this->listado = array_map(function ($p) {
+            return new Rol($p['descripcion']);
+        }, $dataSet);
     }
 }

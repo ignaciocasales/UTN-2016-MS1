@@ -2,6 +2,8 @@
 
 namespace Controladoras;
 
+use Dao\RolBdDao;
+use Dao\RolJsonDao;
 use Dao\UsuarioBdDao;
 use Dao\UsuarioJsonDao;
 
@@ -30,41 +32,57 @@ class loginControladora
     function verificar($mail, $pwd)
     {
         if (isset($mail) && isset($pwd)) {
-            $rol = $this->existe($mail, $pwd);
-
-            if ($rol == 1) {
-                $privilegios = 'developer';
-            } else if ($rol == 2) {
-                $privilegios = 'empleado';
-            } else if ($rol == 3) {
-                $privilegios = 'titular';
-            }
 
             if ($mail === "" || $pwd === "") {
+
                 echo "Por favor, completar usuario y clave";
-            } else if (!is_null($rol)) {
-                $_SESSION["mail"] = $mail;
-                $_SESSION["pwd"] = $pwd;
-                $_SESSION["rol"] = $privilegios;
+
             } else {
+
+                $dao = UsuarioBdDao::getInstancia();
+                //$dao = UsuarioJsonDao::getInstancia();
+
+                $usuario = $dao->traeUno($mail);
+                print_r($usuario);
+                if ($this->existe($usuario)) {
+
+                    if ($mail === $usuario->getEmail() && $pwd === $usuario->getPassword()) {
+
+                        $privilegios = $this->establecerPrivilegios($usuario);
+
+                        $_SESSION["mail"] = $mail;
+                        $_SESSION["pwd"] = $pwd;
+                        $_SESSION["rol"] = $privilegios;
+
+                    }
+                }
             }
+        }else{
+            echo 'valores no seteados';
         }
+
         header('Location: ' . URL_PUBLIC);
+
     }
 
-    protected function existe($mail, $pwd)
+    protected function existe($usuario)
     {
-        $dao = UsuarioBdDao::getInstancia();
-        //$dao = UsuarioJsonDao::getInstancia();
-
-        $array = $dao->traeUno($mail);
-
-        if (!empty($array)) {
-            if ($mail === $array["mail"] && $pwd === $array["pwd"]) {
-                return $array["id_roles"];
+        if (!empty($usuario)) {
+            if (count($usuario) === 1) {
+                return true;
             }
-        } else {
-            return null;
         }
+
+        return false;
+    }
+
+    protected function establecerPrivilegios($usuario)
+    {
+        $dao = RolBdDao::getInstancia();
+        //$dao = RolJsonDao::getInstancia();
+
+        $rol = $dao->traeUno($usuario->getRol());
+
+        return $rol->getDescripcion();
     }
 }

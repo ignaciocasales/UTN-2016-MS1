@@ -5,10 +5,12 @@ namespace Dao;
 
 use Dao\IDao;
 use Dao\Conexion as Conexion;
+use Modelo\Usuario;
 
 class UsuarioBdDao extends Conexion implements IDao
 {
     protected $tabla = "usuarios";
+    protected $listado;
     private static $instancia;
 
     public static function getInstancia(){
@@ -24,10 +26,8 @@ class UsuarioBdDao extends Conexion implements IDao
         // con nombre (:name) o signos de interrogación (?) por los cuales los valores reales
         // serán sustituidos cuando la sentencia sea ejecutada
 
-        $sql = "INSERT INTO $this->tabla (nombre) VALUES (:nombre)";
 
-        // creo el objeto conexion
-        //$obj_pdo = new Conexion();
+        $sql = "INSERT INTO $this->tabla (nombre) VALUES (:nombre)";
 
 
         // Conecto a la base de datos.
@@ -52,12 +52,8 @@ class UsuarioBdDao extends Conexion implements IDao
         $sql = "DELETE FROM $this->tabla WHERE id_usuarios = $valor";
 
 
-        // creo el objeto conexion
-        $obj_pdo = new Conexion();
-
-
         // Conecto a la base de datos.
-        $conexion = $obj_pdo->conectar();
+        $conexion = Conexion::conectar();
 
 
         // Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
@@ -80,12 +76,8 @@ class UsuarioBdDao extends Conexion implements IDao
         $sql = "SELECT * FROM $this->tabla";
 
 
-        // creo el objeto conexion
-        $obj_pdo = new Conexion();
-
-
         // Conecto a la base de datos.
-        $conexion = $obj_pdo->conectar();
+        $conexion = Conexion::conectar();
 
 
         // Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
@@ -104,23 +96,26 @@ class UsuarioBdDao extends Conexion implements IDao
 
     public function traeUno($valor)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE mail =  '$valor'";
+        $sql = "SELECT * FROM $this->tabla WHERE mail =  '$valor' LIMIT 1";
 
-        $obj_pdo = new Conexion();
-
-        $conexion = $obj_pdo->conectar();
+        $conexion = Conexion::conectar();
 
         $sentencia = $conexion->prepare($sql);
 
         $sentencia->execute();
 
-        $row = $sentencia->fetch(\PDO::FETCH_ASSOC);
+        $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
 
-        if (!empty($row)) return $row;
+        $this->mapear($dataSet);
+
+        if (!empty($this->listado[0])) return $this->listado[0];
     }
 
-    private function mapear($dataSet)
+    protected function mapear($dataSet)
     {
-
+        $dataSet = is_array($dataSet) ? $dataSet : [];
+        $this->listado = array_map(function($p){
+            return new Usuario($p['mail'],$p['pwd'],$p['id_roles']);
+        }, $dataSet);
     }
 }
