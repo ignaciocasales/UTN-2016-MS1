@@ -68,8 +68,8 @@ class loginControladora
         }else{
             echo 'valores no seteados';
         }
-        require ('/index.php');
-        //header('Location: /index.php');
+        //require ('/index.php');
+        header('Location: /index.php');
 
     }
 

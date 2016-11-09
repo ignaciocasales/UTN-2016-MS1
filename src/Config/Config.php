@@ -8,7 +8,6 @@ namespace Config;
  */
 
 // Constantes Base de datos.
-
 define("DB_NAME", "tacconid");
 define("DB_USER", "tacconid");
 define("DB_PASS", "ppw123");
@@ -18,7 +17,12 @@ define("DB_USER", "casalesi");
 define("DB_PASS", "ckl123");
 */
 define("DB_HOST", "git.mdp.utn.edu.ar");
-
+/*
+define("DB_NAME", "casalesi");
+define("DB_USER", "root");
+define("DB_PASS", "ckl123");
+define("DB_HOST", "localhost");
+*/
 // Constantes front
 define('ROOT', dirname(__DIR__) . "/");
 define("URL_VISTA", ROOT . 'Vistas/');
