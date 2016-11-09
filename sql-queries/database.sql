@@ -11,11 +11,13 @@ CREATE TABLE roles
 CREATE TABLE usuarios
 (
   id_usuarios SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  
+  nombre      VARCHAR(30)  NOT NULL,
 
-  mail        VARCHAR(50)                      NOT NULL,
+  mail        VARCHAR(50) UNIQUE NOT NULL,
 
-  pwd         VARCHAR(32)                      NOT NULL,
-
+  pwd         VARCHAR(32)  NOT NULL,
+  
   id_roles    SMALLINT UNSIGNED,
 
   CONSTRAINT pk_de_usuario PRIMARY KEY (id_usuarios),
@@ -31,11 +33,11 @@ CREATE TABLE titulares
 
   id_usuarios  SMALLINT UNSIGNED,
 
-  dni          VARCHAR(10) UNIQUE               NOT NULL,
+  dni          VARCHAR(10) UNIQUE  NOT NULL,
 
-  nombre       VARCHAR(20)                      NOT NULL,
+  nombre       VARCHAR(20) NOT NULL,
 
-  apellido     VARCHAR(20)                      NOT NULL,
+  apellido     VARCHAR(20) NOT NULL,
 
   telefono     VARCHAR(40) UNIQUE,
 
@@ -52,13 +54,13 @@ CREATE TABLE vehiculos
 
   id_titulares SMALLINT UNSIGNED,
 
-  dominio      VARCHAR(10)                      NOT NULL,
+  dominio      VARCHAR(10) UNIQUE NOT NULL,
 
-  marca        VARCHAR(10)                      NOT NULL,
+  marca        VARCHAR(10) NOT NULL,
 
-  modelo       VARCHAR(10)                      NOT NULL,
+  modelo       VARCHAR(10) NOT NULL,
 
-  qr           VARCHAR(100),
+  qr           VARCHAR(100) UNIQUE,
 
   CONSTRAINT pk_de_vehiculos PRIMARY KEY (id_vehiculos),
 
@@ -71,13 +73,13 @@ CREATE TABLE cuentas_corrientes
 (
   id_cuentas_corrientes      SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
 
-  fecha_ultima_acrualisacion DATETIME                         NOT NULL,
+  fecha_ultima_acrualisacion DATETIME  NOT NULL,
 
-  maximo_credito             FLOAT UNSIGNED                   NOT NULL,
+  maximo_credito  FLOAT UNSIGNED  NOT NULL,
 
-  saldo                      FLOAT UNSIGNED                   NOT NULL,
+  saldo           FLOAT UNSIGNED NOT NULL,
 
-  id_vehiculos               SMALLINT UNSIGNED,
+  id_vehiculos    SMALLINT UNSIGNED,
 
   CONSTRAINT pk_de_id_cuentas_corrientes PRIMARY KEY (id_cuentas_corrientes),
 
@@ -89,6 +91,8 @@ CREATE TABLE cuentas_corrientes
 CREATE TABLE sensores
 (
   id_sensores   SMALLINT UNSIGNED AUTO_INCREMENT,
+  
+  tipo_sensor   VARCHAR(40),
 
   fecha_alta    DATE,
 
@@ -102,102 +106,52 @@ CREATE TABLE sensores
 );
 
 
-CREATE TABLE sensores_semaforos
+CREATE TABLE eventos
 (
-  id_sensores_semaforos SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
+id_eventos SMALLINT UNSIGNED AUTO_INCREMENT,
 
-  id_sensores           SMALLINT UNSIGNED,
+tipo_evento VARCHAR (40),
 
-  CONSTRAINT pk_de_id_sensores_semaforo PRIMARY KEY (id_sensores_semaforos),
+foto MEDIUMBLOB,
 
-  CONSTRAINT fk_de_id_de_sensores FOREIGN KEY (id_sensores) REFERENCES sensores (id_sensores)
-    ON DELETE CASCADE
+tipo_foto VARCHAR(10),
+
+id_sensores SMALLINT UNSIGNED,
+
+CONSTRAINT pk_de_eventos PRIMARY KEY(id_eventos),
+
+CONSTRAINT fk_de_id_de_sensores FOREIGN KEY(id_sensores) REFERENCES sensores(id_sensores)
+on DELETE CASCADE
 );
-
-
-CREATE TABLE sensor_peajes
-(
-  id_sensor_peajes SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
-
-  id_sensores      SMALLINT UNSIGNED,
-
-  CONSTRAINT pk_de_id_sensor_peajes PRIMARY KEY (id_sensor_peajes),
-
-  CONSTRAINT fk_de_id_de_sensores_peajes FOREIGN KEY (id_sensores) REFERENCES sensores (id_sensores)
-    ON DELETE CASCADE
-);
-
-
-CREATE TABLE eventos_multas
-(
-  id_eventos_multas     SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
-
-  fecha_hora            DATE                             NOT NULL,
-
-  foto                  MEDIUMBLOB,
-
-  tipo_foto             VARCHAR(30),
-
-  id_sensores_semaforos SMALLINT UNSIGNED,
-
-  CONSTRAINT pf_de_id_eventos_multas PRIMARY KEY (id_eventos_multas),
-
-  CONSTRAINT fk_de_id_de_sensores_semaforos FOREIGN KEY (id_sensores_semaforos) REFERENCES sensores_semaforos (id_sensores_semaforos)
-    ON DELETE CASCADE
-);
-
-
-CREATE TABLE eventos_peajes
-(
-  id_eventos_peajes SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
-
-  fecha_hora        DATE                             NOT NULL,
-
-  foto              MEDIUMBLOB,
-
-  tipo              VARCHAR(50),
-
-  id_sensor_peajes  SMALLINT UNSIGNED,
-
-  CONSTRAINT pk_de_id_evento_peajes PRIMARY KEY (id_eventos_peajes),
-
-  CONSTRAINT fk_de_id_sensor_peajes FOREIGN KEY (id_sensor_peajes) REFERENCES sensor_peajes (id_sensor_peajes)
-    ON DELETE CASCADE
-);
-
 
 CREATE TABLE movimientos_cuentas_corrientes
 (
   id_movimientos        SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
 
-  fecha_hora            DATETIME                         NOT NULL,
+  fecha_hora            DATETIME   NOT NULL,
 
-  inporte               FLOAT UNSIGNED                   NOT NULL,
+  inporte               FLOAT UNSIGNED NOT NULL,
 
   id_cuentas_corrientes SMALLINT UNSIGNED,
 
-  id_eventos_peajes     SMALLINT UNSIGNED,
-
-  id_evento_multas      SMALLINT UNSIGNED,
+  id_eventos   SMALLINT UNSIGNED,
 
   CONSTRAINT pk_de_id_movimientos PRIMARY KEY (id_movimientos),
 
   CONSTRAINT fk_de_id_cuentas_corrientes_de_cuentas FOREIGN KEY (id_cuentas_corrientes) REFERENCES cuentas_corrientes (id_cuentas_corrientes)
     ON DELETE CASCADE,
 
-  CONSTRAINT fk_de_id_eventos_peaje_peajes FOREIGN KEY (id_eventos_peajes) REFERENCES eventos_peajes (id_eventos_peajes)
-    ON DELETE CASCADE,
-
-  CONSTRAINT fk_de_id_evento_multa_multas FOREIGN KEY (id_evento_multas) REFERENCES eventos_multas (id_eventos_multas)
+  CONSTRAINT fk_de_id_eventos_eventos FOREIGN KEY (id_eventos) REFERENCES eventos(id_eventos)
     ON DELETE CASCADE
+
 );
 
 
 CREATE TABLE pagos
 (
-  id_pagos       SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  id_pagos   SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
 
-  fecha          DATE                             NOT NULL,
+  fecha      DATE  NOT NULL,
 
   id_movimientos SMALLINT UNSIGNED,
 
@@ -212,11 +166,11 @@ CREATE TABLE tarifas
 (
   id_tarifas        SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
 
-  fecha_desde       DATE                             NOT NULL,
+  fecha_desde       DATE   NOT NULL,
 
   fecha_asta        DATE,
 
-  multa             FLOAT UNSIGNED                   NOT NULL,
+  multa             FLOAT UNSIGNED  NOT NULL,
 
   peaje_hora_normal DATE,
 
