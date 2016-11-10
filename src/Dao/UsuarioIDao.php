@@ -5,11 +5,11 @@ namespace Dao;
 
 interface UsuarioIDao
 {
-    public function agregar($valor);
+    public function agregar($usuario);
 
-    public function eliminar($valor);
+    public function eliminar($usuario);
 
-    public function actualizar($valor);
+    public function actualizar($usuario);
 
     public function traeTodo();
 

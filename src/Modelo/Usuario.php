@@ -2,18 +2,19 @@
 
 namespace Modelo;
 
-class Usuario
+class Usuario implements \JsonSerializable
 {
-
     private $email;
     private $password;
-    private $m_Rol;
+    private $rol;
+    private $id = 0;
 
-    function __construct($email, $password, $rol)
+    function __construct($id, $email, $password, $rol)
     {
+        $this->id = $id;
         $this->email = $email;
         $this->password = $password;
-        $this->m_Rol = $rol;
+        $this->rol = $rol;
     }
 
     function __destruct()
@@ -32,7 +33,12 @@ class Usuario
 
     public function setRol($rol)
     {
-        $this->m_Rol = $rol;
+        $this->rol = $rol;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     public function getEmail()
@@ -47,6 +53,21 @@ class Usuario
 
     public function getRol()
     {
-        return $this->m_Rol;
+        return $this->rol;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'mail' => $this->email,
+            'pwd' => $this->password,
+            'id_roles' => $this->rol
+        ];
     }
 }

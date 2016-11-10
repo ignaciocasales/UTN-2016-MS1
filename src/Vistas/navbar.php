@@ -10,7 +10,9 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/index.php" id="responsiveBrand">
-                <img alt="Brand" src="<?php echo URL_IMG . 'traffic-lights-icon.png'; ?>" class="img-responsive brand">
+                <img alt="Brand" src="<?php echo URL_IMG . 'traffic-lights-icon.png'; ?>" class="img-responsive brand"
+                     title="Trafico MDQ" data-toggle="tooltip"
+                     data-placement="right">
             </a>
         </div>
 

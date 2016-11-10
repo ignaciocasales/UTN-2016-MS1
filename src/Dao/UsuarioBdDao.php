@@ -13,83 +13,72 @@ class UsuarioBdDao implements UsuarioIDao
     protected $listado;
     private static $instancia;
 
-    public static function getInstancia(){
-        if(!self::$instancia instanceof self){
+    public static function getInstancia()
+    {
+        if (!self::$instancia instanceof self) {
+
             self::$instancia = new self();
+
         }
+
         return self::$instancia;
     }
 
-    public function agregar($valor)
+    public function agregar($usuario)
     {
-        // Guardo como string la consulta sql utilizando como values, marcadores de parámetros
-        // con nombre (:name) o signos de interrogación (?) por los cuales los valores reales
-        // serán sustituidos cuando la sentencia sea ejecutada
+        $sql = "INSERT INTO $this->tabla (mail, pwd, id_roles) VALUES (:mail, :pwd, :rol)";
 
-
-        $sql = "INSERT INTO $this->tabla (nombre) VALUES (:nombre)";
-
-
-        // Conecto a la base de datos.
         $conexion = Conexion::conectar();
 
-
-        // Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
         $sentencia = $conexion->prepare($sql);
 
+        $sentencia->bindParam(":mail", $usuario->getEmail());
+        $sentencia->bindParam(":pwd", $usuario->getPassword());
+        $sentencia->bindParam(":rol", $usuario->getRol());
 
-        // Reemplazo los marcadores de parametro por los valores reales utilizando el método bindParam().
-        $sentencia->bindParam(":nombre", $value);
-
-
-        // Ejecuto la sentencia.
         $sentencia->execute();
     }
 
-    public function eliminar($valor)
+    public function eliminar($usuario)
     {
-        // Guardo como string la consulta sql
-        $sql = "DELETE FROM $this->tabla WHERE id_usuarios = $valor";
+        $sql = "DELETE FROM $this->tabla WHERE id_usuarios = $usuario";
 
-
-        // Conecto a la base de datos.
         $conexion = Conexion::conectar();
 
-
-        // Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
         $sentencia = $conexion->prepare($sql);
 
-
-        // Ejecuto la sentencia.
         $sentencia->execute();
     }
 
-    public function actualizar($valor)
+    public function actualizar($usuario)
     {
-        // TODO: Implement actualizar() method.
+        $sql = "UPDATE $this->tabla SET mail = :mail, pwd = :pwd, id_roles = :rol WHERE id_usuarios = :id";
+
+        $conexion = Conexion::conectar();
+
+        $sentencia = $conexion->prepare($sql);
+
+        $sentencia->bindParam(":mail", $usuario->getEmail());
+        $sentencia->bindParam(":pwd", $usuario->getPassword());
+        $sentencia->bindParam(":rol", $usuario->getRol());
+        $sentencia->bindParam(":id", $usuario->getId());
+
+        $sentencia->execute();
     }
 
     public function traeTodo()
     {
-
-        // Guardo como string la consulta sql
         $sql = "SELECT * FROM $this->tabla";
 
-
-        // Conecto a la base de datos.
         $conexion = Conexion::conectar();
 
-
-        // Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
         $sentencia = $conexion->prepare($sql);
 
-
-        // Ejecuto la sentencia.
         $sentencia->execute();
 
-        $row[] = $sentencia->fetchall(\PDO::FETCH_ASSOC);
-
-        $this->mapear($row);
+        $dataSet[] = $sentencia->fetchall(\PDO::FETCH_ASSOC);
+        print_r($dataSet);
+        $this->mapear($dataSet);
 
         if (!empty($this->listado)) return $this->listado;
     }
@@ -114,8 +103,8 @@ class UsuarioBdDao implements UsuarioIDao
     public function mapear($dataSet)
     {
         $dataSet = is_array($dataSet) ? $dataSet : [];
-        $this->listado = array_map(function($p){
-            return new Usuario($p['mail'],$p['pwd'],$p['id_roles']);
+        $this->listado = array_map(function ($p) {
+            return new Usuario($p['id'], $p['mail'], $p['pwd'], $p['id_roles']);
         }, $dataSet);
     }
 }

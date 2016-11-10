@@ -5,7 +5,7 @@ namespace Dao;
 use Dao\IDao;
 use Dao\Conexion as Conexion;
 
-class TitularBdDao extends Conexion implements IDao
+class TitularBdDao implements TitularIDao
 {
     protected $tabla = "titulares";
     private static $instancia;

@@ -6,6 +6,7 @@ use Dao\RolBdDao;
 use Dao\RolJsonDao;
 use Dao\UsuarioBdDao;
 use Dao\UsuarioJsonDao;
+use Modelo\Usuario;
 
 class loginControladora
 {
@@ -65,7 +66,7 @@ class loginControladora
                     }
                 }
             }
-        }else{
+        } else {
             echo 'valores no seteados';
         }
         header('Location: /index.php');
