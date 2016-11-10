@@ -30,7 +30,7 @@ INSERT INTO titulares(id_usuarios, dni, nombre, apellido, telefono) VALUES
   ('12','33301243','esteban','gonzales','154-003214'),
   ('13','35301443','natalia','paolini','478-1090'),
   ('14','22333153','agustin','bosque','455-3021'),
-  ('15','28111253','nasarena','gusman','467-3511');
+  ('15','28111253','nasarena','gusman','467-3611');
 
 INSERT INTO vehiculos(id_titulares,dominio,marca,modelo,qr) VALUES
 ('1','ark-230','renault','twingo','ark-2302'),

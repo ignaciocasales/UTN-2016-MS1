@@ -139,7 +139,7 @@ CREATE TABLE movimientos_cuentas_corrientes
   CONSTRAINT fk_de_id_cuentas_corrientes_de_cuentas FOREIGN KEY (id_cuentas_corrientes) REFERENCES cuentas_corrientes (id_cuentas_corrientes)
     ON DELETE CASCADE,
 
-  CONSTRAINT fk_de_id_eventos_eventos FOREIGN KEY (id_eventos) REFERENCES eventos(id_eventos)
+  CONSTRAINT fk_de_id_de_eventos_eventos FOREIGN KEY (id_eventos) REFERENCES eventos(id_eventos)
     ON DELETE CASCADE
 
 );

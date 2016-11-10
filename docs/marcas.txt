@@ -1,4 +1,4 @@
 marcas(ford),(audi),(hyundai),(chevrolet),
 (nissan),(mitsubishi),(volvo),(honda),(suzuki),
 (toyota),(mercedes-benz),(seat),(renault),
-(peugeot),(wolsvagen);
+(peugeot),(wolsvagen),(subaru);
