@@ -11,8 +11,6 @@ CREATE TABLE roles
 CREATE TABLE usuarios
 (
   id_usuarios SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
-  
-  nombre      VARCHAR(30)  NOT NULL,
 
   mail        VARCHAR(50) UNIQUE NOT NULL,
 
@@ -73,7 +71,7 @@ CREATE TABLE cuentas_corrientes
 (
   id_cuentas_corrientes      SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
 
-  fecha_ultima_acrualisacion DATETIME  NOT NULL,
+  fecha_ultima_actualisacion DATETIME  NOT NULL,
 
   maximo_credito  FLOAT UNSIGNED  NOT NULL,
 
