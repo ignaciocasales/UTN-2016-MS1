@@ -90,8 +90,6 @@ CREATE TABLE sensores
 (
   id_sensores   SMALLINT UNSIGNED AUTO_INCREMENT,
 
-  tipo_sensor   VARCHAR(40),
-
   fecha_alta    DATE,
 
   latitud       FLOAT,
@@ -121,8 +119,6 @@ CREATE TABLE tipos_sensores
 CREATE TABLE eventos
 (
   id_eventos  SMALLINT UNSIGNED AUTO_INCREMENT,
-
-  tipo_evento VARCHAR(40),
 
   foto        MEDIUMBLOB,
 
@@ -199,9 +195,9 @@ CREATE TABLE tarifas
 
   multa             FLOAT UNSIGNED                   NOT NULL,
 
-  peaje_hora_normal DATE,
+  peaje_hora_normal TIME,
 
-  peaje_hora_pico   DATE,
+  peaje_hora_pico   TIME,
 
   CONSTRAINT pk_id_de_tarifas PRIMARY KEY (id_tarifas)
 );
