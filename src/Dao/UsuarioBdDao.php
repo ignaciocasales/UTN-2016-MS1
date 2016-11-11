@@ -39,9 +39,9 @@ class UsuarioBdDao implements UsuarioIDao
         $sentencia->execute();
     }
 
-    public function eliminar($usuario)
+    public function eliminar($idUsuario)
     {
-        $sql = "DELETE FROM $this->tabla WHERE id_usuarios = $usuario";
+        $sql = "DELETE FROM $this->tabla WHERE id_usuarios = $idUsuario";
 
         $conexion = Conexion::conectar();
 
@@ -61,7 +61,6 @@ class UsuarioBdDao implements UsuarioIDao
         $sentencia->bindParam(":mail", $usuario->getEmail());
         $sentencia->bindParam(":pwd", $usuario->getPassword());
         $sentencia->bindParam(":rol", $usuario->getRol());
-        $sentencia->bindParam(":id", $usuario->getId());
 
         $sentencia->execute();
     }
@@ -104,7 +103,7 @@ class UsuarioBdDao implements UsuarioIDao
     {
         $dataSet = is_array($dataSet) ? $dataSet : [];
         $this->listado = array_map(function ($p) {
-            return new Usuario($p['id'], $p['mail'], $p['pwd'], $p['id_roles']);
+            return new Usuario($p['mail'], $p['pwd'], $p['id_roles']);
         }, $dataSet);
     }
 }

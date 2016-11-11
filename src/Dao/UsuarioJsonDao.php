@@ -22,7 +22,7 @@ class UsuarioJsonDao implements UsuarioIDao
         return self::$instancia;
     }
 
-    public function __construct($ruta = __DIR__ . '\json\usuarios.txt')
+    public function __construct($ruta = __DIR__ . '\json\usuarios.json')
     {
         if (!file_exists($ruta)) {
 
@@ -60,9 +60,9 @@ class UsuarioJsonDao implements UsuarioIDao
         $this->listado[] = $usuario;
     }
 
-    public function eliminar($usuario)
+    public function eliminar($idUsuario)
     {
-        if (($key = array_search($usuario, $this->listado, true)) !== FALSE) {
+        if (($key = array_search($idUsuario, $this->listado, true)) !== FALSE) {
             unset($this->listado[$key]);
         }
     }
