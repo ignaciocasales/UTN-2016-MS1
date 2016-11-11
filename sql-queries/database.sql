@@ -103,6 +103,20 @@ CREATE TABLE sensores
   CONSTRAINT pk_id_sensores PRIMARY KEY (id_sensores)
 );
 
+CREATE TABLE tipos_sensores
+(
+  id_tipos_sensores SMALLINT UNSIGNED AUTO_INCREMENT,
+
+  descripcion       VARCHAR(50),
+
+  id_sensores       SMALLINT UNSIGNED,
+
+  CONSTRAINT pk_de_id_tipos_sensores PRIMARY KEY (id_tipos_sensores),
+
+  CONSTRAINT fk_de_id_de_tipos_sensores FOREIGN KEY (id_sensores) REFERENCES sensores (id_sensores)
+    ON DELETE CASCADE
+);
+
 
 CREATE TABLE eventos
 (
@@ -119,6 +133,21 @@ CREATE TABLE eventos
   CONSTRAINT pk_de_eventos PRIMARY KEY (id_eventos),
 
   CONSTRAINT fk_de_id_de_sensores FOREIGN KEY (id_sensores) REFERENCES sensores (id_sensores)
+    ON DELETE CASCADE
+);
+
+
+CREATE TABLE tipos_eventos
+(
+  id_tipos_eventos SMALLINT UNSIGNED AUTO_INCREMENT,
+
+  descripcion      VARCHAR(50),
+
+  id_eventos       SMALLINT UNSIGNED,
+
+  CONSTRAINT pk_de_tipos_eventos PRIMARY KEY (id_tipos_eventos),
+
+  CONSTRAINT fk_de_id_de_eventos FOREIGN KEY (id_eventos) REFERENCES eventos (id_eventos)
     ON DELETE CASCADE
 );
 
@@ -139,7 +168,7 @@ CREATE TABLE movimientos_cuentas_corrientes
   CONSTRAINT fk_de_id_cuentas_corrientes_de_cuentas FOREIGN KEY (id_cuentas_corrientes) REFERENCES cuentas_corrientes (id_cuentas_corrientes)
     ON DELETE CASCADE,
 
-  CONSTRAINT fk_de_id_eventos_eventos FOREIGN KEY (id_eventos) REFERENCES eventos (id_eventos)
+  CONSTRAINT fk_de_id_de_eventos_de_eventos FOREIGN KEY (id_eventos) REFERENCES eventos (id_eventos)
     ON DELETE CASCADE
 
 );

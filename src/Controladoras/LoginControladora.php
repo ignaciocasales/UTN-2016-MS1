@@ -35,10 +35,8 @@ class loginControladora
     public
     function verificar($mail, $pwd)
     {
-        //estan seteadas mail y contraseña?
         if (isset($mail) && isset($pwd)) {
 
-            //estan vacias?
             if ($mail === "" || $pwd === "") {
 
                 echo "Por favor, completar usuario y clave";
@@ -50,18 +48,13 @@ class loginControladora
 
                 $usuario = $dao->traerPorMail($mail);
 
-                //existe?
                 if ($this->existe($usuario)) {
 
-                    //corresponde?
                     if ($mail === $usuario->getEmail() && $pwd === $usuario->getPassword()) {
-
-                        //dame los privilegios.
-                        $privilegios = $this->establecerPrivilegios($usuario);
 
                         $_SESSION["mail"] = $mail;
                         $_SESSION["pwd"] = $pwd;
-                        $_SESSION["rol"] = $privilegios;
+                        $_SESSION["rol"] = $this->establecerPrivilegios($usuario);
 
                     }
                 }
