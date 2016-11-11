@@ -25,7 +25,7 @@ class titularControladora
                 include ("../Vistas/abmVehiculos.php");
             }else{
               //  header('Location: ' . URL_PUBLIC);
-                $this->registrar();
+                $this->registrar($dni);
             }
         }
     }
@@ -46,7 +46,7 @@ class titularControladora
         }
     }
 
-    public function registrar()
+    public function registrar($dni)
     {
         include("../Vistas/abmTitular.php");
     }

@@ -121,3 +121,13 @@ body {
     /* Set the fixed height of the footer here */
     height: 37px;
 }
+
+/* otras */
+
+.input-width-90 input{
+    width: 90%;
+}
+
+.input-width-95 input{
+    width: 95%;
+}
