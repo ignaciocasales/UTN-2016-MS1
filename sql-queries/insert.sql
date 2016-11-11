@@ -1,3 +1,4 @@
+
 INSERT INTO roles (descripcion)
 VALUES ('developer'), ('empleado'), ('titular');
 
@@ -70,7 +71,7 @@ INSERT INTO tarifas
 
 
 INSERT INTO cuentas_corrientes 
-(fecha_ultima_actualisacion, maximo_credito, saldo, id_vehiculos) VALUES 
+(fecha_ultima_actualizacion, maximo_credito, saldo, id_vehiculos) VALUES
 ('2015-04-10 10:30:13', '2000', '200', '1'),
 ('2015-04-10 10:30:13', '2000', '200', '2'),
 ('2015-01-14 08:08:23', '1500', '400', '3'),

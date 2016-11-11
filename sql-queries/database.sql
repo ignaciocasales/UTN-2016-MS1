@@ -1,3 +1,6 @@
+/*CREATE DATABASE TrafiMDQ;
+ *USE TrafiMDQ; */
+
 CREATE TABLE roles
 (
   id_roles    SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
@@ -71,7 +74,7 @@ CREATE TABLE cuentas_corrientes
 (
   id_cuentas_corrientes      SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
 
-  fecha_ultima_acrualisacion DATETIME                         NOT NULL,
+  fecha_ultima_actualizacion DATETIME                         NOT NULL,
 
   maximo_credito             FLOAT UNSIGNED                   NOT NULL,
 
