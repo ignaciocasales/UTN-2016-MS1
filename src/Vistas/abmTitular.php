@@ -8,7 +8,7 @@
         <div class="col-md-8 col-md-offset-2  lower-box box-primary">
             <form class="form" method='POST' action="/titular/darAltaTitular/">
                 <div class="row">
-                    <div class="col-md-4 box-right-content input-width-90">
+                    <div class="col-xs-12 col-sm-12 col-md-4 box-right-content input-width-90">
                         <div class="form-group " aria-required="true">
                             <label for="Nombre">Nombre</label><br/>
                             <input type="text" name="nombre" autofocus required>
@@ -22,22 +22,22 @@
                             <input type="text" name="email" required>
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-xs-12 col-sm-12 col-md-8">
                         <div class="row">
-                            <div class="col-md-4 box-right-content input-width-90">
+                            <div class="col-xs-12 col-sm-6 col-md-4 box-right-content input-width-90">
                                 <div class="form-group">
                                     <label for="dni">DNI (sin puntos)</label><br/>
-                                    <input type="text" name="dni" pattern="(?:\d*){8}" maxlength="8" required>
+                                    <input type="text" name="dni" pattern="(?:\d*){8}"  value=<?= $dni?> maxlength="8" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="telefono">Telefono</label><br/>
                                     <input type="text" name="telefono" pattern="([0-90000000]){7}" maxlength="7" required>
                                 </div>
                             </div>
-                            <div class="col-md-8 input-width-95">
+                            <div class="col-xs-12 col-sm-6 col-md-8 input-width-95">
                                 <div class="form-group">
                                     <label for="usuario">Usuario</label><br/>
-                                    <input type="text" name="usuario" pattern="(?:\d*){8}" value=<?= $dni?> maxlength="8" required>
+                                    <input type="text" name="usuario" pattern="(?:\d*){8}" maxlength="8" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label><br/>
