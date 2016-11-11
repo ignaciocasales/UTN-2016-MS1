@@ -13,7 +13,11 @@ class Request
     {
         $metodoRequest = $this->getMetodoRequest();
 
-        $url = filter_input(INPUT_GET, 'url', FILTER_SANITIZE_URL);
+        $url = filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL); /*
+        *
+        *Tuve que cambiar INPUT_GET por INPUT_SERVER  y  REQUEST_METHOD por REQUEST_URI para que funcione en mi
+        *localhost
+        */
 
 
         /**
@@ -25,6 +29,9 @@ class Request
          * La función filter_input() obtiene una variable externa y opcionalmente la filtra.
          * Esta función se utiliza para validar las variables de fuentes inseguras, como la entrada de un usuario.
          */
+
+       $url = str_replace('index.php','',$url);
+        //esto tambien tuve que agregar para que me direccione correctamente al login
 
 
         $urlToArray = explode("/", $url);
@@ -38,11 +45,11 @@ class Request
 
         $ArregloUrl = array_filter($urlToArray);
 
-        /*
-        echo '<pre>';
-        print_r($ArregloUrl);
-        echo '</pre>';
-        */
+        /**
+         * echo '<pre>';
+         * print_r($ArregloUrl);
+         * echo '</pre>';
+         */
 
         /**
          * Filtra elementos de un array usando una función de devolución de llamada.
