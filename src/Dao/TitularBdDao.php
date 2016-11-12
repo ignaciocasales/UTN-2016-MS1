@@ -18,9 +18,31 @@ class TitularBdDao implements TitularIDao
         return self::$instancia;
     }
 
-    public function agregar($valor)
+    public function agregar($titular)
     {
-        // Guardo como string la consulta sql utilizando como values, marcadores de parámetros
+
+        $sql = "INSERT INTO $this->tabla (nombre, apellido, dni, telefono, id_usuarios) VALUES (:nombre, :apellido, :dni, :telefono, (SELECT id_usuarios FROM usuarios WHERE mail = :mail))";
+
+        $conexion = Conexion::conectar();
+
+        $sentencia = $conexion->prepare($sql);
+
+        $nombre   = $titular->getNombre();
+        $apellido = $titular->getApellido();
+        $dni      = $titular->getDni();
+        $telefono = $titular->getTelefono();
+        $usuario  = $titular->getUsuario();
+        $mail    = $usuario->getEmail();
+
+
+        $sentencia->bindParam(":nombre", $nombre);
+        $sentencia->bindParam(":apellido", $apellido);
+        $sentencia->bindParam(":dni", $dni);
+        $sentencia->bindParam(":telefono", $telefono);
+        $sentencia->bindParam(":mail", $mail);
+
+        $sentencia->execute();
+        /*// Guardo como string la consulta sql utilizando como values, marcadores de parámetros
         // con nombre (:name) o signos de interrogación (?) por los cuales los valores reales
         // serán sustituidos cuando la sentencia sea ejecutada
 
@@ -43,13 +65,13 @@ class TitularBdDao implements TitularIDao
 
 
         // Ejecuto la sentencia.
-        $sentencia->execute();
+        $sentencia->execute();*/
     }
 
-    public function eliminar($valor)
+    public function eliminar($dni)
     {
         // Guardo como string la consulta sql
-        $sql = "DELETE FROM $this->tabla WHERE id_titular = $valor";
+        $sql = "DELETE FROM $this->tabla WHERE dni = $dni";
 
 
         // creo el objeto conexion
@@ -68,7 +90,7 @@ class TitularBdDao implements TitularIDao
         $sentencia->execute();
     }
 
-    public function actualizar($valor)
+    public function actualizar($titular)
     {
         // TODO: Implement actualizar() method.
     }

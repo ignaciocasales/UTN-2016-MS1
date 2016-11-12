@@ -19,9 +19,19 @@ class RolBdDao implements RolIDao
         return self::$instancia;
     }
 
-    public function agregar($valor)
+    public function agregar($rol)
     {
-        // TODO: Implement agregar() method.
+        $sql = "INSERT INTO $this->tabla (descripcion) VALUES (:descripcion)";
+
+        $conexion = Conexion::conectar();
+
+        $sentencia = $conexion->prepare($sql);
+
+        $descripcion = $rol->getDescripcion();
+
+        $sentencia->bindParam(":descripcion", $descripcion);
+
+        $sentencia->execute();
     }
 
     public function eliminar($valor)
