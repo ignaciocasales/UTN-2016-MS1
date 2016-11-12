@@ -60,9 +60,9 @@ class UsuarioJsonDao implements UsuarioIDao
         $this->listado[] = $usuario;
     }
 
-    public function eliminar($idUsuario)
+    public function eliminar($mail)
     {
-        if (($key = array_search($idUsuario, $this->listado, true)) !== FALSE) {
+        if (($key = array_search($mail, $this->listado, true)) !== FALSE) {
             unset($this->listado[$key]);
         }
     }

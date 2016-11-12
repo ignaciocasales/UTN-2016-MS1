@@ -6,6 +6,7 @@ use Dao\RolBdDao;
 use Dao\RolJsonDao;
 use Dao\UsuarioBdDao;
 use Dao\UsuarioJsonDao;
+use Modelo\Rol;
 use Modelo\Usuario;
 
 class loginControladora
@@ -51,7 +52,9 @@ class loginControladora
                 if ($this->existe($usuario)) {
 
                     if ($mail === $usuario->getEmail() && $pwd === $usuario->getPassword()) {
+
                         $rol = $usuario->getRol();
+
                         $_SESSION["mail"] = $mail;
                         $_SESSION["pwd"] = $pwd;
                         $_SESSION["rol"] = $rol->getDescripcion();

@@ -9,7 +9,7 @@
                 <div class="form-group">
                     <label for="usuario">Usuario</label>
                     <input type="email" name="mail" class="form-control" id="usuario"
-                           placeholder="Ingrese su email..."
+                           placeholder="usuario@dominio.com"
                            title="Email" maxlength="50" data-toggle="tooltip" data-placement="right" autofocus required>
                 </div>
                 <div class="form-group">

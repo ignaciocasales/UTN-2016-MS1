@@ -26,22 +26,28 @@ class UsuarioBdDao implements UsuarioIDao
 
     public function agregar($usuario)
     {
-        $sql = "INSERT INTO $this->tabla (mail, pwd, id_roles) VALUES (:mail, :pwd, :rol)";
+        $sql = "INSERT INTO $this->tabla (mail, pwd, id_roles) VALUES (:mail, :pwd, (SELECT id_roles FROM roles WHERE descripcion = :rol))";
 
         $conexion = Conexion::conectar();
 
         $sentencia = $conexion->prepare($sql);
 
-        $sentencia->bindParam(":mail", $usuario->getEmail());
-        $sentencia->bindParam(":pwd", $usuario->getPassword());
-        $sentencia->bindParam(":rol", $usuario->getRol());
+        $mail = $usuario->getEmail();
+        $pwd = $usuario->getPassword();
+
+        $r = $usuario->getRol();
+        $rol = $r->getDescripcion();
+
+        $sentencia->bindParam(":mail", $mail);
+        $sentencia->bindParam(":pwd", $pwd);
+        $sentencia->bindParam(":rol", $rol);
 
         $sentencia->execute();
     }
 
-    public function eliminar($idUsuario)
+    public function eliminar($mail)
     {
-        $sql = "DELETE FROM $this->tabla WHERE id_usuarios = $idUsuario";
+        $sql = "DELETE FROM $this->tabla WHERE mail = \"$mail\"";
 
         $conexion = Conexion::conectar();
 
@@ -76,9 +82,7 @@ class UsuarioBdDao implements UsuarioIDao
         $sentencia->execute();
 
         $dataSet = $sentencia->fetchall(\PDO::FETCH_ASSOC);
-        echo '<pre>';
-        print_r($dataSet);
-        echo '</pre>';
+
         $this->mapear($dataSet);
 
         if (!empty($this->listado)) return $this->listado;
