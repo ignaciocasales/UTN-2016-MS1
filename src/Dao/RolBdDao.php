@@ -5,7 +5,7 @@ namespace Dao;
 
 use Modelo\Rol;
 
-class RolBdDao extends Conexion implements RolIDao
+class RolBdDao implements RolIDao
 {
     protected $tabla = "roles";
     private static $instancia;

@@ -75,8 +75,10 @@ class UsuarioBdDao implements UsuarioIDao
 
         $sentencia->execute();
 
-        $dataSet[] = $sentencia->fetchall(\PDO::FETCH_ASSOC);
+        $dataSet = $sentencia->fetchall(\PDO::FETCH_ASSOC);
+        echo '<pre>';
         print_r($dataSet);
+        echo '</pre>';
         $this->mapear($dataSet);
 
         if (!empty($this->listado)) return $this->listado;
@@ -103,7 +105,8 @@ class UsuarioBdDao implements UsuarioIDao
     {
         $dataSet = is_array($dataSet) ? $dataSet : [];
         $this->listado = array_map(function ($p) {
-            return new Usuario($p['mail'], $p['pwd'], $p['id_roles']);
+            $daoRol = RolBdDao::getInstancia();
+            return new Usuario($p['mail'], $p['pwd'], $daoRol->traerPorId($p['id_roles']));
         }, $dataSet);
     }
 }

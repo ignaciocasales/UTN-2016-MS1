@@ -51,10 +51,10 @@ class loginControladora
                 if ($this->existe($usuario)) {
 
                     if ($mail === $usuario->getEmail() && $pwd === $usuario->getPassword()) {
-
+                        $rol = $usuario->getRol();
                         $_SESSION["mail"] = $mail;
                         $_SESSION["pwd"] = $pwd;
-                        $_SESSION["rol"] = $this->establecerPrivilegios($usuario);
+                        $_SESSION["rol"] = $rol->getDescripcion();
 
                     }
                 }
@@ -63,7 +63,6 @@ class loginControladora
             echo 'valores no seteados';
         }
         header('Location: /index.php');
-
     }
 
     protected function existe($usuario)
@@ -75,15 +74,5 @@ class loginControladora
         }
 
         return false;
-    }
-
-    protected function establecerPrivilegios($usuario)
-    {
-        $dao = RolBdDao::getInstancia();
-        //$dao = RolJsonDao::getInstancia();
-
-        $rol = $dao->traerPorId($usuario->getRol());
-
-        return $rol->getDescripcion();
     }
 }
