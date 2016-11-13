@@ -11,7 +11,7 @@
                     <div class="col-md-6 box-right-content">
                         <div class="form-group" aria-required="true">
                             <label for="Patente">Patente</label><br/>
-                            <input type="text" class="form-control" name="patente">
+                            <input type="text" class="form-control" name="patente" required>
                         </div>
                         <div class="form-group">
                             <label for="Marca">Marca</label><br/>
@@ -30,7 +30,7 @@
                                 <h3 class="panel-title">DNI DEL TITULAR</h3>
                             </div>
                             <div class="panel-body">
-                                <?php echo $existe['dni']; ?>
+                                <?php echo $titular['dni']; ?>
                             </div>
                         </div>
                         <div class="panel panel-default">
@@ -38,7 +38,7 @@
                                 <h3 class="panel-title">NOMBRE</h3>
                             </div>
                             <div class="panel-body">
-                                <?php echo $existe['nombre'] . ' ' . $existe['apellido']; ?>
+                                <?php echo $titular['nombre'] . ' ' . $titular['apellido']; ?>
                             </div>
                         </div>
                     </div>
