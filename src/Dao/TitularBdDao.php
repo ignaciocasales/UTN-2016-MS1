@@ -95,6 +95,10 @@ class TitularBdDao implements TitularIDao
         // TODO: Implement actualizar() method.
     }
 
+    public function traerPorDni($dni){
+        
+    }
+
     public function traeTodo()
     {
 
