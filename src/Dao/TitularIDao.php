@@ -15,5 +15,4 @@ interface TitularIDao
 
     public function traerPorDni($dni);
 
-    public function mapear($dataSet);
 }
