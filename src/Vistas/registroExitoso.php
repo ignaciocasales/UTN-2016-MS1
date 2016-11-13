@@ -1,6 +1,6 @@
 <?php include('navbar.php'); ?>
 <header>
-    <h2 style="text-align: center;">Se registro el titular con Exito!</h2>
+    <h2 style="text-align: center;">Se registro el <?= $nombre ?> con Exito!</h2>
 </header>
 <div class="container">
     <div class="bg"></div>

@@ -11,7 +11,7 @@ class Titular
     private $telefono;
     private $m_Usuario;
 
-    function __construct($apellido = '', $dni, $nombre = '', $telefono, $usuario)
+    function __construct($nombre,$apellido,$dni,$telefono,$usuario)
     {
         $this->apellido = $apellido;
         $this->dni = $dni;

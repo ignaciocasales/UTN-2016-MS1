@@ -17,10 +17,6 @@
                             <label for="Apellido">Apellido</label><br/>
                             <input type="text" name="apellido" required>
                         </div>
-                        <div class="form-group">
-                            <label for="Email">Email</label><br/>
-                            <input type="text" name="email" required>
-                        </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-8">
                         <div class="row">
@@ -36,12 +32,12 @@
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-8 input-width-95">
                                 <div class="form-group">
-                                    <label for="usuario">Usuario</label><br/>
-                                    <input type="text" name="usuario" pattern="(?:\d*){8}" maxlength="8" required>
+                                    <label for="email">Email</label><br/>
+                                    <input type="email" name="email"  required>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label><br/>
-                                    <input type="text" name="´password" pattern="([0-90000000]){7}" maxlength="7" required>
+                                    <input type="password" name="´password" maxlength="7" required>
                                 </div>
                             </div>
                         </div>

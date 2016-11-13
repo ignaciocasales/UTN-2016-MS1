@@ -4,10 +4,12 @@ namespace Dao;
 
 use Dao\IDao;
 use Dao\Conexion as Conexion;
+use Modelo\Titular;
 
 class TitularBdDao implements TitularIDao
 {
     protected $tabla = "titulares";
+    protected $listado;
     private static $instancia;
 
     public static function getInstancia()
@@ -96,7 +98,21 @@ class TitularBdDao implements TitularIDao
     }
 
     public function traerPorDni($dni){
-        
+        $sql = "SELECT * FROM $this->tabla WHERE dni = '$dni'";
+
+        $conexion = Conexion::conectar();
+
+        $sentencia = $conexion->prepare($sql);
+
+        $sentencia->execute();
+
+        $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+
+        $this->mapear($dataSet);
+
+        if (!empty($this->listado[0])) return $this->listado[0];
+
+
     }
 
     public function traeTodo()
@@ -147,6 +163,10 @@ class TitularBdDao implements TitularIDao
 
     private function mapear($dataSet)
     {
-
+        $dataSet = is_array($dataSet) ? $dataSet : [];
+        $this->listado = array_map(function ($p) {
+            $usuarioDao = UsuarioBdDao::getInstancia();
+            return new Titular($p['nombre'], $p['apellido'],$p['dni'],$p['telefono'], $usuarioDao->traerPorId($p['id_usuarios']));
+        }, $dataSet);
     }
 }

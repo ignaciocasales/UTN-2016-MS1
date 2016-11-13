@@ -43,6 +43,7 @@ class UsuarioBdDao implements UsuarioIDao
         $sentencia->bindParam(":rol", $rol);
 
         $sentencia->execute();
+
     }
 
     public function eliminar($mail)
@@ -88,6 +89,21 @@ class UsuarioBdDao implements UsuarioIDao
         if (!empty($this->listado)) return $this->listado;
     }
 
+    public function traerPorId($id){
+        $sql = "SELECT * FROM $this->tabla WHERE id_usuarios =  '$id' LIMIT 1";
+
+        $conexion = Conexion::conectar();
+
+        $sentencia = $conexion->prepare($sql);
+
+        $sentencia->execute();
+
+        $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+
+        $this->mapear($dataSet);
+
+        if (!empty($this->listado[0])) return $this->listado[0];
+    }
     public function traerPorMail($mail)
     {
         $sql = "SELECT * FROM $this->tabla WHERE mail =  '$mail' LIMIT 1";

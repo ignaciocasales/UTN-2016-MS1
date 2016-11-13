@@ -31,7 +31,8 @@ class titularControladora
             UsuarioBdDao::getInstancia()->agregar($usuario);
             TitularBdDao::getInstancia()->agregar($titular);
 
-            include ("../Vistas/registroTitularExitoso.php");
+            $nombre = "titular";
+            include ("../Vistas/registroExitoso.php");
 
         }catch(\Exception $error){
             echo 'Hubo un error al procesar los datos. Error:' . $error;
