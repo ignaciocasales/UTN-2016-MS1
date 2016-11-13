@@ -10,6 +10,7 @@ hr {
     margin-bottom: 40px;
     margin-top: 15px;
 }
+
 .navbar-brand {
     padding: 22px 56px 15px;
 }
@@ -17,7 +18,8 @@ hr {
 .navbar-brand .brand {
     width: 80px;
 }
-@media screen and (max-width: 768px){
+
+@media screen and (max-width: 768px) {
     .navbar-brand {
         padding: 7px 0px 0px;
     }
@@ -122,12 +124,21 @@ body {
     height: 37px;
 }
 
-/* otras */
+/* Problema con las tablas responsive en firefox
+-------------------------------------------------- */
 
-.input-width-90 input{
+@-moz-document url-prefix() {
+    .table-responsive {
+        display: table-cell;
+    }
+}
+
+/* otras
+-------------------------------------------------- */
+.input-width-90 input {
     width: 90%;
 }
 
-.input-width-95 input{
+.input-width-95 input {
     width: 95%;
 }

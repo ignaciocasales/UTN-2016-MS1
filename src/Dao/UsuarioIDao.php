@@ -11,7 +11,7 @@ interface UsuarioIDao
 
     public function actualizar($usuario);
 
-    public function traeTodo();
+    public function traerTodo();
 
     public function traerPorId($id);
 

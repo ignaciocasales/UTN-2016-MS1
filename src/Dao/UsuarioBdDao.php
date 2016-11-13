@@ -79,7 +79,7 @@ class UsuarioBdDao implements UsuarioIDao
         $sentencia->execute();
     }
 
-    public function traeTodo()
+    public function traerTodo()
     {
         $sql = "SELECT * FROM $this->tabla";
 
