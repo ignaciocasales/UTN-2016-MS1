@@ -9,65 +9,66 @@ class Vehiculo
     private $marca;
     private $modelo;
     private $QR;
-    private $m_Titular;
+    private $titular;
 
-	function __construct($dominio = '', $marca = '', $modelo = '', $titular)
+    function __construct($dominio = '', $marca = '', $modelo = '', $titular, $qr)
     {
         $this->dominio = $dominio;
         $this->marca = $marca;
         $this->modelo = $modelo;
-        $this->m_Titular = $titular;
+        $this->titular = $titular;
+        $this->QR = $qr;
     }
 
-	function __destruct()
+    function __destruct()
     {
     }
-    
+
     public function setDominio($dominio = '')
     {
         $this->dominio = $dominio;
     }
-    
+
     public function setMarca($marca = '')
     {
         $this->marca = $marca;
     }
-    
+
     public function setModelo($modelo = '')
     {
         $this->modelo = $modelo;
     }
-   
+
     public function setQR($QR = '')
     {
         $this->QR = $QR;
     }
-    
+
     public function setTitular($titular)
     {
-        $this->m_Titular = $titular;
+        $this->titular = $titular;
     }
-    
+
     public function getDominio()
     {
         return $this->dominio;
     }
-    
+
     public function getMarca()
     {
         return $this->marca;
     }
-    
+
     public function getModelo()
     {
         return $this->modelo;
     }
-    
+
     public function getTitular()
     {
-        return $this->m_Titular;
+        return $this->titular;
     }
-   
+
     public function getQR()
     {
         return $this->QR;

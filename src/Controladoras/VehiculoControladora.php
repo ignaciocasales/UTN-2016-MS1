@@ -13,22 +13,24 @@ class vehiculoControladora
     {
     }
 
-    public function darAltaVehiculo($patente,$marca,$modelo,$dni){
+    public function darAltaVehiculo($patente, $marca, $modelo, $dni)
+    {
 
         $titular = TitularBdDao::getInstancia()->traerPorDni($dni);
-        $vehiculo = new Vehiculo($patente,$marca,$modelo,$titular);
+        $vehiculo = new Vehiculo($patente, $marca, $modelo, $titular);
 
 
-        try{
+        try {
             VehiculoBdDao::getInstancia()->agregar($vehiculo);
             $nombre = "vehiculo";
 
-            include ("../Vistas/registroExitoso.php");
+            include("../Vistas/registroExitoso.php");
 
-        }catch(\Exception $error){
+        } catch (\Exception $error) {
             echo 'Hubo un error al procesar los datos. Error:' . $error;
         }
     }
+
     public function registrar()
     {
         include("../Vistas/abmVehiculos.php");

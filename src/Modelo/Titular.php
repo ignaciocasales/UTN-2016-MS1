@@ -9,15 +9,15 @@ class Titular
     private $dni;
     private $nombre;
     private $telefono;
-    private $m_Usuario;
+    private $Usuario;
 
-    function __construct($nombre,$apellido,$dni,$telefono,$usuario)
+    function __construct($nombre, $apellido, $dni, $telefono, $usuario)
     {
         $this->apellido = $apellido;
         $this->dni = $dni;
         $this->nombre = $nombre;
         $this->telefono = $telefono;
-        $this->m_Usuario = $usuario;
+        $this->Usuario = $usuario;
     }
 
     function __destruct()
@@ -46,7 +46,7 @@ class Titular
 
     public function setUsuario($usuario)
     {
-        $this->m_Usuario = $usuario;
+        $this->Usuario = $usuario;
     }
 
     public function getApellido()
@@ -71,7 +71,7 @@ class Titular
 
     public function getUsuario()
     {
-        return $this->m_Usuario;
+        return $this->Usuario;
     }
 
 }

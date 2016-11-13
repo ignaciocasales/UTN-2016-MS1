@@ -46,7 +46,7 @@ class UsuarioBdDao implements UsuarioIDao
 
     }
 
-    public function eliminar($mail)
+    public function eliminarPorMail($mail)
     {
         $sql = "DELETE FROM $this->tabla WHERE mail = \"$mail\"";
 
@@ -59,15 +59,22 @@ class UsuarioBdDao implements UsuarioIDao
 
     public function actualizar($usuario)
     {
-        $sql = "UPDATE $this->tabla SET mail = :mail, pwd = :pwd, id_roles = :rol WHERE id_usuarios = :id";
+        //Por comodidad, el usuario no puede cambiar el mail.
+        $sql = "UPDATE $this->tabla SET pwd = :pwd, id_roles = (SELECT id_roles FROM roles WHERE descripcion = :rol) WHERE mail = :mail";
 
         $conexion = Conexion::conectar();
 
         $sentencia = $conexion->prepare($sql);
 
-        $sentencia->bindParam(":mail", $usuario->getEmail());
-        $sentencia->bindParam(":pwd", $usuario->getPassword());
-        $sentencia->bindParam(":rol", $usuario->getRol());
+        $mail = $usuario->getEmail();
+        $pwd = $usuario->getPassword();
+
+        $r = $usuario->getRol();
+        $rol = $r->getDescripcion();
+
+        $sentencia->bindParam(":mail", $mail);
+        $sentencia->bindParam(":pwd", $pwd);
+        $sentencia->bindParam(":rol", $rol);
 
         $sentencia->execute();
     }
@@ -89,7 +96,8 @@ class UsuarioBdDao implements UsuarioIDao
         if (!empty($this->listado)) return $this->listado;
     }
 
-    public function traerPorId($id){
+    public function traerPorId($id)
+    {
         $sql = "SELECT * FROM $this->tabla WHERE id_usuarios =  '$id' LIMIT 1";
 
         $conexion = Conexion::conectar();
@@ -104,6 +112,7 @@ class UsuarioBdDao implements UsuarioIDao
 
         if (!empty($this->listado[0])) return $this->listado[0];
     }
+
     public function traerPorMail($mail)
     {
         $sql = "SELECT * FROM $this->tabla WHERE mail =  '$mail' LIMIT 1";

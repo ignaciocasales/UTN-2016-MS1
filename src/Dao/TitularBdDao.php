@@ -29,12 +29,12 @@ class TitularBdDao implements TitularIDao
 
         $sentencia = $conexion->prepare($sql);
 
-        $nombre   = $titular->getNombre();
+        $nombre = $titular->getNombre();
         $apellido = $titular->getApellido();
-        $dni      = $titular->getDni();
+        $dni = $titular->getDni();
         $telefono = $titular->getTelefono();
-        $usuario  = $titular->getUsuario();
-        $mail    = $usuario->getEmail();
+        $usuario = $titular->getUsuario();
+        $mail = $usuario->getEmail();
 
 
         $sentencia->bindParam(":nombre", $nombre);
@@ -97,7 +97,25 @@ class TitularBdDao implements TitularIDao
         // TODO: Implement actualizar() method.
     }
 
-    public function traerPorDni($dni){
+    public function traerPorId($id)
+    {
+        $sql = "SELECT * FROM $this->tabla WHERE id_titulares =  '$id' LIMIT 1";
+
+        $conexion = Conexion::conectar();
+
+        $sentencia = $conexion->prepare($sql);
+
+        $sentencia->execute();
+
+        $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+
+        $this->mapear($dataSet);
+
+        if (!empty($this->listado[0])) return $this->listado[0];
+    }
+
+    public function traerPorDni($dni)
+    {
         $sql = "SELECT * FROM $this->tabla WHERE dni = '$dni'";
 
         $conexion = Conexion::conectar();
@@ -166,7 +184,7 @@ class TitularBdDao implements TitularIDao
         $dataSet = is_array($dataSet) ? $dataSet : [];
         $this->listado = array_map(function ($p) {
             $usuarioDao = UsuarioBdDao::getInstancia();
-            return new Titular($p['nombre'], $p['apellido'],$p['dni'],$p['telefono'], $usuarioDao->traerPorId($p['id_usuarios']));
+            return new Titular($p['nombre'], $p['apellido'], $p['dni'], $p['telefono'], $usuarioDao->traerPorId($p['id_usuarios']));
         }, $dataSet);
     }
 }

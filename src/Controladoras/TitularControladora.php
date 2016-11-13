@@ -3,9 +3,7 @@
 namespace Controladoras;
 
 
-use Dao\RolBdDao;
 use Dao\TitularBdDao;
-use Dao\TitularJsonDao;
 use Dao\UsuarioBdDao;
 use Modelo\Rol;
 use Modelo\Titular;
@@ -17,37 +15,40 @@ class titularControladora
     {
     }
 
-    public function buscarDni(){
-        include ("../Vistas/buscarDniTitular.php");
+    public function buscarDni()
+    {
+        include("../Vistas/buscarDniTitular.php");
     }
 
 
-    public function darAltaTitular($nombre ,$apellido,$dni ,$telefono,$email,$password){
+    public function darAltaTitular($nombre, $apellido, $dni, $telefono, $email, $password)
+    {
 
-        $usuario = new Usuario($email,$password,new Rol('titular'));
-        $titular = new Titular($nombre,$apellido,$dni,$telefono,$usuario);
+        $usuario = new Usuario($email, $password, new Rol('titular'));
+        $titular = new Titular($nombre, $apellido, $dni, $telefono, $usuario);
 
-        try{
+        try {
             UsuarioBdDao::getInstancia()->agregar($usuario);
             TitularBdDao::getInstancia()->agregar($titular);
 
             $nombre = "titular";
-            include ("../Vistas/registroExitoso.php");
+            include("../Vistas/registroExitoso.php");
 
-        }catch(\Exception $error){
+        } catch (\Exception $error) {
             echo 'Hubo un error al procesar los datos. Error:' . $error;
         }
 
     }
+
     public
     function verificar($dni)
     {
         if (isset($dni)) {
             $titular = $this->existe($dni);
             if ($titular != null) {
-                include ("../Vistas/abmVehiculos.php");
-            }else{
-              //  header('Location: ' . URL_PUBLIC);
+                include("../Vistas/abmVehiculos.php");
+            } else {
+                //  header('Location: ' . URL_PUBLIC);
                 $this->registrar($dni);
             }
         }

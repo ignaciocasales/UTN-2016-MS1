@@ -23,17 +23,19 @@
                             <div class="col-xs-12 col-sm-6 col-md-4 box-right-content input-width-90">
                                 <div class="form-group">
                                     <label for="dni">DNI (sin puntos)</label><br/>
-                                    <input type="text" name="dni" pattern="(?:\d*){8}"  value=<?= $dni?> maxlength="8" required>
+                                    <input type="text" name="dni" pattern="(?:\d*){8}" value=<?= $dni ?> maxlength="8"
+                                           required>
                                 </div>
                                 <div class="form-group">
                                     <label for="telefono">Telefono</label><br/>
-                                    <input type="text" name="telefono" pattern="([0-90000000]){7}" maxlength="7" required>
+                                    <input type="text" name="telefono" pattern="([0-90000000]){7}" maxlength="7"
+                                           required>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-8 input-width-95">
                                 <div class="form-group">
                                     <label for="email">Email</label><br/>
-                                    <input type="email" name="email"  required>
+                                    <input type="email" name="email" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label><br/>

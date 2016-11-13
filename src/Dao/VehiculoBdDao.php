@@ -3,6 +3,8 @@
 namespace Dao;
 
 
+use Modelo\Vehiculo;
+
 class VehiculoBdDao implements VehiculoIDao
 {
     protected $tabla = "vehiculos";
@@ -29,10 +31,10 @@ class VehiculoBdDao implements VehiculoIDao
         $sentencia = $conexion->prepare($sql);
 
         $dominio = $vehiculo->getDominio();
-        $marca   = $vehiculo->getMarca();
-        $modelo  = $vehiculo->getModelo();
+        $marca = $vehiculo->getMarca();
+        $modelo = $vehiculo->getModelo();
         $titular = $vehiculo->getTitular();
-        $dni     = $titular->getDni();
+        $dni = $titular->getDni();
 
         $sentencia->bindParam(":dominio", $dominio);
         $sentencia->bindParam(":marca", $marca);
@@ -42,5 +44,79 @@ class VehiculoBdDao implements VehiculoIDao
 
         $sentencia->execute();
 
+    }
+
+    public function eliminarPorDominio($dominio)
+    {
+        $sql = "DELETE FROM $this->tabla WHERE dominio = \"$dominio\"";
+
+        $conexion = Conexion::conectar();
+
+        $sentencia = $conexion->prepare($sql);
+
+        $sentencia->execute();
+    }
+
+    public function actualizar($vehiculo)
+    {
+        //No tiene sentido cambiar otro dato que no sea el titular.
+        $sql = "UPDATE $this->tabla SET id_titulares = (SELECT id_titulares FROM titulares WHERE dni = :dni) WHERE dominio = :dominio";
+
+        $conexion = Conexion::conectar();
+
+        $sentencia = $conexion->prepare($sql);
+
+        $dominio = $vehiculo->getDominio();
+
+        $t = $vehiculo->getTitular();
+        $dni = $t->getDni();
+
+        $sentencia->bindParam(":dominio", $dominio);
+        $sentencia->bindParam(":dni", $dni);
+
+        $sentencia->execute();
+    }
+
+    public function traeTodo()
+    {
+        $sql = "SELECT * FROM $this->tabla";
+
+        $conexion = Conexion::conectar();
+
+        $sentencia = $conexion->prepare($sql);
+
+        $sentencia->execute();
+
+        $dataSet = $sentencia->fetchall(\PDO::FETCH_ASSOC);
+
+        $this->mapear($dataSet);
+
+        if (!empty($this->listado)) return $this->listado;
+    }
+
+    public function traerPorDominio($dominio)
+    {
+        $sql = "SELECT * FROM $this->tabla WHERE dominio =  '$dominio' LIMIT 1";
+
+        $conexion = Conexion::conectar();
+
+        $sentencia = $conexion->prepare($sql);
+
+        $sentencia->execute();
+
+        $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+
+        $this->mapear($dataSet);
+
+        if (!empty($this->listado[0])) return $this->listado[0];
+    }
+
+    public function mapear($dataSet)
+    {
+        $dataSet = is_array($dataSet) ? $dataSet : [];
+        $this->listado = array_map(function ($p) {
+            $daoTitular = TitularBdDao::getInstancia();
+            return new Vehiculo($p['dominio'], $p['marca'], $p['modelo'], $daoTitular->traerPorId($p['id_titulares']), $p['qr']);
+        }, $dataSet);
     }
 }
