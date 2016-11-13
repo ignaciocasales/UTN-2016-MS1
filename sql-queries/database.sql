@@ -194,13 +194,13 @@ CREATE TABLE tarifas
 
   fecha_desde       DATE                             NOT NULL,
 
-  fecha_asta        DATE,
+  fecha_hasta        DATE,
 
   multa             FLOAT UNSIGNED                   NOT NULL,
 
-  peaje_hora_normal TIME,
+  peaje_hora_normal FLOAT UNSIGNED                   NOT NULL,
 
-  peaje_hora_pico   TIME,
+  peaje_hora_pico   FLOAT UNSIGNED                   NOT NULL,
 
   CONSTRAINT pk_id_de_tarifas PRIMARY KEY (id_tarifas)
 );

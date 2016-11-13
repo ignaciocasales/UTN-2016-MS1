@@ -11,7 +11,9 @@ interface VehiculoIDao
 
     public function actualizar($vehiculo);
 
-    public function traeTodo();
+    public function traerTodo();
+
+    public function traerPorId($id);
 
     public function traerPorDominio($dominio);
 

@@ -13,6 +13,8 @@ interface UsuarioIDao
 
     public function traeTodo();
 
+    public function traerPorId($id);
+
     public function traerPorMail($mail);
 
     public function mapear($dataSet);

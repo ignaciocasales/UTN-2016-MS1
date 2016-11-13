@@ -44,62 +44,64 @@ class TitularBdDao implements TitularIDao
         $sentencia->bindParam(":mail", $mail);
 
         $sentencia->execute();
-        /*// Guardo como string la consulta sql utilizando como values, marcadores de parámetros
-        // con nombre (:name) o signos de interrogación (?) por los cuales los valores reales
-        // serán sustituidos cuando la sentencia sea ejecutada
 
-        $sql = "INSERT INTO $this->tabla (nombre) VALUES (:nombre)";
-
-        // creo el objeto conexion
-        //$obj_pdo = new Conexion();
-
-
-        // Conecto a la base de datos.
-        $conexion = Conexion::conectar();
-
-
-        // Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
-        $sentencia = $conexion->prepare($sql);
-
-
-        // Reemplazo los marcadores de parametro por los valores reales utilizando el método bindParam().
-        $sentencia->bindParam(":nombre", $value);
-
-
-        // Ejecuto la sentencia.
-        $sentencia->execute();*/
     }
 
-    public function eliminar($dni)
+    public function eliminarPorDni($dni)
     {
-        // Guardo como string la consulta sql
-        $sql = "DELETE FROM $this->tabla WHERE dni = $dni";
+        $sql = "DELETE FROM $this->tabla WHERE dni = \"$dni\"";
 
-
-        // creo el objeto conexion
         $obj_pdo = new Conexion();
 
-
-        // Conecto a la base de datos.
         $conexion = $obj_pdo->conectar();
 
-
-        // Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
         $sentencia = $conexion->prepare($sql);
 
-
-        // Ejecuto la sentencia.
         $sentencia->execute();
     }
 
     public function actualizar($titular)
     {
-        // TODO: Implement actualizar() method.
+        //Al titular no se le puede cambiar el dni, no tiene sentido.
+        $sql = "UPDATE $this->tabla SET nombre = :nombre, apellido = :apellido, telefono = :telefono  WHERE dni = :dni";
+
+        $conexion = Conexion::conectar();
+
+        $sentencia = $conexion->prepare($sql);
+
+        $nombre = $titular->getNombre();
+        $apellido = $titular->getApellido();
+        $telefono = $titular->getTelefono();
+        $dni = $titular->getDni();
+
+        $sentencia->bindParam(":nombre", $nombre);
+        $sentencia->bindParam(":apellido", $apellido);
+        $sentencia->bindParam(":telefono", $telefono);
+        $sentencia->bindParam(":dni", $dni);
+
+        $sentencia->execute();
+    }
+
+    public function traeTodo()
+    {
+        $sql = "SELECT * FROM $this->tabla";
+
+        $conexion = Conexion::conectar();
+
+        $sentencia = $conexion->prepare($sql);
+
+        $sentencia->execute();
+
+        $dataSet = $sentencia->fetchall(\PDO::FETCH_ASSOC);
+
+        $this->mapear($dataSet);
+
+        if (!empty($this->listado)) return $this->listado;
     }
 
     public function traerPorId($id)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE id_titulares =  '$id' LIMIT 1";
+        $sql = "SELECT * FROM $this->tabla WHERE id_titulares =  \"$id\" LIMIT 1";
 
         $conexion = Conexion::conectar();
 
@@ -116,7 +118,7 @@ class TitularBdDao implements TitularIDao
 
     public function traerPorDni($dni)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE dni = '$dni'";
+        $sql = "SELECT * FROM $this->tabla WHERE dni = \"$dni\"";
 
         $conexion = Conexion::conectar();
 
@@ -129,57 +131,9 @@ class TitularBdDao implements TitularIDao
         $this->mapear($dataSet);
 
         if (!empty($this->listado[0])) return $this->listado[0];
-
-
     }
 
-    public function traeTodo()
-    {
-
-        // Guardo como string la consulta sql
-        $sql = "SELECT * FROM $this->tabla";
-
-
-        // creo el objeto conexion
-        $obj_pdo = new Conexion();
-
-
-        // Conecto a la base de datos.
-        $conexion = $obj_pdo->conectar();
-
-
-        // Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
-        $sentencia = $conexion->prepare($sql);
-
-
-        // Ejecuto la sentencia.
-        $sentencia->execute();
-
-
-        while ($row = $sentencia->fetch(\PDO::FETCH_ASSOC)) {
-            $array[] = $row;
-        }
-        if (!empty($array)) return $array;
-    }
-
-    public function traeUno($valor)
-    {
-        $sql = "SELECT * FROM $this->tabla WHERE dni =  '$valor'";
-
-        $obj_pdo = new Conexion();
-
-        $conexion = $obj_pdo->conectar();
-
-        $sentencia = $conexion->prepare($sql);
-
-        $sentencia->execute();
-
-        $row = $sentencia->fetch(\PDO::FETCH_ASSOC);
-
-        if (!empty($row)) return $row;
-    }
-
-    private function mapear($dataSet)
+    public function mapear($dataSet)
     {
         $dataSet = is_array($dataSet) ? $dataSet : [];
         $this->listado = array_map(function ($p) {

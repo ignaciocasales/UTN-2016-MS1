@@ -77,7 +77,7 @@ class VehiculoBdDao implements VehiculoIDao
         $sentencia->execute();
     }
 
-    public function traeTodo()
+    public function traerTodo()
     {
         $sql = "SELECT * FROM $this->tabla";
 
@@ -94,9 +94,26 @@ class VehiculoBdDao implements VehiculoIDao
         if (!empty($this->listado)) return $this->listado;
     }
 
+    public function traerPorId($id)
+    {
+        $sql = "SELECT * FROM $this->tabla WHERE id_vehiculos =  \"$id\" LIMIT 1";
+
+        $conexion = Conexion::conectar();
+
+        $sentencia = $conexion->prepare($sql);
+
+        $sentencia->execute();
+
+        $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+
+        $this->mapear($dataSet);
+
+        if (!empty($this->listado[0])) return $this->listado[0];
+    }
+
     public function traerPorDominio($dominio)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE dominio =  '$dominio' LIMIT 1";
+        $sql = "SELECT * FROM $this->tabla WHERE dominio =  \"$dominio\" LIMIT 1";
 
         $conexion = Conexion::conectar();
 

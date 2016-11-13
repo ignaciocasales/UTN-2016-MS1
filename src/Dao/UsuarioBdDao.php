@@ -98,7 +98,7 @@ class UsuarioBdDao implements UsuarioIDao
 
     public function traerPorId($id)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE id_usuarios =  '$id' LIMIT 1";
+        $sql = "SELECT * FROM $this->tabla WHERE id_usuarios =  \"$id\" LIMIT 1";
 
         $conexion = Conexion::conectar();
 
@@ -115,7 +115,7 @@ class UsuarioBdDao implements UsuarioIDao
 
     public function traerPorMail($mail)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE mail =  '$mail' LIMIT 1";
+        $sql = "SELECT * FROM $this->tabla WHERE mail =  \"$mail\" LIMIT 1";
 
         $conexion = Conexion::conectar();
 
