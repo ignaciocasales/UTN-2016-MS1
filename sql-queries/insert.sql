@@ -116,3 +116,32 @@ INSERT INTO sensores
 ('2016-09-22', '-98.55661', '-89.34590', '465413456'),
 ('2016-09-22', '-68.55555', '-90.45789', '457645321');
 
+
+INSERT INTO tipos_sensores 
+(descripcion, id_sensores) VALUES
+('tomar foto','1'),
+('lectura qr','2'),
+('tomar foto','3'),
+('tomar foto','4'),
+('lrctura qr','5'),
+('lrctura qr','6'),
+('tomar foto','7'),
+('tomar foto','8'),
+('lectura qr','9'),
+('lectura qr','10'),
+('foto y qr','11'),
+('tomar foto','12'),
+('tomar foto','13'),
+('foto y qr','14'),
+('lectura qr','15'),
+('lectura qr','16'),
+('tomar foto','17'),
+('tomar foto','18'),
+('tomar foto','19'),
+('qr y foto','20'),
+('qr y foto','21'),
+('lectura qr','22'),
+('tomar foto','23'),
+('tomar foto','24'),
+('lectura qr','25');
+
