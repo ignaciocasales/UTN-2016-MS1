@@ -45,6 +45,7 @@ class titularControladora
     {
         if (isset($dni)) {
             $titular = $this->existe($dni);
+
             if ($titular != null) {
                 include("../Vistas/abmVehiculos.php");
             } else {
@@ -59,10 +60,10 @@ class titularControladora
         $dao = TitularBdDao::getInstancia();
         //$dao = TitularJsonDao::getInstancia();
 
-        $array = $dao->traeUno($dni);
+        $array = $dao->traerPorDni($dni);
 
         if (!empty($array)) {
-            if ($dni === $array["dni"]) {
+            if ($dni === $array->getDni()) {
                 return $array;
             }
         } else {

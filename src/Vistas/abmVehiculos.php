@@ -29,7 +29,7 @@
                                 <h3 class="panel-title">DNI DEL TITULAR</h3>
                             </div>
                             <div class="panel-body">
-                                <input type="text" name="dni" value="<?php echo $titular['dni']; ?>" readonly>
+                                <input type="text" name="dni" value="<?php echo $titular->getDni(); ?>" readonly>
                             </div>
                         </div>
                         <div class="panel panel-default">
@@ -37,7 +37,7 @@
                                 <h3 class="panel-title">NOMBRE</h3>
                             </div>
                             <div class="panel-body">
-                                <?php echo $titular['nombre'] . ' ' . $titular['apellido']; ?>
+                                <?php echo $titular->getNombre() . ' ' . $titular->getApellido(); ?>
                             </div>
                         </div>
                     </div>

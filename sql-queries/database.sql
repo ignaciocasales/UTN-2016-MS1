@@ -156,7 +156,7 @@ CREATE TABLE movimientos_cuentas_corrientes
 
   fecha_hora            DATETIME                         NOT NULL,
 
-  inporte               FLOAT UNSIGNED                   NOT NULL,
+  importe               FLOAT UNSIGNED                   NOT NULL,
 
   id_cuentas_corrientes SMALLINT UNSIGNED,
 

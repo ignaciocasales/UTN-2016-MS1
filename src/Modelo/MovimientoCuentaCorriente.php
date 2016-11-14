@@ -25,7 +25,7 @@ class MovimientoCuentaCorriente
     public function setFecha($fecha){
         $this->fecha_hora = $fecha;
     }
-    public function setImporte(){
+    public function setImporte($importe){
         $this->importe = $importe;
 
     }    
@@ -42,12 +42,12 @@ class MovimientoCuentaCorriente
     }
     
     public function getFecha(){
-        return $this->fecha_hora = $fecha;
+        return $this->fecha_hora;
 
     }
     
     public function getImporte(){
-        return $this->importe = $importe;
+        return $this->importe;
     }
     
     public function getEventoPeaje(){
@@ -58,7 +58,7 @@ class MovimientoCuentaCorriente
         return $this->m_EventoMulta;
     }
     public function getCuenta(){
-        return $this->m_CuentaCte = $m_CuentaCte;
+        return $this->m_CuentaCte;
     }
 
 }

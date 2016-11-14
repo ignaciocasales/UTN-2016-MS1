@@ -5,11 +5,11 @@ namespace Dao;
 
 interface RolIDao
 {
-    public function agregar($valor);
+    public function agregar($rol);
 
-    public function eliminar($valor);
+    public function eliminar($rol);
 
-    public function actualizar($valor);
+    public function actualizar($rol);
 
     public function traeTodo();
 
