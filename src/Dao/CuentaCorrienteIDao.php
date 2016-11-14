@@ -5,11 +5,11 @@ namespace Dao;
 
 interface CuentaCorrienteIDao
 {
-    public function agregar($cuentas_corrientes);
+    public function agregar($cuentaCorriente);
 
-    public function eliminar($cuentas_corrientes);
+    public function eliminar($id);
 
-    public function actualizar($cuentas_corrientes);
+    public function actualizar($cuentaCorriente);
 
     public function traerTodo();
 

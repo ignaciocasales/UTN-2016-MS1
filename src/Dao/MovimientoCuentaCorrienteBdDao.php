@@ -100,14 +100,28 @@ class MovimientoCuentaCorrienteBdDao
         $this->listado = array_map(function ($p) {
 
             $daoCuentaCorriente = CuentaCorrienteBdDao::getInstancia();
+
             $daoEventoMulta = EventoMultaBdDao::getInstancia();
+            $eventoMulta = $daoEventoMulta->traerPorId($p['id_eventos']);
+
             $daoEventoPeaje = EventoPeajeBdDao::getInstancia();
+            $eventoPeaje = $daoEventoPeaje->traerPorId($p['id_eventos']);
 
             $mcc = new MovimientoCuentaCorriente($p['fecha_hora'], $p['importe'], $daoCuentaCorriente->traerPorId($p['id_cuentas_corrientes']));
 
             $mcc->setId($p['id_movimientos']);
 
+            if ($eventoMulta) {
 
+                $mcc->setEventoMulta($eventoMulta);
+
+            } else if ($eventoPeaje) {
+
+                $mcc->setEventoPeaje($eventoPeaje);
+
+            } else {
+                echo 'error';
+            }
 
             return $mcc;
 

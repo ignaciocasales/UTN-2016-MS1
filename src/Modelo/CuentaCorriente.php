@@ -4,7 +4,7 @@ namespace Modelo;
 
 class CuentaCorriente
 {
-
+    private $id;
     private $fechaUltimaActualizacion;
     private $maximoCredito;
     private $saldo;
@@ -22,14 +22,24 @@ class CuentaCorriente
     {
     }
 
-    public function setFecha($fecha)
+    public function setId($id)
     {
-        $this->fechaUltimaActualizacion = $fecha;
+        $this->id = $id;
+    }
+
+    public function setFechaUltimaActualizacion($fechaUltimaActualizacion)
+    {
+        $this->fechaUltimaActualizacion = $fechaUltimaActualizacion;
     }
 
     public function setMaximoCredito($mCredito)
     {
         $this->maximoCredito = $mCredito;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function setSaldo($saldo)
@@ -42,7 +52,7 @@ class CuentaCorriente
         $this->vehiculo = $vehiculo;
     }
 
-    public function getFecha()
+    public function getFechaUltimaActualizacion()
     {
         return $this->fechaUltimaActualizacion;
     }
