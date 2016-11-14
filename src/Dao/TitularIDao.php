@@ -7,6 +7,8 @@ interface TitularIDao
 {
     public function agregar($titular);
 
+    public function eliminarPorId($id);
+
     public function eliminarPorDni($dni);
 
     public function actualizar($titular);

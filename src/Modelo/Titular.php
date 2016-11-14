@@ -4,7 +4,7 @@ namespace Modelo;
 
 class Titular
 {
-
+    private $id;
     private $apellido;
     private $dni;
     private $nombre;
@@ -22,6 +22,11 @@ class Titular
 
     function __destruct()
     {
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     public function setApellido($apellido)
@@ -47,6 +52,11 @@ class Titular
     public function setUsuario($usuario)
     {
         $this->Usuario = $usuario;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getApellido()

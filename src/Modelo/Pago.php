@@ -4,18 +4,23 @@ namespace Modelo;
 
 class Pago
 {
-
+    private $id;
     private $fecha;
-    private $m_MovimientoCuentaClte;
+    private $movimientoCuentaCorriente;
 
-    function __construct($fecha, $m_MovimientoCuentaClte)
+    function __construct($fecha, $movimientoCuentaCorriente)
     {
         $this->fecha = $fecha;
-        $this->m_MovimientoCuentaClte = $m_MovimientoCuentaClte;
+        $this->movimientoCuentaCorriente = $movimientoCuentaCorriente;
     }
 
     function __destruct()
     {
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     public function setFecha($fecha)
@@ -23,9 +28,14 @@ class Pago
         $this->fecha = $fecha;
     }
 
-    public function setMovimientoCuentaClte($movimientoCuentaClte)
+    public function setMovimientoCuentaCorriente($movimientoCuentaClte)
     {
-        $this->m_MovimientoCuentaClte = $movimientoCuentaClte;
+        $this->movimientoCuentaCorriente = $movimientoCuentaClte;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getFecha()
@@ -33,9 +43,9 @@ class Pago
         return $this->fecha;
     }
 
-    public function getMovimientoCuentaClte()
+    public function getMovimientoCuentaCorriente()
     {
-        return $this->m_MovimientoCuentaClte;
+        return $this->movimientoCuentaCorriente;
     }
 
 }

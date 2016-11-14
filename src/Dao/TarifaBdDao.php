@@ -107,8 +107,11 @@ class TarifaBdDao implements TarifaIDao
     {
         $dataSet = is_array($dataSet) ? $dataSet : [];
         $this->listado = array_map(function ($p) {
+
             $t = new Tarifa($p['fecha_desde'], $p['fecha_hasta'], $p['multa'], $p['peaje_hora_normal'], $p['peaje_hora_pico']);
+
             $t->setId($p['id_tarifas']);
+
             return $t;
         }, $dataSet);
     }

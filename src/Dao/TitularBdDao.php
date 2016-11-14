@@ -23,7 +23,7 @@ class TitularBdDao implements TitularIDao
     public function agregar($titular)
     {
 
-        $sql = "INSERT INTO $this->tabla (nombre, apellido, dni, telefono, id_usuarios) VALUES (:nombre, :apellido, :dni, :telefono, (SELECT id_usuarios FROM usuarios WHERE mail = :mail))";
+        $sql = "INSERT INTO $this->tabla (nombre, apellido, dni, telefono, id_usuarios) VALUES (:nombre, :apellido, :dni, :telefono, (SELECT id_usuarios FROM usuarios WHERE id_usuarios = :idUsuarios))";
 
         $conexion = Conexion::conectar();
 
@@ -34,17 +34,30 @@ class TitularBdDao implements TitularIDao
         $dni = $titular->getDni();
         $telefono = $titular->getTelefono();
         $usuario = $titular->getUsuario();
-        $mail = $usuario->getEmail();
+        $idUsuarios = $usuario->getId();
 
 
         $sentencia->bindParam(":nombre", $nombre);
         $sentencia->bindParam(":apellido", $apellido);
         $sentencia->bindParam(":dni", $dni);
         $sentencia->bindParam(":telefono", $telefono);
-        $sentencia->bindParam(":mail", $mail);
+        $sentencia->bindParam(":idUsuarios", $idUsuarios);
 
         $sentencia->execute();
 
+    }
+
+    public function eliminarPorId($id)
+    {
+        $sql = "DELETE FROM $this->tabla WHERE dni = \"$id\"";
+
+        $obj_pdo = new Conexion();
+
+        $conexion = $obj_pdo->conectar();
+
+        $sentencia = $conexion->prepare($sql);
+
+        $sentencia->execute();
     }
 
     public function eliminarPorDni($dni)
@@ -62,8 +75,7 @@ class TitularBdDao implements TitularIDao
 
     public function actualizar($titular)
     {
-        //Al titular no se le puede cambiar el dni, no tiene sentido.
-        $sql = "UPDATE $this->tabla SET nombre = :nombre, apellido = :apellido, telefono = :telefono  WHERE dni = :dni";
+        $sql = "UPDATE $this->tabla SET nombre = :nombre, apellido = :apellido, telefono = :telefono, dni = :dni  WHERE id_titulares = :id";
 
         $conexion = Conexion::conectar();
 
@@ -73,11 +85,13 @@ class TitularBdDao implements TitularIDao
         $apellido = $titular->getApellido();
         $telefono = $titular->getTelefono();
         $dni = $titular->getDni();
+        $id = $titular->getId();
 
         $sentencia->bindParam(":nombre", $nombre);
         $sentencia->bindParam(":apellido", $apellido);
         $sentencia->bindParam(":telefono", $telefono);
         $sentencia->bindParam(":dni", $dni);
+        $sentencia->bindParam(":id", $id);
 
         $sentencia->execute();
     }
@@ -137,8 +151,14 @@ class TitularBdDao implements TitularIDao
     {
         $dataSet = is_array($dataSet) ? $dataSet : [];
         $this->listado = array_map(function ($p) {
+
             $usuarioDao = UsuarioBdDao::getInstancia();
-            return new Titular($p['nombre'], $p['apellido'], $p['dni'], $p['telefono'], $usuarioDao->traerPorId($p['id_usuarios']));
+
+            $t = new Titular($p['nombre'], $p['apellido'], $p['dni'], $p['telefono'], $usuarioDao->traerPorId($p['id_usuarios']));
+
+            $t->setId($p['id_titulares']);
+
+            return $t;
         }, $dataSet);
     }
 }

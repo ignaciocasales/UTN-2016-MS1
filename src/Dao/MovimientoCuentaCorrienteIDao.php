@@ -5,11 +5,9 @@ namespace Dao;
 
 interface MovimientoCuentaCorrienteIDao
 {
-    public function agregar($movimientoCC);
+    public function agregar($movimiento);
 
-    public function eliminar($movimientoCC);
-
-    public function actualizar($movimientoCC);
+    //No tiene sentido actualizar o eliminar un pago. Una vez pagado, ya está.
 
     public function traerTodo();
 

@@ -194,7 +194,7 @@ CREATE TABLE tarifas
 
   fecha_desde       DATE                             NOT NULL,
 
-  fecha_hasta        DATE,
+  fecha_hasta       DATE,
 
   multa             FLOAT UNSIGNED                   NOT NULL,
 

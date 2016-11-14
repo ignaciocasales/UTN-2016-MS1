@@ -46,6 +46,17 @@ class VehiculoBdDao implements VehiculoIDao
 
     }
 
+    public function eliminarPorId($id)
+    {
+        $sql = "DELETE FROM $this->tabla WHERE id_vehiculos = \"$id\"";
+
+        $conexion = Conexion::conectar();
+
+        $sentencia = $conexion->prepare($sql);
+
+        $sentencia->execute();
+    }
+
     public function eliminarPorDominio($dominio)
     {
         $sql = "DELETE FROM $this->tabla WHERE dominio = \"$dominio\"";
@@ -60,19 +71,19 @@ class VehiculoBdDao implements VehiculoIDao
     public function actualizar($vehiculo)
     {
         //No tiene sentido cambiar otro dato que no sea el titular.
-        $sql = "UPDATE $this->tabla SET id_titulares = (SELECT id_titulares FROM titulares WHERE dni = :dni) WHERE dominio = :dominio";
+        $sql = "UPDATE $this->tabla SET id_titulares = (SELECT id_titulares FROM titulares WHERE id_titulares = :idTitular) WHERE id_vehiculos = :idVehiculo";
 
         $conexion = Conexion::conectar();
 
         $sentencia = $conexion->prepare($sql);
 
-        $dominio = $vehiculo->getDominio();
+        $idVehiculo = $vehiculo->getId();
 
         $t = $vehiculo->getTitular();
-        $dni = $t->getDni();
+        $idTitular = $t->getId();
 
-        $sentencia->bindParam(":dominio", $dominio);
-        $sentencia->bindParam(":dni", $dni);
+        $sentencia->bindParam(":idVehiculo", $idVehiculo);
+        $sentencia->bindParam(":idTitular", $idTitular);
 
         $sentencia->execute();
     }
@@ -132,8 +143,14 @@ class VehiculoBdDao implements VehiculoIDao
     {
         $dataSet = is_array($dataSet) ? $dataSet : [];
         $this->listado = array_map(function ($p) {
+
             $daoTitular = TitularBdDao::getInstancia();
-            return new Vehiculo($p['dominio'], $p['marca'], $p['modelo'], $daoTitular->traerPorId($p['id_titulares']), $p['qr']);
+
+            $v = new Vehiculo($p['dominio'], $p['marca'], $p['modelo'], $daoTitular->traerPorId($p['id_titulares']), $p['qr']);
+
+            $v->setId($p['id_vehiculos']);
+
+            return $v;
         }, $dataSet);
     }
 }

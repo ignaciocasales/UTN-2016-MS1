@@ -2,8 +2,8 @@
 
 namespace Dao;
 
+use Modelo\MovimientoCuentaCorriente;
 
-//// NO TERMINADO /////
 class MovimientoCuentaCorrienteBdDao
 {
     protected $tabla = "cuentas_corrientes";
@@ -21,9 +21,50 @@ class MovimientoCuentaCorrienteBdDao
         return self::$instancia;
     }
 
+    public function agregar($movimiento)
+    {
+        $sql = "INSERT INTO $this->tabla (fecha_hora, importe, id_cuentas_corrientes, id_eventos) VALUES (:fecha_hora, :importe, :idCuentaCorriente, :idEvento)";
+
+        $conexion = Conexion::conectar();
+
+        $sentencia = $conexion->prepare($sql);
+
+        $fechaYhora = $movimiento->getFechaYhora();
+        $importe = $movimiento->getImporte();
+
+        $cuentaCorriente = $movimiento->getCuentaCorriente();
+        $idCuentaCorriente = $cuentaCorriente->getId();
+
+        if ($movimiento->getEventoPeaje()) {
+
+            $eventoPeaje = $movimiento->getEventoPeaje();
+
+            $idEvento = $eventoPeaje->getId();
+
+        } else if ($movimiento->getEventoMulta()) {
+
+            $eventoMulta = $movimiento->getEventoMulta();
+
+            $idEvento = $eventoMulta->getId();
+
+        } else {
+
+            echo 'error';
+
+        }
+
+        $sentencia->bindParam("fecha_hora", $fechaYhora);
+        $sentencia->bindParam("importe", $importe);
+        $sentencia->bindParam("idCuentaCorriente", $idCuentaCorriente);
+        $sentencia->bindParam("idEvento", $idEvento);
+
+        $sentencia->execute();
+
+    }
+
     public function traerPorId($id)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE id_movimientos =  '$id'";
+        $sql = "SELECT * FROM $this->tabla WHERE id_movimientos =  \"$id\"";
 
         $conexion = Conexion::conectar();
 
@@ -38,54 +79,9 @@ class MovimientoCuentaCorrienteBdDao
         if (!empty($this->listado[0])) return $this->listado[0];
     }
 
-    public function agregar($movimientosCC)
+    public function traerTodo()
     {
-        $sql = "INSERT INTO $this->tabla (fecha_hora, importe, id_cuentas_corrientes, id_eventos) VALUES (:fecha_hora, :importe, 
-        (SELECT id_cuentas_corrientes FROM cuentas_corrientes WHERE id_vehiculos = (SELECT id_vehiculos FROM vehiculos WHERE dominio = :dominio)), 
-        (SELECT id_eventos FROM eventos WHERE id_sensores = (SELECT id_sensores FROM sensores WHERE numeros_serie = :numeros_serie)))";
-
-        $conexion = Conexion::conectar();
-
-        $sentencia = $conexion->prepare($sql);
-
-        $fecha_hora = $movimientosCC->getFecha();
-        $importe = $movimientosCC->getImporte();
-        $cuentas_corrientes = $movimientosCC->getCuenta();
-        $sensores = $movimientosCC->getSensor();
-        $vehiculo = $cuentas_corrientes->getVehiculo();
-        $dominio = $vehiculo->getDominio();
-
-        $dominio  = $vehiculo->getDominio();
-
-
-        $sentencia->bindParam(":fecha_ultima_actualizacion", $fecha_ultima_actualizacion);
-        $sentencia->bindParam(":maximo_credito", $maximo_credito);
-        $sentencia->bindParam(":saldo", $saldo);
-        $sentencia->bindParam(":dominio", $dominio);
-
-
-        $sentencia->execute();
-
-    }
-
-    public function eliminar($cuentas_corrientes)
-    {
-        $sql = "DELETE FROM $this->tabla WHERE id_cuentas_corrientes = (SELECT id_cuentas_corrientes FROM cuentas_corrientes WHERE id_vehiculos = 
-        (SELECT id_vehiculos FROM vehiculos WHERE dominio = :dominio))";
-
-        $conexion = Conexion::conectar();
-        $sentencia = $conexion->prepare($sql);
-        $vehiculo = $cuentas_corrientes->getVehiculo();
-        $dominio = $vehiculo->getDominio();
-
-        $sentencia->bindParam(":dominio",$dominio);
-
-
-        $sentencia->execute();
-    }
-
-    public function traerTodo(){
-        $sql = "SELECT * FROM $this->tabla ";
+        $sql = "SELECT * FROM $this->tabla";
         $sentencia = Conexion::conectar()->prepare($sql);
 
         $sentencia->execute();
@@ -98,37 +94,23 @@ class MovimientoCuentaCorrienteBdDao
 
     }
 
-    public function actualizar($cuentas_corrientes)
+    public function mapear($dataSet)
     {
-        $sql = "UPDATE $this->tabla SET fecha_ultima_actualizacion = :fecha_ultima_actualizacion , saldo=:saldo, maximo_credito = :maximo_credito, id_vehiculos = (SELECT id_vehiculos FROM vehiculos WHERE dominio = :dominio)
-        WHERE id_cuentas_corrientes = (SELECT id_cuentas_corrientes FROM cuentas_corrientes WHERE id_vehiculos = 
-        (SELECT id_vehiculos FROM vehiculos WHERE dominio = :dominio))";
-
-        $conexion = Conexion::conectar();
-
-        $sentencia = $conexion->prepare($sql);
-
-        $fecha_ultima_actualizacion = $cuentas_corrientes->getFecha();
-        $saldo = $cuentas_corrientes->getSaldo();
-        $maximo_credito = $cuentas_corrientes->getMaximoCredito();
-        $vehiculo = $cuentas_corrientes->getVehiculo();
-        $dominio = $vehiculo->getDominio();
-
-
-        $sentencia->bindParam(":fecha_ultima_actualizacion", $fecha_ultima_actualizacion);
-        $sentencia->bindParam(":saldo", $saldo);
-        $sentencia->bindParam(":maximo_credito", $maximo_credito);
-        $sentencia->bindParam(":dominio", $dominio);
-
-        $sentencia->execute();
-
-    }
-
-    public function mapear($dataSet){
         $dataSet = is_array($dataSet) ? $dataSet : [];
         $this->listado = array_map(function ($p) {
 
-           // return new CuentaCorriente($p['fecha_ultima_actualizacion'], $p['maximo_credito'], $p['saldo'], $daoVehiculo->traerPorId($p['id_vehiculos']));
+            $daoCuentaCorriente = CuentaCorrienteBdDao::getInstancia();
+            $daoEventoMulta = EventoMultaBdDao::getInstancia();
+            $daoEventoPeaje = EventoPeajeBdDao::getInstancia();
+
+            $mcc = new MovimientoCuentaCorriente($p['fecha_hora'], $p['importe'], $daoCuentaCorriente->traerPorId($p['id_cuentas_corrientes']));
+
+            $mcc->setId($p['id_movimientos']);
+
+
+
+            return $mcc;
+
         }, $dataSet);
     }
 }

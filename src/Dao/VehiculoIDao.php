@@ -7,6 +7,8 @@ interface VehiculoIDao
 {
     public function agregar($vehiculo);
 
+    public function eliminarPorId($id);
+
     public function eliminarPorDominio($dominio);
 
     public function actualizar($vehiculo);

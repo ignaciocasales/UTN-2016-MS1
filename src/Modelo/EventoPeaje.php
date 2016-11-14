@@ -4,25 +4,30 @@ namespace Modelo;
 
 class EventoPeaje
 {
-
-    private $fecha_hora;
+    private $id;
+    private $fechaYhora;
     private $foto;
-    private $m_SensorPeaje;
+    private $sensorPeaje;
 
-    function __construct($fecha_hora, $foto, $m_SensorPeaje)
+    function __construct($fecha_hora, $foto, $sensorPeaje)
     {
-        $this->fecha_hora = $fecha_hora;
+        $this->fechaYhora = $fecha_hora;
         $this->foto = $foto;
-        $this->m_SensorPeaje = $m_SensorPeaje;
+        $this->sensorPeaje = $sensorPeaje;
     }
 
     function __destruct()
     {
     }
 
-    public function setFecha($fecha)
+    public function setId($id)
     {
-        $this->fecha_hora = $fecha;
+        $this->id = $id;
+    }
+
+    public function setFechaYhora($fechaYhora)
+    {
+        $this->fechaYhora = $fechaYhora;
     }
 
     public function setFoto($foto)
@@ -32,12 +37,17 @@ class EventoPeaje
 
     public function setSensorPeaje($sensor)
     {
-        $this->m_SensorPeaje = $sensor;
+        $this->sensorPeaje = $sensor;
     }
 
-    public function getFecha()
+    public function getId()
     {
-        return $this->fecha_hora;
+        return $this->id;
+    }
+
+    public function getFechaYhora()
+    {
+        return $this->fechaYhora;
     }
 
     public function getFoto()
@@ -47,7 +57,7 @@ class EventoPeaje
 
     public function getSensorPeaje()
     {
-        return $this->m_SensorPeaje;
+        return $this->sensorPeaje;
     }
 
 }

@@ -4,6 +4,7 @@ namespace Modelo;
 
 class Usuario implements \JsonSerializable
 {
+    private $id;
     private $email;
     private $password;
     private $rol;
@@ -19,6 +20,11 @@ class Usuario implements \JsonSerializable
     {
     }
 
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
     public function setEmail($email)
     {
         $this->email = $email;
@@ -32,6 +38,11 @@ class Usuario implements \JsonSerializable
     public function setRol($rol)
     {
         $this->rol = $rol;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getEmail()

@@ -6,6 +6,7 @@ use Dao\RolBdDao;
 use Dao\RolJsonDao;
 use Dao\UsuarioBdDao;
 use Dao\UsuarioJsonDao;
+use Dao\VehiculoBdDao;
 use Modelo\Rol;
 use Modelo\Usuario;
 
@@ -36,7 +37,12 @@ class loginControladora
     public
     function verificar($mail, $pwd)
     {
-        if (isset($mail) && isset($pwd)) {
+        $dao = VehiculoBdDao::getInstancia();
+
+        echo '<pre>';
+        print_r($dao->traerTodo());
+        echo '<pre>';
+        /*if (isset($mail) && isset($pwd)) {
 
             if ($mail === "" || $pwd === "") {
 
@@ -65,7 +71,7 @@ class loginControladora
         } else {
             echo 'valores no seteados';
         }
-        header('Location: /index.php');
+        header('Location: /index.php');*/
     }
 
     protected function existe($usuario)

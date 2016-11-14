@@ -5,8 +5,6 @@ namespace Dao;
 
 use Modelo\Rol;
 
-// TERMINADO //
-
 class RolBdDao implements RolIDao
 {
     protected $tabla = "roles";
@@ -36,9 +34,9 @@ class RolBdDao implements RolIDao
         $sentencia->execute();
     }
 
-    public function eliminar($descripcion)
+    public function eliminar($id)
     {
-        $sql = "DELETE FROM $this->tabla WHERE descripcion = '$descripcion'";
+        $sql = "DELETE FROM $this->tabla WHERE descripcion = \"$id\"";
 
         $conexion = Conexion::conectar();
 
@@ -49,15 +47,15 @@ class RolBdDao implements RolIDao
 
     public function actualizar($rol)
     {
-        $sql = "UPDATE $this->tabla SET descripcion = :descripcion WHERE descripcion = :descripcion";
+        $sql = "UPDATE $this->tabla SET descripcion = :descripcion WHERE id_roles = :idRoles";
 
         $conexion = Conexion::conectar();
 
         $sentencia = $conexion->prepare($sql);
 
-        $descripcion = $rol->getDescripcion();
+        $idRoles = $rol->getId();
 
-        $sentencia->bindParam(":descripcion", $descripcion);
+        $sentencia->bindParam(":idRoles", $idRoles);
 
         $sentencia->execute();
     }
@@ -78,7 +76,7 @@ class RolBdDao implements RolIDao
 
     public function traerPorId($id)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE id_roles =  '$id' LIMIT 1";
+        $sql = "SELECT * FROM $this->tabla WHERE id_roles =  \"$id\" LIMIT 1";
 
         $conexion = Conexion::conectar();
 
@@ -97,7 +95,12 @@ class RolBdDao implements RolIDao
     {
         $dataSet = is_array($dataSet) ? $dataSet : [];
         $this->listado = array_map(function ($p) {
-            return new Rol($p['descripcion']);
+
+            $r = new Rol($p['descripcion']);
+
+            $r->setId($p['id_roles']);
+
+            return $r;
         }, $dataSet);
     }
 }

@@ -5,9 +5,7 @@ namespace Dao;
 
 use Modelo\CuentaCorriente;
 
-// TERMINADO //
-
-class CuentaCorrienteBD implements CuentaCorrienteIDao
+class CuentaCorrienteBdDao implements CuentaCorrienteIDao
 {
     protected $tabla = "cuentas_corrientes";
     protected $listado;

@@ -7,7 +7,7 @@ interface RolIDao
 {
     public function agregar($rol);
 
-    public function eliminar($rol);
+    public function eliminar($id);
 
     public function actualizar($rol);
 

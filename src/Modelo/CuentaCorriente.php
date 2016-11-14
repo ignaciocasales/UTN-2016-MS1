@@ -5,17 +5,17 @@ namespace Modelo;
 class CuentaCorriente
 {
 
-    private $fecha_ultima_actualizacion;
-    private $maximo_credito;
+    private $fechaUltimaActualizacion;
+    private $maximoCredito;
     private $saldo;
-    private $m_Vehiculo;
+    private $vehiculo;
 
-    function __construct($fecha, $mCredito, $saldo, $vehiculo)
+    function __construct($fechaUltimaActualizacion, $maximoCredito, $saldo, $vehiculo)
     {
-        $this->fecha_ultima_actualizacion = $fecha;
-        $this->maximo_credito = $mCredito;
+        $this->fechaUltimaActualizacion = $fechaUltimaActualizacion;
+        $this->maximoCredito = $maximoCredito;
         $this->saldo = $saldo;
-        $this->m_Vehiculo = $vehiculo;
+        $this->vehiculo = $vehiculo;
     }
 
     function __destruct()
@@ -24,12 +24,12 @@ class CuentaCorriente
 
     public function setFecha($fecha)
     {
-        $this->fecha_ultima_actualizacion = $fecha;
+        $this->fechaUltimaActualizacion = $fecha;
     }
 
     public function setMaximoCredito($mCredito)
     {
-        $this->maximo_credito = $mCredito;
+        $this->maximoCredito = $mCredito;
     }
 
     public function setSaldo($saldo)
@@ -39,17 +39,17 @@ class CuentaCorriente
 
     public function setVehiculo($vehiculo)
     {
-        $this->m_Vehiculo = $vehiculo;
+        $this->vehiculo = $vehiculo;
     }
 
     public function getFecha()
     {
-        return $this->fecha_ultima_actualizacion;
+        return $this->fechaUltimaActualizacion;
     }
 
     public function getMaximoCredito()
     {
-        return $this->maximo_credito;
+        return $this->maximoCredito;
     }
 
     public function getSaldo()
@@ -59,7 +59,7 @@ class CuentaCorriente
 
     public function getVehiculo()
     {
-        return $this->m_Vehiculo;
+        return $this->vehiculo;
     }
 
 }

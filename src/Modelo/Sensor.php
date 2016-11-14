@@ -4,27 +4,31 @@ namespace Modelo;
 
 class Sensor
 {
-
-    private $fecha_alta;
+    private $id;
+    private $fechaAlta;
     private $latitud;
     private $longitud;
-    private $numero_serie;
+    private $numeroSerie;
 
-    function __construct($fecha_alta, $latitud, $longitud, $numero_serie)
+    function __construct($fechaAlta, $latitud, $longitud, $numeroSerie)
     {
-        $this->fecha_alta = $fecha;
+        $this->fechaAlta = $fechaAlta;
         $this->latitud = $latitud;
         $this->longitud = $longitud;
-        $this->numero_serie = $numero_serie;
+        $this->numeroSerie = $numeroSerie;
     }
 
     function __destruct()
     {
     }
 
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
     public function setFechaAlta($fecha)
     {
-        $this->fecha_alta = $fecha;
+        $this->fechaAlta = $fecha;
     }
 
     public function setLatitud($latitud)
@@ -37,14 +41,19 @@ class Sensor
         $this->longitud = $longitud;
     }
 
-    public function setNumeroSerie($numero_serie)
+    public function setNumeroSerie($numeroSerie)
     {
-        $this->numero_serie = $numero_serie;
+        $this->numeroSerie = $numeroSerie;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getFechaAlta()
     {
-        return $this->fecha_alta;
+        return $this->fechaAlta;
     }
 
     public function getLatitud()
@@ -59,7 +68,7 @@ class Sensor
 
     public function getNumeroSerie()
     {
-        return $this->numero_serie;
+        return $this->numeroSerie;
     }
 
 }

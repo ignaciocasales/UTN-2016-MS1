@@ -4,61 +4,84 @@ namespace Modelo;
 
 class MovimientoCuentaCorriente
 {
+    private $id;
+    private $fechaYhora;
+    private $importe;
+    private $eventoPeaje;
+    private $cuentaCorriente;
+    private $eventoMulta;
 
-	private $fecha_hora;
-	private $importe;
-	private $m_EventoPeaje;
-	private $m_CuentaCte;
-    private $m_EventoMulta;
-
-	function __construct($fecha_hora,$importe,$eventoP,$cuenta,$eventoM)
-	{
-        $this->fecha_hora = $fecha_hora;
+    function __construct($fechaYhora, $importe, $cuentaCorriente)
+    {
+        $this->fechaYhora = $fechaYhora;
         $this->importe = $importe;
-        $this->m_EventoPeaje = $eventoP;
-        $this->m_EventoMulta = $eventoM;
-        $this->m_CuentaCte = $cuenta;
-	}
-
-	function __destruct(){}
-
-    public function setFecha($fecha){
-        $this->fecha_hora = $fecha;
+        $this->cuentaCorriente = $cuentaCorriente;
     }
-    public function setImporte($importe){
+
+    function __destruct()
+    {
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function setFechaYhora($fechaYhora)
+    {
+        $this->fechaYhora = $fechaYhora;
+    }
+
+    public function setImporte($importe)
+    {
         $this->importe = $importe;
 
-    }    
-    public function setEventoPeaje($eventoP){
-        $this->m_EventoPeaje = $eventoP;
-
-    } 
-    public function setEventoMulta($eventoM){
-        $this->m_EventoMulta = $eventoM;
     }
-    public function setCuenta($m_CuentaCte){
-        $this->m_CuentaCte = $m_CuentaCte;
+
+    public function setEventoPeaje($eventoP)
+    {
+        $this->eventoPeaje = $eventoP;
 
     }
-    
-    public function getFecha(){
-        return $this->fecha_hora;
 
+    public function setEventoMulta($eventoM)
+    {
+        $this->eventoMulta = $eventoM;
     }
-    
-    public function getImporte(){
+
+    public function setCuentaCorriente($cuentaCorriente)
+    {
+        $this->cuentaCorriente = $cuentaCorriente;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getFechaYhora()
+    {
+        return $this->fechaYhora;
+    }
+
+    public function getImporte()
+    {
         return $this->importe;
     }
-    
-    public function getEventoPeaje(){
-        return $this->m_EventoPeaje;
+
+    public function getEventoPeaje()
+    {
+        return $this->eventoPeaje;
     }
-    
-    public function getEventoMulta(){
-        return $this->m_EventoMulta;
+
+    public function getEventoMulta()
+    {
+        return $this->eventoMulta;
     }
-    public function getCuenta(){
-        return $this->m_CuentaCte;
+
+    public function getCuentaCorriente()
+    {
+        return $this->cuentaCorriente;
     }
 
 }

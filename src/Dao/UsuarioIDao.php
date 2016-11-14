@@ -7,6 +7,8 @@ interface UsuarioIDao
 {
     public function agregar($usuario);
 
+    public function eliminarPorId($id);
+
     public function eliminarPorMail($mail);
 
     public function actualizar($usuario);

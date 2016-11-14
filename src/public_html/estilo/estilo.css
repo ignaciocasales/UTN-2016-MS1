@@ -124,15 +124,6 @@ body {
     height: 37px;
 }
 
-/* Problema con las tablas responsive en firefox
--------------------------------------------------- */
-
-@-moz-document url-prefix() {
-    .table-responsive {
-        display: table-cell;
-    }
-}
-
 /* otras
 -------------------------------------------------- */
 .input-width-90 input {

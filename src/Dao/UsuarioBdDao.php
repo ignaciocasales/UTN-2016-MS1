@@ -26,7 +26,7 @@ class UsuarioBdDao implements UsuarioIDao
 
     public function agregar($usuario)
     {
-        $sql = "INSERT INTO $this->tabla (mail, pwd, id_roles) VALUES (:mail, :pwd, (SELECT id_roles FROM roles WHERE descripcion = :rol))";
+        $sql = "INSERT INTO $this->tabla (mail, pwd, id_roles) VALUES (:mail, :pwd, (SELECT id_roles FROM roles WHERE id_roles = :idRoles))";
 
         $conexion = Conexion::conectar();
 
@@ -36,14 +36,25 @@ class UsuarioBdDao implements UsuarioIDao
         $pwd = $usuario->getPassword();
 
         $r = $usuario->getRol();
-        $rol = $r->getDescripcion();
+        $idRoles = $r->getId();
 
         $sentencia->bindParam(":mail", $mail);
         $sentencia->bindParam(":pwd", $pwd);
-        $sentencia->bindParam(":rol", $rol);
+        $sentencia->bindParam(":idRoles", $idRoles);
 
         $sentencia->execute();
 
+    }
+
+    public function eliminarPorId($id)
+    {
+        $sql = "DELETE FROM $this->tabla WHERE id_usuarios = \"$id\"";
+
+        $conexion = Conexion::conectar();
+
+        $sentencia = $conexion->prepare($sql);
+
+        $sentencia->execute();
     }
 
     public function eliminarPorMail($mail)
@@ -60,21 +71,21 @@ class UsuarioBdDao implements UsuarioIDao
     public function actualizar($usuario)
     {
         //Por comodidad, el usuario no puede cambiar el mail.
-        $sql = "UPDATE $this->tabla SET pwd = :pwd, id_roles = (SELECT id_roles FROM roles WHERE descripcion = :rol) WHERE mail = :mail";
+        $sql = "UPDATE $this->tabla SET pwd = :pwd, id_roles = (SELECT id_roles FROM roles WHERE id_roles = :idRoles) WHERE id_usuarios = :idUsuarios";
 
         $conexion = Conexion::conectar();
 
         $sentencia = $conexion->prepare($sql);
 
-        $mail = $usuario->getEmail();
+        $idUsuarios = $usuario->getId();
         $pwd = $usuario->getPassword();
 
         $r = $usuario->getRol();
-        $rol = $r->getDescripcion();
+        $idRoles = $r->getId();
 
-        $sentencia->bindParam(":mail", $mail);
+        $sentencia->bindParam(":idUsuarios", $idUsuarios);
         $sentencia->bindParam(":pwd", $pwd);
-        $sentencia->bindParam(":rol", $rol);
+        $sentencia->bindParam(":idRoles", $idRoles);
 
         $sentencia->execute();
     }
@@ -134,8 +145,14 @@ class UsuarioBdDao implements UsuarioIDao
     {
         $dataSet = is_array($dataSet) ? $dataSet : [];
         $this->listado = array_map(function ($p) {
+
             $daoRol = RolBdDao::getInstancia();
-            return new Usuario($p['mail'], $p['pwd'], $daoRol->traerPorId($p['id_roles']));
+
+            $u = new Usuario($p['mail'], $p['pwd'], $daoRol->traerPorId($p['id_roles']));
+
+            $u->setId($p['id_usuarios']);
+
+            return $u;
         }, $dataSet);
     }
 }

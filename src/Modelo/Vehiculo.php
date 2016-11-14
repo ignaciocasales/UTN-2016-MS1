@@ -4,7 +4,7 @@ namespace Modelo;
 
 class Vehiculo
 {
-
+    private $id;
     private $dominio;
     private $marca;
     private $modelo;
@@ -21,6 +21,11 @@ class Vehiculo
 
     function __destruct()
     {
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     public function setDominio($dominio = '')
@@ -46,6 +51,11 @@ class Vehiculo
     public function setTitular($titular)
     {
         $this->titular = $titular;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getDominio()

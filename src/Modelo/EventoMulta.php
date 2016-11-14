@@ -4,25 +4,30 @@ namespace Modelo;
 
 class EventoMulta
 {
-
-    private $fecha_hora;
+    private $id;
+    private $fechaYhora;
     private $foto;
-    private $m_SensorSemaforo;
+    private $sensorSemaforo;
 
-    function __construct($fecha_hora, $foto, $m_SensorSemaforo)
+    function __construct($fecha_hora, $foto, $sensorSemaforo)
     {
-        $this->fecha_hora = $fecha_hora;
+        $this->fechaYhora = $fecha_hora;
         $this->foto = $foto;
-        $this->m_SensorSemaforo = $m_SensorSemaforo;
+        $this->sensorSemaforo = $sensorSemaforo;
     }
 
     function __destruct()
     {
     }
 
-    public function setFecha($fecha)
+    public function setId($id)
     {
-        $this->fecha_hora = $fecha;
+        $this->id = $id;
+    }
+
+    public function setFechaYhora($fechaYhora)
+    {
+        $this->fechaYhora = $fechaYhora;
     }
 
     public function setFoto($foto)
@@ -32,12 +37,17 @@ class EventoMulta
 
     public function setSensorSemaforo($sensor)
     {
-        $this->m_SensorSemaforo = $sensor;
+        $this->sensorSemaforo = $sensor;
     }
 
-    public function getFecha()
+    public function getId()
     {
-        return $this->fecha_hora;
+        return $this->id;
+    }
+
+    public function getFechaYhora()
+    {
+        return $this->fechaYhora;
     }
 
     public function getFoto()
@@ -47,15 +57,15 @@ class EventoMulta
 
     public function getSensorSemaforo()
     {
-        return $this->m_SensorSemaforo;
+        return $this->sensorSemaforo;
     }
 
     public function jsonSerialize()
     {
         return [
-            'fecha_hora' => $this->fecha_hora,
+            'fecha_hora' => $this->fechaYhora,
             'foto' => $this->foto,
-            'sensorSemaforo' => $this->m_SensorSemaforo,
+            'sensorSemaforo' => $this->sensorSemaforo,
         ];
     }
 
