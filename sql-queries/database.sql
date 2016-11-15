@@ -211,12 +211,11 @@ CREATE TABLE tarifas
 
 CREATE TABLE modelos_marcas
 (
-id_modelos_marcas SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  id_modelos_marcas SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
 
-marcas VARCHAR(50) NOT NULL,
+  marcas            VARCHAR(50)                      NOT NULL,
 
-modelos VARCHAR(50) NOT NULL,
+  modelos           VARCHAR(50)                      NOT NULL,
 
-CONSTRAINT pk_de_id_modelos_marcas PRIMARY KEY(id_modelos_marcas)
+  CONSTRAINT pk_de_id_modelos_marcas PRIMARY KEY (id_modelos_marcas)
 );
-  
