@@ -57,7 +57,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/index.php">
+                            <a href="/simulacion/simular/">
                                 Simulación <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
                             </a>
                         </li>
