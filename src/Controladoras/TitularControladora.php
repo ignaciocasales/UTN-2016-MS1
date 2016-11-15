@@ -3,6 +3,7 @@
 namespace Controladoras;
 
 
+use Dao\RolBdDao;
 use Dao\TitularBdDao;
 use Dao\UsuarioBdDao;
 use Modelo\Rol;
@@ -24,11 +25,21 @@ class titularControladora
     public function darAltaTitular($nombre, $apellido, $dni, $telefono, $email, $password)
     {
 
-        $usuario = new Usuario($email, $password, new Rol('titular'));
-        $titular = new Titular($nombre, $apellido, $dni, $telefono, $usuario);
+        $daorol = RolBdDao::getInstancia();
+        $rol = $daorol->traerPorId(3);
+        $usuario = new Usuario($email, $password, $rol);
+
+
 
         try {
-            UsuarioBdDao::getInstancia()->agregar($usuario);
+            $daousuario = UsuarioBdDao::getInstancia();
+
+            $daousuario->agregar($usuario);
+
+            $usuario = $daousuario->traerPorMail($email);
+
+            $titular = new Titular($nombre, $apellido, $dni, $telefono, $usuario);
+
             TitularBdDao::getInstancia()->agregar($titular);
 
             $nombre = "titular";
