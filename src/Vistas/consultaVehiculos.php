@@ -9,8 +9,9 @@
                         <th>Dominio</th>
                         <th>Marca</th>
                         <th>Modelo</th>
-                        <th>DNI - Titular</th>
                         <?php if ($_SESSION['rol'] === 'developer') { ?>
+
+                            <th>DNI - Titular</th>
                         <th></th>
                         <th></th>
                         <th><a href="/titular/buscarDni/"><span class="glyphicon glyphicon-plus" title="Añadir" data-toggle="tooltip"
@@ -25,9 +26,10 @@
                             <td><?= $objeto->getDominio(); ?></td>
                             <td><?php echo $objeto->getMarca(); ?></td>
                             <td><?php echo $objeto->getModelo(); ?></td>
-                            <td><?php $o = $objeto->getTitular();
-                                echo $o->getDni(); ?></td>
                             <?php if ($_SESSION['rol'] === 'developer') { ?>
+
+                                <td><?php $o = $objeto->getTitular();
+                                echo $o->getDni(); ?></td>
                             <td><a href="#" class="disabled"><span class="glyphicon glyphicon-pencil" title="Modificar"
                                                   data-toggle="tooltip" data-placement="right"></span></a></td>
                             <td><a href="#"><span class="glyphicon glyphicon-trash" title="Eliiminar"
