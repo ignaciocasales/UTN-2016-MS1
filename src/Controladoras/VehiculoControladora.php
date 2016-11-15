@@ -13,18 +13,31 @@ class vehiculoControladora
     {
     }
 
-    public function darAltaVehiculo($patente, $marca, $modelo, $dni)
+    public function darAltaVehiculo($dni, $patente, $marca, $modelo)
     {
+        $daoTitular = TitularBdDao::getInstancia();
 
-        $titular = TitularBdDao::getInstancia()->traerPorDni($dni);
+        $titular = $daoTitular->traerPorDni($dni);
+
         $vehiculo = new Vehiculo($patente, $marca, $modelo, $titular);
 
-
         try {
-            VehiculoBdDao::getInstancia()->agregar($vehiculo);
-            $nombre = "vehiculo";
+            $daoVehiculo = VehiculoBdDao::getInstancia();
 
-            include("../Vistas/registroExitoso.php");
+            $daoVehiculo->agregar($vehiculo);
+
+            if ($daoVehiculo->traerPorDominio($vehiculo->getDominio())) {
+
+                $nombre = 'titular';
+
+                include("../Vistas/registroExitoso.php");
+
+            } else {
+
+                echo 'no se cargo';
+
+            }
+
 
         } catch (\Exception $error) {
             echo 'Hubo un error al procesar los datos. Error:' . $error;

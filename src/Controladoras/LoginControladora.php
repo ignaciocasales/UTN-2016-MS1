@@ -4,6 +4,7 @@ namespace Controladoras;
 
 use Dao\RolBdDao;
 use Dao\RolJsonDao;
+use Dao\TitularBdDao;
 use Dao\UsuarioBdDao;
 use Dao\UsuarioJsonDao;
 use Dao\VehiculoBdDao;
