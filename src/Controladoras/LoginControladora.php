@@ -37,12 +37,7 @@ class loginControladora
     public
     function verificar($mail, $pwd)
     {
-        $dao = VehiculoBdDao::getInstancia();
-
-        echo '<pre>';
-        print_r($dao->traerTodo());
-        echo '<pre>';
-        /*if (isset($mail) && isset($pwd)) {
+        if (isset($mail) && isset($pwd)) {
 
             if ($mail === "" || $pwd === "") {
 
@@ -71,7 +66,7 @@ class loginControladora
         } else {
             echo 'valores no seteados';
         }
-        header('Location: /index.php');*/
+        header('Location: /index.php');
     }
 
     protected function existe($usuario)

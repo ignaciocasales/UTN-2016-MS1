@@ -9,11 +9,9 @@ class EventoMulta
     private $foto;
     private $sensorSemaforo;
 
-    function __construct($fecha_hora, $foto, $sensorSemaforo)
+    function __construct($fecha_hora)
     {
         $this->fechaYhora = $fecha_hora;
-        $this->foto = $foto;
-        $this->sensorSemaforo = $sensorSemaforo;
     }
 
     function __destruct()

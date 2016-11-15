@@ -134,6 +134,8 @@ CREATE TABLE eventos
 (
   id_eventos       SMALLINT UNSIGNED AUTO_INCREMENT,
 
+  fecha_hora       DATE,
+
   foto             MEDIUMBLOB,
 
   tipo_foto        VARCHAR(10),

@@ -100,7 +100,7 @@ class UsuarioBdDao implements UsuarioIDao
 
         $sentencia->execute();
 
-        $dataSet = $sentencia->fetchall(\PDO::FETCH_ASSOC);
+        $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
 
         $this->mapear($dataSet);
 

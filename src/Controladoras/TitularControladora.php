@@ -47,9 +47,8 @@ class titularControladora
             $titular = $this->existe($dni);
 
             if ($titular != null) {
-                include("../Vistas/abmVehiculos.php");
+                include("../Vistas/altaVehiculo.php");
             } else {
-                //  header('Location: ' . URL_PUBLIC);
                 $this->registrar($dni);
             }
         }

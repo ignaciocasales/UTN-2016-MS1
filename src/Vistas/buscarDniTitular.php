@@ -1,20 +1,20 @@
 <?php include('navbar.php'); ?>
-<div class="container lower-box box-primary"">
-<div class="bg"></div>
-<div class="row">
-    <div class="hidden-xs hidden-sm col-md-3 box-right-content">
-        <h5 style="text-align: center">INGRESE DNI DEL TITULAR</h5>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3 lower-box box-primary">
+            <div class="bg"></div>
+            <h3 class="text-center">Ingrese el DNI</h3>
+            <hr>
+            <form class="text-center form-inline" method="post" action="/titular/verificar">
+                <div class="form-group">
+                    <label for="Titular">DNI</label>
+                    <input type="text" name="dni" class="form-control" id="Titular"
+                           title="Sin puntos ni separación." size="10" maxlength="8" data-toggle="tooltip"
+                           data-placement="bottom" autofocus
+                           required>
+                </div>
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
+        </div>
     </div>
-    <div class="col-md-6">
-        <form method="post" action="/titular/verificar">
-            <div class="form-group">
-                <label for="Titular">DNI</label>
-                <input type="text" name="dni" size="10" maxlength="8" autofocus required>
-                <button type="submit" class="btn btn-primary" style="left: 50px">Buscar
-                </button>
-            </div>
-        </form>
-    </div>
-
-</div>
 </div>

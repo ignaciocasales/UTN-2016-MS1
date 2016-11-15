@@ -4,14 +4,8 @@ namespace Modelo;
 
 class SensorSemaforo extends Sensor
 {
-
-    function __construct()
+    public function __construct($fechaAlta, $latitud, $longitud, $numeroSerie)
     {
+        parent::__construct($fechaAlta, $latitud, $longitud, $numeroSerie);
     }
-
-    function __destruct()
-    {
-    }
-
-
 }

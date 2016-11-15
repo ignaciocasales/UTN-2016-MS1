@@ -9,11 +9,9 @@ class EventoPeaje
     private $foto;
     private $sensorPeaje;
 
-    function __construct($fecha_hora, $foto, $sensorPeaje)
+    function __construct($fecha_hora)
     {
         $this->fechaYhora = $fecha_hora;
-        $this->foto = $foto;
-        $this->sensorPeaje = $sensorPeaje;
     }
 
     function __destruct()

@@ -5,12 +5,9 @@ namespace Modelo;
 class SensorPeaje extends Sensor
 {
 
-    function __construct()
+    public function __construct($fechaAlta, $latitud, $longitud, $numeroSerie)
     {
-    }
-
-    function __destruct()
-    {
+        parent::__construct($fechaAlta, $latitud, $longitud, $numeroSerie);
     }
 
 }

@@ -33,6 +33,6 @@ class vehiculoControladora
 
     public function registrar()
     {
-        include("../Vistas/abmVehiculos.php");
+        include("../Vistas/altaVehiculo.php");
     }
 }
