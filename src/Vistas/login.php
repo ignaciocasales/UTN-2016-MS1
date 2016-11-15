@@ -27,7 +27,6 @@
                 <a href="%" class="pull-left">¿Olvidaste tu contraseña?</a>
                 <button type="submit" class="btn btn-primary pull-right">Inicie Sesión</button>
             </form>
-
         </div>
     </div>
 </div>

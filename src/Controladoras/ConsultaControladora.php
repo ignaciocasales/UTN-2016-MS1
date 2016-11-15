@@ -64,4 +64,12 @@ class ConsultaControladora
             echo 'no tiene permisos';
         }
     }
+
+    public function vehiculo($id){
+        $dao = VehiculoBdDao::getInstancia();
+
+        $vehiculo = $dao->traerPorId($id);
+
+        include ("../Vistas/verVehiculo.php");
+    }
 }

@@ -12,11 +12,13 @@
                         <?php if ($_SESSION['rol'] === 'developer') { ?>
 
                             <th>DNI - Titular</th>
+                            <th></th>
+                            <th></th>
+                            <th><a href="/titular/buscarDni/"><span class="glyphicon glyphicon-plus" title="Añadir"
+                                                                    data-toggle="tooltip"
+                                                                    data-placement="right"></span></a></th>
+                        <?php } ?>
                         <th></th>
-                        <th></th>
-                        <th><a href="/titular/buscarDni/"><span class="glyphicon glyphicon-plus" title="Añadir" data-toggle="tooltip"
-                                              data-placement="right"></span></a></th>
-                        <?php }?>
                     </tr>
                     </thead>
                     <tbody>
@@ -29,12 +31,19 @@
                             <?php if ($_SESSION['rol'] === 'developer') { ?>
 
                                 <td><?php $o = $objeto->getTitular();
-                                echo $o->getDni(); ?></td>
-                            <td><a href="#" class="disabled"><span class="glyphicon glyphicon-pencil" title="Modificar"
-                                                  data-toggle="tooltip" data-placement="right"></span></a></td>
-                            <td><a href="#"><span class="glyphicon glyphicon-trash" title="Eliiminar"
-                                                  data-toggle="tooltip" data-placement="right"></span></a></td>
+                                    echo $o->getDni(); ?></td>
+                                <td><a href="#"><span class="glyphicon glyphicon-pencil"
+                                                      title="Modificar"
+                                                      data-toggle="tooltip"
+                                                      data-placement="right"></span></a></td>
+                                <td><a href="#"><span class="glyphicon glyphicon-trash" title="Eliiminar"
+                                                      data-toggle="tooltip" data-placement="right"></span></a></td>
                             <?php } ?>
+                            <td><a href="/consulta/vehiculo/<?= $objeto->getId(); ?>"><span
+                                        class="glyphicon glyphicon-eye-open"
+                                        title="Ver"
+                                        data-toggle="tooltip"
+                                        data-placement="right"></span></a></td>
                         </tr>
                     <?php }
                     ?>
