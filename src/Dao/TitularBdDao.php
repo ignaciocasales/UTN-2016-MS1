@@ -111,6 +111,22 @@ class TitularBdDao implements TitularIDao
         if (!empty($this->listado)) return $this->listado;
     }
 
+    public function traerPorIdUsuario($id){
+        $sql = "SELECT * FROM $this->tabla WHERE id_usuarios = '$id'";
+
+        $conexion = Conexion::conectar();
+
+        $sentencia = $conexion->prepare($sql);
+
+        $sentencia->execute();
+
+        $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+
+        $this->mapear($dataSet);
+
+        if (!empty($this->listado[0])) return $this->listado[0];
+
+    }
     public function traerPorId($id)
     {
         $sql = "SELECT * FROM $this->tabla WHERE id_titulares =  \"$id\" LIMIT 1";

@@ -27,16 +27,16 @@
                     foreach ($listado as $objeto) { ?>
                         <tr>
                             <td><?= $objeto->getEmail(); ?></td>
-                            <td><?php echo $objeto->getPassword(); ?></td>
+                            <td><?= $objeto->getPassword(); ?></td>
                             <td><?php $o = $objeto->getRol();
                                 echo $o->getDescripcion(); ?></td>
+
                             <td><a href="#"><span class="glyphicon glyphicon-pencil" title="Modificar"
                                                   data-toggle="tooltip" data-placement="right"></span></a></td>
                             <td><a href="#"><span class="glyphicon glyphicon-trash" title="Eliiminar"
                                                   data-toggle="tooltip" data-placement="right"></span></a></td>
                         </tr>
-                    <?php }
-                    ?>
+                    <?php } ?>
                     </tbody>
                 </table>
             </div>
