@@ -23,47 +23,47 @@ class TarifaBdDao implements TarifaIDao
 
     public function agregar($tarifa)
     {
-        $sql = "INSERT INTO $this->tabla (fecha_desde, fecha_hasta, multa, peaje_hora_normal, peaje_hora_pico) VALUES (:fecha_desde, :fecha_hasta, :multa, :peaje_hora_normal, :peaje_hora_pico)";
+        $sql = "INSERT INTO $this->tabla (fecha_desde, fechaHasta, multa, peajeHoraNormal, peajeHoraPico) VALUES (:fechaDesde, :fechaHasta, :multa, :peajeHoraNormal, :peajeHoraPico)";
 
         $conexion = Conexion::conectar();
 
         $sentencia = $conexion->prepare($sql);
 
-        $fecha_desde = $tarifa->getFechaDesde();
-        $fecha_hasta = $tarifa->getFechaHasta();
+        $fechaDesde = $tarifa->getFechaDesde();
+        $fechaHasta = $tarifa->getFechaHasta();
         $multa = $tarifa->getMulta();
-        $peaje_hora_normal = $tarifa->getPeajeHorasNormal();
-        $peaje_hora_pico = $tarifa->getPeajeHorasPico();
+        $peajeHoraNormal = $tarifa->getPeajeHorasNormal();
+        $peajeHoraPico = $tarifa->getPeajeHorasPico();
 
-        $sentencia->bindParam(":fecha_desde", $fecha_desde);
-        $sentencia->bindParam(":fecha_hasta", $fecha_hasta);
+        $sentencia->bindParam(":fechaDesde", $fechaDesde);
+        $sentencia->bindParam(":fechaHasta", $fechaHasta);
         $sentencia->bindParam(":multa", $multa);
-        $sentencia->bindParam(":peaje_hora_normal", $peaje_hora_normal);
-        $sentencia->bindParam(":peaje_hora_pico", $peaje_hora_pico);
+        $sentencia->bindParam(":peajeHoraNormal", $peajeHoraNormal);
+        $sentencia->bindParam(":peajeHoraPico", $peajeHoraPico);
 
         $sentencia->execute();
     }
 
     public function actualizar($tarifa)
     {
-        $sql = "UPDATE $this->tabla SET fecha_desde = :fecha_desde, fecha_hasta = :fecha_hasta, multa = :multa, peaje_hora_normal = :peaje_hora_normal, peaje_hora_pico = :peaje_hora_pico WHERE id_tarifas = :id";
+        $sql = "UPDATE $this->tabla SET fechaDesde = :fechaDesde, fechaHasta = :fechaHasta, multa = :multa, peajeHoraNormal = :peajeHoraNormal, peajeHoraPico = :peajeHoraPico WHERE id_tarifas = :id";
 
         $conexion = Conexion::conectar();
 
         $sentencia = $conexion->prepare($sql);
 
-        $fecha_desde = $tarifa->getFechaDesde();
-        $fecha_hasta = $tarifa->getFechaHasta();
+        $fechaDesde = $tarifa->getFechaDesde();
+        $fechaHasta = $tarifa->getFechaHasta();
         $multa = $tarifa->getMulta();
-        $peaje_hora_normal = $tarifa->getPeajeHorasNormal();
-        $peaje_hora_pico = $tarifa->getPeajeHorasPico();
+        $peajeHoraNormal = $tarifa->getPeajeHorasNormal();
+        $peajeHoraPico = $tarifa->getPeajeHorasPico();
         $id = $tarifa->getId();
 
-        $sentencia->bindParam(":fecha_desde", $fecha_desde);
-        $sentencia->bindParam(":fecha_hasta", $fecha_hasta);
+        $sentencia->bindParam(":fechaDesde", $fechaDesde);
+        $sentencia->bindParam(":fechaHasta", $fechaHasta);
         $sentencia->bindParam(":multa", $multa);
-        $sentencia->bindParam(":peaje_hora_normal", $peaje_hora_normal);
-        $sentencia->bindParam(":peaje_hora_pico", $peaje_hora_pico);
+        $sentencia->bindParam(":peajeHoraNormal", $peajeHoraNormal);
+        $sentencia->bindParam(":peajeHoraPico", $peajeHoraPico);
         $sentencia->bindParam(":id", $id);
 
         $sentencia->execute();
@@ -113,6 +113,7 @@ class TarifaBdDao implements TarifaIDao
             $t->setId($p['id_tarifas']);
 
             return $t;
+
         }, $dataSet);
     }
 }

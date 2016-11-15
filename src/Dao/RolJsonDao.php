@@ -3,29 +3,19 @@
 namespace Dao;
 
 
-class RolJsonDao extends Conexion implements IDao
+class RolJsonDao implements RolIDao
 {
-    private static $instancia;
-
-    public static function getInstancia()
-    {
-        if (!self::$instancia instanceof self) {
-            self::$instancia = new self();
-        }
-        return self::$instancia;
-    }
-
-    public function agregar($valor)
+    public function agregar($rol)
     {
         // TODO: Implement agregar() method.
     }
 
-    public function eliminar($valor)
+    public function eliminar($id)
     {
         // TODO: Implement eliminar() method.
     }
 
-    public function actualizar($valor)
+    public function actualizar($rol)
     {
         // TODO: Implement actualizar() method.
     }
@@ -35,8 +25,13 @@ class RolJsonDao extends Conexion implements IDao
         // TODO: Implement traeTodo() method.
     }
 
-    public function traeUno($valor)
+    public function traerPorId($id)
     {
-        // TODO: Implement traeUno() method.
+        // TODO: Implement traerPorId() method.
+    }
+
+    public function mapear($dataSet)
+    {
+        // TODO: Implement mapear() method.
     }
 }

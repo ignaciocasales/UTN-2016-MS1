@@ -3,7 +3,7 @@
 namespace Dao;
 
 
-class SensorPeajeJsonDao
+class SensorPeajeJsonDao implements SensorPeajeIDao
 {
 
 }

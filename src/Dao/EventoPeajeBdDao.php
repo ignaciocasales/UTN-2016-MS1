@@ -3,7 +3,7 @@
 namespace Dao;
 
 
-class EventoPeajeBdDao implements EventoPeajeIDao
+class EventoPeajeBdDao implements EventoIDao
 {
     protected $tabla = "eventos";
     protected $listado;
@@ -20,7 +20,7 @@ class EventoPeajeBdDao implements EventoPeajeIDao
         return self::$instancia;
     }
 
-    public function agregar($movimiento)
+    public function agregar($evento)
     {
         // TODO: Implement agregar() method.
     }

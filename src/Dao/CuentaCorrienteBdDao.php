@@ -33,6 +33,7 @@ class CuentaCorrienteBdDao implements CuentaCorrienteIDao
         $fecha_ultima_actualizacion = $cuenta_corriente->getFecha();
         $maximo_credito = $cuenta_corriente->getMaximoCredito();
         $saldo = $cuenta_corriente->getSaldo();
+
         $vehiculo = $cuenta_corriente->getVehiculo();
         $idVehiculo = $vehiculo->getId();
 
@@ -42,7 +43,6 @@ class CuentaCorrienteBdDao implements CuentaCorrienteIDao
         $sentencia->bindParam(":idVehiculo", $idVehiculo);
 
         $sentencia->execute();
-
     }
 
     public function eliminar($id)
@@ -114,8 +114,15 @@ class CuentaCorrienteBdDao implements CuentaCorrienteIDao
     {
         $dataSet = is_array($dataSet) ? $dataSet : [];
         $this->listado = array_map(function ($p) {
+
             $daoVehiculo = VehiculoBdDao::getInstancia();
-            return new CuentaCorriente($p['fecha_ultima_actualizacion'], $p['maximo_credito'], $p['saldo'], $daoVehiculo->traerPorId($p['id_vehiculos']));
+
+            $cc = new CuentaCorriente($p['fecha_ultima_actualizacion'], $p['maximo_credito'], $p['saldo'], $daoVehiculo->traerPorId($p['id_vehiculos']));
+
+            $cc->setId($p['id_cuentas_corriente']);
+
+            return $cc;
+
         }, $dataSet);
     }
 }

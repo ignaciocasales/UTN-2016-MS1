@@ -31,6 +31,7 @@ class PagoBdDao implements PagoIDao
         $sentencia = $conexion->prepare($sql);
 
         $fecha = $pago->getFecha();
+
         $movimientoCuentaCorriente = $pago->getMovimientoCuentaCorriente();
         $idMovimiento = $movimientoCuentaCorriente->getId();
 
@@ -38,12 +39,11 @@ class PagoBdDao implements PagoIDao
         $sentencia->bindParam(":idMovimiento", $idMovimiento);
 
         $sentencia->execute();
-
     }
 
     public function traerTodo()
     {
-        $sql = "SELECT * FROM $this->tabla ";
+        $sql = "SELECT * FROM $this->tabla";
         $sentencia = Conexion::conectar()->prepare($sql);
 
         $sentencia->execute();
@@ -58,7 +58,7 @@ class PagoBdDao implements PagoIDao
 
     public function traerPorId($id)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE id_pagos =  '$id'";
+        $sql = "SELECT * FROM $this->tabla WHERE id_pagos =  \"$id\"";
 
         $conexion = Conexion::conectar();
 

@@ -3,7 +3,7 @@
 namespace Dao;
 
 
-class SensorSemaforoJsonDao
+class SensorSemaforoJsonDao implements SensorSemaforoIDao
 {
 
 }

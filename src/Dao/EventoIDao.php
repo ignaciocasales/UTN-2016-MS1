@@ -3,9 +3,9 @@
 namespace Dao;
 
 
-interface EventoPeajeIDao
+interface EventoIDao
 {
-    public function agregar($movimiento);
+    public function agregar($evento);
 
     public function traerTodo();
 

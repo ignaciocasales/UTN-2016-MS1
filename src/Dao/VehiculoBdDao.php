@@ -24,7 +24,7 @@ class VehiculoBdDao implements VehiculoIDao
 
     public function agregar($vehiculo)
     {
-        $sql = "INSERT INTO $this->tabla (dominio, marca, modelo, id_titulares) VALUES (:dominio, :marca, :modelo, (SELECT id_titulares FROM titulares WHERE dni = :dni))";
+        $sql = "INSERT INTO $this->tabla (dominio, marca, modelo, id_titulares) VALUES (:dominio, :marca, :modelo, :idTitular)";
 
         $conexion = Conexion::conectar();
 
@@ -33,13 +33,14 @@ class VehiculoBdDao implements VehiculoIDao
         $dominio = $vehiculo->getDominio();
         $marca = $vehiculo->getMarca();
         $modelo = $vehiculo->getModelo();
-        $titular = $vehiculo->getTitular();
-        $dni = $titular->getDni();
+
+        $t = $vehiculo->getTitular();
+        $idTitular = $t->getId();
 
         $sentencia->bindParam(":dominio", $dominio);
         $sentencia->bindParam(":marca", $marca);
         $sentencia->bindParam(":modelo", $modelo);
-        $sentencia->bindParam(":dni", $dni);
+        $sentencia->bindParam(":idTitular", $idTitular);
 
 
         $sentencia->execute();
@@ -70,8 +71,7 @@ class VehiculoBdDao implements VehiculoIDao
 
     public function actualizar($vehiculo)
     {
-        //No tiene sentido cambiar otro dato que no sea el titular.
-        $sql = "UPDATE $this->tabla SET id_titulares = (SELECT id_titulares FROM titulares WHERE id_titulares = :idTitular) WHERE id_vehiculos = :idVehiculo";
+        $sql = "UPDATE $this->tabla SET id_titulares = :idTitular WHERE id_vehiculos = :idVehiculo";
 
         $conexion = Conexion::conectar();
 
@@ -151,6 +151,7 @@ class VehiculoBdDao implements VehiculoIDao
             $v->setId($p['id_vehiculos']);
 
             return $v;
+
         }, $dataSet);
     }
 }

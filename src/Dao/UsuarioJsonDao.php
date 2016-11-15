@@ -3,93 +3,46 @@
 namespace Dao;
 
 
-use Modelo\Usuario;
-
 class UsuarioJsonDao implements UsuarioIDao
 {
-    private static $instancia;
-    private $listado;
-    private $ruta;
-
-    public static function getInstancia()
-    {
-        if (!self::$instancia instanceof self) {
-
-            self::$instancia = new self();
-
-        }
-
-        return self::$instancia;
-    }
-
-    public function __construct($ruta = __DIR__ . '\json\usuarios.json')
-    {
-        if (!file_exists($ruta)) {
-
-            echo 'No existe el archivo';
-            //throw new Exception('No existe el archivo');
-
-        }
-
-        $this->ruta = $ruta;
-        $this->leer();
-    }
-
-    public function __destruct()
-    {
-        $archivo = fopen($this->ruta, 'w');
-
-        fwrite($archivo, json_encode($this->listado));
-
-        fclose($archivo);
-    }
-
-    protected function leer()
-    {
-        $archivo = fopen($this->ruta, "r");
-
-        $dataSet = json_decode(fgets($archivo), true);
-
-        $this->mapear($dataSet);
-
-        fclose($archivo);
-    }
 
     public function agregar($usuario)
     {
-        $this->listado[] = $usuario;
+        // TODO: Implement agregar() method.
     }
 
-    public function eliminar($mail)
+    public function eliminarPorId($id)
     {
-        if (($key = array_search($mail, $this->listado, true)) !== FALSE) {
-            unset($this->listado[$key]);
-        }
+        // TODO: Implement eliminarPorId() method.
+    }
+
+    public function eliminarPorMail($mail)
+    {
+        // TODO: Implement eliminarPorMail() method.
     }
 
     public function actualizar($usuario)
     {
+        // TODO: Implement actualizar() method.
     }
 
-    public function traeTodo()
+    public function traerTodo()
     {
-        return $this->listado;
+        // TODO: Implement traerTodo() method.
+    }
+
+    public function traerPorId($id)
+    {
+        // TODO: Implement traerPorId() method.
     }
 
     public function traerPorMail($mail)
     {
-        return array_filter($this->listado, function ($p) use ($mail) {
-
-            return $p->getEmail() == $mail;
-
-        });
+        // TODO: Implement traerPorMail() method.
     }
 
     public function mapear($dataSet)
     {
-        $dataSet = is_array($dataSet) ? $dataSet : [];
-        $this->listado = array_map(function ($p) use ($dataSet) {
-            return new Usuario($p['id'], $p['mail'], $p['pwd'], $p['id_roles']);
-        }, $dataSet);
+        // TODO: Implement mapear() method.
     }
 }

@@ -3,7 +3,7 @@
 namespace Dao;
 
 
-class EventoMultaBdDao implements EventoMultaIDao
+class EventoMultaBdDao implements EventoIDao
 {
     protected $tabla = "eventos";
     protected $listado;
@@ -20,7 +20,7 @@ class EventoMultaBdDao implements EventoMultaIDao
         return self::$instancia;
     }
 
-    public function agregar($movimiento)
+    public function agregar($evento)
     {
         // TODO: Implement agregar() method.
     }

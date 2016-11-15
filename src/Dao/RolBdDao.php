@@ -101,6 +101,7 @@ class RolBdDao implements RolIDao
             $r->setId($p['id_roles']);
 
             return $r;
+
         }, $dataSet);
     }
 }

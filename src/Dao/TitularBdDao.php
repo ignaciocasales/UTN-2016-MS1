@@ -23,7 +23,7 @@ class TitularBdDao implements TitularIDao
     public function agregar($titular)
     {
 
-        $sql = "INSERT INTO $this->tabla (nombre, apellido, dni, telefono, id_usuarios) VALUES (:nombre, :apellido, :dni, :telefono, (SELECT id_usuarios FROM usuarios WHERE id_usuarios = :idUsuarios))";
+        $sql = "INSERT INTO $this->tabla (nombre, apellido, dni, telefono, id_usuarios) VALUES (:nombre, :apellido, :dni, :telefono, :idUsuarios)";
 
         $conexion = Conexion::conectar();
 
@@ -36,7 +36,6 @@ class TitularBdDao implements TitularIDao
         $usuario = $titular->getUsuario();
         $idUsuarios = $usuario->getId();
 
-
         $sentencia->bindParam(":nombre", $nombre);
         $sentencia->bindParam(":apellido", $apellido);
         $sentencia->bindParam(":dni", $dni);
@@ -44,7 +43,6 @@ class TitularBdDao implements TitularIDao
         $sentencia->bindParam(":idUsuarios", $idUsuarios);
 
         $sentencia->execute();
-
     }
 
     public function eliminarPorId($id)
@@ -159,6 +157,7 @@ class TitularBdDao implements TitularIDao
             $t->setId($p['id_titulares']);
 
             return $t;
+
         }, $dataSet);
     }
 }
