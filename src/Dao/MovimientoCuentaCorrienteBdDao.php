@@ -6,7 +6,7 @@ use Modelo\MovimientoCuentaCorriente;
 
 class MovimientoCuentaCorrienteBdDao
 {
-    protected $tabla = "cuentas_corrientes";
+    protected $tabla = "movimientos_cuentas_corrientes";
     protected $listado;
     private static $instancia;
 
@@ -59,7 +59,6 @@ class MovimientoCuentaCorrienteBdDao
         $sentencia->bindParam("idEvento", $idEvento);
 
         $sentencia->execute();
-
     }
 
     public function traerPorId($id)

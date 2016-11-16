@@ -22,23 +22,27 @@ class EventoPeajeBdDao implements EventoIDao
         return self::$instancia;
     }
 
-    public function agregar($eventoPeaje)
+    public function agregar($evento)
     {
-        $sql = "INSERT INTO $this->tabla (id_tipos_eventos, id_sensores) VALUES (:idEvento, :idSensor)";
+        $sql = "INSERT INTO $this->tabla (fecha_hora, id_tipos_eventos, id_sensores) VALUES (:fechaHora, :idEvento, :idSensor)";
 
         $conexion = Conexion::conectar();
 
         $sentencia = $conexion->prepare($sql);
 
-        $idEvento = $eventoPeaje->getId();
+        $idEvento = 2;
+        $fechaHora = $evento->getFechaYhora();
 
-        $s = $eventoPeaje->getSensorSemaforo();
+        $s = $evento->getSensorSemaforo();
         $idSensor = $s->getId();
 
+        $sentencia->bindParam(":fechaHora", $fechaHora);
         $sentencia->bindParam(":idEvento", $idEvento);
         $sentencia->bindParam(":idSensor", $idSensor);
 
         $sentencia->execute();
+
+        return $conexion->lastInsertId();
     }
 
     public function traerTodo()

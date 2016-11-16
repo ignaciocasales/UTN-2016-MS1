@@ -11,5 +11,7 @@ interface SensorIDao
 
     public function traerPorId($id);
 
+    public function traerCualquiera();
+
     public function mapear($dataSet);
 }

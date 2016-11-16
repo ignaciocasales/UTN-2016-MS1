@@ -5,7 +5,7 @@ CREATE TABLE roles
 (
   id_roles    SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
 
-  descripcion VARCHAR(20),
+  descripcion VARCHAR(20) UNIQUE,
 
   CONSTRAINT pk_de_roles PRIMARY KEY (id_roles)
 );
@@ -93,7 +93,7 @@ CREATE TABLE tipos_sensores
 (
   id_tipos_sensores SMALLINT UNSIGNED AUTO_INCREMENT,
 
-  descripcion       VARCHAR(50),
+  descripcion       VARCHAR(50) UNIQUE,
 
   CONSTRAINT pk_de_id_tipos_sensores PRIMARY KEY (id_tipos_sensores)
 );
@@ -124,7 +124,7 @@ CREATE TABLE tipos_eventos
 (
   id_tipos_eventos SMALLINT UNSIGNED AUTO_INCREMENT,
 
-  descripcion      VARCHAR(50),
+  descripcion      VARCHAR(50) UNIQUE,
 
   CONSTRAINT pk_de_tipos_eventos PRIMARY KEY (id_tipos_eventos)
 );
@@ -134,11 +134,7 @@ CREATE TABLE eventos
 (
   id_eventos       SMALLINT UNSIGNED AUTO_INCREMENT,
 
-  fecha_hora       DATE,
-
-  foto             MEDIUMBLOB,
-
-  tipo_foto        VARCHAR(10),
+  fecha_hora       DATETIME,
 
   id_tipos_eventos SMALLINT UNSIGNED,
 
@@ -194,17 +190,17 @@ CREATE TABLE pagos
 
 CREATE TABLE tarifas
 (
-  id_tarifas        SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  id_tarifas        SMALLINT UNSIGNED AUTO_INCREMENT       NOT NULL,
 
-  fecha_desde       DATE                             NOT NULL,
+  fecha_desde       DATETIME UNIQUE                        NOT NULL,
 
-  fecha_hasta       DATE,
+  fecha_hasta       DATETIME UNIQUE                        NOT NULL,
 
-  multa             FLOAT UNSIGNED                   NOT NULL,
+  multa             FLOAT UNSIGNED                         NOT NULL,
 
-  peaje_hora_normal FLOAT UNSIGNED                   NOT NULL,
+  peaje_hora_normal FLOAT UNSIGNED                         NOT NULL,
 
-  peaje_hora_pico   FLOAT UNSIGNED                   NOT NULL,
+  peaje_hora_pico   FLOAT UNSIGNED                         NOT NULL,
 
   CONSTRAINT pk_id_de_tarifas PRIMARY KEY (id_tarifas)
 );

@@ -5,7 +5,11 @@ namespace Controladoras;
 
 
 use Dao\CuentaCorrienteBdDao;
+use Dao\EventoMultaBdDao;
+use Dao\EventoPeajeBdDao;
 use Dao\MovimientoCuentaCorrienteBdDao;
+use Dao\SensorPeajeBdDao;
+use Dao\SensorSemaforoBdDao;
 use Dao\TarifaBdDao;
 use Dao\UsuarioBdDao;
 use Dao\VehiculoBdDao;
@@ -33,39 +37,55 @@ class SimulacionControladora
 
     }
 
-    public function verificar($patente, $eventoFecha, $evento)
+    public function verificar($patente, $eventoFecha, $eventoTipo)
     {
-        echo '<pre>';
         $daoVehiculo = VehiculoBdDao::getInstancia();
         $vehiculo = $daoVehiculo->traerPorDominio($patente);
-        print_r($vehiculo);
+
         $daoCuentaCorriente = CuentaCorrienteBdDao::getInstancia();
         $cuentaCorriente = $daoCuentaCorriente->traerPorId($vehiculo->getId());
-        print_r($cuentaCorriente);
+
         $daoTarifa = TarifaBdDao::getInstancia();
         $tarifa = $daoTarifa->traerPorFecha($eventoFecha);
-        print_r($tarifa);
-        if($evento==='multa'){
 
-            $movimientoCuentaCorriente = new MovimientoCuentaCorriente($eventoFecha,$tarifa->getMulta(),$cuentaCorriente);
-            $movimientoCuentaCorriente->setEventoMulta(new EventoMulta($eventoFecha));
+        if ($eventoTipo === 'multa') {
 
-        }else if($evento==='peaje'){
+            $evento = new EventoMulta($eventoFecha);
 
-            $movimientoCuentaCorriente = new MovimientoCuentaCorriente($eventoFecha,$tarifa->getPeajeHorasPico(),$cuentaCorriente);
-            $movimientoCuentaCorriente->setEventoPeaje(new EventoPeaje($eventoFecha));
+            $daoSensor = SensorSemaforoBdDao::getInstancia();
+            $sensor = $daoSensor->traerCualquiera();
 
-        }else{
+            $evento->setSensorSemaforo($sensor);
+
+            $daoEvento = EventoMultaBdDao::getInstancia();
+            $evento->setId($daoEvento->agregar($evento));
+
+            $movimientoCuentaCorriente = new MovimientoCuentaCorriente($eventoFecha, $tarifa->getMulta(), $cuentaCorriente);
+            $movimientoCuentaCorriente->setEventoMulta($evento);
+
+        } else if ($eventoTipo === 'peaje') {
+
+            $evento = new EventoPeaje($eventoFecha);
+
+            $daoSensor = SensorPeajeBdDao::getInstancia();
+            $sensor = $daoSensor->traerCualquiera();
+
+            $evento->setSensorPeaje($sensor);
+
+            $daoEvento = EventoPeajeBdDao::getInstancia();
+            $evento->setId($daoEvento->agregar($evento));
+
+            $movimientoCuentaCorriente = new MovimientoCuentaCorriente($eventoFecha, $tarifa->getPeajeHorasPico(), $cuentaCorriente);
+            $movimientoCuentaCorriente->setEventoPeaje($evento);
+
+        } else {
 
             echo 'error';
 
         }
-        print_r($movimientoCuentaCorriente);
-        echo '</pre>';
 
-        //$daoMovimientoCuentaCorriente = MovimientoCuentaCorrienteBdDao::getInstancia();
-        //$daoMovimientoCuentaCorriente->agregar($movimientoCuentaCorriente);
-
+        $daoMovimientoCuentaCorriente = MovimientoCuentaCorrienteBdDao::getInstancia();
+        $daoMovimientoCuentaCorriente->agregar($movimientoCuentaCorriente);
 
 
         include("../Vistas/simulacionResultado.php");

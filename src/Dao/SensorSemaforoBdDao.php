@@ -34,7 +34,7 @@ class SensorSemaforoBdDao implements SensorIDao
         $latitud = $sensor->getLatitud();
         $longitud = $sensor->getLongitud();
         $numerosSerie = $sensor->getNumeroSerie();
-        $idSensor= $sensor->getId();
+        $idSensor = $sensor->getId();
 
         $sentencia->bindParam(":fechaAlta", $fechaAlta);
         $sentencia->bindParam(":latitud", $latitud);
@@ -64,7 +64,24 @@ class SensorSemaforoBdDao implements SensorIDao
 
     public function traerPorId($id)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE id_usuarios =  \"$id\" LIMIT 1";
+        $sql = "SELECT * FROM $this->tabla WHERE id_sensores =  \"$id\" LIMIT 1";
+
+        $conexion = Conexion::conectar();
+
+        $sentencia = $conexion->prepare($sql);
+
+        $sentencia->execute();
+
+        $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+
+        $this->mapear($dataSet);
+
+        if (!empty($this->listado[0])) return $this->listado[0];
+    }
+
+    public function traerCualquiera()
+    {
+        $sql = "SELECT * FROM $this->tabla WHERE id_tipos_sensores =  \"2\" ORDER BY RAND() LIMIT 1";
 
         $conexion = Conexion::conectar();
 
@@ -84,7 +101,7 @@ class SensorSemaforoBdDao implements SensorIDao
         $dataSet = is_array($dataSet) ? $dataSet : [];
         $this->listado = array_map(function ($p) {
 
-            $s = new SensorSemaforo($p['fecha_alta'],$p['latitud'],$p['longitud'],$p['numeros_serie']);
+            $s = new SensorSemaforo($p['fecha_alta'], $p['latitud'], $p['longitud'], $p['numeros_serie']);
 
             $s->setId($p['id_sensores']);
 

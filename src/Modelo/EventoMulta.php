@@ -6,7 +6,6 @@ class EventoMulta
 {
     private $id;
     private $fechaYhora;
-    private $foto;
     private $sensorSemaforo;
 
     function __construct($fecha_hora)
@@ -28,11 +27,6 @@ class EventoMulta
         $this->fechaYhora = $fechaYhora;
     }
 
-    public function setFoto($foto)
-    {
-        $this->foto = $foto;
-    }
-
     public function setSensorSemaforo($sensor)
     {
         $this->sensorSemaforo = $sensor;
@@ -48,11 +42,6 @@ class EventoMulta
         return $this->fechaYhora;
     }
 
-    public function getFoto()
-    {
-        return $this->foto;
-    }
-
     public function getSensorSemaforo()
     {
         return $this->sensorSemaforo;
@@ -62,7 +51,6 @@ class EventoMulta
     {
         return [
             'fecha_hora' => $this->fechaYhora,
-            'foto' => $this->foto,
             'sensorSemaforo' => $this->sensorSemaforo,
         ];
     }
