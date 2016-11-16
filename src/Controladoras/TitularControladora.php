@@ -18,7 +18,7 @@ class titularControladora
 
     public function buscarDni()
     {
-        include("../Vistas/buscarDniTitular.php");
+        include("../Vistas/verificarDni.php");
     }
 
 
@@ -43,6 +43,7 @@ class titularControladora
             TitularBdDao::getInstancia()->agregar($titular);
 
             $nombre = "titular";
+
             include("../Vistas/registroExitoso.php");
 
         } catch (\Exception $error) {
@@ -83,6 +84,6 @@ class titularControladora
 
     public function registrar($dni)
     {
-        include("../Vistas/abmTitular.php");
+        include("../Vistas/altaTitular.php");
     }
 }

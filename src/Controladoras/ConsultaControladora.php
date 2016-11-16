@@ -70,6 +70,6 @@ class ConsultaControladora
 
         $vehiculo = $dao->traerPorId($id);
 
-        include ("../Vistas/verVehiculo.php");
+        include("../Vistas/vehiculoDetalle.php");
     }
 }

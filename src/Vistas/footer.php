@@ -6,8 +6,9 @@
         </div>
     </div>
 </footer>
+<!-- TOOLTIPS -->
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
     });
 </script>

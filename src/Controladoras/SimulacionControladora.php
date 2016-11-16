@@ -19,7 +19,7 @@ class SimulacionControladora
         if ($_SESSION['rol'] === 'developer') {
             $dao = VehiculoBdDao::getInstancia();
             $listado = $dao->traerTodo();
-            include("../Vistas/vistaConsultaSimulacion.php");
+            include("../Vistas/simulacion.php");
         } else {
             echo 'no tiene permisos';
         }
@@ -44,7 +44,7 @@ class SimulacionControladora
             }
         }
 
-        include("../Vistas/resultadoSimulacion.php");
+        include("../Vistas/simulacionResultado.php");
 
 
     }
