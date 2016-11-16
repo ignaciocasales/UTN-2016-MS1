@@ -15,6 +15,8 @@ interface TarifaIDao
 
     public function traerPorId($id);
 
+    public function traerPorFecha($fecha);
+
     public function mapear($dataSet);
 
 }

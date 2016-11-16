@@ -4,10 +4,10 @@ namespace Modelo;
 
 class EventoPeaje
 {
-    private $id;
+    private $id=null;
     private $fechaYhora;
-    private $foto;
-    private $sensorPeaje;
+    private $foto=null;
+    private $sensorPeaje=null;
 
     function __construct($fecha_hora)
     {

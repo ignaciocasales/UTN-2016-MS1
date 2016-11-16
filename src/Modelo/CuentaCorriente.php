@@ -71,5 +71,4 @@ class CuentaCorriente
     {
         return $this->vehiculo;
     }
-
 }

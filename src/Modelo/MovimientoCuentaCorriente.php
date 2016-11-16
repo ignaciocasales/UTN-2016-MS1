@@ -4,12 +4,12 @@ namespace Modelo;
 
 class MovimientoCuentaCorriente
 {
-    private $id;
+    private $id = null;
     private $fechaYhora;
     private $importe;
-    private $eventoPeaje;
+    private $eventoPeaje = null;
     private $cuentaCorriente;
-    private $eventoMulta;
+    private $eventoMulta = null;
 
     function __construct($fechaYhora, $importe, $cuentaCorriente)
     {

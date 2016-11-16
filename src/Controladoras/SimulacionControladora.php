@@ -4,8 +4,14 @@
 namespace Controladoras;
 
 
+use Dao\CuentaCorrienteBdDao;
+use Dao\MovimientoCuentaCorrienteBdDao;
+use Dao\TarifaBdDao;
 use Dao\UsuarioBdDao;
 use Dao\VehiculoBdDao;
+use Modelo\EventoMulta;
+use Modelo\EventoPeaje;
+use Modelo\MovimientoCuentaCorriente;
 
 class SimulacionControladora
 {
@@ -27,22 +33,40 @@ class SimulacionControladora
 
     }
 
-    public function verificar($patente, $evento, $eventoFecha)
+    public function verificar($patente, $eventoFecha, $evento)
     {
+        echo '<pre>';
+        $daoVehiculo = VehiculoBdDao::getInstancia();
+        $vehiculo = $daoVehiculo->traerPorDominio($patente);
+        print_r($vehiculo);
+        $daoCuentaCorriente = CuentaCorrienteBdDao::getInstancia();
+        $cuentaCorriente = $daoCuentaCorriente->traerPorId($vehiculo->getId());
+        print_r($cuentaCorriente);
+        $daoTarifa = TarifaBdDao::getInstancia();
+        $tarifa = $daoTarifa->traerPorFecha($eventoFecha);
+        print_r($tarifa);
+        if($evento==='multa'){
 
-        $dao = VehiculoBdDao::getInstancia();
-        $vehiculo = $dao->traerPorDominio($patente);
-        $titular = $vehiculo->getTitular();
-        $gastoPeaje = 20;
-        if ($evento == 'semaforo') {
+            $movimientoCuentaCorriente = new MovimientoCuentaCorriente($eventoFecha,$tarifa->getMulta(),$cuentaCorriente);
+            $movimientoCuentaCorriente->setEventoMulta(new EventoMulta($eventoFecha));
 
-        } else {
-            if (isset($eventoFecha)) {
-                if($eventoFecha === '2016-11-01 07:00:00'){
-                    $gastoPeaje = 25;
-                }
-            }
+        }else if($evento==='peaje'){
+
+            $movimientoCuentaCorriente = new MovimientoCuentaCorriente($eventoFecha,$tarifa->getPeajeHorasPico(),$cuentaCorriente);
+            $movimientoCuentaCorriente->setEventoPeaje(new EventoPeaje($eventoFecha));
+
+        }else{
+
+            echo 'error';
+
         }
+        print_r($movimientoCuentaCorriente);
+        echo '</pre>';
+
+        //$daoMovimientoCuentaCorriente = MovimientoCuentaCorrienteBdDao::getInstancia();
+        //$daoMovimientoCuentaCorriente->agregar($movimientoCuentaCorriente);
+
+
 
         include("../Vistas/simulacionResultado.php");
 

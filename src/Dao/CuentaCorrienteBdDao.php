@@ -119,7 +119,7 @@ class CuentaCorrienteBdDao implements CuentaCorrienteIDao
 
             $cc = new CuentaCorriente($p['fecha_ultima_actualizacion'], $p['maximo_credito'], $p['saldo'], $daoVehiculo->traerPorId($p['id_vehiculos']));
 
-            $cc->setId($p['id_cuentas_corriente']);
+            $cc->setId($p['id_cuentas_corrientes']);
 
             return $cc;
 

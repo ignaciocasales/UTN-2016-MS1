@@ -40,7 +40,9 @@
                                 </div>
                                 <script type="text/javascript">
                                     $(function () {
-                                        $('#datetimepicker1').datetimepicker();
+                                        $('#datetimepicker1').datetimepicker({
+                                            format: 'YYYY-MM-DD'
+                                        });
                                     });
                                 </script>
                                 </div>
@@ -53,7 +55,7 @@
                                     <h3 class="panel-title">Evento</h3>
                                 </div>
                                 <div class="panel-body">
-                                    <input type="radio" name="evento" value="semaforo" checked="checked"> Semaforo en rojo
+                                    <input type="radio" name="evento" value="multa" checked="checked"> Semaforo en rojo
                                     <hr>
                                     <input type="radio" name="evento" value="peaje"> Peaje
                                 </div>

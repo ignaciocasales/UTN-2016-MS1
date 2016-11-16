@@ -103,6 +103,23 @@ class TarifaBdDao implements TarifaIDao
         if (!empty($this->listado[0])) return $this->listado[0];
     }
 
+    public function traerPorFecha($fecha)
+    {
+        $sql = "SELECT * FROM $this->tabla WHERE fecha_desde <=  \"$fecha\" AND fecha_hasta >= \"$fecha\" LIMIT 1";
+
+        $conexion = Conexion::conectar();
+
+        $sentencia = $conexion->prepare($sql);
+
+        $sentencia->execute();
+
+        $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+
+        $this->mapear($dataSet);
+
+        if (!empty($this->listado[0])) return $this->listado[0];
+    }
+
     public function mapear($dataSet)
     {
         $dataSet = is_array($dataSet) ? $dataSet : [];
