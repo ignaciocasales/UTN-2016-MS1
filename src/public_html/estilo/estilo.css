@@ -43,8 +43,12 @@ hr {
 }
 
 .bg-body {
-    background-color: white;
-    /*color: ;*/
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,f6f6f6+24,ededed+26;White+3D+%231 */
+    background: rgb(255, 255, 255); /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 24%, rgba(237, 237, 237, 1) 26%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 24%, rgba(237, 237, 237, 1) 26%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 24%, rgba(237, 237, 237, 1) 26%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed', GradientType=0); /* IE6-9 */
 }
 
 .navbar-default .navbar-nav > li > a {
@@ -133,11 +137,12 @@ body {
 .input-width-95 input {
     width: 95%;
 }
+
 hr {
     border: 0;
-    clear:both;
-    display:block;
+    clear: both;
+    display: block;
     width: 96%;
-    background-color:#E3E3E3;
+    background-color: #E3E3E3;
     height: 1px;
 }

@@ -3,7 +3,7 @@
     <div class="bg"></div>
     <div class="row">
         <div class="col-sm-12">
-            <h2 class="text-center">Simulación</h2>
+            <h4 class="text-center">Simulación</h4>
             <hr>
         </div>
         <div class="col-sm-12">
@@ -59,7 +59,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary pull-right">Simular</button>
+                        <button type="submit" class="btn btn-success pull-right">generar</button>
                     </div>
                 </div>
             </form>

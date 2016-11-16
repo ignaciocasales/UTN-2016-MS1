@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-sm-offset-3 lower-box box-primary">
             <div class="bg"></div>
-            <h3 class="text-center">Ingrese el DNI</h3>
+            <h4 class="text-center">Ingrese el DNI</h4>
             <hr>
             <form class="text-center form-inline" method="post" action="/titular/verificar">
                 <div class="form-group">
@@ -13,7 +13,7 @@
                            data-placement="bottom" autofocus
                            required>
                 </div>
-                <button type="submit" class="btn btn-primary">Buscar</button>
+                <button type="submit" class="btn btn-primary">verificar</button>
             </form>
         </div>
     </div>

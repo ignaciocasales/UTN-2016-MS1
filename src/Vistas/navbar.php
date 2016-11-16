@@ -36,8 +36,11 @@
                             <?php } ?>
                             <?php if ($_SESSION["rol"] === 'developer') { ?>
                                 <li><a href="/consulta/todosUsuarios/">Usuarios</a></li>
+                                <li><a href="#">Titulares</a></li>
                                 <li><a href="/consulta/todosVehiculos/">Vehiculos</a></li>
                                 <li><a href="#">Sensores</a></li>
+                                <li><a href="#">Reclamos</a></li>
+                                <li><a href="#">Tarifas</a></li>
                             <?php } ?>
                             <?php if ($_SESSION["rol"] === 'empleado') { ?>
                                 <li><a href="#">Tarifas</a></li>
@@ -45,9 +48,11 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="/index.php">
-                            Reclamos <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                        </a>
+                        <?php if ($_SESSION["rol"] === 'titular') { ?>
+                            <a href="/index.php">
+                                Reclamos <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                            </a>
+                        <?php } ?>
                     </li>
                     <?php if ($_SESSION["rol"] === 'empleado' || $_SESSION["rol"] === 'developer') { ?>
                         <li>
