@@ -1,7 +1,7 @@
 <?php include('navbar.php'); ?>
 <?php if (isset($mensaje)) { ?>
-    <div id="message">
-        <div style="padding: 5px;">
+    <div id="message" class="container">
+        <div>
             <div id="inner-message" class="alert alert-<?= $mensaje->getTipo(); ?> alert-dismissible fade"
                  role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
@@ -47,14 +47,14 @@
             <div class="col-xs-12 col-sm-12 col-md-4">
                 <h3>Iniciar Sesión</h3>
                 <form method="post" action="/login/verificar/">
-                    <div class="form-group">
+                    <div class="form-group <?php include("estadosValidacionFormularios.php"); ?>">
                         <label for="usuario">Usuario</label>
                         <input type="email" name="mail" class="form-control" id="usuario"
                                placeholder="email@ejemplo.com"
                                title="Email" maxlength="50" data-toggle="tooltip" data-placement="right" autofocus
                                required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group <?php include("estadosValidacionFormularios.php"); ?>">
                         <label for="pass">Contraseña</label>
                         <input type="password" name="pwd" class="form-control" id="pass"
                                placeholder="Ingrese su contraseña..."

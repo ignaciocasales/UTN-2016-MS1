@@ -37,7 +37,7 @@ class loginControladora
 
                 if ($mail === "" || $pwd === "") {
 
-                    echo "Por favor, completar usuario y clave";
+                    $mensaje = new Mensaje('warning', 'Debe llenar todos los campos !');
 
                 } else {
 
@@ -46,27 +46,32 @@ class loginControladora
 
                     $usuario = $dao->traerPorMail($mail);
 
-                    if ($this->existe($usuario)) {
+                    if ($mail === $usuario->getEmail() && $pwd === $usuario->getPassword()) {
 
-                        if ($mail === $usuario->getEmail() && $pwd === $usuario->getPassword()) {
+                        $rol = $usuario->getRol();
 
-                            $rol = $usuario->getRol();
+                        $_SESSION["mail"] = $mail;
+                        $_SESSION["pwd"] = $pwd;
+                        $_SESSION["rol"] = $rol->getDescripcion();
 
-                            $_SESSION["mail"] = $mail;
-                            $_SESSION["pwd"] = $pwd;
-                            $_SESSION["rol"] = $rol->getDescripcion();
+                    } else {
 
-                        }
+                        $mensaje = new Mensaje('warning', 'Datos de inicio de sesión incorrectos !');
+
                     }
                 }
             } else {
-                echo 'valores no seteados';
+
+                $mensaje = new Mensaje('danger', 'Error al iniciar sesión, intentelo más tarde !');
+
             }
-            require("../Vistas/login.php");
         } catch (\PDOException $e) {
-            $mensaje = new Mensaje('danger', 'Hubo un error al conectarse a la base de datos !');
-            require("../Vistas/login.php");
+
+            $mensaje = new Mensaje('danger', 'Hubo un error al conectarse con la base de datos !');
+
         }
+
+        require("../Vistas/login.php");
     }
 
     protected function existe($usuario)

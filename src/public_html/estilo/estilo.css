@@ -7,26 +7,16 @@ hr {
 /*Bootstrap Override.
 -------------------------------------------------- */
 .navbar {
-    margin-bottom: 40px;
+    margin-bottom: 70px;
     margin-top: 15px;
 }
 
 .navbar-brand {
-    padding: 22px 56px 15px;
+    padding: 7px 15px 0;
 }
 
 .navbar-brand .brand {
-    width: 80px;
-}
-
-@media screen and (max-width: 768px) {
-    .navbar-brand {
-        padding: 7px 0px 0px;
-    }
-
-    .navbar-brand .brand {
-        width: 50px;
-    }
+    width: 50px;
 }
 
 /*Custom CSS.
@@ -133,10 +123,10 @@ body {
 -------------------------------------------------- */
 #message {
     position: fixed;
-    top: 44px;
+    top: 85px;
     left: 0;
-    width: 50%;
-    margin-left: 264px;
+    width: 100%;
+   /* margin-left: 264px;*/
 }
 
 #inner-message {

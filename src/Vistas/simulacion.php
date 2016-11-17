@@ -31,7 +31,8 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class='input-group date' id='datetimepicker1'>
-                                        <input type='text' name="fecha" class="form-control" id="fecha" placeholder="Fecha del Evento..."
+                                        <input onkeydown="return false" type='text' name="fecha" class="form-control" id="fecha"
+                                               placeholder="Fecha del Evento..."
                                                title="Fecha" required/>
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
@@ -41,12 +42,13 @@
                                 <script type="text/javascript">
                                     $(function () {
                                         $('#datetimepicker1').datetimepicker({
-                                            format: 'YYYY-MM-DD HH:mm:ss'
+                                            format: 'YYYY-MM-DD HH:mm:ss',
+                                            minDate: moment()
                                         });
                                     });
                                 </script>
-                                </div>
                             </div>
+                        </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">

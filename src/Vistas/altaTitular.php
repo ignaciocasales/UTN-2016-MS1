@@ -35,7 +35,7 @@
                         <div class="col-xs-8 col-xs-offset-2">
                             <h5>Datos de cuenta de usuario</h5>
                             <div class="form-group">
-                                <label for="email">Email address</label>
+                                <label for="email">Direccion de Email</label>
                                 <input type="email" name="email" class="form-control" id="email"
                                        placeholder="email@ejemplo.com" required>
                             </div>
