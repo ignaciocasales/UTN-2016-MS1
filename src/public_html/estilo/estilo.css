@@ -129,6 +129,30 @@ body {
     height: 37px;
 }
 
+/* Estilo para los alerts
+-------------------------------------------------- */
+#message {
+    position: fixed;
+    top: 44px;
+    left: 0;
+    width: 50%;
+    margin-left: 264px;
+}
+
+#inner-message {
+    margin: 0 auto;
+}
+.fade {
+    opacity: 0;
+    -webkit-transition: opacity 0.25s linear;
+    -moz-transition: opacity 0.25s linear;
+    -o-transition: opacity 0.25s linear;
+    transition: opacity 0.25s linear;
+}
+.fade.in {
+    opacity: 1;
+}
+
 /* otras
 -------------------------------------------------- */
 .input-width-90 input {

@@ -1,15 +1,38 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Ignacio
- * Date: 17/11/2016
- * Time: 9:30 AM
- */
 
 namespace Controladoras;
+
 
 
 class Mensaje
 {
 
+    private $tipo;
+    private $mensaje;
+
+    public function __construct($tipo, $mensaje)
+    {
+        $this->tipo = $tipo;
+        $this->mensaje = $mensaje;
+    }
+
+    public function getTipo()
+    {
+        return $this->tipo;
+    }
+
+    public function setTipo($tipo)
+    {
+        $this->tipo = $tipo;
+    }
+
+    public function getMensaje()
+    {
+        return $this->mensaje;
+    }
+
+    public function setMensaje($mensaje)
+    {
+        $this->mensaje = $mensaje;
+    }
 }

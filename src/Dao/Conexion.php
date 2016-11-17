@@ -14,12 +14,14 @@ class Conexion
 
         $dsn = "mysql:host=$host;dbname=$db;";
 
-        try {
-            return new \PDO($dsn, $user, $pass);
-        } catch (\PDOException $error) {
-            echo 'No se pudo establecer la conexion con la Base de Datos | TIPO DE ERROR: 
-            <br/><hr>' . $error;
+        $dbh = new \PDO($dsn, $user, $pass);
+
+        if ($dbh) {
+            return $dbh;
+        } else {
+            throw new \PDOException;
         }
+
 
         //la linea de abajo la hizo adrian...
         //return new \PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS);

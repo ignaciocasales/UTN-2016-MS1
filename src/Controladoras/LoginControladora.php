@@ -20,13 +20,7 @@ class loginControladora
 
     public function index()
     {
-        //Si estan seteadas las variables de sesion cargo bienvenida
-        //sino cargo login
-        if ((isset($_SESSION["mail"]) && $_SESSION["pwd"])) {
-            require("../Vistas/bienvenida.php");
-        } else {
-            require("../Vistas/login.php");
-        }
+        require("../Vistas/login.php");
     }
 
     public function terminar()
@@ -38,36 +32,41 @@ class loginControladora
     public
     function verificar($mail, $pwd)
     {
-        if (isset($mail) && isset($pwd)) {
+        try {
+            if (isset($mail) && isset($pwd)) {
 
-            if ($mail === "" || $pwd === "") {
+                if ($mail === "" || $pwd === "") {
 
-                echo "Por favor, completar usuario y clave";
+                    echo "Por favor, completar usuario y clave";
 
-            } else {
+                } else {
 
-                $dao = UsuarioBdDao::getInstancia();
-                //$dao = UsuarioJsonDao::getInstancia();
+                    $dao = UsuarioBdDao::getInstancia();
+                    //$dao = UsuarioJsonDao::getInstancia();
 
-                $usuario = $dao->traerPorMail($mail);
+                    $usuario = $dao->traerPorMail($mail);
 
-                if ($this->existe($usuario)) {
+                    if ($this->existe($usuario)) {
 
-                    if ($mail === $usuario->getEmail() && $pwd === $usuario->getPassword()) {
+                        if ($mail === $usuario->getEmail() && $pwd === $usuario->getPassword()) {
 
-                        $rol = $usuario->getRol();
+                            $rol = $usuario->getRol();
 
-                        $_SESSION["mail"] = $mail;
-                        $_SESSION["pwd"] = $pwd;
-                        $_SESSION["rol"] = $rol->getDescripcion();
+                            $_SESSION["mail"] = $mail;
+                            $_SESSION["pwd"] = $pwd;
+                            $_SESSION["rol"] = $rol->getDescripcion();
 
+                        }
                     }
                 }
+            } else {
+                echo 'valores no seteados';
             }
-        } else {
-            echo 'valores no seteados';
+            require("../Vistas/login.php");
+        } catch (\PDOException $e) {
+            $mensaje = new Mensaje('danger', 'Hubo un error al conectarse a la base de datos !');
+            require("../Vistas/login.php");
         }
-        header('Location: /index.php');
     }
 
     protected function existe($usuario)
