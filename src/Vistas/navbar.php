@@ -9,9 +9,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/index.php" id="responsiveBrand">
+            <a class="navbar-brand" href="/" id="responsiveBrand">
                 <img alt="Brand" src="<?php echo URL_IMG . 'traffic-lights-icon.png'; ?>" class="img-responsive brand"
-                     title="Trafico MDQ" data-toggle="tooltip"
+                     title="Trafi-MDQ" data-toggle="tooltip"
                      data-placement="left">
             </a>
         </div>
@@ -80,7 +80,7 @@
                 ?>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="<?php echo '/index.php'; ?>">
+                        <a href="/">
                             Iniciar Sesión <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
                         </a>
                     </li>

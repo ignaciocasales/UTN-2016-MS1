@@ -63,13 +63,14 @@
                     </div>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox"> Recordarme
+                            <input type="checkbox" disabled> Recordarme
                         </label>
                     </div>
-                    <a href="%" class="pull-left">¿Olvidaste tu contraseña?</a>
+                    <a href="/" class="pull-left" title="No implementado" data-toggle="tooltip" data-placement="bottom">¿Olvidaste
+                        tu contraseña?</a>
                     <button type="submit" class="btn btn-primary pull-right">Inicie Sesión</button>
                 </form>
             </div>
-        <?php } ?>
+        <?php } ?>/
     </div>
 </div>
