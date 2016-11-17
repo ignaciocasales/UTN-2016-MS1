@@ -87,9 +87,8 @@ class SimulacionControladora
         $daoMovimientoCuentaCorriente = MovimientoCuentaCorrienteBdDao::getInstancia();
         $daoMovimientoCuentaCorriente->agregar($movimientoCuentaCorriente);
 
+        $titular = $vehiculo->getTitular();
 
         include("../Vistas/simulacionResultado.php");
-
-
     }
 }
