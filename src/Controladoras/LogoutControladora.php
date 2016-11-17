@@ -21,7 +21,9 @@ class LogoutControladora
         // 4. Eliminamos el archivo de sesión del servidor
         session_destroy();
 
-        header('Location: /index.php');
+        $mensaje = new Mensaje('success', 'Ha cerrado sesión satisfactoriamente');
+
+        require ("../Vistas/login.php");
     }
 
 }
