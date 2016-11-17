@@ -71,6 +71,6 @@
                     <button type="submit" class="btn btn-primary pull-right">Inicie Sesión</button>
                 </form>
             </div>
-        <?php } ?>/
+        <?php } ?>
     </div>
 </div>

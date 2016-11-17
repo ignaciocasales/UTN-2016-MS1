@@ -12,7 +12,7 @@
             <a class="navbar-brand" href="/" id="responsiveBrand">
                 <img alt="Brand" src="<?php echo URL_IMG . 'traffic-lights-icon.png'; ?>" class="img-responsive brand"
                      title="Trafi-MDQ" data-toggle="tooltip"
-                     data-placement="left">
+                     data-placement="right">
             </a>
         </div>
 
