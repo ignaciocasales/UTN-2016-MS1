@@ -23,12 +23,6 @@ class loginControladora
         require("../Vistas/login.php");
     }
 
-    public function terminar()
-    {
-        //Al presionar 'cerrar sesión' llamo a logout
-        include("../Vistas/logout.php");
-    }
-
     public
     function verificar($mail, $pwd)
     {

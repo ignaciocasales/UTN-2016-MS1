@@ -31,7 +31,7 @@
                             <div class="form-group">
                                 <label for="telefono">Teléfono</label>
                                 <input type="text" name="telefono" class="form-control" id="telefono"
-                                       pattern="([0-90000000]){7}" maxlength="7" placeholder="Apellido" required>
+                                       pattern="([0-90000000]){7}" maxlength="7" placeholder="Telefono" required>
                             </div>
                         </div>
                         <div class="col-xs-4">
@@ -53,5 +53,4 @@
             </div>
         </div>
     </div>
-</div>
 </div>
