@@ -33,7 +33,7 @@ class EventoPeajeBdDao implements EventoIDao
         $idEvento = 2;
         $fechaHora = $evento->getFechaYhora();
 
-        $s = $evento->getSensorSemaforo();
+        $s = $evento->getSensorPeaje();
         $idSensor = $s->getId();
 
         $sentencia->bindParam(":fechaHora", $fechaHora);

@@ -47,7 +47,7 @@
                             <?php } ?>
                         </ul>
                     </li>
-                    <li>
+                    <li class="disabled">
                         <?php if ($_SESSION["rol"] === 'titular') { ?>
                             <a href="/index.php">
                                 Reclamos <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
