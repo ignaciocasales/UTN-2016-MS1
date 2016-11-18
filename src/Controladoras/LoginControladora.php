@@ -32,7 +32,6 @@ class loginControladora
     public
     function verificar($mail, $pwd)
     {
-        $direccion = '../Vistas/login.php';
         try {
             if (isset($mail) && isset($pwd)) {
 
@@ -69,7 +68,7 @@ class loginControladora
             $mensaje = new Mensaje('danger', 'Hubo un error al conectarse a la base de datos !');
         }
 
-        require($direccion);
+        require('../Vistas/login.php');
 
     }
 
