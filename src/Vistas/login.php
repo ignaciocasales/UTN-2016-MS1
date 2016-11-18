@@ -1,25 +1,4 @@
 <?php include('navbar.php'); ?>
-<?php if (isset($mensaje)) { ?>
-    <div id="message" class="container">
-        <div>
-            <div id="inner-message" class="alert alert-<?= $mensaje->getTipo(); ?> alert-dismissible fade"
-                 role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-                <?= $mensaje->getMensaje(); ?>
-            </div>
-        </div>
-    </div>
-    <script>
-        function showAlert() {
-            $("#inner-message").addClass("in");
-        }
-
-        window.setTimeout(function () {
-            showAlert();
-        }, 250);
-    </script>
-<?php } ?>
 <div class="container lower-box box-primary">
     <div class="bg"></div>
     <div class="row">

@@ -11,7 +11,6 @@ use Dao\MovimientoCuentaCorrienteBdDao;
 use Dao\SensorPeajeBdDao;
 use Dao\SensorSemaforoBdDao;
 use Dao\TarifaBdDao;
-use Dao\UsuarioBdDao;
 use Dao\VehiculoBdDao;
 use Modelo\EventoMulta;
 use Modelo\EventoPeaje;
@@ -19,19 +18,42 @@ use Modelo\MovimientoCuentaCorriente;
 
 class SimulacionControladora
 {
+    private $daoVehiculo;
+    private $daoCuentaCorriente;
+    private $daoTarifa;
+    private $daoSensorSemaforo;
+    private $daoEventoMulta;
+    private $daoSensorPeaje;
+    private $daoEventoPeaje;
+    private $daoMovimientoCuentaCorriente;
+
     public function __construct()
     {
+        $this->daoMovimientoCuentaCorriente = MovimientoCuentaCorrienteBdDao::getInstancia();
+        $this->daoEventoPeaje = EventoPeajeBdDao::getInstancia();
+        $this->daoSensorPeaje = SensorPeajeBdDao::getInstancia();
+        $this->daoEventoMulta = EventoMultaBdDao::getInstancia();
+        $this->daoSensorSemaforo = SensorSemaforoBdDao::getInstancia();
+        $this->daoTarifa = TarifaBdDao::getInstancia();
+        $this->daoCuentaCorriente = CuentaCorrienteBdDao::getInstancia();
+        $this->daoVehiculo = VehiculoBdDao::getInstancia();
     }
 
     public function simular()
     {
 
         if ($_SESSION['rol'] === 'developer') {
-            $dao = VehiculoBdDao::getInstancia();
-            $listado = $dao->traerTodo();
-            include("../Vistas/simulacion.php");
+
+            $daoV = $this->daoVehiculo;
+
+            $listado = $daoV->traerTodo();
+
+            require ("../Vistas/simulacion.php");
+
         } else {
-            echo 'no tiene permisos';
+
+            $mensaje = new Mensaje('danger', 'No tiene los permisos necesarios !');
+
         }
 
 
@@ -39,25 +61,25 @@ class SimulacionControladora
 
     public function verificar($patente, $eventoFecha, $eventoTipo)
     {
-        $daoVehiculo = VehiculoBdDao::getInstancia();
-        $vehiculo = $daoVehiculo->traerPorDominio($patente);
+        $daoV = $this->daoVehiculo;
+        $vehiculo = $daoV->traerPorDominio($patente);
 
-        $daoCuentaCorriente = CuentaCorrienteBdDao::getInstancia();
-        $cuentaCorriente = $daoCuentaCorriente->traerPorId($vehiculo->getId());
+        $daoCC = $this->daoCuentaCorriente;
+        $cuentaCorriente = $daoCC->traerPorId($vehiculo->getId());
 
-        $daoTarifa = TarifaBdDao::getInstancia();
+        $daoTarifa = $this->daoTarifa;
         $tarifa = $daoTarifa->traerPorFecha($eventoFecha);
 
         if ($eventoTipo === 'multa') {
 
             $evento = new EventoMulta($eventoFecha);
 
-            $daoSensor = SensorSemaforoBdDao::getInstancia();
+            $daoSensor = $this->daoSensorSemaforo;
             $sensor = $daoSensor->traerCualquiera();
 
             $evento->setSensorSemaforo($sensor);
 
-            $daoEvento = EventoMultaBdDao::getInstancia();
+            $daoEvento = $this->daoEventoMulta;
             $evento->setId($daoEvento->agregar($evento));
 
             $movimientoCuentaCorriente = new MovimientoCuentaCorriente($eventoFecha, $tarifa->getMulta(), $cuentaCorriente);
@@ -67,12 +89,12 @@ class SimulacionControladora
 
             $evento = new EventoPeaje($eventoFecha);
 
-            $daoSensor = SensorPeajeBdDao::getInstancia();
+            $daoSensor = $this->daoSensorPeaje;
             $sensor = $daoSensor->traerCualquiera();
 
             $evento->setSensorPeaje($sensor);
 
-            $daoEvento = EventoPeajeBdDao::getInstancia();
+            $daoEvento = $this->daoEventoPeaje;
             $evento->setId($daoEvento->agregar($evento));
 
             $movimientoCuentaCorriente = new MovimientoCuentaCorriente($eventoFecha, $tarifa->getPeajeHorasPico(), $cuentaCorriente);
@@ -80,15 +102,17 @@ class SimulacionControladora
 
         } else {
 
-            echo 'error';
+            $mensaje = new Mensaje('danger', 'Se Produjo un ERROR.');
 
         }
 
-        $daoMovimientoCuentaCorriente = MovimientoCuentaCorrienteBdDao::getInstancia();
+        $daoMovimientoCuentaCorriente = $this->daoMovimientoCuentaCorriente;
         $daoMovimientoCuentaCorriente->agregar($movimientoCuentaCorriente);
 
         $titular = $vehiculo->getTitular();
 
-        include("../Vistas/simulacionResultado.php");
+        $mensaje = new Mensaje('success', 'Se genero un evento ! ');
+
+        require ("../Vistas/login.php");
     }
 }

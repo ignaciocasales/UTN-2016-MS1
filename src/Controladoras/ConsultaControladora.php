@@ -4,19 +4,39 @@ namespace Controladoras;
 
 
 use Dao\TitularBdDao;
+use Dao\TitularJsonDao;
 use Dao\UsuarioBdDao;
+use Dao\UsuarioJsonDao;
 use Dao\VehiculoBdDao;
+use Dao\VehiculoJsonDao;
 
 class ConsultaControladora
 {
+    private $daoUsuario;
+
+    private $daoVehiculo;
+
+    private $daoTitular;
+
+    public function __construct()
+    {
+        $this->daoVehiculo = VehiculoBdDao::getInstancia();
+        //$this->daoVehiculo = VehiculoJsonDao::getInstancia();
+
+        $this->daoTitular = TitularBdDao::getInstancia();
+        //$this->daoTitular = TitularJsonDao::getInstancia();
+
+        $this->daoUsuario = UsuarioBdDao::getInstancia();
+        //$this->daoUsuario = UsuarioJsonDao::getInstancia();
+    }
+
     public function todosUsuarios()
     {
         if ($_SESSION["rol"] === 'developer') {
 
-            $dao = UsuarioBdDao::getInstancia();
-            //$dao = UsuarioJsonDao::getInstancia();
+            $daoU = $this->daoUsuario;
 
-            $listado = $dao->traerTodo();
+            $listado = $daoU->traerTodo();
 
             require("../Vistas/consultaUsuarios.php");
 
@@ -32,24 +52,28 @@ class ConsultaControladora
     {
         if ($_SESSION["rol"] === 'titular') {
 
-            $vdao = VehiculoBdDao::getInstancia();
-            $tdao = TitularBdDao::getInstancia();
+            $daoV = $this->daoVehiculo;
+            $daoT = $this->daoTitular;
 
-            $udao = UsuarioBdDao::getInstancia();
-            $usuario = $udao->traerPorMail($_SESSION['mail']);
+            $daoU = $this->daoUsuario;
+            $usuario = $daoU->traerPorMail($_SESSION['mail']);
 
 
-            $titular = $tdao->traerPorIdUsuario($usuario->getId());
-            $listadoVehiculos = $vdao->traerTodo();
+            $titular = $daoT->traerPorIdUsuario($usuario->getId());
+            $listadoVehiculos = $daoV->traerTodo();
 
             $listado = [];
 
             foreach ($listadoVehiculos as $vehiculo) {
-                $titu = $vehiculo->getTitular();
 
-                if ($titu->getId() === $titular->getId()) {
+                $t = $vehiculo->getTitular();
+
+                if ($t->getId() === $titular->getId()) {
+
                     $listado[] = $vehiculo;
+
                 }
+
             }
 
             require("../Vistas/consultaVehiculos.php");
@@ -65,10 +89,9 @@ class ConsultaControladora
     {
         if ($_SESSION["rol"] === 'developer') {
 
-            $dao = VehiculoBdDao::getInstancia();
-            //$dao = UsuarioJsonDao::getInstancia();
+            $daoV = $this->daoVehiculo;
 
-            $listado = $dao->traerTodo();
+            $listado = $daoV->traerTodo();
 
             require("../Vistas/consultaVehiculos.php");
 
@@ -83,9 +106,9 @@ class ConsultaControladora
 
     public function vehiculo($id)
     {
-        $dao = VehiculoBdDao::getInstancia();
+        $daoV = $this->daoVehiculo;
 
-        $vehiculo = $dao->traerPorId($id);
+        $vehiculo = $daoV->traerPorId($id);
 
         require("../Vistas/vehiculoDetalle.php");
     }

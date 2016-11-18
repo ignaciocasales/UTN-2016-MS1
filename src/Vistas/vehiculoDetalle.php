@@ -9,7 +9,7 @@
             <div>
                 <div class="col-xs-3">
                     <img
-                        src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=<?= $vehiculo->getDominio(); ?>&choe=UTF-8"
+                        src="/generadorQR.php?qr=<?= $vehiculo->getQR(); ?>"
                         title="Vehiculo" class="img-responsive img-thumbnail"/>
                 </div>
                 <div class="col-xs-9">

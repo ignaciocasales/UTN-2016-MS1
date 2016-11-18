@@ -13,8 +13,11 @@ use Modelo\Usuario;
 
 class loginControladora
 {
+    private $daoUsuario;
+
     public function __construct()
     {
+        $this->daoUsuario = UsuarioBdDao::getInstancia();
 
     }
 
@@ -35,10 +38,9 @@ class loginControladora
 
                 } else {
 
-                    $dao = UsuarioBdDao::getInstancia();
-                    //$dao = UsuarioJsonDao::getInstancia();
+                    $daoU = $this->daoUsuario;
 
-                    $usuario = $dao->traerPorMail($mail);
+                    $usuario = $daoU->traerPorMail($mail);
 
                     if ($mail === $usuario->getEmail() && $pwd === $usuario->getPassword()) {
 

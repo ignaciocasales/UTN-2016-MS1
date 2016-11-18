@@ -9,23 +9,25 @@ use Modelo\Vehiculo;
 
 class vehiculoControladora
 {
-    private $dao_titular;
+    private $daoTitular;
+    private $daoVehiculo;
 
     function __construct()
     {
-        $this->dao_titular = TitularBdDao::getInstancia();
+        $this->daoVehiculo = VehiculoBdDao::getInstancia();
+        $this->daoTitular = TitularBdDao::getInstancia();
     }
 
     public function darAltaVehiculo($dni, $patente, $marca, $modelo)
     {
-        $daoTitular = $this->dao_titular;
+        $daoTitular = $this->daoTitular;
 
         $titular = $daoTitular->traerPorDni($dni);
 
         $vehiculo = new Vehiculo($patente, $marca, $modelo, $titular);
 
         try {
-            $daoVehiculo = VehiculoBdDao::getInstancia();
+            $daoVehiculo = $this->daoVehiculo;
 
             $daoVehiculo->agregar($vehiculo);
 
@@ -33,48 +35,72 @@ class vehiculoControladora
 
                 $nombre = 'vehiculo';
 
-                include("../Vistas/registroExitoso.php");
+                require("../Vistas/verificarDni.php");
 
             } else {
 
-                echo 'no se cargo';
+                $mensaje = new Mensaje('danger', 'No se pudo cargar !');
+
+                require("../Vistas/verificarDni.php");
 
             }
 
 
         } catch (\Exception $error) {
-            echo 'Hubo un error al procesar los datos. Error:' . $error;
+
+            $mensaje = new Mensaje('danger', 'Error inesperado, intente mas tarde');
+
+            require('../Vistas/consultaVehiculos.php');
+
         }
     }
 
-    public function eliminar($patente){
-        try{
-            $daoVehiculo = VehiculoBdDao::getInstancia();
+    public function eliminar($patente)
+    {
+
+        try {
+
+            $daoVehiculo = $this->daoVehiculo;
+
             $daoVehiculo->eliminarPorDominio($patente);
+
             $listado = $daoVehiculo->traerTodo();
-            $mensaje = new Mensaje('success','Se elimino el vehiculo correctamente!');
-            require ("../Vistas/consultaVehiculos.php");
-        }catch (\Exception $e){
-            new Mensaje('danger','No se pudo eliminar el vehiculo');
-            require ('../Vistas/consultaVehiculos.php');
-        }
 
+            $mensaje = new Mensaje('success', 'Se elimino el vehiculo correctamente!');
+
+            require("../Vistas/consultaVehiculos.php");
+
+        } catch (\Exception $e) {
+
+            $mensaje = new Mensaje('danger', 'No se pudo eliminar el vehiculo');
+
+            require('../Vistas/consultaVehiculos.php');
+        }
     }
-    public function eliminarModal($idVehiculo){
-        try{
-            $daoVehiculoModal = VehiculoBdDao::getInstancia();
+
+    public function eliminarModal($idVehiculo)
+    {
+        try {
+
+            $daoVehiculoModal = $this->daoVehiculo;
+
             $listado = $daoVehiculoModal->traerTodo();
+
             $vehiculo = $daoVehiculoModal->traerPorId($idVehiculo);
-            require ("../Vistas/consultaVehiculos.php");
-        }catch(\Exception $e){
-            $mensaje = new Mensaje('danger','Error inesperado, intente mas tarde');
-            require ('../Vistas/consultaVehiculos.php');
+
+            require("../Vistas/consultaVehiculos.php");
+
+        } catch (\Exception $e) {
+
+            $mensaje = new Mensaje('danger', 'Error inesperado, intente mas tarde');
+
+            require('../Vistas/consultaVehiculos.php');
+
         }
-
-
     }
+
     public function registrar()
     {
-        include("../Vistas/altaVehiculo.php");
+        require("../Vistas/altaVehiculo.php");
     }
 }

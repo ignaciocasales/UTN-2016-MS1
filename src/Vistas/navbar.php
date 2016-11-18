@@ -12,7 +12,7 @@
             <a class="navbar-brand" href="/" id="responsiveBrand">
                 <img alt="Brand" src="<?php echo URL_IMG . 'traffic-lights-icon.png'; ?>" class="img-responsive brand"
                      title="Trafi-MDQ" data-toggle="tooltip"
-                     data-placement="right">
+                     data-placement="bottom">
             </a>
         </div>
 
@@ -91,3 +91,25 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+
+<?php if (isset($mensaje)) { ?>
+    <div id="message" class="container">
+        <div>
+            <div id="inner-message" class="alert alert-<?= $mensaje->getTipo(); ?> alert-dismissible fade"
+                 role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <?= $mensaje->getMensaje(); ?>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showAlert() {
+            $("#inner-message").addClass("in");
+        }
+
+        window.setTimeout(function () {
+            showAlert();
+        }, 250);
+    </script>
+<?php } ?>
