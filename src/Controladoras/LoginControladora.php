@@ -23,12 +23,6 @@ class loginControladora
         require("../Vistas/login.php");
     }
 
-    public function terminar()
-    {
-        //Al presionar 'cerrar sesión' llamo a logout
-        include("../Vistas/logout.php");
-    }
-
     public
     function verificar($mail, $pwd)
     {
@@ -37,7 +31,7 @@ class loginControladora
 
                 if ($mail === "" || $pwd === "") {
 
-                    echo "Por favor, completar usuario y clave";
+                    $mensaje = new Mensaje('warning', 'Debe llenar todos los campos !');
 
                 } else {
 
@@ -46,40 +40,33 @@ class loginControladora
 
                     $usuario = $dao->traerPorMail($mail);
 
-                    if ($this->existe($usuario)) {
+                    if ($mail === $usuario->getEmail() && $pwd === $usuario->getPassword()) {
 
-                        if ($mail === $usuario->getEmail() && $pwd === $usuario->getPassword()) {
+                        $rol = $usuario->getRol();
 
-                            $rol = $usuario->getRol();
+                        $_SESSION["mail"] = $mail;
+                        $_SESSION["pwd"] = $pwd;
+                        $_SESSION["rol"] = $rol->getDescripcion();
 
-                            $_SESSION["mail"] = $mail;
-                            $_SESSION["pwd"] = $pwd;
-                            $_SESSION["rol"] = $rol->getDescripcion();
-                        }else{
-                            $mensaje = new Mensaje('danger', 'usuario o contraseña incorrectos');
+                        $mensaje = new Mensaje('success', 'Ha iniciado sesión satisfactoriamente ! Se ha logueado como' . ' ' . '<i><u>' . $usuario->getEmail() . '</i></u>');
 
-                        }
+                    } else {
+
+                        $mensaje = new Mensaje('warning', 'Datos de inicio de sesión incorrectos !');
+
                     }
                 }
             } else {
-                $mensaje = new Mensaje('danger', 'valores no seteados');
+
+                $mensaje = new Mensaje('danger', 'Error al iniciar sesión, intentelo más tarde !');
+
             }
         } catch (\PDOException $e) {
-            $mensaje = new Mensaje('danger', 'Hubo un error al conectarse a la base de datos !');
+
+            $mensaje = new Mensaje('danger', 'Hubo un error al conectarse con la base de datos !');
+
         }
 
-        require('../Vistas/login.php');
-
-    }
-
-    protected function existe($usuario)
-    {
-        if (!empty($usuario)) {
-            if (count($usuario) === 1) {
-                return true;
-            }
-        }
-
-        return false;
+        require("../Vistas/login.php");
     }
 }

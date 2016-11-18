@@ -12,19 +12,26 @@ class ConsultaControladora
     public function todosUsuarios()
     {
         if ($_SESSION["rol"] === 'developer') {
+
             $dao = UsuarioBdDao::getInstancia();
             //$dao = UsuarioJsonDao::getInstancia();
 
             $listado = $dao->traerTodo();
 
-            include("../Vistas/consultaUsuarios.php");
+            require("../Vistas/consultaUsuarios.php");
+
         } else {
-            echo 'no tiene permisos';
+
+            $mensaje = new Mensaje('danger', 'No posee los permisos necesarios !');
+
+            require("../Vistas/login.php");
         }
     }
 
-    public function  usuarioVehiculos(){
-        if($_SESSION["rol"] === 'titular'){
+    public function usuarioVehiculos()
+    {
+        if ($_SESSION["rol"] === 'titular') {
+
             $vdao = VehiculoBdDao::getInstancia();
             $tdao = TitularBdDao::getInstancia();
 
@@ -37,39 +44,49 @@ class ConsultaControladora
 
             $listado = [];
 
-            foreach ($listadoVehiculos as $vehiculo){
+            foreach ($listadoVehiculos as $vehiculo) {
                 $titu = $vehiculo->getTitular();
 
-                if($titu->getId() === $titular->getId()){
+                if ($titu->getId() === $titular->getId()) {
                     $listado[] = $vehiculo;
                 }
             }
 
-            include("../Vistas/consultaVehiculos.php");
+            require("../Vistas/consultaVehiculos.php");
 
-        }else{
+        } else {
+
             $this->todosVehiculos();
+
         }
     }
+
     public function todosVehiculos()
     {
         if ($_SESSION["rol"] === 'developer') {
+
             $dao = VehiculoBdDao::getInstancia();
             //$dao = UsuarioJsonDao::getInstancia();
 
             $listado = $dao->traerTodo();
 
-            include("../Vistas/consultaVehiculos.php");
+            require("../Vistas/consultaVehiculos.php");
+
         } else {
-            echo 'no tiene permisos';
+
+            $mensaje = new Mensaje('danger', 'No posee los permisos necesarios !');
+
+            require("../Vistas/login.php");
+
         }
     }
 
-    public function vehiculo($id){
+    public function vehiculo($id)
+    {
         $dao = VehiculoBdDao::getInstancia();
 
         $vehiculo = $dao->traerPorId($id);
 
-        include("../Vistas/vehiculoDetalle.php");
+        require("../Vistas/vehiculoDetalle.php");
     }
 }
