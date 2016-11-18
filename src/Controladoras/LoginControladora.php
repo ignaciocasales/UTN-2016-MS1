@@ -32,6 +32,7 @@ class loginControladora
     public
     function verificar($mail, $pwd)
     {
+        $direccion = '../Vistas/login.php';
         try {
             if (isset($mail) && isset($pwd)) {
 
@@ -55,18 +56,21 @@ class loginControladora
                             $_SESSION["mail"] = $mail;
                             $_SESSION["pwd"] = $pwd;
                             $_SESSION["rol"] = $rol->getDescripcion();
+                        }else{
+                            $mensaje = new Mensaje('danger', 'usuario o contraseña incorrectos');
 
                         }
                     }
                 }
             } else {
-                echo 'valores no seteados';
+                $mensaje = new Mensaje('danger', 'valores no seteados');
             }
-            require("../Vistas/login.php");
         } catch (\PDOException $e) {
             $mensaje = new Mensaje('danger', 'Hubo un error al conectarse a la base de datos !');
-            require("../Vistas/login.php");
         }
+
+        require($direccion);
+
     }
 
     protected function existe($usuario)

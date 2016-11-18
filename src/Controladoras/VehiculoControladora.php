@@ -28,7 +28,7 @@ class vehiculoControladora
 
             if ($daoVehiculo->traerPorDominio($vehiculo->getDominio())) {
 
-                $nombre = 'titular';
+                $nombre = 'vehiculo';
 
                 include("../Vistas/registroExitoso.php");
 
