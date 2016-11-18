@@ -18,9 +18,9 @@ define("DB_USER", "casalesi");
 define("DB_PASS", "ckl123");
 define("DB_HOST", "git.mdp.utn.edu.ar");
 */
-define("DB_NAME", "casalesi");
-define("DB_USER", "root");
-define("DB_PASS", "ckl123");
+define("DB_NAME", "trafimdq");
+define("DB_USER", "damiSQL");
+define("DB_PASS", "ppw123");
 define("DB_HOST", "localhost");
 
 // Constantes front
