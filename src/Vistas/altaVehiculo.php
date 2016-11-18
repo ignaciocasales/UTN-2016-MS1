@@ -41,6 +41,14 @@
                                        autofocus required>
                             </div>
                             <div class="form-group">
+                                <select name="patente" id="patente" style="width: 23%;">
+                                    <?php foreach ($listado as $vehiculo) { ?>
+                                        <option><?= $vehiculo->getDominio() ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <!--
+                            <div class="form-group">
                                 <label for="marca">Marca</label>
                                 <input type="text" name="marca" class="form-control" id="marca"
                                        title="..." maxlength="30" data-toggle="tooltip" data-placement="right"
@@ -52,6 +60,7 @@
                                        title="..." maxlength="30" data-toggle="tooltip" data-placement="right"
                                        autofocus required>
                             </div>
+                            -->
                         </div>
                         <button type="submit" class="btn btn-primary pull-right">Registrar</button>
                     </form>

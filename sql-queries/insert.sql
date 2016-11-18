@@ -132,7 +132,7 @@ VALUES
   ('2016-09-22', '-68.55555', '-90.45789', '457645321', '2');
 
 
-INSERT INTO modelos_marcas (modelos, marcas)
+INSERT INTO modelos_marcas (marcas, modelos)
 VALUES
   ('ford', 'focus'),
   ('ford', 'fiesta'),
