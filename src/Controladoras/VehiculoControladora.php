@@ -44,6 +44,18 @@ class vehiculoControladora
         }
     }
 
+    public function eliminar($dominio){
+        try{
+            $daoVehiculo = VehiculoBdDao::getInstancia();
+            $daoVehiculo->eliminarPorDominio($dominio);
+            require ("../Vistas/vehiculoEliminado.php");
+        }catch(\Exception $e){
+            $mensaje = new Mensaje('danger','No se pudo eliminar el vehiculo');
+            require ('../Vistas/login.php');
+        }
+
+
+    }
     public function registrar()
     {
         include("../Vistas/altaVehiculo.php");

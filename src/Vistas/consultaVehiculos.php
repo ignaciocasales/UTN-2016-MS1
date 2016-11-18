@@ -36,8 +36,14 @@
                                                       title="Modificar"
                                                       data-toggle="tooltip"
                                                       data-placement="right"></span></a></td>
-                                <td><a href="#"><span class="glyphicon glyphicon-trash" title="Eliiminar"
-                                                      data-toggle="tooltip" data-placement="right"></span></a></td>
+                                <td><a href="" onclick="eliminar_vehiculo(
+                                    '<?= $objeto->getDominio(); ?>',
+                                        '<?= $objeto->getMarca(); ?>',
+                                        '<?= $objeto->getModelo(); ?>',
+                                        '<?php $titular= $objeto->getTitular();
+                                                echo $titular->getNombre() . ' ' . $titular->getApellido();
+                                    ?>');" data-toggle="modal" data-target="#modalEliminarVehiculo"><span class="glyphicon glyphicon-trash" title="Eliiminar"
+                                                      data-toggle="tooltip" datatype="" data-placement="right"></span></a></td>
                             <?php } ?>
                             <td><a href="/consulta/vehiculo/<?= $objeto->getId(); ?>"><span
                                         class="glyphicon glyphicon-eye-open"
@@ -51,5 +57,24 @@
                 </table>
             </div>
         </div>
+    </div>
+</div>
+<div id="modalEliminarVehiculo" class="fade modal" style="opacity: 50 " role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Eliminar Vehiculo</h4>
+            </div>
+            <div class="modal-body" id="datosVehiculo">
+
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+
     </div>
 </div>
