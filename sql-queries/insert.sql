@@ -137,7 +137,7 @@ VALUES
   ('audi'),
   ('hyundai'),
   ('chevrolet'),
-  ('nissan''),
+  ('nissan'),
   ('mitsubishi'),
   ('volvo'),
   ('honda'),
