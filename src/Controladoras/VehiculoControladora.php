@@ -9,13 +9,16 @@ use Modelo\Vehiculo;
 
 class vehiculoControladora
 {
+    private $dao_titular;
+
     function __construct()
     {
+        $this->dao_titular = TitularBdDao::getInstancia();
     }
 
     public function darAltaVehiculo($dni, $patente, $marca, $modelo)
     {
-        $daoTitular = TitularBdDao::getInstancia();
+        $daoTitular = $this->dao_titular;
 
         $titular = $daoTitular->traerPorDni($dni);
 
