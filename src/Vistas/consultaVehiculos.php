@@ -1,4 +1,32 @@
 <?php include('navbar.php'); ?>
+<?php if (isset($mensaje)) { ?>
+    <div id="message" class="container">
+        <div>
+            <div id="inner-message" class="alert alert-<?= $mensaje->getTipo(); ?> alert-dismissible fade"
+                 role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <?= $mensaje->getMensaje(); ?>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showAlert() {
+            $("#inner-message").addClass("in");
+        }
+
+        window.setTimeout(function () {
+            showAlert();
+        }, 250);
+    </script>
+<?php } ?>
+<?php if(isset($daoVehiculoModal)) { ?>
+    <script type="text/javascript">
+        $(window).load(function(){
+            $('#modalEliminarVehiculo').modal('show');
+        });
+    </script>
+<?php } ?>
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-8 col-sm-offset-2">
@@ -36,13 +64,7 @@
                                                       title="Modificar"
                                                       data-toggle="tooltip"
                                                       data-placement="right"></span></a></td>
-                                <td><a href="" onclick="eliminar_vehiculo(
-                                    '<?= $objeto->getDominio(); ?>',
-                                        '<?= $objeto->getMarca(); ?>',
-                                        '<?= $objeto->getModelo(); ?>',
-                                        '<?php $titular= $objeto->getTitular();
-                                                echo $titular->getNombre() . ' ' . $titular->getApellido();
-                                    ?>');" data-toggle="modal" data-target="#modalEliminarVehiculo"><span class="glyphicon glyphicon-trash" title="Eliiminar"
+                                <td><a href="/vehiculo/eliminarModal/<?php echo $objeto->getId(); ?>"><span class="glyphicon glyphicon-trash" title="Eliminar"
                                                       data-toggle="tooltip" datatype="" data-placement="right"></span></a></td>
                             <?php } ?>
                             <td><a href="/consulta/vehiculo/<?= $objeto->getId(); ?>"><span
@@ -69,7 +91,24 @@
                 <h4 class="modal-title">Eliminar Vehiculo</h4>
             </div>
             <div class="modal-body" id="datosVehiculo">
+                <div class="row">
+                    <div class="col-md-12">
+                        <hr>
+                        <h5>PATENTE DEL VEHICULO: <?= $vehiculo->getDominio(); ?></h5>
+                        <h5>Marca: <?= $vehiculo->getMarca(); ?></h5>
+                        <h5>Modelo: <?= $vehiculo->getModelo(); ?></h5>
+                        <h5>TITULAR: <?php $titular= $vehiculo->getTitular();
+                            echo $titular->getNombre() . ' ' . $titular->getApellido(); ?></h5>
+                        <hr>
+                        <h4>Eliminar Vehiculo?</h4>
+                        <form action="/vehiculo/eliminar/" method="post">
+                            <input type="hidden" name="dominio" value="<?= $vehiculo->getDominio(); ?>" readonly>
+                            <button type="submit" class="btn btn-danger pull-left" name="eliminar">Eliminar</button>
+                            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cancelar</button>
 
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
 
