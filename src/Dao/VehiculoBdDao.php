@@ -24,7 +24,7 @@ class VehiculoBdDao implements VehiculoIDao
 
     public function agregar($vehiculo)
     {
-        $sql = "INSERT INTO $this->tabla (dominio, marca, modelo, id_titulares) VALUES (:dominio, :marca, :modelo, :idTitular)";
+        $sql = "INSERT INTO $this->tabla (dominio, marca, modelo, id_titulares, qr) VALUES (:dominio, :marca, :modelo, :idTitular, :qr)";
 
         $conexion = Conexion::conectar();
 
@@ -37,11 +37,13 @@ class VehiculoBdDao implements VehiculoIDao
         $t = $vehiculo->getTitular();
         $idTitular = $t->getId();
 
+        $qr = $vehiculo->getQR();
+
         $sentencia->bindParam(":dominio", $dominio);
         $sentencia->bindParam(":marca", $marca);
         $sentencia->bindParam(":modelo", $modelo);
         $sentencia->bindParam(":idTitular", $idTitular);
-
+        $sentencia->bindParam(":qr", $qr);
 
         $sentencia->execute();
 

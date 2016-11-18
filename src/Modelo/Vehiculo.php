@@ -11,12 +11,13 @@ class Vehiculo
     private $QR;
     private $titular;
 
-    function __construct($dominio = '', $marca = '', $modelo = '', $titular)
+    function __construct($dominio = '', $marca = '', $modelo = '', $titular, $qr)
     {
         $this->dominio = $dominio;
         $this->marca = $marca;
         $this->modelo = $modelo;
         $this->titular = $titular;
+        $this->QR = $qr;
     }
 
     function __destruct()

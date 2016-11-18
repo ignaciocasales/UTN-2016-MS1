@@ -24,7 +24,9 @@ class vehiculoControladora
 
         $titular = $daoTitular->traerPorDni($dni);
 
-        $vehiculo = new Vehiculo($patente, $marca, $modelo, $titular);
+        $qr = 'Dominio: ' . $patente;
+
+        $vehiculo = new Vehiculo($patente, $marca, $modelo, $titular, $qr);
 
         try {
             $daoVehiculo = $this->daoVehiculo;

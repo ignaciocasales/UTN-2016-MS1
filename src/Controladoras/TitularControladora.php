@@ -12,42 +12,55 @@ use Modelo\Usuario;
 
 class titularControladora
 {
+    private $daoRol;
+
+    private $daoUsuario;
+
+    private $daoTitular;
+
     function __construct()
     {
+        $this->daoTitular = TitularBdDao::getInstancia();
+        $this->daoUsuario = UsuarioBdDao::getInstancia();
+        $this->daoRol = RolBdDao::getInstancia();
     }
 
     public function buscarDni()
     {
-        include("../Vistas/verificarDni.php");
+        require("../Vistas/verificarDni.php");
     }
 
 
     public function darAltaTitular($nombre, $apellido, $dni, $telefono, $email, $password)
     {
 
-        $daorol = RolBdDao::getInstancia();
-        $rol = $daorol->traerPorId(3);
+        $daoR = $this->daoRol;
+        $rol = $daoR->traerPorId(3);
         $usuario = new Usuario($email, $password, $rol);
 
 
-
         try {
-            $daousuario = UsuarioBdDao::getInstancia();
+            $daoU = $this->daoUsuario;
 
-            $daousuario->agregar($usuario);
+            $daoU->agregar($usuario);
 
-            $usuario = $daousuario->traerPorMail($email);
+            $usuario = $daoU->traerPorMail($email);
 
             $titular = new Titular($nombre, $apellido, $dni, $telefono, $usuario);
 
-            TitularBdDao::getInstancia()->agregar($titular);
+            $this->daoTitular->agregar($titular);
 
             $nombre = "titular";
 
-            include("../Vistas/registroExitoso.php");
+            $mensaje = new Mensaje('success', 'Se registro un titular con éxito !');
+
+            require("../Vistas/verificarDni.php");
 
         } catch (\Exception $error) {
-            echo 'Hubo un error al procesar los datos. Error:' . $error;
+
+            $mensaje = new Mensaje('success', 'Hubo un error al procesar los datos !');
+
+            require("../Vistas/verificarDni.php");
         }
 
     }
