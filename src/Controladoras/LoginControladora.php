@@ -48,6 +48,8 @@ class loginControladora
                         $_SESSION["pwd"] = $pwd;
                         $_SESSION["rol"] = $rol->getDescripcion();
 
+                        $mensaje = new Mensaje('success', 'Ha iniciado sesión satisfactoriamente ! Se ha logueado como' . ' ' . '<i><u>' . $usuario->getEmail() . '</i></u>');
+
                     } else {
 
                         $mensaje = new Mensaje('warning', 'Datos de inicio de sesión incorrectos !');
@@ -66,16 +68,5 @@ class loginControladora
         }
 
         require("../Vistas/login.php");
-    }
-
-    protected function existe($usuario)
-    {
-        if (!empty($usuario)) {
-            if (count($usuario) === 1) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }
