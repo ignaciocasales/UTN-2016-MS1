@@ -88,7 +88,7 @@ try {
         $cuentaCorriente = $daoCC->traerPorId($vehiculos[$vehiculoKey]->getId());
 
         //Me traigo la tarifa correspondie a la fecha aleatoria.
-        $tarifas = $daoTarifa->traerPorFecha($fechaAleatoria);
+        $tarifas = $daoTarifa->traerPorFecha(date('Y-m-d H:i:s', $fechaAleatoria));
 
         //Selecciono aleatoriamente el evento. Si va a ser multa o peaje.
         $eventoKey = array_rand($eventos, 1);
@@ -97,7 +97,7 @@ try {
         //Si es peaje, cargo el movimiento correspondiente con la tarifa correspondiente ya además verifico si es hora pico u hora normal.
         if ($eventos[$eventoKey] === 'multa') {
 
-            $evento = new \Modelo\EventoMulta($fechaAleatoria);
+            $evento = new \Modelo\EventoMulta(date('Y-m-d H:i:s', $fechaAleatoria));
 
             $sensores = $daoSemaforo->traerTodo();
             $sensorKey = array_rand($sensores, 1);
@@ -106,12 +106,12 @@ try {
 
             $evento->setId($daoEventoMulta->agregar($evento));
 
-            $movimientoCuentaCorriente = new \Modelo\MovimientoCuentaCorriente($fechaAleatoria, $tarifas->getMulta(), $cuentaCorriente);
+            $movimientoCuentaCorriente = new \Modelo\MovimientoCuentaCorriente(date('Y-m-d H:i:s', $fechaAleatoria), $tarifas->getMulta(), $cuentaCorriente);
             $movimientoCuentaCorriente->setEventoMulta($evento);
 
         } else if ($eventos[$eventoKey] === 'peaje') {
 
-            $evento = new \Modelo\EventoPeaje($fechaAleatoria);
+            $evento = new \Modelo\EventoPeaje(date('Y-m-d H:i:s', $fechaAleatoria));
 
             $sensores = $daoPeaje->traerTodo();
             $sensorKey = array_rand($sensores, 1);
@@ -125,7 +125,7 @@ try {
             $horaPicoTardeDesde = strtotime('17:00:00');
             $horaPicoTardeHasta = strtotime('20:00:00');
 
-            $hora = strtotime($fechaAleatoria);
+            $hora = strtotime(date('H:i:s', $fechaAleatoria));
 
             if (($hora >= $horaPicoManianaDesde && $hora <= $horaPicoManianaHasta) || ($hora >= $horaPicoTardeDesde && $hora <= $horaPicoTardeHasta)) {
 
@@ -137,7 +137,7 @@ try {
 
             }
 
-            $movimientoCuentaCorriente = new \Modelo\MovimientoCuentaCorriente($fechaAleatoria, $importe, $cuentaCorriente);
+            $movimientoCuentaCorriente = new \Modelo\MovimientoCuentaCorriente(date('Y-m-d H:i:s', $fechaAleatoria), $importe, $cuentaCorriente);
             $movimientoCuentaCorriente->setEventoPeaje($evento);
 
         }
@@ -161,5 +161,5 @@ function rand_date($min_date, $max_date)
 
     $rand_epoch = rand($min_epoch, $max_epoch);
 
-    return date('Y-m-d H:i:s', $rand_epoch);
+    return $rand_epoch;
 }
