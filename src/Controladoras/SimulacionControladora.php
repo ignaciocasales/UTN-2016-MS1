@@ -48,7 +48,7 @@ class SimulacionControladora
 
             $listado = $daoV->traerTodo();
 
-            require ("../Vistas/simulacion.php");
+            require("../Vistas/simulacion.php");
 
         } else {
 
@@ -97,7 +97,9 @@ class SimulacionControladora
             $daoEvento = $this->daoEventoPeaje;
             $evento->setId($daoEvento->agregar($evento));
 
-            $movimientoCuentaCorriente = new MovimientoCuentaCorriente($eventoFecha, $tarifa->getPeajeHorasPico(), $cuentaCorriente);
+            $importe = $this->isHoraPico($eventoFecha);
+
+            $movimientoCuentaCorriente = new MovimientoCuentaCorriente($eventoFecha, $importe, $cuentaCorriente);
             $movimientoCuentaCorriente->setEventoPeaje($evento);
 
         } else {
@@ -113,6 +115,28 @@ class SimulacionControladora
 
         $mensaje = new Mensaje('success', 'Se genero un evento ! ');
 
-        require ("../Vistas/login.php");
+        require("../Vistas/login.php");
+    }
+
+    public function isHoraPico($hora)
+    {
+        $horaPicoManianaDesde = strtotime('07:00:00');
+        $horaPicoManianaHasta = strtotime('10:00:00');
+        $horaPicoTardeDesde = strtotime('17:00:00');
+        $horaPicoTardeHasta = strtotime('20:00:00');
+
+        $h = strtotime(date('H:i:s', $hora));
+
+        if (($h >= $horaPicoManianaDesde && $h <= $horaPicoManianaHasta) || ($h >= $horaPicoTardeDesde && $h <= $horaPicoTardeHasta)) {
+
+            $importe = $tarifas->getPeajeHorasPico();
+
+        } else {
+
+            $importe = $tarifas->getPeajeHorasNormal();
+
+        }
+
+        return $importe;
     }
 }
