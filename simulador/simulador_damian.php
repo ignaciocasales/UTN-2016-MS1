@@ -2,6 +2,7 @@
 
 namespace simulador;
 
+//php simulador_damian.php cantidad = <<introducir cantidad>> ;
 // Establecer la zona horaria predeterminada a usar. Disponible desde PHP 5.1
 date_default_timezone_set('UTC');
 // VARIABLE GLOBAL DESDE CONSOLA
