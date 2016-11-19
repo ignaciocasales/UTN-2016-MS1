@@ -14,18 +14,14 @@ echo '....SIMULANDO....';
 
 //////////////////////////////////////////////////////////////////////////////
 require_once '../src/Config/Config.php';
-require_once '../src/Dao/CuentaCorrienteIDao.php';
-require_once '../src/Dao/EventoIDao.php';
-require_once '../src/Dao/MarcaModeloIDao.php';
-require_once '../src/Dao/MovimientoCuentaCorrienteIDao.php';
-require_once '../src/Dao/PagoIDao.php';
-require_once '../src/Dao/RolIDao.php';
-require_once '../src/Dao/SensorIDao.php';
-require_once '../src/Dao/CuentaCorrienteIDao.php';
-require_once '../src/Dao/TarifaIDao.php';
-require_once '../src/Dao/TitularIDao.php';
-require_once '../src/Dao/UsuarioIDao.php';
-require_once '../src/Dao/VehiculoIDao.php';
+
+foreach (glob("../src/Dao/*.php") as $filename) {
+    $string = null;
+    $string = strpos($filename, "IDao");
+    if ($string != null) {
+        require_once $filename;
+    }
+}
 
 foreach (glob("../src/Dao/*.php") as $filename) {
     $string = null;
@@ -82,6 +78,8 @@ try {
     $daoEventoM = EventoMultaBdDao::getInstancia();
     $daoSensorP = SensorPeajeBdDao::getInstancia();
     $daoEventoP = EventoPeajeBdDao::getInstancia();
+    $daoMovimientoCuentaCorriente = MovimientoCuentaCorrienteBdDao::getInstancia();
+
 
 //////////////////////////////////////////////////////////////////////
 
@@ -139,7 +137,6 @@ try {
         } else {
             echo 'error';
         }
-        $daoMovimientoCuentaCorriente = MovimientoCuentaCorrienteBdDao::getInstancia();
         $daoMovimientoCuentaCorriente->agregar($movimientoCuentaCorriente);
     }
 }catch (\PDOException $e){
