@@ -14,16 +14,17 @@ class Conexion
 
         $dsn = "mysql:host=$host;dbname=$db;";
 
-        $dbh = new \PDO($dsn, $user, $pass);
+        $dbh = new \PDO($dsn, $user, $pass, array(\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION));
+
 
         if ($dbh) {
+
             return $dbh;
+
         } else {
+
             throw new \PDOException;
+
         }
-
-
-        //la linea de abajo la hizo adrian...
-        //return new \PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS);
     }
 }

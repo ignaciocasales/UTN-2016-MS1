@@ -18,43 +18,80 @@ class vehiculoControladora
         $this->daoTitular = TitularBdDao::getInstancia();
     }
 
-    public function darAltaVehiculo($dni, $patente, $marca, $modelo)
+    public function darAltaVehiculo($dni, $marcaModelo, $patente)
     {
-        $daoTitular = $this->daoTitular;
+        $dominio = $this->validarDominio($patente);
 
-        $titular = $daoTitular->traerPorDni($dni);
+        if ($dominio) {
 
-        $qr = 'Dominio: ' . $patente;
+            $mm = explode('|', $marcaModelo);
 
-        $vehiculo = new Vehiculo($patente, $marca, $modelo, $titular, $qr);
+            $mm[0] = preg_replace('/\s+/', '', $mm[0]);
+            $mm[1] = preg_replace('/\s+/', '', $mm[1]);
 
-        try {
-            $daoVehiculo = $this->daoVehiculo;
+            $daoTitular = $this->daoTitular;
 
-            $daoVehiculo->agregar($vehiculo);
+            $titular = $daoTitular->traerPorDni($dni);
 
-            if ($daoVehiculo->traerPorDominio($vehiculo->getDominio())) {
+            $qr = 'Dominio: ' . $dominio;
 
-                $nombre = 'vehiculo';
+            $vehiculo = new Vehiculo($dominio, $mm[0], $mm[1], $titular, $qr);
 
-                require("../Vistas/verificarDni.php");
+            try {
+                $daoVehiculo = $this->daoVehiculo;
 
-            } else {
+                $daoVehiculo->agregar($vehiculo);
 
-                $mensaje = new Mensaje('danger', 'No se pudo cargar !');
+                if ($daoVehiculo->traerPorDominio($vehiculo->getDominio())) {
 
-                require("../Vistas/verificarDni.php");
+                    $mensaje = new Mensaje('success', 'Se ha cargado el vehiculo con éxito !');
+
+                    require("../Vistas/verificarDni.php");
+
+                } else {
+
+                    $mensaje = new Mensaje('danger', 'No se pudo cargar !');
+
+                    require("../Vistas/verificarDni.php");
+
+                }
+
+
+            } catch (\Exception $error) {
+
+                $mensaje = new Mensaje('danger', 'Se ha producio un error. Posible Dominio duplicado / Campos vacíos !');
+
+                require('../Vistas/verificarDni.php');
 
             }
 
+        } else {
 
-        } catch (\Exception $error) {
+            $mensaje = new Mensaje('danger', 'Ha ingresado un dominio erróneo !');
 
-            $mensaje = new Mensaje('danger', 'Error inesperado, intente mas tarde');
+            require('../Vistas/verificarDni.php');
+        }
+    }
 
-            require('../Vistas/consultaVehiculos.php');
+    private function validarDominio($patente)
+    {
+        $limpiar = new LimpiarEntrada();
+
+        if (empty($patente[0]) || empty($patente[1])) {
+
+            $dominio = strtoupper($limpiar->clean_input($patente[2])) . '-' . $limpiar->clean_input($patente[3]) . '-' . strtoupper($limpiar->clean_input($patente[4]));
+
+            return $dominio;
+
+        } else if (empty($patente[2]) || empty($patente[3]) || empty($patente[4])) {
+
+            $dominio = strtoupper($limpiar->clean_input($patente[0])) . '-' . $limpiar->clean_input($patente[1]);
+
+            return $dominio;
 
         }
+
+        return null;
     }
 
     public function eliminar($patente)

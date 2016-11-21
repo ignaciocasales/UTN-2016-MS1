@@ -44,7 +44,7 @@
                                     $(function () {
                                         $('#datetimepicker1').datetimepicker({
                                             format: 'YYYY-MM-DD HH:mm:ss',
-                                            minDate: moment(),
+                                            minDate: '2016-11-01 00:00:00',
                                             maxDate: '2016-12-31 23:59:59'
                                         });
                                     });

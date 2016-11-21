@@ -69,7 +69,7 @@
                                 <input type="hidden" name="dni" value="<?php echo $titular->getDni(); ?>" readonly>
                                 <div class="form-group">
                                     <label for="marcaModelo">Marca | Modelo</label><br>
-                                    <select name="patente" id="marcaModelo" style="width: 100%;">
+                                    <select name="marcaModelo" id="marcaModelo" style="width: 100%;">
                                         <?php foreach ($listado as $marcaModelo) { ?>
                                             <option><?= $marcaModelo['marca'] . ' | ' . $marcaModelo['modelo'] ?></option>
                                         <?php } ?>
@@ -78,45 +78,31 @@
                                 <div class="form-group" id="patenteVieja" style="visibility: hidden">
                                     <label for="patente">Patente</label>
                                     <div class="input-group">
-                                        <input type="text" name="patente" class="form-control" id="patente"
-                                               maxlength="3" placeholder="AAA" autofocus>
+                                        <input type="text" name="patente[]" class="form-control" id="patente"
+                                               maxlength="3" placeholder="AAA" pattern="^[a-zA-Z]+$" autofocus>
                                         <div class="input-group-addon">-</div>
-                                        <input type="text" name="patente" class="form-control" maxlength="3"
-                                               placeholder="000">
+                                        <input type="text" name="patente[]" class="form-control" maxlength="3"
+                                               placeholder="000" pattern="[0-9]">
                                     </div>
                                 </div>
                                 <div class="form-group" id="patenteMercosur"
                                      style="visibility: hidden; position: absolute; display: block; top: 109px;">
                                     <label for="patenteM">Patente Mercosur</label>
                                     <div class="input-group">
-                                        <input type="text" name="patente" class="form-control" id="patenteM"
-                                               maxlength="2" placeholder="AA">
+                                        <input type="text" name="patente[]" class="form-control" id="patenteM"
+                                               maxlength="2" placeholder="AA" pattern="^[a-zA-Z]+$">
                                         <div class="input-group-addon">-</div>
-                                        <input type="text" name="patente" class="form-control" maxlength="3"
-                                               placeholder="000">
+                                        <input type="text" name="patente[]" class="form-control" maxlength="3"
+                                               placeholder="000" pattern="[0-9]">
                                         <div class="input-group-addon">-</div>
-                                        <input type="text" name="patente" class="form-control" maxlength="2"
-                                               placeholder="AA">
+                                        <input type="text" name="patente[]" class="form-control" maxlength="2"
+                                               placeholder="AA" pattern="^[a-zA-Z]+$">
                                     </div>
                                 </div>
-                                <!--
-                                <div class="form-group">
-                                    <label for="marca">Marca</label>
-                                    <input type="text" name="marca" class="form-control" id="marca"
-                                           title="..." maxlength="30" data-toggle="tooltip" data-placement="right"
-                                           autofocus required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="modelo">Modelo</label>
-                                    <input type="text" name="modelo" class="form-control" id="modelo"
-                                           title="..." maxlength="30" data-toggle="tooltip" data-placement="right"
-                                           autofocus required>
-                                </div>
-                                -->
+                                <button type="submit" class="btn btn-primary pull-right">Registrar</button>
+                            </form>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary pull-right">Registrar</button>
-                    </form>
                 </div>
             </div>
         </div>
