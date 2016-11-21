@@ -82,7 +82,7 @@
                                                maxlength="3" placeholder="AAA" pattern="^[a-zA-Z]+$" autofocus>
                                         <div class="input-group-addon">-</div>
                                         <input type="text" name="patente[]" class="form-control" maxlength="3"
-                                               placeholder="000" pattern="[0-9]">
+                                               placeholder="000" pattern="^[0-9]+$">
                                     </div>
                                 </div>
                                 <div class="form-group" id="patenteMercosur"
@@ -93,7 +93,7 @@
                                                maxlength="2" placeholder="AA" pattern="^[a-zA-Z]+$">
                                         <div class="input-group-addon">-</div>
                                         <input type="text" name="patente[]" class="form-control" maxlength="3"
-                                               placeholder="000" pattern="[0-9]">
+                                               placeholder="000" pattern="^[0-9]+$">
                                         <div class="input-group-addon">-</div>
                                         <input type="text" name="patente[]" class="form-control" maxlength="2"
                                                placeholder="AA" pattern="^[a-zA-Z]+$">

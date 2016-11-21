@@ -134,7 +134,7 @@ class SimulacionControladora
         $horaPicoTardeDesde = strtotime('17:00:00');
         $horaPicoTardeHasta = strtotime('20:00:00');
 
-        $h = strtotime(date('H:i:s', $hora));
+        $h = strtotime(date('H:i:s', strtotime($hora)));
 
         if (($h >= $horaPicoManianaDesde && $h <= $horaPicoManianaHasta) || ($h >= $horaPicoTardeDesde && $h <= $horaPicoTardeHasta)) {
 

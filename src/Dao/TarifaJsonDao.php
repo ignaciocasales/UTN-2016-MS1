@@ -1,11 +1,13 @@
 <?php
+/**
+ * Sin implementar !
+ */
 
 namespace Dao;
 
 
 class TarifaJsonDao implements TarifaIDao
 {
-
     public function agregar($tarifa)
     {
         // TODO: Implement agregar() method.
@@ -24,6 +26,11 @@ class TarifaJsonDao implements TarifaIDao
     public function traerPorId($id)
     {
         // TODO: Implement traerPorId() method.
+    }
+
+    public function traerPorFecha($fecha)
+    {
+        // TODO: Implement traerPorFecha() method.
     }
 
     public function mapear($dataSet)

@@ -1,2 +1,9 @@
-En esta carpeta colocamos un script php para generar automáticamente un numero n de eventos de la simulación
-para que persistan en la base de datos.
+///////////////////////////////////////////////////////////////////////////////////
+En esta carpeta colocamos un script php que
+genera automáticamente un numero N de eventos
+de la simulación para que persistan en la base de datos.
+///////////////////////////////////////////////////////////////////////////////////
+Se encuentran dos script diferentes, ambos cumplen
+la misma funcion y fueron desarrollados de diferente
+forma aunque similar.
+///////////////////////////////////////////////////////////////////////////////////

@@ -1,10 +1,10 @@
-/*HTML custom CSS.
+/*Estilo para la etiqueta <hr>.
 -------------------------------------------------- */
 hr {
     border-color: black;
 }
 
-/*Bootstrap Override.
+/*Reescribo Bootstrap.
 -------------------------------------------------- */
 .navbar {
     margin-bottom: 70px;
@@ -19,34 +19,22 @@ hr {
     width: 50px;
 }
 
-/*Custom CSS.
+/*Colores.
 -------------------------------------------------- */
 
 .bg-pri {
     background-color: white;
-    /*color: white;*/
 }
 
 .bg-sec {
     background-color: white;
-    /*color: ;*/
 }
 
 .bg-body {
     background-color: white;
-    /*
-    background: rgb(255, 255, 255);
-    background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 24%, rgba(237, 237, 237, 1) 26%);
-    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 24%, rgba(237, 237, 237, 1) 26%);
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 24%, rgba(237, 237, 237, 1) 26%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed', GradientType=0); */
 }
 
-.navbar-default .navbar-nav > li > a {
-    /*color: white;*/
-}
-
-/*box CSS.
+/*Diseño tipo 'Cajas'.
 -------------------------------------------------- */
 .box-primary {
     padding: 15px;
@@ -84,7 +72,7 @@ hr {
     border-right: 1px solid #E3E3E3;
 }
 
-/* Hace que los col tengan la misma altura.
+/* Si quiero que todos los col tengan la misma altura, le paso esa clase.
 -------------------------------------------------- */
 .altura {
     display: -webkit-box;
@@ -99,7 +87,7 @@ hr {
     flex-direction: column;
 }
 
-/* Sticky footer styles.
+/* Estilo para que el footer se quede en el fondo, sin importar el contenido.
 -------------------------------------------------- */
 html {
     position: relative;
@@ -119,7 +107,7 @@ body {
     height: 37px;
 }
 
-/* Estilo para los alerts
+/* Estilo para posicionar los alert.
 -------------------------------------------------- */
 #message {
     position: fixed;
@@ -139,23 +127,4 @@ body {
     -moz-transition: opacity 0.25s linear;
     -o-transition: opacity 0.25s linear;
     transition: opacity 0.25s linear;
-}
-
-/* otras
--------------------------------------------------- */
-.input-width-90 input {
-    width: 90%;
-}
-
-.input-width-95 input {
-    width: 95%;
-}
-
-hr {
-    border: 0;
-    clear: both;
-    display: block;
-    width: 96%;
-    background-color: #E3E3E3;
-    height: 1px;
 }
