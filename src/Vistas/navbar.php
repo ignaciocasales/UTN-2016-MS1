@@ -40,7 +40,7 @@
                                 <li><a href="/consulta/tarifas/">Tarifas</a></li>
                             <?php } ?>
                             <?php if ($_SESSION["rol"] === 'empleado') { ?>
-                                <li><a href="#">Tarifas</a></li>
+                                <li><a href="/consulta/tarifas/">Tarifas</a></li>
                             <?php } ?>
                         </ul>
                     </li>

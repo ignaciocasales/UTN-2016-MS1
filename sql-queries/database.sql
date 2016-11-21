@@ -225,5 +225,6 @@ CREATE TABLE modelos
 
   CONSTRAINT pk_de_id_modelos PRIMARY KEY (id_modelos),
 
-  CONSTRAINT pk_de_id_marca_modelos FOREIGN KEY(id_marcas) REFERENCES marcas(id_marcas)on DELETE CASCADE
+  CONSTRAINT pk_de_id_marca_modelos FOREIGN KEY (id_marcas) REFERENCES marcas (id_marcas)
+    ON DELETE CASCADE
 );

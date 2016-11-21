@@ -42,7 +42,7 @@ class SimulacionControladora
     public function simular()
     {
 
-        if ($_SESSION['rol'] === 'developer') {
+        if ($_SESSION['rol'] === 'developer' || $_SESSION["rol"] === 'empleado') {
 
             $daoV = $this->daoVehiculo;
 
@@ -53,6 +53,7 @@ class SimulacionControladora
         } else {
 
             $mensaje = new Mensaje('danger', 'No tiene los permisos necesarios !');
+            require("../Vistas/login.php");
 
         }
 

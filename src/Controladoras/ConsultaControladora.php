@@ -204,7 +204,7 @@ class ConsultaControladora
 
     public function tarifas()
     {
-        if ($_SESSION["rol"] === 'developer') {
+        if ($_SESSION["rol"] === 'developer' || $_SESSION["rol"] === 'empleado') {
 
             $daoTariffa = $this->daoTarifas;
             $listado = $daoTariffa->traeTodo();
