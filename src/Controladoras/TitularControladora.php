@@ -3,6 +3,7 @@
 namespace Controladoras;
 
 
+use Dao\ModeloMarcaDao;
 use Dao\RolBdDao;
 use Dao\TitularBdDao;
 use Dao\UsuarioBdDao;
@@ -18,11 +19,14 @@ class titularControladora
 
     private $daoTitular;
 
+    private $daoMarcaModelo;
+
     function __construct()
     {
         $this->daoTitular = TitularBdDao::getInstancia();
         $this->daoUsuario = UsuarioBdDao::getInstancia();
         $this->daoRol = RolBdDao::getInstancia();
+        $this->daoMarcaModelo = ModeloMarcaDao::getInstancia();
     }
 
     public function buscarDni()
@@ -72,9 +76,17 @@ class titularControladora
             $titular = $this->existe($dni);
 
             if ($titular != null) {
+
+                $daoMarcaModelo = $this->daoMarcaModelo;
+
+                $listado = $daoMarcaModelo->traerTodo();
+
                 include("../Vistas/altaVehiculo.php");
+
             } else {
+
                 $this->registrar($dni);
+
             }
         }
     }

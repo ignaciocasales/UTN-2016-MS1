@@ -137,7 +137,7 @@ VALUES
 INSERT INTO marcas (nombre)
 VALUES
   ('Ford'),
-  ('audi'),
+  ('Audi'),
   ('Hyundai'),
   ('Chevrolet'),
   ('Nissan'),

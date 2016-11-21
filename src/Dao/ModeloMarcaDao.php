@@ -5,7 +5,6 @@ namespace Dao;
 
 class ModeloMarcaDao implements MarcaModeloIDao
 {
-    protected $tabla = "modelos_marcas";
     protected $listado;
     private static $instancia;
 
@@ -22,7 +21,7 @@ class ModeloMarcaDao implements MarcaModeloIDao
 
     public function traerTodo()
     {
-        $sql = "SELECT * FROM $this->tabla";
+        $sql = "SELECT marcas.nombre AS marca, modelos.nombre AS modelo FROM modelos INNER JOIN marcas WHERE modelos.id_marcas = marcas.id_marcas";
 
         $conexion = Conexion::conectar();
 
