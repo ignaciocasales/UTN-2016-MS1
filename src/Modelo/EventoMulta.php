@@ -4,13 +4,14 @@ namespace Modelo;
 
 class EventoMulta
 {
-    private $id;
+    private $id = null;
     private $fechaYhora;
-    private $sensorSemaforo;
+    private $sensorSemaforo = null;
 
-    function __construct($fecha_hora)
+    function __construct($fecha_hora, $sensorSemaforo)
     {
         $this->fechaYhora = $fecha_hora;
+        $this->sensorSemaforo = $sensorSemaforo;
     }
 
     function __destruct()

@@ -63,7 +63,7 @@ class MovimientoCuentaCorrienteBdDao
 
     public function traerPorId($id)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE id_movimientos =  \"$id\"";
+        $sql = "SELECT * FROM $this->tabla WHERE id_movimientos =  \"$id\" LIMIT 1";
 
         $conexion = Conexion::conectar();
 
@@ -78,6 +78,23 @@ class MovimientoCuentaCorrienteBdDao
         if (!empty($this->listado[0])) return $this->listado[0];
     }
 
+    public function traerTodoPorIdCuentaCorriente($id)
+    {
+        $sql = "SELECT * FROM $this->tabla WHERE id_cuentas_corrientes =  \"$id\"";
+
+        $conexion = Conexion::conectar();
+
+        $sentencia = $conexion->prepare($sql);
+
+        $sentencia->execute();
+
+        $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
+
+        $this->mapear($dataSet);
+
+        if (!empty($this->listado)) return $this->listado;
+    }
+
     public function traerTodo()
     {
         $sql = "SELECT * FROM $this->tabla";
@@ -85,11 +102,11 @@ class MovimientoCuentaCorrienteBdDao
 
         $sentencia->execute();
 
-        $dataSet[] = $sentencia->fetchall(\PDO::FETCH_ASSOC);
+        $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
 
         $this->mapear($dataSet);
 
-        if (!empty($this->listado[0])) return $this->listado[0];
+        if (!empty($this->listado)) return $this->listado;
 
     }
 
@@ -119,8 +136,10 @@ class MovimientoCuentaCorrienteBdDao
                 $mcc->setEventoPeaje($eventoPeaje);
 
             } else {
+
                 echo 'error';
             }
+
 
             return $mcc;
 

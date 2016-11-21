@@ -8,8 +8,9 @@ class MovimientoCuentaCorriente
     private $fechaYhora;
     private $importe;
     private $eventoPeaje = null;
-    private $cuentaCorriente;
     private $eventoMulta = null;
+    private $cuentaCorriente;
+
 
     function __construct($fechaYhora, $importe, $cuentaCorriente)
     {

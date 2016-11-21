@@ -64,7 +64,7 @@ class EventoMultaBdDao implements EventoIDao
 
     public function traerPorId($id)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE id_usuarios =  \"$id\" LIMIT 1";
+        $sql = "SELECT * FROM $this->tabla WHERE id_eventos =  \"$id\" AND id_tipos_eventos = 1 LIMIT 1";
 
         $conexion = Conexion::conectar();
 
@@ -76,7 +76,15 @@ class EventoMultaBdDao implements EventoIDao
 
         $this->mapear($dataSet);
 
-        if (!empty($this->listado[0])) return $this->listado[0];
+        if (!empty($this->listado[0])) {
+
+            return $this->listado[0];
+
+        } else {
+
+            return null;
+        }
+
     }
 
     public function mapear($dataSet)
@@ -84,11 +92,21 @@ class EventoMultaBdDao implements EventoIDao
         $dataSet = is_array($dataSet) ? $dataSet : [];
         $this->listado = array_map(function ($p) {
 
-            $e = new EventoMulta($p['fecha_hora']);
+            if ($p['id_eventos']) {
 
-            $e->setId($p['id_eventos']);
+                $daoSensor = SensorSemaforoBdDao::getInstancia();
 
-            return $e;
+                $e = new EventoMulta($p['fecha_hora'], $daoSensor->traerPorId($p{'id_sensores'}));
+
+                $e->setId($p['id_eventos']);
+
+                return $e;
+
+            } else {
+
+                return null;
+
+            }
 
         }, $dataSet);
     }

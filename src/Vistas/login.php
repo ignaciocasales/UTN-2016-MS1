@@ -1,7 +1,7 @@
 <?php include('navbar.php'); ?>
 <div class="container lower-box box-primary">
     <div class="bg"></div>
-    <div class="row">
+    <div class="row altura">
         <?php include("mensaje.php") ?>
         <?php if ((isset($_SESSION["mail"]) && $_SESSION["pwd"])) { ?>
             <div class="col-xs-12 col-sm-12 col-md-4">

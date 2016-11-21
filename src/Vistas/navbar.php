@@ -30,8 +30,6 @@
                         </a>
                         <ul class="dropdown-menu">
                             <?php if ($_SESSION["rol"] === 'titular') { ?>
-                                <li><a href="#">Multas</a></li>
-                                <li><a href="#">Peajes</a></li>
                                 <li><a href="/consulta/usuarioVehiculos/">Vehículos</a></li>
                             <?php } ?>
                             <?php if ($_SESSION["rol"] === 'developer') { ?>

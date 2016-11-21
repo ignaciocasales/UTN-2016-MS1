@@ -97,7 +97,9 @@ class SimulacionControladora
             $daoEvento = $this->daoEventoPeaje;
             $evento->setId($daoEvento->agregar($evento));
 
-            $importe = $this->isHoraPico($eventoFecha);
+            $tarifa = $this->daoTarifa->traerPorFecha(date('Y-m-d H:i:s', $eventoFecha));
+
+            $importe = $this->isHoraPico($eventoFecha, $tarifa);
 
             $movimientoCuentaCorriente = new MovimientoCuentaCorriente($eventoFecha, $importe, $cuentaCorriente);
             $movimientoCuentaCorriente->setEventoPeaje($evento);
@@ -118,7 +120,7 @@ class SimulacionControladora
         require("../Vistas/login.php");
     }
 
-    public function isHoraPico($hora)
+    public function isHoraPico($hora, $tarifa)
     {
         $horaPicoManianaDesde = strtotime('07:00:00');
         $horaPicoManianaHasta = strtotime('10:00:00');
@@ -129,11 +131,11 @@ class SimulacionControladora
 
         if (($h >= $horaPicoManianaDesde && $h <= $horaPicoManianaHasta) || ($h >= $horaPicoTardeDesde && $h <= $horaPicoTardeHasta)) {
 
-            $importe = $tarifas->getPeajeHorasPico();
+            $importe = $tarifa->getPeajeHorasPico();
 
         } else {
 
-            $importe = $tarifas->getPeajeHorasNormal();
+            $importe = $tarifa->getPeajeHorasNormal();
 
         }
 

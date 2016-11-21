@@ -118,6 +118,8 @@ class VehiculoBdDao implements VehiculoIDao
 
         $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
 
+        print_r($dataSet);
+
         $this->mapear($dataSet);
 
         if (!empty($this->listado[0])) return $this->listado[0];

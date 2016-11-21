@@ -3,6 +3,9 @@
 namespace Controladoras;
 
 
+use Dao\CuentaCorrienteBdDao;
+use Dao\MovimientoCuentaCorrienteBdDao;
+use Dao\SensorPeajeBdDao;
 use Dao\TitularBdDao;
 use Dao\TitularJsonDao;
 use Dao\UsuarioBdDao;
@@ -18,6 +21,12 @@ class ConsultaControladora
 
     private $daoTitular;
 
+    private $daoCuentaCorriente;
+
+    private $daoPeaje;
+
+    private $daoMovimientoCuentaCorriente;
+
     public function __construct()
     {
         $this->daoVehiculo = VehiculoBdDao::getInstancia();
@@ -28,6 +37,13 @@ class ConsultaControladora
 
         $this->daoUsuario = UsuarioBdDao::getInstancia();
         //$this->daoUsuario = UsuarioJsonDao::getInstancia();
+
+        $this->daoCuentaCorriente = CuentaCorrienteBdDao::getInstancia();
+
+        $this->daoPeaje = SensorPeajeBdDao::getInstancia();
+
+        $this->daoMovimientoCuentaCorriente = MovimientoCuentaCorrienteBdDao::getInstancia();
+
     }
 
     public function todosUsuarios()
@@ -111,5 +127,29 @@ class ConsultaControladora
         $vehiculo = $daoV->traerPorId($id);
 
         require("../Vistas/vehiculoDetalle.php");
+    }
+
+    public function movimientos($idVehiculo)
+    {
+        if ($_SESSION["rol"] === 'titular') {
+
+            $daoV = $this->daoVehiculo;
+            $vehiculo = $daoV->traerPorId($idVehiculo);
+
+            $daoCC = $this->daoCuentaCorriente;
+            $cuentaCorriente = $daoCC->traerPorId($vehiculo->getId());
+
+            $daoMCC = $this->daoMovimientoCuentaCorriente;
+            $listadoMovimientos = $daoMCC->traerTodoPorIdCuentaCorriente($cuentaCorriente->getId());
+
+            require("../Vistas/consultaMovimientos.php");
+
+        } else {
+
+            $mensaje = new Mensaje('danger', 'Operación inválida !');
+
+            require("../Vistas/login.php");
+
+        }
     }
 }

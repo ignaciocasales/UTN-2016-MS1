@@ -64,7 +64,7 @@ class SensorSemaforoBdDao implements SensorIDao
 
     public function traerPorId($id)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE id_sensores =  \"$id\" LIMIT 1";
+        $sql = "SELECT * FROM $this->tabla WHERE id_sensores =  \"$id\" AND id_tipos_sensores =  \"2\" LIMIT 1";
 
         $conexion = Conexion::conectar();
 

@@ -207,23 +207,23 @@ CREATE TABLE tarifas
 
 CREATE TABLE marcas
 (
-id_marcas SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  id_marcas SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
 
-nombre VARCHAR(40) NOT NULL,
+  nombre    VARCHAR(40)                      NOT NULL,
 
- CONSTRAINT pk_de_id_marcas PRIMARY KEY (id_marcas)
+  CONSTRAINT pk_de_id_marcas PRIMARY KEY (id_marcas)
 );
 
 
 CREATE TABLE modelos
 (
   id_modelos SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
-  
-  id_marcas SMALLINT UNSIGNED,
 
-  nombre       VARCHAR(50)     NOT NULL,
+  id_marcas  SMALLINT UNSIGNED,
+
+  nombre     VARCHAR(50)                      NOT NULL,
 
   CONSTRAINT pk_de_id_modelos PRIMARY KEY (id_modelos),
-    
-  CONSTRAINT pk_de_id_marca_modelos FOREIGN KEY(id_marcas) REFERENCES marcas(id_marcas)
+
+  CONSTRAINT pk_de_id_marca_modelos FOREIGN KEY (id_marcas) REFERENCES marcas (id_marcas)
 );

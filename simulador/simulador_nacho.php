@@ -97,12 +97,9 @@ try {
         //Si es peaje, cargo el movimiento correspondiente con la tarifa correspondiente ya además verifico si es hora pico u hora normal.
         if ($eventos[$eventoKey] === 'multa') {
 
-            $evento = new \Modelo\EventoMulta(date('Y-m-d H:i:s', $fechaAleatoria));
+            $sensores = $daoSemaforo->traerCualquiera();
 
-            $sensores = $daoSemaforo->traerTodo();
-            $sensorKey = array_rand($sensores, 1);
-
-            $evento->setSensorSemaforo($sensores[$sensorKey]);
+            $evento = new \Modelo\EventoMulta(date('Y-m-d H:i:s', $fechaAleatoria), $sensores);
 
             $evento->setId($daoEventoMulta->agregar($evento));
 
@@ -111,12 +108,9 @@ try {
 
         } else if ($eventos[$eventoKey] === 'peaje') {
 
-            $evento = new \Modelo\EventoPeaje(date('Y-m-d H:i:s', $fechaAleatoria));
+            $sensores = $daoPeaje->traerCualquiera();
 
-            $sensores = $daoPeaje->traerTodo();
-            $sensorKey = array_rand($sensores, 1);
-
-            $evento->setSensorPeaje($sensores[$sensorKey]);
+            $evento = new \Modelo\EventoPeaje(date('Y-m-d H:i:s', $fechaAleatoria), $sensores);
 
             $evento->setId($daoEventoPeaje->agregar($evento));
 
