@@ -16,15 +16,10 @@ use Dao\VehiculoJsonDao;
 class ConsultaControladora
 {
     private $daoUsuario;
-
     private $daoVehiculo;
-
     private $daoTitular;
-
     private $daoCuentaCorriente;
-
     private $daoPeaje;
-
     private $daoMovimientoCuentaCorriente;
 
     public function __construct()
@@ -141,6 +136,12 @@ class ConsultaControladora
 
             $daoMCC = $this->daoMovimientoCuentaCorriente;
             $listadoMovimientos = $daoMCC->traerTodoPorIdCuentaCorriente($cuentaCorriente->getId());
+
+            if (!$listadoMovimientos) {
+
+                $mensaje = new Mensaje('warning', 'No se registraron movimientos !');
+
+            }
 
             require("../Vistas/consultaMovimientos.php");
 

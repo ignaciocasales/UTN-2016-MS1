@@ -8,7 +8,7 @@ if ($_GET) {
     $cantidad = $argv[1];
 }
 
-echo 'Generando ...';
+echo "Generando ... \n";
 
 //Defino constantes para almacenar las direcciones de las clases.
 define("SRC_CONFIG", '../src/Config/');
@@ -103,6 +103,10 @@ try {
 
             $evento->setId($daoEventoMulta->agregar($evento));
 
+            $cuentaCorriente->setSaldo($cuentaCorriente->getSaldo() - $tarifas->getMulta());
+            $cuentaCorriente->setFechaUltimaActualizacion(date('Y-m-d H:i:s', $fechaAleatoria));
+            $daoCC->actualizar($cuentaCorriente);
+
             $movimientoCuentaCorriente = new \Modelo\MovimientoCuentaCorriente(date('Y-m-d H:i:s', $fechaAleatoria), $tarifas->getMulta(), $cuentaCorriente);
             $movimientoCuentaCorriente->setEventoMulta($evento);
 
@@ -131,19 +135,29 @@ try {
 
             }
 
+            $cuentaCorriente->setSaldo($cuentaCorriente->getSaldo() - $importe);
+            $cuentaCorriente->setFechaUltimaActualizacion(date('Y-m-d H:i:s', $fechaAleatoria));
+            $daoCC->actualizar($cuentaCorriente);
+
             $movimientoCuentaCorriente = new \Modelo\MovimientoCuentaCorriente(date('Y-m-d H:i:s', $fechaAleatoria), $importe, $cuentaCorriente);
             $movimientoCuentaCorriente->setEventoPeaje($evento);
 
         }
 
         $daoMovimientoCuentaCorriente->agregar($movimientoCuentaCorriente);
+
+        $numerador = $i + 1;
+
+        $progreso = floatval($numerador)/floatval($cantidad) * 100;
+
+        echo $progreso . "% \n";
     }
 
     echo 'Se genero' . ' ' . $cantidad . ' ' . 'evento/s';
 
 } catch (\PDOException $e) {
 
-    echo 'No se pudo conectar a la base de datos';
+    print_r($e->errorInfo);
 
 }
 

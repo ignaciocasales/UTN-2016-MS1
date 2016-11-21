@@ -78,7 +78,7 @@ CREATE TABLE cuentas_corrientes
 
   maximo_credito             FLOAT UNSIGNED                   NOT NULL,
 
-  saldo                      FLOAT UNSIGNED                   NOT NULL,
+  saldo                      FLOAT                            NOT NULL,
 
   id_vehiculos               SMALLINT UNSIGNED,
 

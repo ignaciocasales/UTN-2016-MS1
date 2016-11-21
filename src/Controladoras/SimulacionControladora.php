@@ -72,34 +72,40 @@ class SimulacionControladora
 
         if ($eventoTipo === 'multa') {
 
-            $evento = new EventoMulta($eventoFecha);
-
             $daoSensor = $this->daoSensorSemaforo;
             $sensor = $daoSensor->traerCualquiera();
+
+            $evento = new EventoMulta($eventoFecha, $sensor);
 
             $evento->setSensorSemaforo($sensor);
 
             $daoEvento = $this->daoEventoMulta;
             $evento->setId($daoEvento->agregar($evento));
 
+            $cuentaCorriente->setSaldo($cuentaCorriente->getSaldo() - $tarifa->getMulta());
+            $cuentaCorriente->setFechaUltimaActualizacion($eventoFecha);
+            $daoCC->actualizar($cuentaCorriente);
+
             $movimientoCuentaCorriente = new MovimientoCuentaCorriente($eventoFecha, $tarifa->getMulta(), $cuentaCorriente);
             $movimientoCuentaCorriente->setEventoMulta($evento);
 
         } else if ($eventoTipo === 'peaje') {
 
-            $evento = new EventoPeaje($eventoFecha);
-
             $daoSensor = $this->daoSensorPeaje;
             $sensor = $daoSensor->traerCualquiera();
+
+            $evento = new EventoPeaje($eventoFecha, $sensor);
 
             $evento->setSensorPeaje($sensor);
 
             $daoEvento = $this->daoEventoPeaje;
             $evento->setId($daoEvento->agregar($evento));
 
-            $tarifa = $this->daoTarifa->traerPorFecha(date('Y-m-d H:i:s', $eventoFecha));
-
             $importe = $this->isHoraPico($eventoFecha, $tarifa);
+
+            $cuentaCorriente->setSaldo($cuentaCorriente->getSaldo() - $importe);
+            $cuentaCorriente->setFechaUltimaActualizacion($eventoFecha);
+            $daoCC->actualizar($cuentaCorriente);
 
             $movimientoCuentaCorriente = new MovimientoCuentaCorriente($eventoFecha, $importe, $cuentaCorriente);
             $movimientoCuentaCorriente->setEventoPeaje($evento);

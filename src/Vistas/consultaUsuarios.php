@@ -6,9 +6,12 @@
     Mas adelante tambien implementariamos la paginacion para que no se vea feo, en este momento no importa eso.
     Esta tabla esta pensada para los usuarios.
 -->
+<div class="container lower-box box-primary">
+    <h4 class="text-center">ABM | Usuarios del Sistema</h4>
+</div>
 <div class="container">
     <div class="row">
-        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+        <div class="col-xs-12">
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>

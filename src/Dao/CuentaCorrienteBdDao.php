@@ -58,20 +58,20 @@ class CuentaCorrienteBdDao implements CuentaCorrienteIDao
 
     public function actualizar($cuentaCorriente)
     {
-        $sql = "UPDATE $this->tabla SET fecha_ultima_actualizacion = :fechaUltimaActualizacion, saldo = :saldo, maximo_credito = :maximoCredito WHERE id_cuentas_corrientes = :idCuentaCorriente)";
+        $sql = "UPDATE $this->tabla SET fecha_ultima_actualizacion = :fechaUltimaActualizacion, saldo = :saldo WHERE id_cuentas_corrientes = :idCuentaCorriente";
 
         $conexion = Conexion::conectar();
+
+        $conexion->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
         $sentencia = $conexion->prepare($sql);
 
         $fechaUltimaActualizacion = $cuentaCorriente->getFechaUltimaActualizacion();
         $saldo = $cuentaCorriente->getSaldo();
-        $maximoCredito = $cuentaCorriente->getMaximoCredito();
         $idCuentaCorriente = $cuentaCorriente->getId();
 
         $sentencia->bindParam(":fechaUltimaActualizacion", $fechaUltimaActualizacion);
         $sentencia->bindParam(":saldo", $saldo);
-        $sentencia->bindParam(":maximoCredito", $maximoCredito);
         $sentencia->bindParam(":idCuentaCorriente", $idCuentaCorriente);
 
         $sentencia->execute();

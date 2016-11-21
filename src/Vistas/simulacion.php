@@ -9,7 +9,7 @@
         <div class="col-sm-12">
             <form action="/simulacion/verificar/" method="post">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 box-right-content">
                         <div class="form-group">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -31,7 +31,8 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class='input-group date' id='datetimepicker1'>
-                                        <input onkeydown="return false" type='text' name="fecha" class="form-control" id="fecha"
+                                        <input onkeydown="return false" type='text' name="fecha" class="form-control"
+                                               id="fecha"
                                                placeholder="Fecha del Evento..."
                                                title="Fecha" required/>
                                         <span class="input-group-addon">
@@ -64,9 +65,9 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-success pull-right">generar</button>
                     </div>
                 </div>
+                <button type="submit" class="btn btn-success pull-right">generar</button>
             </form>
         </div>
     </div>

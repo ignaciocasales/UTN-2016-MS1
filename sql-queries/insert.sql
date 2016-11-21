@@ -51,24 +51,24 @@ VALUES
 
 INSERT INTO vehiculos (id_titulares, dominio, marca, modelo, qr)
 VALUES
-  ('1', 'ark-230', 'Renault', 'Twingo', 'ARK-2302'),
-  ('1', 'grv-799', 'Peugeot', '206', 'YBB-799'),
-  ('2', 'ab-012-kr', 'Volkswagen', 'Vento', 'AB-012-KR'),
-  ('2', 'ith-256', 'Volkswagen', 'Bora', 'ITH-256'),
-  ('3', 'epk-713', 'Volkswagen', 'Caddy', 'EPK-713'),
-  ('4', 'aa-404-ky', 'Chevrolet', 'Classic', 'AA-404-KY'),
-  ('4', 'lou-765', 'Peugeot', 'Partner', 'LOU-765'),
-  ('5', 'lor-321', 'Volkswagen', 'Bora', 'LOR-321'),
-  ('6', 'fgt-564', 'Renault', 'Clio', 'FGT-564'),
-  ('6', 'hnk-125', 'Peugeot', '406', 'HNK-125'),
-  ('7', 'kfl-456', 'Nissan', '370z', 'KFL-456'),
-  ('7', 'jkl-876', 'Mitsubishi', 'Evolution', 'JKL-876'),
-  ('8', 'dlk-311', 'Toyota', 'Hilux', 'DLK-311'),
-  ('8', 'aak-111', 'Audi', 'a3', 'AAK-111'),
-  ('9', 'aa-123-ky', 'Toyota', 'Etios', 'AA-123-KY'),
-  ('10', 'aa-675-kb', 'Audi', 'a6', 'AA-675-KB'),
-  ('10', 'aa-434-rk', 'Ford', 'Mondeo', 'AA-434-RK'),
-  ('11', 'lkl-123', 'Ford', 'Focus', 'LKL-123');
+  ('1', 'ARK-230', 'Renault', 'Twingo', 'ARK-230'),
+  ('1', 'YBB-799', 'Peugeot', '206', 'YBB-799'),
+  ('2', 'AB-012-KR', 'Volkswagen', 'Vento', 'AB-012-KR'),
+  ('2', 'ITH-256', 'Volkswagen', 'Bora', 'ITH-256'),
+  ('3', 'EPK-713', 'Volkswagen', 'Caddy', 'EPK-713'),
+  ('4', 'AA-404-KY', 'Chevrolet', 'Classic', 'AA-404-KY'),
+  ('4', 'LOU-765', 'Peugeot', 'Partner', 'LOU-765'),
+  ('5', 'LOR-321', 'Volkswagen', 'Bora', 'LOR-321'),
+  ('6', 'FGT-564', 'Renault', 'Clio', 'FGT-564'),
+  ('6', 'HNK-125', 'Peugeot', '406', 'HNK-125'),
+  ('7', 'KFL-456', 'Nissan', '370z', 'KFL-456'),
+  ('7', 'JKL-876', 'Mitsubishi', 'Evolution', 'JKL-876'),
+  ('8', 'DLK-311', 'Toyota', 'Hilux', 'DLK-311'),
+  ('8', 'AAK-111', 'Audi', 'a3', 'AAK-111'),
+  ('9', 'AA-123-KY', 'Toyota', 'Etios', 'AA-123-KY'),
+  ('10', 'AA-675-KB', 'Audi', 'a6', 'AA-675-KB'),
+  ('10', 'AA-434-RK', 'Ford', 'Mondeo', 'AA-434-RK'),
+  ('11', 'LKL-123', 'Ford', 'Focus', 'LKL-123');
 
 
 INSERT INTO tarifas (fecha_desde, fecha_hasta, multa, peaje_hora_normal, peaje_hora_pico)

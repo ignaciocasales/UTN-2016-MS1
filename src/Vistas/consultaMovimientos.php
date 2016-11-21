@@ -3,7 +3,8 @@
     <div class="row">
         <div class="bg"></div>
         <div class="col-xs-6">
-            <h6><b>Dominio: </b><?= $vehiculo->getDominio(); ?> | <b>Saldo: </b><?= $cuentaCorriente->getSaldo(); ?>
+            <h6><b>Dominio: </b><?= $vehiculo->getDominio(); ?> |
+                <b>Saldo: </b><?= $cuentaCorriente->getSaldo(); ?>
             </h6>
         </div>
         <div class="col-xs-6">
@@ -38,19 +39,27 @@
                     </thead>
                     <tbody>
                     <?php
-                    foreach ($listadoMovimientos as $objeto) { ?>
-                        <tr class="<?php if ($objeto->getEventoPeaje()) {
-                            echo 'warning';
-                        } else {
-                            echo 'danger';
-                        } ?>">
-                            <td><?php if ($objeto->getEventoPeaje()) {
-                                    echo 'Peaje';
-                                } else {
-                                    echo 'Semáforo en Rojo';
-                                } ?></td>
-                            <td><?= $objeto->getFechaYhora(); ?></td>
-                            <td>&dollar;<?= $objeto->getImporte(); ?></td>
+                    if ($listadoMovimientos) {
+                        foreach ($listadoMovimientos as $objeto) { ?>
+                            <tr class="<?php if ($objeto->getEventoPeaje()) {
+                                echo 'warning';
+                            } else {
+                                echo 'danger';
+                            } ?>">
+                                <td><?php if ($objeto->getEventoPeaje()) {
+                                        echo 'Peaje';
+                                    } else {
+                                        echo 'Semáforo en Rojo';
+                                    } ?></td>
+                                <td><?= $objeto->getFechaYhora(); ?></td>
+                                <td>&dollar;<?= $objeto->getImporte(); ?></td>
+                            </tr>
+                        <?php }
+                    } else { ?>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     <?php } ?>
                     </tbody>
