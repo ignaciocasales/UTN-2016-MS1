@@ -6,6 +6,8 @@ namespace Controladoras;
 use Dao\CuentaCorrienteBdDao;
 use Dao\MovimientoCuentaCorrienteBdDao;
 use Dao\SensorPeajeBdDao;
+use Dao\SensorSemaforoBdDao;
+use Dao\TarifaBdDao;
 use Dao\TitularBdDao;
 use Dao\TitularJsonDao;
 use Dao\UsuarioBdDao;
@@ -19,8 +21,10 @@ class ConsultaControladora
     private $daoVehiculo;
     private $daoTitular;
     private $daoCuentaCorriente;
-    private $daoPeaje;
+    private $daoSensorPeaje;
+    private $daoSensorMulta;
     private $daoMovimientoCuentaCorriente;
+    private $daoTarifas;
 
     public function __construct()
     {
@@ -35,9 +39,13 @@ class ConsultaControladora
 
         $this->daoCuentaCorriente = CuentaCorrienteBdDao::getInstancia();
 
-        $this->daoPeaje = SensorPeajeBdDao::getInstancia();
+        $this->daoSensorPeaje = SensorPeajeBdDao::getInstancia();
+
+        $this->daoSensorMulta = SensorSemaforoBdDao::getInstancia();
 
         $this->daoMovimientoCuentaCorriente = MovimientoCuentaCorrienteBdDao::getInstancia();
+
+        $this->daoTarifas = TarifaBdDao::getInstancia();
 
     }
 
@@ -147,7 +155,66 @@ class ConsultaControladora
 
         } else {
 
-            $mensaje = new Mensaje('danger', 'Operación inválida !');
+            $mensaje = new Mensaje('danger', 'No tiene permisos !');
+
+            require("../Vistas/login.php");
+
+        }
+    }
+
+    public function sensoresMulta()
+    {
+        if ($_SESSION["rol"] === 'developer') {
+
+            $daoSensorM = $this->daoSensorMulta;
+            $listado = $daoSensorM->traerTodo();
+
+            $tipo = 'multa';
+
+            require("../Vistas/consultaSensores.php");
+
+        } else {
+
+            $mensaje = new Mensaje('danger', 'No posee los permisos necesarios !');
+
+            require("../Vistas/login.php");
+
+        }
+    }
+
+    public function sensoresPeaje()
+    {
+        if ($_SESSION["rol"] === 'developer') {
+
+            $daoSensorP = $this->daoSensorPeaje;
+            $listado = $daoSensorP->traerTodo();
+
+            $tipo = 'peaje';
+
+            require("../Vistas/consultaSensores.php");
+
+        } else {
+
+            $mensaje = new Mensaje('danger', 'No posee los permisos necesarios !');
+
+            require("../Vistas/login.php");
+
+        }
+    }
+
+    public function tarifas()
+    {
+        if ($_SESSION["rol"] === 'developer') {
+
+            $daoTariffa = $this->daoTarifas;
+            $listado = $daoTariffa->traeTodo();
+
+
+            require("../Vistas/consultaTarifas.php");
+
+        } else {
+
+            $mensaje = new Mensaje('danger', 'No posee los permisos necesarios !');
 
             require("../Vistas/login.php");
 

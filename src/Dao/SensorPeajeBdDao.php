@@ -48,7 +48,7 @@ class SensorPeajeBdDao implements SensorIDao
 
     public function traerTodo()
     {
-        $sql = "SELECT * FROM $this->tabla";
+        $sql = "SELECT * FROM $this->tabla WHERE id_tipos_sensores =  \"1\"";
 
         $conexion = Conexion::conectar();
 

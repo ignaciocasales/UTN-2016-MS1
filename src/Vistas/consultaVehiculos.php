@@ -8,10 +8,10 @@
 <?php } ?>
 <div class="container lower-box box-primary">
     <?php if ($_SESSION["rol"] === 'developer') { ?>
-        <h4 class="text-center">Lista de todos los vehículos del sistema</h4>
+        <h4 class="text-center">Vehículos del sistema</h4>
     <?php } ?>
     <?php if ($_SESSION["rol"] === 'titular') { ?>
-        <h4 class="text-center">Sus vehículos</h4>
+        <h4 class="text-center">Sus vehículos registrados</h4>
     <?php } ?>
 </div>
 <div class="container">
@@ -136,3 +136,4 @@
 
     </div>
 </div>
+

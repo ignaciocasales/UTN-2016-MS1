@@ -7,7 +7,7 @@
     Esta tabla esta pensada para los usuarios.
 -->
 <div class="container lower-box box-primary">
-    <h4 class="text-center">ABM | Usuarios del Sistema</h4>
+    <h4 class="text-center">Usuarios del Sistema</h4>
 </div>
 <div class="container">
     <div class="row">
@@ -46,3 +46,4 @@
         </div>
     </div>
 </div>
+

@@ -47,7 +47,7 @@ class SensorSemaforoBdDao implements SensorIDao
 
     public function traerTodo()
     {
-        $sql = "SELECT * FROM $this->tabla";
+        $sql = "SELECT * FROM $this->tabla WHERE id_tipos_sensores =  \"2\"";
 
         $conexion = Conexion::conectar();
 

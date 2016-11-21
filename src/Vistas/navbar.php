@@ -35,8 +35,9 @@
                             <?php if ($_SESSION["rol"] === 'developer') { ?>
                                 <li><a href="/consulta/todosUsuarios/">Usuarios</a></li>
                                 <li><a href="/consulta/todosVehiculos/">Vehiculos</a></li>
-                                <li><a href="#">Sensores</a></li>
-                                <li><a href="#">Tarifas</a></li>
+                                <li><a href="/consulta/sensoresMulta/">Sensores de Multa</a></li>
+                                <li><a href="/consulta/sensoresPeaje/">Sensores de Peaje</a></li>
+                                <li><a href="/consulta/tarifas/">Tarifas</a></li>
                             <?php } ?>
                             <?php if ($_SESSION["rol"] === 'empleado') { ?>
                                 <li><a href="#">Tarifas</a></li>
@@ -109,3 +110,4 @@
         }, 250);
     </script>
 <?php } ?>
+
