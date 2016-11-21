@@ -151,7 +151,7 @@ class vehiculoControladora
              * Uso la funcion strtoupper(), para obtener los string de
              * las patentes en mayúsculas.
              */
-            if ((preg_match("^[a-zA-Z]+$", $limpiar->clean_input($patente[2]))) && (preg_match("^[0-9]+$", $limpiar->clean_input($patente[3]))) && (preg_match("^[a-zA-Z]+$", $limpiar->clean_input($patente[4])))) {
+            if ((preg_match("/^[a-zA-Z]+$/", $limpiar->clean_input($patente[2]))) && (preg_match("/^[0-9]+$/", $limpiar->clean_input($patente[3]))) && (preg_match("/^[a-zA-Z]+$/", $limpiar->clean_input($patente[4])))) {
 
                 $dominio = strtoupper($limpiar->clean_input($patente[2])) . '-' . $limpiar->clean_input($patente[3]) . '-' . strtoupper($limpiar->clean_input($patente[4]));
 
@@ -171,7 +171,7 @@ class vehiculoControladora
              * Uso la funcion strtoupper(), para obtener los string de
              * las patentes en mayúsculas.
              */
-            if ((preg_match("^[a-zA-Z]+$", $limpiar->clean_input($patente[0]))) && (preg_match("^[0-9]+$", $limpiar->clean_input($patente[1])))) {
+            if ((preg_match("/^[a-zA-Z]+$/", $limpiar->clean_input($patente[0]))) && (preg_match("/^[0-9]+$/", $limpiar->clean_input($patente[1])))) {
 
                 $dominio = strtoupper($limpiar->clean_input($patente[0])) . '-' . $limpiar->clean_input($patente[1]);
 
