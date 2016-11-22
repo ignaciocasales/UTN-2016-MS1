@@ -34,7 +34,6 @@ class titularControladora
         require("../Vistas/verificarDni.php");
     }
 
-
     public function darAltaTitular($nombre, $apellido, $dni, $telefono, $email, $password)
     {
 
@@ -69,8 +68,7 @@ class titularControladora
 
     }
 
-    public
-    function verificar($dni)
+    public function verificar($dni)
     {
         if (isset($dni)) {
             $titular = $this->existe($dni);

@@ -26,8 +26,7 @@ class loginControladora
         require("../Vistas/login.php");
     }
 
-    public
-    function verificar($mail, $pwd)
+    public function verificar($mail, $pwd)
     {
         try {
             if (isset($mail) && isset($pwd)) {
