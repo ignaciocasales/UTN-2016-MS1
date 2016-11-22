@@ -1,26 +1,26 @@
-#TP Integrador - Trafi MDQ
+**TP Integrador - Trafi MDQ**
 
 
-#####Autores: 
+**Autores: **
 
 >Casales, Ignacio
 
 >Navarro, David
 
->Tacconi, Dami·n
+>Tacconi, Dami√°n
 
-#####Materias: 
+**Materias: **
 
-- MetodologÌa de Sistemas I
+- Metodolog√≠a de Sistemas I
 
-- ProgramaciÛn IV
+- Programaci√≥n IV
 
-##Casos de uso a implementar
+**Casos de uso a implementar**
 
 Se pidio implementar los siguientes casos de uso:
 
  - **C.U. 1:** Registrando parque automotor. (_Implementado_)
- - **C.U. 2:** Simulando Flujo Vehicular Y Paso De VehÌculos Por Sem·foros Y Telepeaje. (_Implementado_)
+ - **C.U. 2:** Simulando Flujo Vehicular Y Paso De Veh√≠culos Por Sem√°foros Y Telepeaje. (_Implementado_)
  - **C.U. 3:** Consultando Multas Y Peajes. (_Implementado_)
 
 `UTN - Mar del Plata - 2016`
