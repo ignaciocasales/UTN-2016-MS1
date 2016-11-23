@@ -20,7 +20,7 @@ define("DB_HOST", "git.mdp.utn.edu.ar");
 */
 define("DB_NAME", "casalesi");
 define("DB_USER", "root");
-define("DB_PASS", "ckl123");
+define("DB_PASS", "micaddyes19");
 define("DB_HOST", "localhost");
 
 // Constantes front

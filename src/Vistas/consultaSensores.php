@@ -23,6 +23,12 @@
                             <td><?= $objeto->getFechaAlta(); ?></td>
                             <td><?php echo $objeto->getLatitud() . ' | ' . $objeto->getLongitud(); ?></td>
                             <td><?= $objeto->getNumeroSerie(); ?></td>
+                            <td>
+                                <a      href="/consulta/googlemaps/<?= $objeto->getId(); ?>">
+                                    <img    alt="googlemaps" src="<?php echo URL_IMG . 'Google-Maps.png'; ?>" class="img googlemaps" width="20" height="20"
+                                         title="Google-Maps" data-toggle="tooltip">
+                                </a>
+                            </td>
                         </tr>
                     <?php } ?>
                     </tbody>
