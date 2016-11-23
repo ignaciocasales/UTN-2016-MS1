@@ -21,7 +21,7 @@ class ModeloMarcaDao implements MarcaModeloIDao
 
     public function traerTodo()
     {
-        $sql = "SELECT marcas.nombre AS marca, modelos.nombre AS modelo FROM modelos INNER JOIN marcas WHERE modelos.id_marcas = marcas.id_marcas";
+        $sql = "SELECT marcas.nombre AS marca, modelos.nombre AS modelo FROM modelos INNER JOIN marcas ON marcas.id_marcas = modelos.id_marcas";
 
         $conexion = Conexion::conectar();
 
