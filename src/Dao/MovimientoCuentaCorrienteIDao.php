@@ -11,5 +11,7 @@ interface MovimientoCuentaCorrienteIDao
 
     public function traerPorId($id);
 
+    public function traerTodoPorIdCuentaCorriente($idCC);
+
     public function mapear($dataSet);
 }

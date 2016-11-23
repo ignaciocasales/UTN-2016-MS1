@@ -5,8 +5,12 @@ namespace Controladoras;
 
 use Dao\ModeloMarcaDao;
 use Dao\RolBdDao;
+use Dao\RolJsonDao;
 use Dao\TitularBdDao;
+use Dao\TitularJsonDao;
 use Dao\UsuarioBdDao;
+use Dao\UsuarioJsonDao;
+use Modelo\Mensaje;
 use Modelo\Rol;
 use Modelo\Titular;
 use Modelo\Usuario;
@@ -23,9 +27,20 @@ class titularControladora
 
     function __construct()
     {
+        /*
+         * Los Json DAO no fueron implementados, pero con
+         * descomentar las líneas de abajo debería el programa
+         * funcionar correctamente.
+         */
         $this->daoTitular = TitularBdDao::getInstancia();
+        //$this->daoTitular = TitularJsonDao::getInstancia();
+
         $this->daoUsuario = UsuarioBdDao::getInstancia();
+        //$this->daoUsuario = UsuarioJsonDao::getInstancia();
+
         $this->daoRol = RolBdDao::getInstancia();
+        //$this->daoRol = RolJsonDao::getInstancia();
+
         $this->daoMarcaModelo = ModeloMarcaDao::getInstancia();
     }
 

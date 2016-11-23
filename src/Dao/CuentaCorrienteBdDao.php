@@ -43,6 +43,8 @@ class CuentaCorrienteBdDao implements CuentaCorrienteIDao
         $sentencia->bindParam(":idVehiculo", $idVehiculo);
 
         $sentencia->execute();
+
+        return $conexion->lastInsertId();
     }
 
     public function eliminar($id)

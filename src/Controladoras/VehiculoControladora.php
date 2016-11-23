@@ -7,6 +7,8 @@ use Dao\TitularBdDao;
 use Dao\TitularJsonDao;
 use Dao\VehiculoBdDao;
 use Dao\VehiculoJsonDao;
+use Modelo\limpiarEntrada;
+use Modelo\Mensaje;
 use Modelo\Vehiculo;
 
 class vehiculoControladora

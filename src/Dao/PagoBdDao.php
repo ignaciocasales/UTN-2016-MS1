@@ -1,7 +1,9 @@
 <?php
 
 namespace Dao;
-
+/**
+ * Este Dao no fue implementado, hacce falta revision...
+ */
 
 use Modelo\Pago;
 
@@ -39,6 +41,8 @@ class PagoBdDao implements PagoIDao
         $sentencia->bindParam(":idMovimiento", $idMovimiento);
 
         $sentencia->execute();
+
+        return $conexion->lastInsertId();
     }
 
     public function traerTodo()

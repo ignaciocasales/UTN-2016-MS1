@@ -1,7 +1,7 @@
 **TP Integrador - Trafi MDQ**
 
 
-**Autores: **
+**Autores:**
 
 >Casales, Ignacio
 
@@ -9,7 +9,7 @@
 
 >Tacconi, Damián
 
-**Materias: **
+**Materias:**
 
 - Metodología de Sistemas I
 

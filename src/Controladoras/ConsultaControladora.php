@@ -4,16 +4,22 @@ namespace Controladoras;
 
 
 use Dao\CuentaCorrienteBdDao;
+use Dao\CuentaCorrienteJsonDao;
 use Dao\MovimientoCuentaCorrienteBdDao;
+use Dao\MovimientoCuentaCorrienteJsonDao;
 use Dao\SensorPeajeBdDao;
+use Dao\SensorPeajeJsonDao;
 use Dao\SensorSemaforoBdDao;
+use Dao\SensorSemaforoJsonDao;
 use Dao\TarifaBdDao;
+use Dao\TarifaJsonDao;
 use Dao\TitularBdDao;
 use Dao\TitularJsonDao;
 use Dao\UsuarioBdDao;
 use Dao\UsuarioJsonDao;
 use Dao\VehiculoBdDao;
 use Dao\VehiculoJsonDao;
+use Modelo\Mensaje;
 
 class ConsultaControladora
 {
@@ -28,6 +34,11 @@ class ConsultaControladora
 
     public function __construct()
     {
+        /*
+         * Los Json DAO no fueron implementados, pero con
+         * descomentar las líneas de abajo debería el programa
+         * funcionar correctamente.
+         */
         $this->daoVehiculo = VehiculoBdDao::getInstancia();
         //$this->daoVehiculo = VehiculoJsonDao::getInstancia();
 
@@ -38,15 +49,19 @@ class ConsultaControladora
         //$this->daoUsuario = UsuarioJsonDao::getInstancia();
 
         $this->daoCuentaCorriente = CuentaCorrienteBdDao::getInstancia();
+        //$this->daoCuentaCorriente = CuentaCorrienteJsonDao::getInstancia();
 
         $this->daoSensorPeaje = SensorPeajeBdDao::getInstancia();
+        //$this->daoSensorPeaje = SensorPeajeJsonDao::getInstancia();
 
         $this->daoSensorMulta = SensorSemaforoBdDao::getInstancia();
+        //$this->daoSensorMulta = SensorSemaforoJsonDao::getInstancia();
 
         $this->daoMovimientoCuentaCorriente = MovimientoCuentaCorrienteBdDao::getInstancia();
+        //$this->daoMovimientoCuentaCorriente = MovimientoCuentaCorrienteJsonDao::getInstancia();
 
         $this->daoTarifas = TarifaBdDao::getInstancia();
-
+        //$this->daoTarifas = TarifaJsonDao::getInstancia();
     }
 
     public function todosUsuarios()

@@ -42,6 +42,8 @@ class TarifaBdDao implements TarifaIDao
         $sentencia->bindParam(":peajeHoraPico", $peajeHoraPico);
 
         $sentencia->execute();
+
+        return $conexion->lastInsertId();
     }
 
     public function actualizar($tarifa)

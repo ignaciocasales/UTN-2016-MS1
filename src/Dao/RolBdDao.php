@@ -32,6 +32,8 @@ class RolBdDao implements RolIDao
         $sentencia->bindParam(":descripcion", $descripcion);
 
         $sentencia->execute();
+
+        return $conexion->lastInsertId();
     }
 
     public function eliminar($id)

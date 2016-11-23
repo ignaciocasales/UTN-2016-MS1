@@ -1,6 +1,6 @@
 <?php
 
-namespace Controladoras;
+namespace Modelo;
 
 
 /**

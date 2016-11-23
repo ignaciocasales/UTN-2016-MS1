@@ -1,6 +1,6 @@
 <?php
 
-namespace Controladoras;
+namespace Modelo;
 
 /**
  * Esta clase fue creada para limpiar la entrada por consola,
