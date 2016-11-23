@@ -2,6 +2,7 @@
 
 namespace Dao;
 
+use Modelo\Mensaje;
 use Modelo\MovimientoCuentaCorriente;
 
 class MovimientoCuentaCorrienteBdDao
@@ -49,7 +50,7 @@ class MovimientoCuentaCorrienteBdDao
 
         } else {
 
-            echo 'error';
+            throw new \Exception('Se produjo un error');
 
         }
 
@@ -59,6 +60,8 @@ class MovimientoCuentaCorrienteBdDao
         $sentencia->bindParam("idEvento", $idEvento);
 
         $sentencia->execute();
+
+        return $conexion->lastInsertId();
     }
 
     public function traerPorId($id)
@@ -78,9 +81,9 @@ class MovimientoCuentaCorrienteBdDao
         if (!empty($this->listado[0])) return $this->listado[0];
     }
 
-    public function traerTodoPorIdCuentaCorriente($id)
+    public function traerTodoPorIdCuentaCorriente($idCC)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE id_cuentas_corrientes =  \"$id\"";
+        $sql = "SELECT * FROM $this->tabla WHERE id_cuentas_corrientes =  \"$idCC\"";
 
         $conexion = Conexion::conectar();
 

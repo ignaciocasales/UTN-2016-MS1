@@ -5,15 +5,23 @@ namespace Controladoras;
 
 
 use Dao\CuentaCorrienteBdDao;
+use Dao\CuentaCorrienteJsonDao;
 use Dao\EventoMultaBdDao;
 use Dao\EventoPeajeBdDao;
+use Dao\EventoPeajeJsonDao;
 use Dao\MovimientoCuentaCorrienteBdDao;
+use Dao\MovimientoCuentaCorrienteJsonDao;
 use Dao\SensorPeajeBdDao;
+use Dao\SensorPeajeJsonDao;
 use Dao\SensorSemaforoBdDao;
+use Dao\SensorSemaforoJsonDao;
 use Dao\TarifaBdDao;
+use Dao\TarifaJsonDao;
 use Dao\VehiculoBdDao;
+use Dao\VehiculoJsonDao;
 use Modelo\EventoMulta;
 use Modelo\EventoPeaje;
+use Modelo\Mensaje;
 use Modelo\MovimientoCuentaCorriente;
 
 class SimulacionControladora
@@ -29,14 +37,34 @@ class SimulacionControladora
 
     public function __construct()
     {
+        /*
+         * Los Json DAO no fueron implementados, pero con
+         * descomentar las líneas de abajo debería el programa
+         * funcionar correctamente.
+         */
         $this->daoMovimientoCuentaCorriente = MovimientoCuentaCorrienteBdDao::getInstancia();
+        //$this->daoMovimientoCuentaCorriente = MovimientoCuentaCorrienteJsonDao::getInstancia();
+
         $this->daoEventoPeaje = EventoPeajeBdDao::getInstancia();
+        //$this->daoEventoPeaje = EventoPeajeJsonDao::getInstancia();
+
         $this->daoSensorPeaje = SensorPeajeBdDao::getInstancia();
+        //$this->daoSensorPeaje = SensorPeajeJsonDao::getInstancia();
+
         $this->daoEventoMulta = EventoMultaBdDao::getInstancia();
+        //$this->daoEventoMulta = EventoPeajeJsonDao::getInstancia();
+
         $this->daoSensorSemaforo = SensorSemaforoBdDao::getInstancia();
+        //$this->daoSensorSemaforo = SensorSemaforoJsonDao::getInstancia();
+
         $this->daoTarifa = TarifaBdDao::getInstancia();
+        //$this->daoTarifa = TarifaJsonDao::getInstancia();
+
         $this->daoCuentaCorriente = CuentaCorrienteBdDao::getInstancia();
+        //$this->daoCuentaCorriente = CuentaCorrienteJsonDao::getInstancia();
+
         $this->daoVehiculo = VehiculoBdDao::getInstancia();
+        //$this->daoVehiculo = VehiculoJsonDao::getInstancia();
     }
 
     public function simular()
@@ -134,7 +162,7 @@ class SimulacionControladora
         $horaPicoTardeDesde = strtotime('17:00:00');
         $horaPicoTardeHasta = strtotime('20:00:00');
 
-        $h = strtotime(date('H:i:s', $hora));
+        $h = strtotime(date('H:i:s', strtotime($hora)));
 
         if (($h >= $horaPicoManianaDesde && $h <= $horaPicoManianaHasta) || ($h >= $horaPicoTardeDesde && $h <= $horaPicoTardeHasta)) {
 

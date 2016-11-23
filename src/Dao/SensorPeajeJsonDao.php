@@ -1,4 +1,7 @@
 <?php
+/**
+ * Sin implementar !
+ */
 
 namespace Dao;
 
@@ -24,5 +27,10 @@ class SensorPeajeJsonDao implements SensorIDao
     public function mapear($dataSet)
     {
         // TODO: Implement mapear() method.
+    }
+
+    public function traerCualquiera()
+    {
+        // TODO: Implement traerCualquiera() method.
     }
 }

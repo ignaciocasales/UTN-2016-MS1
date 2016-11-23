@@ -11,8 +11,6 @@
             <!-- Aca deberia tener el máximo crédito -->
         </div>
         <div class="col-xs-6">
-            <a class="btn btn-info" href="#" role="button">Ver Sólo Multas</a>
-            <a class="btn btn-info" href="#" role="button">Ver Sólo Peajes</a>
             <?php if ($_SESSION["rol"] === 'developer') { ?>
                 <a class="btn btn-primary pull-right" href="/consulta/todosVehiculos/" role="button"><span
                         class="glyphicon glyphicon-arrow-left"></span>Volver</a>

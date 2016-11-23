@@ -1,9 +1,15 @@
 <?php
 
-namespace Controladoras;
+namespace Modelo;
 
 
-
+/**
+ * Esta clase fue creada para crear y mostrar mensajes por pantalla.
+ * Esta clase no es óptima ya que esta acoplada a bootstrap.
+ *
+ * Class Mensaje
+ * @package Controladoras
+ */
 class Mensaje
 {
 

@@ -43,6 +43,8 @@ class UsuarioBdDao implements UsuarioIDao
         $sentencia->bindParam(":idRoles", $idRoles);
 
         $sentencia->execute();
+
+        return $conexion->lastInsertId();
     }
 
     public function eliminarPorId($id)

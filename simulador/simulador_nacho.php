@@ -148,7 +148,7 @@ try {
 
         $numerador = $i + 1;
 
-        $progreso = floatval($numerador)/floatval($cantidad) * 100;
+        $progreso = floatval($numerador) / floatval($cantidad) * 100;
 
         echo $progreso . "% \n";
     }

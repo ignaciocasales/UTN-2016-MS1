@@ -43,6 +43,8 @@ class SensorSemaforoBdDao implements SensorIDao
         $sentencia->bindParam(":idSensor", $idSensor);
 
         $sentencia->execute();
+
+        return $conexion->lastInsertId();
     }
 
     public function traerTodo()

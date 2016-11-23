@@ -43,6 +43,8 @@ class TitularBdDao implements TitularIDao
         $sentencia->bindParam(":idUsuarios", $idUsuarios);
 
         $sentencia->execute();
+
+        return $conexion->lastInsertId();
     }
 
     public function eliminarPorId($id)
@@ -111,8 +113,9 @@ class TitularBdDao implements TitularIDao
         if (!empty($this->listado)) return $this->listado;
     }
 
-    public function traerPorIdUsuario($id){
-        $sql = "SELECT * FROM $this->tabla WHERE id_usuarios = '$id'";
+    public function traerPorIdUsuario($idUsuario)
+    {
+        $sql = "SELECT * FROM $this->tabla WHERE id_usuarios = '$idUsuario'";
 
         $conexion = Conexion::conectar();
 
@@ -127,6 +130,7 @@ class TitularBdDao implements TitularIDao
         if (!empty($this->listado[0])) return $this->listado[0];
 
     }
+
     public function traerPorId($id)
     {
         $sql = "SELECT * FROM $this->tabla WHERE id_titulares =  \"$id\" LIMIT 1";

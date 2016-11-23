@@ -8,6 +8,8 @@ use Dao\TitularBdDao;
 use Dao\UsuarioBdDao;
 use Dao\UsuarioJsonDao;
 use Dao\VehiculoBdDao;
+use Modelo\limpiarEntrada;
+use Modelo\Mensaje;
 use Modelo\Rol;
 use Modelo\Usuario;
 
@@ -17,8 +19,13 @@ class loginControladora
 
     public function __construct()
     {
+        /*
+         * Los Json DAO no fueron implementados, pero con
+         * descomentar las líneas de abajo debería el programa
+         * funcionar correctamente.
+         */
         $this->daoUsuario = UsuarioBdDao::getInstancia();
-
+        //$this->daoUsuario = UsuarioJsonDao::getInstancia();
     }
 
     public function index()
@@ -26,10 +33,15 @@ class loginControladora
         require("../Vistas/login.php");
     }
 
-    public
-    function verificar($mail, $pwd)
+    public function verificar($mail, $pwd)
     {
         try {
+            $limpiar = new LimpiarEntrada();
+
+            $mail = $limpiar->clean_input($mail);
+
+            $pwd = $limpiar->clean_input($pwd);
+
             if (isset($mail) && isset($pwd)) {
 
                 if ($mail === "" || $pwd === "") {

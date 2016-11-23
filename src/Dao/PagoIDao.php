@@ -7,8 +7,6 @@ interface PagoIDao
 {
     public function agregar($pago);
 
-    //No tiene sentido actualizar o eliminar un pago. Una vez pagado, ya está.
-
     public function traerTodo();
 
     public function traerPorId($id);

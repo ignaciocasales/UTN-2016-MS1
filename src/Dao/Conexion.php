@@ -6,24 +6,35 @@ class Conexion
 {
     public static function conectar()
     {
-        //esta es mi version del conectar, creo es mas optimo y mas legible
         $host = DB_HOST;
         $db = DB_NAME;
         $user = DB_USER;
         $pass = DB_PASS;
 
+        /*
+         * dsn: EL Nombre del Origen de Datos (DSN), contiene la información requerida
+         * para conectarse a la base de datos.
+         *
+         * dsn está formado por uri: seguido por un URI que define la ubicación de un
+         * fichero que contiene el string del DSN. El URI puede especificar un fichero
+         * local o un URL remoto.
+         */
         $dsn = "mysql:host=$host;dbname=$db;";
 
-        $dbh = new \PDO($dsn, $user, $pass);
+        /*
+         * Creo el objeto PDO y le seteo que devuelva errores.
+         */
+        $dbh = new \PDO($dsn, $user, $pass, array(\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION));
+
 
         if ($dbh) {
+
             return $dbh;
+
         } else {
+
             throw new \PDOException;
+
         }
-
-
-        //la linea de abajo la hizo adrian...
-        //return new \PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS);
     }
 }

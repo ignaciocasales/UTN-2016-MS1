@@ -47,6 +47,7 @@ class VehiculoBdDao implements VehiculoIDao
 
         $sentencia->execute();
 
+        return $conexion->lastInsertId();
     }
 
     public function eliminarPorId($id)
@@ -107,7 +108,8 @@ class VehiculoBdDao implements VehiculoIDao
         if (!empty($this->listado)) return $this->listado;
     }
 
-    public function traerPorIdTitular($id){
+    public function traerPorIdTitular($id)
+    {
         $sql = "SELECT * FROM $this->tabla WHERE id_titular = '$id'";
 
         $conexion = Conexion::conectar();
@@ -125,6 +127,7 @@ class VehiculoBdDao implements VehiculoIDao
         if (!empty($this->listado[0])) return $this->listado[0];
 
     }
+
     public function traerPorId($id)
     {
         $sql = "SELECT * FROM $this->tabla WHERE id_vehiculos =  \"$id\" LIMIT 1";

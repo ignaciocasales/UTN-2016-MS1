@@ -15,6 +15,8 @@ interface TitularIDao
 
     public function traeTodo();
 
+    public function traerPorIdUsuario($idUsuario);
+
     public function traerPorId($id);
 
     public function traerPorDni($dni);

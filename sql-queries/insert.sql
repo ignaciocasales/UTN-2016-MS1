@@ -51,24 +51,24 @@ VALUES
 
 INSERT INTO vehiculos (id_titulares, dominio, marca, modelo, qr)
 VALUES
-  ('1', 'ARK-230', 'Renault', 'Twingo', 'ARK-230'),
-  ('1', 'YBB-799', 'Peugeot', '206', 'YBB-799'),
-  ('2', 'AB-012-KR', 'Volkswagen', 'Vento', 'AB-012-KR'),
-  ('2', 'ITH-256', 'Volkswagen', 'Bora', 'ITH-256'),
-  ('3', 'EPK-713', 'Volkswagen', 'Caddy', 'EPK-713'),
-  ('4', 'AA-404-KY', 'Chevrolet', 'Classic', 'AA-404-KY'),
-  ('4', 'LOU-765', 'Peugeot', 'Partner', 'LOU-765'),
-  ('5', 'LOR-321', 'Volkswagen', 'Bora', 'LOR-321'),
-  ('6', 'FGT-564', 'Renault', 'Clio', 'FGT-564'),
-  ('6', 'HNK-125', 'Peugeot', '406', 'HNK-125'),
-  ('7', 'KFL-456', 'Nissan', '370z', 'KFL-456'),
-  ('7', 'JKL-876', 'Mitsubishi', 'Evolution', 'JKL-876'),
-  ('8', 'DLK-311', 'Toyota', 'Hilux', 'DLK-311'),
-  ('8', 'AAK-111', 'Audi', 'a3', 'AAK-111'),
-  ('9', 'AA-123-KY', 'Toyota', 'Etios', 'AA-123-KY'),
-  ('10', 'AA-675-KB', 'Audi', 'a6', 'AA-675-KB'),
-  ('10', 'AA-434-RK', 'Ford', 'Mondeo', 'AA-434-RK'),
-  ('11', 'LKL-123', 'Ford', 'Focus', 'LKL-123');
+  ('1', 'ARK-230', 'Renault', 'Twingo', 'Dominio: ARK-230'),
+  ('1', 'YBB-799', 'Peugeot', '206', 'Dominio: YBB-799'),
+  ('2', 'AB-012-KR', 'Volkswagen', 'Vento', 'Dominio: AB-012-KR'),
+  ('2', 'ITH-256', 'Volkswagen', 'Bora', 'Dominio: ITH-256'),
+  ('3', 'EPK-713', 'Volkswagen', 'Caddy', 'Dominio: EPK-713'),
+  ('4', 'AA-404-KY', 'Chevrolet', 'Classic', 'Dominio: AA-404-KY'),
+  ('4', 'LOU-765', 'Peugeot', 'Partner', 'Dominio: LOU-765'),
+  ('5', 'LOR-321', 'Volkswagen', 'Bora', 'Dominio: LOR-321'),
+  ('6', 'FGT-564', 'Renault', 'Clio', 'Dominio: FGT-564'),
+  ('6', 'HNK-125', 'Peugeot', '406', 'Dominio: HNK-125'),
+  ('7', 'KFL-456', 'Nissan', '370z', 'Dominio: KFL-456'),
+  ('7', 'JKL-876', 'Mitsubishi', 'Evolution', 'Dominio: JKL-876'),
+  ('8', 'DLK-311', 'Toyota', 'Hilux', 'Dominio: DLK-311'),
+  ('8', 'AAK-111', 'Audi', 'a3', 'Dominio: AAK-111'),
+  ('9', 'AA-123-KY', 'Toyota', 'Etios', 'Dominio: AA-123-KY'),
+  ('10', 'AA-675-KB', 'Audi', 'a6', 'Dominio: AA-675-KB'),
+  ('10', 'AA-434-RK', 'Ford', 'Mondeo', 'Dominio: AA-434-RK'),
+  ('11', 'LKL-123', 'Ford', 'Focus', 'Dominio: LKL-123');
 
 
 INSERT INTO tarifas (fecha_desde, fecha_hasta, multa, peaje_hora_normal, peaje_hora_pico)
