@@ -12,7 +12,6 @@
         $('[data-toggle="tooltip"]').tooltip();
     });
 </script>
-<script src="/js/jsEliminarVehiculo.js"></script>
 
 </body>
 
