@@ -13,35 +13,29 @@ class Request
     {
         $metodoRequest = $this->getMetodoRequest();
 
-        $url = filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL); /*
-        *
-        *Tuve que cambiar INPUT_GET por INPUT_SERVER  y  REQUEST_METHOD por REQUEST_URI para que funcione en mi
-        *localhost
-        */
-
+        $url = filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL);
 
         /**
-         * $url = filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_URL);
+         * Apache:
+         * $url = filter_input(INPUT_GET, 'REQUEST_METHOD', FILTER_SANITIZE_URL);
+         *
+         * Otro:
+         * $url = filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL);
          */
-
 
         /**
          * La función filter_input() obtiene una variable externa y opcionalmente la filtra.
          * Esta función se utiliza para validar las variables de fuentes inseguras, como la entrada de un usuario.
          */
 
-        $url = str_replace('index.php', '', $url);
-        //esto tambien tuve que agregar para que me direccione correctamente al login
-
+        $url = str_replace('index.php', '', $url);//esto tambien tuve que agregar para que me direccione correctamente al login
 
         $urlToArray = explode("/", $url);
-
 
         /**
          * Devuelve un array de string, siendo cada uno un substring del segundo parametro pasado formado
          * por la división realizada por los delimitadores indicados en el primer paramtro.
          */
-
 
         $ArregloUrl = array_filter($urlToArray);
 
@@ -57,7 +51,6 @@ class Request
          * Si la función callback devuelve true, el valor actual desde array es devuelto al array resultante.
          * Las claves del array se conservan.
          */
-
 
         if (empty($ArregloUrl)) {
             // Si Arreglo Url esta vacio, cargo el controlador por defecto y  cargo el index por defecto.
@@ -126,7 +119,7 @@ class Request
      * con el que se hizo el
      * Request
      *
-     * @return Array
+     * @return /Array
      */
     public function getParametros()
     {

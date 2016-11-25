@@ -180,7 +180,6 @@ class ConsultaControladora
     public function googlemaps($id){
 
         $maps = new Googlemaps();
-
         $obtener = $maps->extraer_latitud_longitud($id);
 
         require ("../Vistas/mapsSensor.php");
