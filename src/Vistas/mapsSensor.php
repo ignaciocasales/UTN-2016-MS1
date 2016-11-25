@@ -22,7 +22,7 @@
         </table>
 
 
-        <a class="btn btn-primary" href="<?php if ($obtener === 'multa') {
+        <a class="btn btn-primary" href="<?php if ($obtener['descripcion'] === 'multa') {
             echo '/consulta/sensoresMulta/';
         } else {
             echo '/consulta/sensoresPeaje/';
