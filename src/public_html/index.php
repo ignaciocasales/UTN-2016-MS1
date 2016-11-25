@@ -5,7 +5,10 @@
  */
 if (empty($_SESSION)) {
     session_start();
+
 }
+date_default_timezone_set('UTC');
+
 /*
  * Si quiero ver el identificador de sesión, descomento:
  *
