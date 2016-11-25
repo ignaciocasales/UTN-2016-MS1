@@ -1,4 +1,4 @@
-﻿USE TrafiMDQ;
+﻿/*USE TrafiMDQ;*/
 
 INSERT INTO roles (descripcion)
 VALUES

@@ -21,7 +21,8 @@
                         <th>Privilegios</th>
                         <th></th>
                         <th></th>
-                        <th><a href="#"><span class="glyphicon glyphicon-plus" title="Añadir" data-toggle="tooltip"
+                        <th><a href="#"><span class="glyphicon glyphicon-plus" title="(NO IMPLEMENTADO)"
+                                              data-toggle="tooltip"
                                               data-placement="right"></span></a></th>
                     </tr>
                     </thead>
@@ -34,10 +35,14 @@
                             <td><?php $o = $objeto->getRol();
                                 echo $o->getDescripcion(); ?></td>
 
-                            <td><a href="#"><span class="glyphicon glyphicon-pencil" title="Modificar"
-                                                  data-toggle="tooltip" data-placement="right"></span></a></td>
-                            <td><a href="#"><span class="glyphicon glyphicon-trash" title="Eliiminar"
-                                                  data-toggle="tooltip" data-placement="right"></span></a></td>
+                            <td><a href="#" class="disabled"><span class="glyphicon glyphicon-pencil"
+                                                                   title="(NO IMPLEMENTADO)"
+                                                                   data-toggle="tooltip" data-placement="right"></span></a>
+                            </td>
+                            <td><a href="#" class="disabled"><span class="glyphicon glyphicon-trash"
+                                                                   title="(NO IMPLEMENTADO)"
+                                                                   data-toggle="tooltip" data-placement="right"></span></a>
+                            </td>
                         </tr>
                     <?php } ?>
                     </tbody>

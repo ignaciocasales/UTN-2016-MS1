@@ -1,5 +1,5 @@
-CREATE DATABASE TrafiMDQ;
- USE TrafiMDQ; 
+/*CREATE DATABASE TrafiMDQ;
+ USE TrafiMDQ; */
 
 CREATE TABLE roles
 (
