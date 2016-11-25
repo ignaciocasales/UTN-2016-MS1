@@ -20,6 +20,7 @@ use Dao\UsuarioJsonDao;
 use Dao\VehiculoBdDao;
 use Dao\VehiculoJsonDao;
 use Modelo\Mensaje;
+use Modelo\QR;
 
 class ConsultaControladora
 {

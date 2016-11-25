@@ -13,6 +13,7 @@ ob_start("callback");
 $codeText = $param;
 
 // end of processing here
+
 $debugLog = ob_get_contents();
 ob_end_clean();
 
