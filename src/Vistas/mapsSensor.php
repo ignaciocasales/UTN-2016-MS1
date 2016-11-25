@@ -1,10 +1,32 @@
 <?php include('navbar.php'); ?>
 <div class="container lower-box box-primary">
-    <div clas ="container" >
+<div class="container">
 
 
-        <input type="button" onclick="init(<?= $obtener['longitud'] ?>,<?= $obtener['latitud'] ?>)" value="Mostrar mapa">
-        <div id="map" style="width: 1137px; height: 380px;"></div>
+          <table class="table">
+
+                  <thead>
+                  <tr>
+                      <th>Fecha Instalación</th>
+                      <th>Latitud | Longitud</th>
+                      <th>Número de Serie</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                      <td><?= $obtener['fechaalta'] ?></td>
+                      <td><?php echo $obtener['latitud']. ' | ' . $obtener['longitud'] ?></td>
+                      <td><?= $obtener['numeroserie'] ?></td>
+                  </tr>
+                </tbody>
+          </table>
+
+
+    <a class="btn btn-primary" href="aca nacho tenes que cambiarlooooooWWWWWWWAAAASd" role="button"><span class="glyphicon glyphicon-arrow-left"></span>Volver</a>
+    <input class="btn btn-primary" type="button" onclick="init(<?= $obtener['longitud'] ?>,<?= $obtener['latitud'] ?>)" value="Mostrar mapa">
+
+
+        <div id="map" style="width: 1137px; height: 373px;"></div>
 
         <script src="http://maps.google.com/maps/api/js?sensor=false"> </script>
         <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyDcvicJ0hoFQ8iVcqI1_qyC32bsHPML98I" async="" defer="defer" type="text/javascript"></script>
@@ -17,19 +39,24 @@
                 var mapOptions = {
                     center: new google.maps.LatLng(latitud,longitud),
                     zoom: 17,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                    zoomControl: false,
+                    scaleControl: false,
+                    mapTypeControl: false,
+                    mapTypeControlOptions: {
+                        style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+                    }
+
                 }
                 map = new google.maps.Map(document.getElementById("map"),mapOptions);
 
                 var place = new google.maps.LatLng(latitud,longitud);
                 marker = new google.maps.Marker({
                     position: place,
-                    title: "sdasdasd",
                     map: map
                 });
             }
         </script>
-
-    </div>
+  </div>
 </div>
+
 
