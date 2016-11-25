@@ -177,14 +177,25 @@ class ConsultaControladora
         }
     }
 
-    public function googlemaps($id){
+    public function googlemaps($id)
+    {
+        if ($_SESSION["rol"] === 'developer') {
 
-        $maps = new Googlemaps();
+            $maps = new Googlemaps();
 
-        $obtener = $maps->extraer_latitud_longitud($id);
+            $obtener = $maps->extraer_latitud_longitud($id);
 
-        require ("../Vistas/mapsSensor.php");
+            require("../Vistas/mapsSensor.php");
+
+        } else {
+
+            $mensaje = new Mensaje('danger', 'No posee los permisos necesarios !');
+
+            require("../Vistas/login.php");
+
+        }
     }
+
     public function sensoresMulta()
     {
         if ($_SESSION["rol"] === 'developer') {
@@ -210,6 +221,7 @@ class ConsultaControladora
         if ($_SESSION["rol"] === 'developer') {
 
             $daoSensorP = $this->daoSensorPeaje;
+
             $listado = $daoSensorP->traerTodo();
 
             $tipo = 'peaje';

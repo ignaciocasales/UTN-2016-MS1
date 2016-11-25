@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: David
- * Date: 23/11/2016
- * Time: 10:22 AM
- */
 
 namespace Controladoras;
 
@@ -39,10 +33,19 @@ class Googlemaps
     {
         return $this->daoPeaje;
     }
+
     public function extraer_latitud_longitud($id)
     {
-        $daoP=$this->daoPeaje;
-        $sensor= $daoP->traerPorId($id);
+        $daoP = $this->daoPeaje;
+        $daoS = $this->daoSemaforo;
+
+        $sensor = $daoP->traerPorId($id);
+        if (!$sensor) {
+            $sensor = $daoS->traerPorId($id);
+            $descripcion = 'multa';
+        } else {
+            $descripcion = 'peaje';
+        }
         $fechaalta = $sensor->getFechaAlta();
         $numeroserie = $sensor->getNumeroSerie();
         $latitud = $sensor->getLatitud();
@@ -50,9 +53,11 @@ class Googlemaps
         $arreglo = array(
             "latitud" => $latitud,
             "longitud" => $longitud,
-             "numeroserie" => $numeroserie,
-             "fechaalta" => $fechaalta
+            "numeroserie" => $numeroserie,
+            "fechaalta" => $fechaalta,
+            "descripcion" => $descripcion
         );
+
         return $arreglo;
 
     }

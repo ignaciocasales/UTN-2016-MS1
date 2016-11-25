@@ -77,9 +77,13 @@ class SensorPeajeBdDao implements SensorIDao
 
         $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
 
-        $this->mapear($dataSet);
+        if ($dataSet[0] == false) {
+            return null;
+        } else {
+            $this->mapear($dataSet);
 
-        if (!empty($this->listado[0])) return $this->listado[0];
+            if (!empty($this->listado[0])) return $this->listado[0];
+        }
     }
 
     public function traerCualquiera()
