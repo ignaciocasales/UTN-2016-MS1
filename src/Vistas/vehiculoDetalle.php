@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-xs-3 box-right-content">
                     <img
-                        src="/generadorQR.php?qr=<?= $vehiculo->getQR(); ?>"
+                        src="/img/qr/<?= $vehiculo->getDominio() . '.png'; ?>"
                         title="Vehiculo" class="img-responsive img-thumbnail"/>
                 </div>
                 <div class="col-xs-9">

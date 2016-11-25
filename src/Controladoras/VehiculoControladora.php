@@ -9,6 +9,7 @@ use Dao\VehiculoBdDao;
 use Dao\VehiculoJsonDao;
 use Modelo\limpiarEntrada;
 use Modelo\Mensaje;
+use Modelo\QR;
 use Modelo\Vehiculo;
 
 class vehiculoControladora
@@ -37,6 +38,7 @@ class vehiculoControladora
      * @param $marcaModelo
      * @param $patente
      */
+
     public function darAltaVehiculo($dni, $marcaModelo, $patente)
     {
         /*
@@ -71,9 +73,9 @@ class vehiculoControladora
              * El qr lo guardo como un string que luego se genera
              * en un qr de formato png.
              */
-            $qr = 'Dominio: ' . $dominio;
+            $qrContenido= 'Dominio: ' . $dominio . "\n" . 'Titular: ' . $titular->getNombre() . ' ' . $titular->getApellido();
 
-            $vehiculo = new Vehiculo($dominio, $mm[0], $mm[1], $titular, $qr);
+            $vehiculo = new Vehiculo($dominio, $mm[0], $mm[1], $titular, $qrContenido);
 
             try {
 
@@ -83,6 +85,9 @@ class vehiculoControladora
                 $daoVehiculo = $this->daoVehiculo;
 
                 $daoVehiculo->agregar($vehiculo);
+
+                $qr = new QR();
+                $qr->generarQR($qrContenido,$vehiculo->getDominio());
 
                 $mensaje = new Mensaje('success', 'Se ha cargado el vehiculo con éxito !');
 
