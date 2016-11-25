@@ -9,14 +9,14 @@ namespace Config;
 
 // Constantes Base de datos.
 define("DB_NAME", "trafimdq");
-<<<<<<< HEAD
 define("DB_USER", "damiSQL");
 define("DB_PASS", "ppw123");
-=======
+define("DB_HOST", "localhost");
+
+/*
 define("DB_USER", "root");
 define("DB_PASS", "ckl123");
->>>>>>> 66876586346fb2c8d62a2191b03bf980b4bfc50f
-define("DB_HOST", "localhost");
+define("DB_HOST", "localhost"); */
 
 // Constantes front
 define('ROOT', dirname(__DIR__) . "/");
