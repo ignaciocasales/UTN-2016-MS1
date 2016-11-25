@@ -16,6 +16,8 @@ class Googlemaps
 {
     private $latitud;
     private $longitud;
+    private $fechaalta;
+    private $numeroserie;
     private $daoPeaje;
     private $daoSemaforo;
 
@@ -41,12 +43,15 @@ class Googlemaps
     {
         $daoP=$this->daoPeaje;
         $sensor= $daoP->traerPorId($id);
-
-       $latitud = $sensor->getLatitud();
+        $fechaalta = $sensor->getFechaAlta();
+        $numeroserie = $sensor->getNumeroSerie();
+        $latitud = $sensor->getLatitud();
         $longitud = $sensor->getLongitud();
         $arreglo = array(
             "latitud" => $latitud,
-            "longitud" => $longitud
+            "longitud" => $longitud,
+             "numeroserie" => $numeroserie,
+             "fechaalta" => $fechaalta
         );
         return $arreglo;
 
