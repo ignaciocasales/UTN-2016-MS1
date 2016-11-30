@@ -2,30 +2,22 @@
 
 namespace Controladoras;
 
-
 use Dao\ModeloMarcaDao;
 use Dao\RolBdDao;
-use Dao\RolJsonDao;
 use Dao\TitularBdDao;
-use Dao\TitularJsonDao;
 use Dao\UsuarioBdDao;
-use Dao\UsuarioJsonDao;
 use Modelo\Mensaje;
-use Modelo\Rol;
 use Modelo\Titular;
 use Modelo\Usuario;
 
-class titularControladora
+class TitularControladora
 {
     private $daoRol;
-
     private $daoUsuario;
-
     private $daoTitular;
-
     private $daoMarcaModelo;
 
-    function __construct()
+    public function __construct()
     {
         /*
          * Los Json DAO no fueron implementados, pero con
@@ -68,19 +60,20 @@ class titularControladora
 
             $this->daoTitular->agregar($titular);
 
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $nombre = "titular";
 
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $mensaje = new Mensaje('success', 'Se registro un titular con éxito !');
 
             require("../Vistas/verificarDni.php");
-
         } catch (\Exception $error) {
 
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $mensaje = new Mensaje('success', 'Hubo un error al procesar los datos !');
 
             require("../Vistas/verificarDni.php");
         }
-
     }
 
     public function verificar($dni)
@@ -89,35 +82,31 @@ class titularControladora
             $titular = $this->existe($dni);
 
             if ($titular != null) {
-
                 $daoMarcaModelo = $this->daoMarcaModelo;
 
+                /** @noinspection PhpUnusedLocalVariableInspection */
                 $listado = $daoMarcaModelo->traerTodo();
 
                 include("../Vistas/altaVehiculo.php");
-
             } else {
-
                 $this->registrar($dni);
-
             }
         }
     }
 
     protected function existe($dni)
     {
-        $dao = TitularBdDao::getInstancia();
-        //$dao = TitularJsonDao::getInstancia();
+        $daoTitular = $this->daoTitular;
 
-        $array = $dao->traerPorDni($dni);
+        /** @var Titular $titular */
+        $titular = $daoTitular->traerPorDni($dni);
 
-        if (!empty($array)) {
-            if ($dni === $array->getDni()) {
-                return $array;
+        if (!empty($titular)) {
+            if ($dni === $titular->getDni()) {
+                return $titular;
             }
-        } else {
-            return null;
         }
+        return null;
     }
 
     public function registrar($dni)

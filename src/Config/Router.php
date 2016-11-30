@@ -2,7 +2,6 @@
 
 namespace Config;
 
-
 class Router
 {
 

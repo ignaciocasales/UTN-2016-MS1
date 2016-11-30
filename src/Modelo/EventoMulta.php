@@ -8,13 +8,13 @@ class EventoMulta
     private $fechaYhora;
     private $sensorSemaforo = null;
 
-    function __construct($fecha_hora, $sensorSemaforo)
+    public function __construct($fecha_hora, $sensorSemaforo)
     {
         $this->fechaYhora = $fecha_hora;
         $this->sensorSemaforo = $sensorSemaforo;
     }
 
-    function __destruct()
+    public function __destruct()
     {
     }
 
@@ -47,13 +47,4 @@ class EventoMulta
     {
         return $this->sensorSemaforo;
     }
-
-    public function jsonSerialize()
-    {
-        return [
-            'fecha_hora' => $this->fechaYhora,
-            'sensorSemaforo' => $this->sensorSemaforo,
-        ];
-    }
-
 }

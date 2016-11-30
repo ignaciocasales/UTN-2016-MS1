@@ -2,21 +2,11 @@
 
 namespace Config;
 
-    /**
-     * define('ROOT', dirname(dirname(__FILE__)) . DS); //str_replace("/", "\\", $_SERVER['CONTEXT_DOCUMENT_ROOT'] . $_SERVER['REQUEST_URI']));
-     * define('__ROOT__', dirname(dirname(__FILE__)));
-     */
-
 // Constantes Base de datos.
 define("DB_NAME", "trafimdq");
 define("DB_USER", "root");
 define("DB_PASS", "ckl123");
 define("DB_HOST", "localhost");
-
-/*
-define("DB_USER", "root");
-define("DB_PASS", "ckl123");
-define("DB_HOST", "localhost"); */
 
 // Constantes front
 define('ROOT', dirname(__DIR__) . "/");

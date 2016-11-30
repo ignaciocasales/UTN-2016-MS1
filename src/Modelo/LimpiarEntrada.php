@@ -10,7 +10,7 @@ namespace Modelo;
  * Class limpiarEntrada
  * @package Controladoras
  */
-class limpiarEntrada
+class LimpiarEntrada
 {
 
     public function __construct()
@@ -23,7 +23,7 @@ class limpiarEntrada
      * @param $value
      * @return mixed|string
      */
-    function clean_input($value)
+    public function cleanInput($value)
     {
         //Hago una lista de los caracteres no deseados.
         $bad_chars = array("{", "}", "(", ")", ";", ":", "<", ">", "/", "$");
@@ -32,9 +32,7 @@ class limpiarEntrada
         $value = htmlentities($value); // Elimina cualquier entidad HTML
         $value = strip_tags($value); // Elimina posibles tags
         if (get_magic_quotes_gpc()) {
-
             $value = stripslashes($value); // Elimina comillas
-
         }
         return $value;
     }

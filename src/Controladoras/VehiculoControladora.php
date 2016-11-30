@@ -7,7 +7,7 @@ use Dao\TitularBdDao;
 use Dao\TitularJsonDao;
 use Dao\VehiculoBdDao;
 use Dao\VehiculoJsonDao;
-use Modelo\limpiarEntrada;
+use Modelo\LimpiarEntrada;
 use Modelo\Mensaje;
 use Modelo\QR;
 use Modelo\Vehiculo;
@@ -89,6 +89,7 @@ class vehiculoControladora
                 $qr = new QR();
                 $qr->generarQR($qrContenido,$vehiculo->getDominio());
 
+                /** @noinspection PhpUnusedLocalVariableInspection */
                 $mensaje = new Mensaje('success', 'Se ha cargado el vehiculo con éxito !');
 
                 require("../Vistas/verificarDni.php");
@@ -96,12 +97,14 @@ class vehiculoControladora
 
             } catch (\PDOException $e) {
 
+                /** @noinspection PhpUnusedLocalVariableInspection */
                 $mensaje = new Mensaje('danger', 'Se ha producio un error. Posible Dominio duplicado / Campos vacíos !');
 
                 require('../Vistas/verificarDni.php');
 
             } catch (\Exception $error) {
 
+                /** @noinspection PhpUnusedLocalVariableInspection */
                 $mensaje = new Mensaje('danger', 'Se ha producio un error !');
 
                 require('../Vistas/verificarDni.php');
@@ -117,8 +120,10 @@ class vehiculoControladora
              */
             $daoTitular = $this->daoTitular;
 
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $titular = $daoTitular->traerPorDni($dni);
 
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $mensaje = new Mensaje('warning', 'Verifique los campos !');
 
             require('../Vistas/altaVehiculo.php');
@@ -158,9 +163,9 @@ class vehiculoControladora
              * Uso la funcion strtoupper(), para obtener los string de
              * las patentes en mayúsculas.
              */
-            if ((preg_match("/^[a-zA-Z]+$/", $limpiar->clean_input($patente[2]))) && (preg_match("/^[0-9]+$/", $limpiar->clean_input($patente[3]))) && (preg_match("/^[a-zA-Z]+$/", $limpiar->clean_input($patente[4])))) {
+            if ((preg_match("/^[a-zA-Z]+$/", $limpiar->cleanInput($patente[2]))) && (preg_match("/^[0-9]+$/", $limpiar->cleanInput($patente[3]))) && (preg_match("/^[a-zA-Z]+$/", $limpiar->cleanInput($patente[4])))) {
 
-                $dominio = strtoupper($limpiar->clean_input($patente[2])) . '-' . $limpiar->clean_input($patente[3]) . '-' . strtoupper($limpiar->clean_input($patente[4]));
+                $dominio = strtoupper($limpiar->cleanInput($patente[2])) . '-' . $limpiar->cleanInput($patente[3]) . '-' . strtoupper($limpiar->cleanInput($patente[4]));
 
                 return $dominio;
 
@@ -178,9 +183,9 @@ class vehiculoControladora
              * Uso la funcion strtoupper(), para obtener los string de
              * las patentes en mayúsculas.
              */
-            if ((preg_match("/^[a-zA-Z]+$/", $limpiar->clean_input($patente[0]))) && (preg_match("/^[0-9]+$/", $limpiar->clean_input($patente[1])))) {
+            if ((preg_match("/^[a-zA-Z]+$/", $limpiar->cleanInput($patente[0]))) && (preg_match("/^[0-9]+$/", $limpiar->cleanInput($patente[1])))) {
 
-                $dominio = strtoupper($limpiar->clean_input($patente[0])) . '-' . $limpiar->clean_input($patente[1]);
+                $dominio = strtoupper($limpiar->cleanInput($patente[0])) . '-' . $limpiar->cleanInput($patente[1]);
 
                 return $dominio;
             }
@@ -198,14 +203,17 @@ class vehiculoControladora
 
             $daoVehiculo->eliminarPorDominio($patente);
 
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $listado = $daoVehiculo->traerTodo();
 
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $mensaje = new Mensaje('success', 'Se elimino el vehiculo correctamente!');
 
             require("../Vistas/consultaVehiculos.php");
 
         } catch (\Exception $e) {
 
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $mensaje = new Mensaje('danger', 'No se pudo eliminar el vehiculo');
 
             require('../Vistas/consultaVehiculos.php');
@@ -218,14 +226,17 @@ class vehiculoControladora
 
             $daoVehiculoModal = $this->daoVehiculo;
 
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $listado = $daoVehiculoModal->traerTodo();
 
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $vehiculo = $daoVehiculoModal->traerPorId($idVehiculo);
 
             require("../Vistas/consultaVehiculos.php");
 
         } catch (\Exception $e) {
 
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $mensaje = new Mensaje('danger', 'Error inesperado, intente mas tarde');
 
             require('../Vistas/consultaVehiculos.php');

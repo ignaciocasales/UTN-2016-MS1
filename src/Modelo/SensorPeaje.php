@@ -9,5 +9,4 @@ class SensorPeaje extends Sensor
     {
         parent::__construct($fechaAlta, $latitud, $longitud, $numeroSerie);
     }
-
 }

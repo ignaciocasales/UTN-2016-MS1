@@ -8,12 +8,12 @@ use Dao\TitularBdDao;
 use Dao\UsuarioBdDao;
 use Dao\UsuarioJsonDao;
 use Dao\VehiculoBdDao;
-use Modelo\limpiarEntrada;
+use Modelo\LimpiarEntrada;
 use Modelo\Mensaje;
 use Modelo\Rol;
 use Modelo\Usuario;
 
-class loginControladora
+class LoginControladora
 {
     private $daoUsuario;
 
@@ -38,47 +38,42 @@ class loginControladora
         try {
             $limpiar = new LimpiarEntrada();
 
-            $mail = $limpiar->clean_input($mail);
+            $mail = $limpiar->cleanInput($mail);
 
-            $pwd = $limpiar->clean_input($pwd);
+            $pwd = $limpiar->cleanInput($pwd);
 
             if (isset($mail) && isset($pwd)) {
-
                 if ($mail === "" || $pwd === "") {
-
+                    /** @noinspection PhpUnusedLocalVariableInspection */
                     $mensaje = new Mensaje('warning', 'Debe llenar todos los campos !');
-
                 } else {
-
                     $daoU = $this->daoUsuario;
-
+                    /** @var Usuario $usuario */
                     $usuario = $daoU->traerPorMail($mail);
 
                     if ($mail === $usuario->getEmail() && $pwd === $usuario->getPassword()) {
-
                         $rol = $usuario->getRol();
 
                         $_SESSION["mail"] = $mail;
                         $_SESSION["pwd"] = $pwd;
                         $_SESSION["rol"] = $rol->getDescripcion();
 
-                        $mensaje = new Mensaje('success', 'Ha iniciado sesión satisfactoriamente ! Se ha logueado como' . ' ' . '<i><u>' . $usuario->getEmail() . '</i></u>');
-
+                        /** @noinspection PhpUnusedLocalVariableInspection */
+                        $mensaje = new Mensaje('success', 'Ha iniciado sesión satisfactoriamente 
+                        ! Se ha logueado como' . ' ' . '<i><u>' . $usuario->getEmail() . '</i></u>');
                     } else {
-
+                        /** @noinspection PhpUnusedLocalVariableInspection */
                         $mensaje = new Mensaje('warning', 'Datos de inicio de sesión incorrectos !');
-
                     }
                 }
             } else {
 
+                /** @noinspection PhpUnusedLocalVariableInspection */
                 $mensaje = new Mensaje('danger', 'Error al iniciar sesión, intentelo más tarde !');
-
             }
         } catch (\PDOException $e) {
-
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $mensaje = new Mensaje('danger', 'Hubo un error al conectarse con la base de datos !');
-
         }
 
         require("../Vistas/login.php");

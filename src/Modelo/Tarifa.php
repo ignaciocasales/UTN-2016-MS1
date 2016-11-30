@@ -12,16 +12,16 @@ class Tarifa
     private $peajeHorasNormal;
     private $peajeHorasPico;
 
-    function __construct($fecha_desde, $fecha_hasta, $multa, $peaje_horas_normal, $peaje_horas_pico)
+    public function __construct($fechaDesde, $fechaHasta, $multa, $peajeHorasNormal, $peajeHorasPico)
     {
-        $this->fechaDesde = $fecha_desde;
-        $this->fechaHasta = $fecha_hasta;
+        $this->fechaDesde = $fechaDesde;
+        $this->fechaHasta = $fechaHasta;
         $this->multa = $multa;
-        $this->peajeHorasNormal = $peaje_horas_normal;
-        $this->peajeHorasPico = $peaje_horas_pico;
+        $this->peajeHorasNormal = $peajeHorasNormal;
+        $this->peajeHorasPico = $peajeHorasPico;
     }
 
-    function __destruct()
+    public function __destruct()
     {
     }
 

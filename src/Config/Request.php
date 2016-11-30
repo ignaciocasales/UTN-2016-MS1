@@ -28,7 +28,8 @@ class Request
          * Esta función se utiliza para validar las variables de fuentes inseguras, como la entrada de un usuario.
          */
 
-        $url = str_replace('index.php', '', $url);//esto tambien tuve que agregar para que me direccione correctamente al login
+        //esto tambien tuve que agregar para que me direccione correctamente al login
+        $url = str_replace('index.php', '', $url);
 
         $urlToArray = explode("/", $url);
 
@@ -63,19 +64,14 @@ class Request
         }
 
         if ($metodoRequest == 'GET') {
-
             if (!empty($ArregloUrl)) {
                 $this->parametros = $ArregloUrl;
             }
-
         } else {
-
             if (!empty($_POST)) {
                 $this->parametros = $_POST;
             }
-
         }
-
     }
 
     /**

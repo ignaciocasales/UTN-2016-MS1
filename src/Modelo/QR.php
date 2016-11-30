@@ -1,17 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Damian
- * Date: 24/11/2016
- * Time: 10:34 PM
- */
 
 namespace Modelo;
 
-
 class QR
 {
-    public function generarQR($qr,$dominio){
+    public function generarQR($qr, $dominio)
+    {
 
         include('../lib/phpqrcode/qrlib.php');
         include('../lib/config.php');
@@ -24,18 +18,19 @@ class QR
 
         // we need to generate filename somehow,
         // with md5 or with database ID used to obtains $codeContents...
-        $fileName = $dominio.'.png';
+        $fileName = $dominio . '.png';
 
-        $pngAbsoluteFilePath = $tempDir.$fileName;
-        $urlRelativeFilePath = EXAMPLE_TMP_URLRELPATH.$fileName;
+        $pngAbsoluteFilePath = $tempDir . $fileName;
+        /** @noinspection PhpUnusedLocalVariableInspection */
+        $urlRelativeFilePath = EXAMPLE_TMP_URLRELPATH . $fileName;
 
         // generating
         if (!file_exists($pngAbsoluteFilePath)) {
             \QRcode::png($codeContents, $pngAbsoluteFilePath);
-           // echo 'File generated!';
-           // echo '<hr />';
+            // echo 'File generated!';
+            // echo '<hr />';
         } else {
-           // echo 'File already generated! We can use this cached file to speed up site on common codes!';
+            // echo 'File already generated! We can use this cached file to speed up site on common codes!';
             //echo '<hr />';
         }
 

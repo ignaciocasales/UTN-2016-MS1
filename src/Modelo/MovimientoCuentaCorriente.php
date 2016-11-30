@@ -12,14 +12,14 @@ class MovimientoCuentaCorriente
     private $cuentaCorriente;
 
 
-    function __construct($fechaYhora, $importe, $cuentaCorriente)
+    public function __construct($fechaYhora, $importe, CuentaCorriente $cuentaCorriente)
     {
         $this->fechaYhora = $fechaYhora;
         $this->importe = $importe;
         $this->cuentaCorriente = $cuentaCorriente;
     }
 
-    function __destruct()
+    public function __destruct()
     {
     }
 
@@ -36,13 +36,11 @@ class MovimientoCuentaCorriente
     public function setImporte($importe)
     {
         $this->importe = $importe;
-
     }
 
     public function setEventoPeaje($eventoP)
     {
         $this->eventoPeaje = $eventoP;
-
     }
 
     public function setEventoMulta($eventoM)
@@ -84,5 +82,4 @@ class MovimientoCuentaCorriente
     {
         return $this->cuentaCorriente;
     }
-
 }

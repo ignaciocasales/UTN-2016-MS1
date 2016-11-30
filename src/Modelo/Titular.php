@@ -11,7 +11,7 @@ class Titular
     private $telefono;
     private $Usuario;
 
-    function __construct($nombre, $apellido, $dni, $telefono, $usuario)
+    public function __construct($nombre, $apellido, $dni, $telefono, Usuario $usuario)
     {
         $this->apellido = $apellido;
         $this->dni = $dni;
@@ -20,7 +20,7 @@ class Titular
         $this->Usuario = $usuario;
     }
 
-    function __destruct()
+    public function __destruct()
     {
     }
 
@@ -83,5 +83,4 @@ class Titular
     {
         return $this->Usuario;
     }
-
 }

@@ -273,7 +273,8 @@ if (!class_exists('QRcode', false)) {
 		function str_split($string, $split_length=1) {
 			if ((strlen($string) > $split_length) OR (!$split_length)) {
 				do {
-					$c = strlen($string);
+                    /** @noinspection PhpUnusedLocalVariableInspection */
+                    $c = strlen($string);
 					$parts[] = substr($string, 0, $split_length);
 					$string = substr($string, $split_length);
 				} while ($string !== false);
@@ -1100,7 +1101,8 @@ if (!class_exists('QRcode', false)) {
 		 */
 		 protected function makeMaskNo($maskNo, $width, $s, &$d, $maskGenOnly=false) {
 			$b = 0;
-			$bitMask = array();
+             /** @noinspection PhpUnusedLocalVariableInspection */
+             $bitMask = array();
 			$bitMask = $this->generateMaskNo($maskNo, $width, $s, $d);
 			if ($maskGenOnly) {
 				return;
@@ -1169,7 +1171,8 @@ if (!class_exists('QRcode', false)) {
 		 * @return int demerit
 		 */
 		 protected function evaluateSymbol($width, $frame) {
-			$head = 0;
+             /** @noinspection PhpUnusedLocalVariableInspection */
+             $head = 0;
 			$demerit = 0;
 			for ($y=0; $y<$width; ++$y) {
 				$head = 0;
@@ -1232,8 +1235,10 @@ if (!class_exists('QRcode', false)) {
 		 */
 		 protected function mask($width, $frame, $level) {
 			$minDemerit = PHP_INT_MAX;
-			$bestMaskNum = 0;
-			$bestMask = array();
+             /** @noinspection PhpUnusedLocalVariableInspection */
+             $bestMaskNum = 0;
+             /** @noinspection PhpUnusedLocalVariableInspection */
+             $bestMask = array();
 			$checked_masks = array(0, 1, 2, 3, 4, 5, 6, 7);
 			if (QR_FIND_FROM_RANDOM !== false) {
 				$howManuOut = 8 - (QR_FIND_FROM_RANDOM % 9);
@@ -1246,7 +1251,8 @@ if (!class_exists('QRcode', false)) {
 			$bestMask = $frame;
 			foreach ($checked_masks as $i) {
 				$mask = array_fill(0, $width, str_repeat("\0", $width));
-				$demerit = 0;
+                /** @noinspection PhpUnusedLocalVariableInspection */
+                $demerit = 0;
 				$blacks = 0;
 				$blacks  = $this->makeMaskNo($i, $width, $frame, $mask);
 				$blacks += $this->writeFormatInformation($width, $mask, $i, $level);

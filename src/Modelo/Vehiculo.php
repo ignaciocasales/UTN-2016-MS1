@@ -11,7 +11,7 @@ class Vehiculo
     private $QR;
     private $titular;
 
-    function __construct($dominio = '', $marca = '', $modelo = '', $titular, $qr)
+    public function __construct($dominio, $marca, $modelo, Titular $titular, $qr)
     {
         $this->dominio = $dominio;
         $this->marca = $marca;
@@ -20,7 +20,7 @@ class Vehiculo
         $this->QR = $qr;
     }
 
-    function __destruct()
+    public function __destruct()
     {
     }
 
@@ -83,5 +83,4 @@ class Vehiculo
     {
         return $this->QR;
     }
-
 }

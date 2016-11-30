@@ -7,12 +7,12 @@ class Rol
     private $id;
     private $descripcion;
 
-    function __construct($descripcion)
+    public function __construct($descripcion)
     {
         $this->descripcion = $descripcion;
     }
 
-    function __destruct()
+    public function __destruct()
     {
     }
 
@@ -35,5 +35,4 @@ class Rol
     {
         return $this->descripcion;
     }
-
 }

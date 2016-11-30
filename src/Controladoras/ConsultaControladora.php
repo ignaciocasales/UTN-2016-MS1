@@ -2,25 +2,20 @@
 
 namespace Controladoras;
 
-
 use Dao\CuentaCorrienteBdDao;
-use Dao\CuentaCorrienteJsonDao;
 use Dao\MovimientoCuentaCorrienteBdDao;
-use Dao\MovimientoCuentaCorrienteJsonDao;
 use Dao\SensorPeajeBdDao;
-use Dao\SensorPeajeJsonDao;
 use Dao\SensorSemaforoBdDao;
-use Dao\SensorSemaforoJsonDao;
 use Dao\TarifaBdDao;
-use Dao\TarifaJsonDao;
 use Dao\TitularBdDao;
-use Dao\TitularJsonDao;
 use Dao\UsuarioBdDao;
-use Dao\UsuarioJsonDao;
 use Dao\VehiculoBdDao;
-use Dao\VehiculoJsonDao;
+use Modelo\CuentaCorriente;
+use Modelo\Googlemaps;
 use Modelo\Mensaje;
-use Modelo\QR;
+use Modelo\Titular;
+use Modelo\Usuario;
+use Modelo\Vehiculo;
 
 class ConsultaControladora
 {
@@ -68,15 +63,14 @@ class ConsultaControladora
     public function todosUsuarios()
     {
         if ($_SESSION["rol"] === 'developer') {
-
             $daoU = $this->daoUsuario;
 
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $listado = $daoU->traerTodo();
 
             require("../Vistas/consultaUsuarios.php");
-
         } else {
-
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $mensaje = new Mensaje('danger', 'No posee los permisos necesarios !');
 
             require("../Vistas/login.php");
@@ -86,56 +80,50 @@ class ConsultaControladora
     public function usuarioVehiculos()
     {
         if ($_SESSION["rol"] === 'titular') {
-
             $daoV = $this->daoVehiculo;
             $daoT = $this->daoTitular;
 
             $daoU = $this->daoUsuario;
+
+            /** @var Usuario $usuario */
             $usuario = $daoU->traerPorMail($_SESSION['mail']);
 
-
+            /** @var Titular $titular */
             $titular = $daoT->traerPorIdUsuario($usuario->getId());
+
             $listadoVehiculos = $daoV->traerTodo();
 
             $listado = [];
 
+            /** @var Vehiculo $vehiculo */
             foreach ($listadoVehiculos as $vehiculo) {
-
+                /** @var Titular $t */
                 $t = $vehiculo->getTitular();
 
                 if ($t->getId() === $titular->getId()) {
-
                     $listado[] = $vehiculo;
-
                 }
-
             }
-
             require("../Vistas/consultaVehiculos.php");
-
         } else {
-
             $this->todosVehiculos();
-
         }
     }
 
     public function todosVehiculos()
     {
         if ($_SESSION["rol"] === 'developer') {
-
             $daoV = $this->daoVehiculo;
 
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $listado = $daoV->traerTodo();
 
             require("../Vistas/consultaVehiculos.php");
-
         } else {
-
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $mensaje = new Mensaje('danger', 'No posee los permisos necesarios !');
 
             require("../Vistas/login.php");
-
         }
     }
 
@@ -143,6 +131,7 @@ class ConsultaControladora
     {
         $daoV = $this->daoVehiculo;
 
+        /** @noinspection PhpUnusedLocalVariableInspection */
         $vehiculo = $daoV->traerPorId($id);
 
         require("../Vistas/vehiculoDetalle.php");
@@ -151,109 +140,106 @@ class ConsultaControladora
     public function movimientos($idVehiculo)
     {
         if ($_SESSION["rol"] === 'titular') {
-
             $daoV = $this->daoVehiculo;
+            /** @var Vehiculo $vehiculo */
             $vehiculo = $daoV->traerPorId($idVehiculo);
 
             $daoCC = $this->daoCuentaCorriente;
+            /** @var CuentaCorriente $cuentaCorriente */
             $cuentaCorriente = $daoCC->traerPorId($vehiculo->getId());
 
             $daoMCC = $this->daoMovimientoCuentaCorriente;
             $listadoMovimientos = $daoMCC->traerTodoPorIdCuentaCorriente($cuentaCorriente->getId());
 
             if (!$listadoMovimientos) {
-
+                /** @noinspection PhpUnusedLocalVariableInspection */
                 $mensaje = new Mensaje('warning', 'No se registraron movimientos !');
-
             }
 
             require("../Vistas/consultaMovimientos.php");
-
         } else {
-
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $mensaje = new Mensaje('danger', 'No tiene permisos !');
 
             require("../Vistas/login.php");
-
         }
     }
 
     public function googlemaps($id)
     {
         if ($_SESSION["rol"] === 'developer') {
-
             $maps = new Googlemaps();
 
-            $obtener = $maps->extraer_latitud_longitud($id);
+            /** @noinspection PhpUnusedLocalVariableInspection */
+            $obtener = $maps->extraerLatitudLongitud($id);
 
             require("../Vistas/mapsSensor.php");
 
         } else {
-
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $mensaje = new Mensaje('danger', 'No posee los permisos necesarios !');
 
             require("../Vistas/login.php");
-
         }
     }
 
     public function sensoresMulta()
     {
         if ($_SESSION["rol"] === 'developer') {
-
             $daoSensorM = $this->daoSensorMulta;
+
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $listado = $daoSensorM->traerTodo();
 
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $tipo = 'multa';
 
             require("../Vistas/consultaSensores.php");
 
         } else {
-
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $mensaje = new Mensaje('danger', 'No posee los permisos necesarios !');
 
             require("../Vistas/login.php");
-
         }
     }
 
     public function sensoresPeaje()
     {
         if ($_SESSION["rol"] === 'developer') {
-
             $daoSensorP = $this->daoSensorPeaje;
 
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $listado = $daoSensorP->traerTodo();
 
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $tipo = 'peaje';
 
             require("../Vistas/consultaSensores.php");
 
         } else {
-
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $mensaje = new Mensaje('danger', 'No posee los permisos necesarios !');
 
             require("../Vistas/login.php");
-
         }
     }
 
     public function tarifas()
     {
         if ($_SESSION["rol"] === 'developer' || $_SESSION["rol"] === 'empleado') {
-
             $daoTariffa = $this->daoTarifas;
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $listado = $daoTariffa->traeTodo();
 
 
             require("../Vistas/consultaTarifas.php");
 
         } else {
-
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $mensaje = new Mensaje('danger', 'No posee los permisos necesarios !');
 
             require("../Vistas/login.php");
-
         }
     }
 }

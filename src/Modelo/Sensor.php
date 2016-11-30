@@ -10,7 +10,7 @@ class Sensor
     private $longitud;
     private $numeroSerie;
 
-    function __construct($fechaAlta, $latitud, $longitud, $numeroSerie)
+    public function __construct($fechaAlta, $latitud, $longitud, $numeroSerie)
     {
         $this->fechaAlta = $fechaAlta;
         $this->latitud = $latitud;
@@ -18,7 +18,7 @@ class Sensor
         $this->numeroSerie = $numeroSerie;
     }
 
-    function __destruct()
+    public function __destruct()
     {
     }
 
@@ -26,6 +26,7 @@ class Sensor
     {
         $this->id = $id;
     }
+
     public function setFechaAlta($fecha)
     {
         $this->fechaAlta = $fecha;
@@ -70,5 +71,4 @@ class Sensor
     {
         return $this->numeroSerie;
     }
-
 }

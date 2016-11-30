@@ -1208,6 +1208,7 @@
         //----------------------------------------------------------------------
         public function estimateBitStreamSizeOfEntry($version)
         {
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $bits = 0;
 
             if($version == 0) 
@@ -1371,6 +1372,7 @@
                 throw new Exception('insertStructuredAppendHeader wrong index');
             }
 
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $buf = array($size, $index, $parity);
             
             try {
@@ -1543,6 +1545,7 @@
         public function estimateVersion()
         {
             $version = 0;
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $prev = 0;
             do {
                 $prev = $version;
@@ -2397,14 +2400,18 @@
         //----------------------------------------------------------------------
         public function encode_rs_char($data, &$parity)
         {
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $MM       =& $this->mm;
             $NN       =& $this->nn;
             $ALPHA_TO =& $this->alpha_to;
             $INDEX_OF =& $this->index_of;
             $GENPOLY  =& $this->genpoly;
             $NROOTS   =& $this->nroots;
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $FCR      =& $this->fcr;
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $PRIM     =& $this->prim;
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $IPRIM    =& $this->iprim;
             $PAD      =& $this->pad;
             $A0       =& $NN;
@@ -2613,6 +2620,7 @@
         public function makeMaskNo($maskNo, $width, $s, &$d, $maskGenOnly = false) 
         {
             $b = 0;
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $bitMask = array();
             
             $fileName = QR_CACHE_DIR.'mask_'.$maskNo.DIRECTORY_SEPARATOR.'mask_'.$width.'_'.$maskNo.'.dat';
@@ -2689,6 +2697,7 @@
         //----------------------------------------------------------------------
         public function evaluateSymbol($width, $frame)
         {
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $head = 0;
             $demerit = 0;
 
@@ -2757,7 +2766,9 @@
         public function mask($width, $frame, $level)
         {
             $minDemerit = PHP_INT_MAX;
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $bestMaskNum = 0;
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $bestMask = array();
             
             $checked_masks = array(0,1,2,3,4,5,6,7);
@@ -2778,7 +2789,9 @@
             foreach($checked_masks as $i) {
                 $mask = array_fill(0, $width, str_repeat("\0", $width));
 
+                /** @noinspection PhpUnusedLocalVariableInspection */
                 $demerit = 0;
+                /** @noinspection PhpUnusedLocalVariableInspection */
                 $blacks = 0;
                 $blacks  = $this->makeMaskNo($i, $width, $frame, $mask);
                 $blacks += $this->writeFormatInformation($width, $mask, $i, $level);
@@ -2789,6 +2802,7 @@
                 if($demerit < $minDemerit) {
                     $minDemerit = $demerit;
                     $bestMask = $mask;
+                    /** @noinspection PhpUnusedLocalVariableInspection */
                     $bestMaskNum = $i;
                 }
             }

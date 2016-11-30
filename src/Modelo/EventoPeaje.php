@@ -8,13 +8,13 @@ class EventoPeaje
     private $fechaYhora;
     private $sensorPeaje = null;
 
-    function __construct($fecha_hora, $sensorPeaje)
+    public function __construct($fecha_hora, SensorPeaje $sensorPeaje)
     {
         $this->fechaYhora = $fecha_hora;
         $this->sensorPeaje = $sensorPeaje;
     }
 
-    function __destruct()
+    public function __destruct()
     {
     }
 
@@ -47,5 +47,4 @@ class EventoPeaje
     {
         return $this->sensorPeaje;
     }
-
 }

@@ -8,13 +8,13 @@ class Pago
     private $fecha;
     private $movimientoCuentaCorriente;
 
-    function __construct($fecha, $movimientoCuentaCorriente)
+    public function __construct($fecha, MovimientoCuentaCorriente $movimientoCuentaCorriente)
     {
         $this->fecha = $fecha;
         $this->movimientoCuentaCorriente = $movimientoCuentaCorriente;
     }
 
-    function __destruct()
+    public function __destruct()
     {
     }
 
@@ -47,5 +47,4 @@ class Pago
     {
         return $this->movimientoCuentaCorriente;
     }
-
 }

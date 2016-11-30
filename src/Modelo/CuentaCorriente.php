@@ -10,7 +10,7 @@ class CuentaCorriente
     private $saldo;
     private $vehiculo;
 
-    function __construct($fechaUltimaActualizacion, $maximoCredito, $saldo, $vehiculo)
+    public function __construct($fechaUltimaActualizacion, $maximoCredito, $saldo, Vehiculo $vehiculo)
     {
         $this->fechaUltimaActualizacion = $fechaUltimaActualizacion;
         $this->maximoCredito = $maximoCredito;
@@ -18,7 +18,7 @@ class CuentaCorriente
         $this->vehiculo = $vehiculo;
     }
 
-    function __destruct()
+    public function __destruct()
     {
     }
 
@@ -32,9 +32,9 @@ class CuentaCorriente
         $this->fechaUltimaActualizacion = $fechaUltimaActualizacion;
     }
 
-    public function setMaximoCredito($mCredito)
+    public function setMaximoCredito($credito)
     {
-        $this->maximoCredito = $mCredito;
+        $this->maximoCredito = $credito;
     }
 
     public function getId()
