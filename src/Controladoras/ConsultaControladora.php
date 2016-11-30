@@ -31,8 +31,8 @@ class ConsultaControladora
     public function __construct()
     {
         /*
-         * Los Json DAO no fueron implementados, pero con
-         * descomentar las líneas de abajo debería el programa
+         * Los Json DAO no fueron implementados, pero en caso de habelo sido,
+         * con descomentar las líneas de abajo hubiera debido el programa de
          * funcionar correctamente.
          */
         $this->daoVehiculo = VehiculoBdDao::getInstancia();
@@ -112,16 +112,24 @@ class ConsultaControladora
 
     public function todosVehiculos()
     {
-        if ($_SESSION["rol"] === 'developer') {
-            $daoV = $this->daoVehiculo;
+        try {
+            if ($_SESSION["rol"] === 'developer') {
+                $daoV = $this->daoVehiculo;
 
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $listado = $daoV->traerTodo();
+                /** @noinspection PhpUnusedLocalVariableInspection */
+                $listado = $daoV->traerTodo();
 
-            require("../Vistas/consultaVehiculos.php");
-        } else {
+                if (!$listado) {
+                    throw new \Exception('No hay vehiculos almacenados !');
+                }
+
+                require("../Vistas/consultaVehiculos.php");
+            } else {
+                throw new \Exception('No posee los permisos necesarios !');
+            }
+        } catch (\Exception $e) {
             /** @noinspection PhpUnusedLocalVariableInspection */
-            $mensaje = new Mensaje('danger', 'No posee los permisos necesarios !');
+            $mensaje = new Mensaje('danger', $e->getMessage());
 
             require("../Vistas/login.php");
         }

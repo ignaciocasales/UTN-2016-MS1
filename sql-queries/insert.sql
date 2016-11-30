@@ -25,13 +25,13 @@ VALUES
   ('ArnaldoSalazar@dominio.com', '123', '3'),
   ('FacundoLeiva@dominio.com', '123', '3'),
   ('KevinSoto@dominio.com', '123', '3'),
-  ('YonathanSánchez@dominio.com', '123', '3'),
+  ('YonathanSanchez@dominio.com', '123', '3'),
   ('LouisMolina@dominio.com', '123', '3'),
-  ('DannyPérez@dominio.com', '123', '3'),
-  ('NehemíasTapia@dominio.com', '123', '3'),
-  ('JoshuaGutiérrez@dominio.com', '123', '3'),
-  ('BastíanCampos@dominio.com', '123', '3'),
-  ('MathíasReyes@dominio.com', '123', '3'),
+  ('DannyPerez@dominio.com', '123', '3'),
+  ('NehemiasTapia@dominio.com', '123', '3'),
+  ('JoshuaGutierrez@dominio.com', '123', '3'),
+  ('BastianCampos@dominio.com', '123', '3'),
+  ('MathiasReyes@dominio.com', '123', '3'),
   ('KarimCarvajal@dominio.com', '123', '3');
 
 INSERT INTO titulares (id_usuarios, dni, nombre, apellido, telefono)

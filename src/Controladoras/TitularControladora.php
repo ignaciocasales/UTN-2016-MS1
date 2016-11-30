@@ -20,8 +20,8 @@ class TitularControladora
     public function __construct()
     {
         /*
-         * Los Json DAO no fueron implementados, pero con
-         * descomentar las líneas de abajo debería el programa
+         * Los Json DAO no fueron implementados, pero en caso de habelo sido,
+         * con descomentar las líneas de abajo hubiera debido el programa de
          * funcionar correctamente.
          */
         $this->daoTitular = TitularBdDao::getInstancia();

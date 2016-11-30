@@ -16,12 +16,13 @@ use Modelo\Usuario;
 class LoginControladora
 {
     private $daoUsuario;
+    private $mensaje;
 
     public function __construct()
     {
         /*
-         * Los Json DAO no fueron implementados, pero con
-         * descomentar las líneas de abajo debería el programa
+         * Los Json DAO no fueron implementados, pero en caso de habelo sido,
+         * con descomentar las líneas de abajo hubiera debido el programa de
          * funcionar correctamente.
          */
         $this->daoUsuario = UsuarioBdDao::getInstancia();
@@ -33,7 +34,7 @@ class LoginControladora
         require("../Vistas/login.php");
     }
 
-    public function verificar($mail, $pwd)
+    public function logueando($mail, $pwd)
     {
         try {
             $limpiar = new LimpiarEntrada();
@@ -44,8 +45,7 @@ class LoginControladora
 
             if (isset($mail) && isset($pwd)) {
                 if ($mail === "" || $pwd === "") {
-                    /** @noinspection PhpUnusedLocalVariableInspection */
-                    $mensaje = new Mensaje('warning', 'Debe llenar todos los campos !');
+                    $this->mensaje = new Mensaje('warning', 'Debe llenar todos los campos !');
                 } else {
                     $daoU = $this->daoUsuario;
                     /** @var Usuario $usuario */
@@ -53,28 +53,26 @@ class LoginControladora
 
                     if ($mail === $usuario->getEmail() && $pwd === $usuario->getPassword()) {
                         $rol = $usuario->getRol();
-
+                        //Seteo las variables de sesión.
                         $_SESSION["mail"] = $mail;
                         $_SESSION["pwd"] = $pwd;
                         $_SESSION["rol"] = $rol->getDescripcion();
-
-                        /** @noinspection PhpUnusedLocalVariableInspection */
-                        $mensaje = new Mensaje('success', 'Ha iniciado sesión satisfactoriamente 
+                        //Mensaje de success
+                        $this->mensaje = new Mensaje('success', 'Ha iniciado sesión satisfactoriamente 
                         ! Se ha logueado como' . ' ' . '<i><strong>' . $usuario->getEmail() . '</strong></i>');
                     } else {
-                        /** @noinspection PhpUnusedLocalVariableInspection */
-                        $mensaje = new Mensaje('warning', 'Datos de inicio de sesión incorrectos !');
+                        $this->mensaje = new Mensaje('warning', 'Datos de inicio de sesión incorrectos !');
                     }
                 }
             } else {
-                /** @noinspection PhpUnusedLocalVariableInspection */
-                $mensaje = new Mensaje('danger', 'Error al iniciar sesión, intentelo más tarde !');
+                throw new \Exception('Error al iniciar sesión, intentelo más tarde !');
             }
         } catch (\PDOException $e) {
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $mensaje = new Mensaje('danger', 'Hubo un error al conectarse con la base de datos !');
+            $this->mensaje = new Mensaje('danger', 'Hubo un error al conectarse con la base de datos !');
+        } catch (\Exception $exception) {
+            $this->mensaje = new Mensaje('danger', $exception->getMessage());
         }
-
+        //Siempre me vuelvo al login.
         require("../Vistas/login.php");
     }
 }

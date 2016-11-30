@@ -76,27 +76,31 @@ $max_date = '2016-12-31 23:59:59';
 //Repito n veces, según se indique por parámetro pasado al script.
 try {
     for ($i = 0; $i <= $cantidad - 1; $i++) {
-
         //Me genero una fecha aleatoria.
         $fechaAleatoria = rand_date($min_date, $max_date);
 
         //Me traigo todos los vehiculos y con 'array_rand()' me traigo el indice aleatorio de un objeto del arreglo.
+        /** @var ArrayObject \Modelo\Vehiculo $vehiculos */
         $vehiculos = $daoVehiculo->traerTodo();
         $vehiculoKey = array_rand($vehiculos, 1);
+        /** @var \Modelo\Vehiculo $v */
+        $v = $vehiculos[$vehiculoKey];
 
         //Me traigo la cuenta corriente del vehiculo seleccionado aleatoriamente en el paso anterior.
-        $cuentaCorriente = $daoCC->traerPorId($vehiculos[$vehiculoKey]->getId());
+        /** @var \Modelo\CuentaCorriente $cuentaCorriente */
+        $cuentaCorriente = $daoCC->traerPorId($v->getId());
 
         //Me traigo la tarifa correspondie a la fecha aleatoria.
+        /** @var \Modelo\Tarifa $tarifas */
         $tarifas = $daoTarifa->traerPorFecha(date('Y-m-d H:i:s', $fechaAleatoria));
 
         //Selecciono aleatoriamente el evento. Si va a ser multa o peaje.
         $eventoKey = array_rand($eventos, 1);
 
         //Si es multa, cargo el movimiento correspondiente con la tarifa correspondiente.
-        //Si es peaje, cargo el movimiento correspondiente con la tarifa correspondiente ya además verifico si es hora pico u hora normal.
+        //Si es peaje, cargo el movimiento correspondiente con la tarifa correspondiente
+        // y además verifico si es hora pico u hora normal.
         if ($eventos[$eventoKey] === 'multa') {
-
             $sensores = $daoSemaforo->traerCualquiera();
 
             $evento = new \Modelo\EventoMulta(date('Y-m-d H:i:s', $fechaAleatoria), $sensores);
@@ -107,11 +111,13 @@ try {
             $cuentaCorriente->setFechaUltimaActualizacion(date('Y-m-d H:i:s', $fechaAleatoria));
             $daoCC->actualizar($cuentaCorriente);
 
-            $movimientoCuentaCorriente = new \Modelo\MovimientoCuentaCorriente(date('Y-m-d H:i:s', $fechaAleatoria), $tarifas->getMulta(), $cuentaCorriente);
+            $movimientoCuentaCorriente = new \Modelo\MovimientoCuentaCorriente(
+                date('Y-m-d H:i:s', $fechaAleatoria),
+                $tarifas->getMulta(),
+                $cuentaCorriente
+            );
             $movimientoCuentaCorriente->setEventoMulta($evento);
-
-        } else if ($eventos[$eventoKey] === 'peaje') {
-
+        } elseif ($eventos[$eventoKey] === 'peaje') {
             $sensores = $daoPeaje->traerCualquiera();
 
             $evento = new \Modelo\EventoPeaje(date('Y-m-d H:i:s', $fechaAleatoria), $sensores);
@@ -125,23 +131,24 @@ try {
 
             $hora = strtotime(date('H:i:s', $fechaAleatoria));
 
-            if (($hora >= $horaPicoManianaDesde && $hora <= $horaPicoManianaHasta) || ($hora >= $horaPicoTardeDesde && $hora <= $horaPicoTardeHasta)) {
-
+            if (($hora >= $horaPicoManianaDesde && $hora <= $horaPicoManianaHasta)
+                || ($hora >= $horaPicoTardeDesde && $hora <= $horaPicoTardeHasta)
+            ) {
                 $importe = $tarifas->getPeajeHorasPico();
-
             } else {
-
                 $importe = $tarifas->getPeajeHorasNormal();
-
             }
 
             $cuentaCorriente->setSaldo($cuentaCorriente->getSaldo() - $importe);
             $cuentaCorriente->setFechaUltimaActualizacion(date('Y-m-d H:i:s', $fechaAleatoria));
             $daoCC->actualizar($cuentaCorriente);
 
-            $movimientoCuentaCorriente = new \Modelo\MovimientoCuentaCorriente(date('Y-m-d H:i:s', $fechaAleatoria), $importe, $cuentaCorriente);
+            $movimientoCuentaCorriente = new \Modelo\MovimientoCuentaCorriente(
+                date('Y-m-d H:i:s', $fechaAleatoria),
+                $importe,
+                $cuentaCorriente
+            );
             $movimientoCuentaCorriente->setEventoPeaje($evento);
-
         }
 
         $daoMovimientoCuentaCorriente->agregar($movimientoCuentaCorriente);
@@ -152,15 +159,10 @@ try {
 
         echo $progreso . "% \n";
     }
-
     echo 'Se genero' . ' ' . $cantidad . ' ' . 'evento/s';
-
 } catch (\PDOException $e) {
-
     print_r($e->errorInfo);
-
 }
-
 
 function rand_date($min_date, $max_date)
 {

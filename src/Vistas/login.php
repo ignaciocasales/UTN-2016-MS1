@@ -25,7 +25,7 @@
         <?php } else { ?>
             <div class="col-xs-12 col-sm-12 col-md-4">
                 <h3>Iniciar Sesión</h3>
-                <form method="post" action="/login/verificar/">
+                <form method="post" action="/login/logueando/">
                     <div class="form-group <?php include("estadosValidacionFormularios.php"); ?>">
                         <label for="usuario">Usuario</label>
                         <input type="email" name="mail" class="form-control" id="usuario"
@@ -45,8 +45,9 @@
                             <input type="checkbox" disabled> Recordarme
                         </label>
                     </div>
-                    <a href="/" class="pull-left" title="No implementado" data-toggle="tooltip" data-placement="bottom">¿Olvidaste
-                        tu contraseña?</a>
+                    <a href="/" class="pull-left" title="No implementado" data-toggle="tooltip" data-placement="bottom">
+                        ¿Olvidaste tu contraseña?
+                    </a>
                     <button type="submit" class="btn btn-primary pull-right">Inicie Sesión</button>
                 </form>
             </div>

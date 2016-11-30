@@ -21,9 +21,6 @@
                         <th>Privilegios</th>
                         <th></th>
                         <th></th>
-                        <th><a href="#"><span class="glyphicon glyphicon-plus" title="(NO IMPLEMENTADO)"
-                                              data-toggle="tooltip"
-                                              data-placement="right"></span></a></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -37,11 +34,17 @@
 
                             <td><a href="#" class="disabled"><span class="glyphicon glyphicon-pencil"
                                                                    title="(NO IMPLEMENTADO)"
-                                                                   data-toggle="tooltip" data-placement="right"></span></a>
+                                                                   data-toggle="tooltip" data-placement="right">
+
+                                    </span>
+                                </a>
                             </td>
                             <td><a href="#" class="disabled"><span class="glyphicon glyphicon-trash"
                                                                    title="(NO IMPLEMENTADO)"
-                                                                   data-toggle="tooltip" data-placement="right"></span></a>
+                                                                   data-toggle="tooltip" data-placement="right">
+
+                                    </span>
+                                </a>
                             </td>
                         </tr>
                     <?php } ?>
