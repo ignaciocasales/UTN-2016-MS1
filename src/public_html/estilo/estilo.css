@@ -7,8 +7,7 @@ hr {
 /*Reescribo Bootstrap.
 -------------------------------------------------- */
 .navbar {
-    margin-bottom: 70px;
-    margin-top: 15px;
+    margin-bottom: 10px;
 }
 
 .navbar-brand {
@@ -109,12 +108,12 @@ body {
 
 /* Estilo para posicionar los alert.
 -------------------------------------------------- */
+.alert-off {
+    min-height: 54px;
+}
+
 #message {
-    position: fixed;
-    top: 85px;
-    left: 0;
     width: 100%;
-    /* margin-left: 264px;*/
 }
 
 #inner-message {

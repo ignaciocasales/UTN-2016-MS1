@@ -89,25 +89,27 @@
     </div><!-- /.container-fluid -->
 </nav>
 
-<?php if (isset($mensaje)) { ?>
-    <div id="message" class="container">
-        <div>
-            <div id="inner-message" class="alert alert-<?= $mensaje->getTipo(); ?> alert-dismissible fade"
-                 role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
+
+<div id="message" class="container" style="min-height: 54px;">
+    <div>
+        <div id="inner-message" class="alert <?php if (isset($mensaje)) { ?>
+                                                    <?php echo 'alert-' . $mensaje->getTipo(); ?>
+                                                    <?php } ?>
+                                                    alert-dismissible fade"
+             role="alert">
+
+            <?php if (isset($mensaje)) { ?>
                 <?= $mensaje->getMensaje(); ?>
-            </div>
+            <?php } ?>
         </div>
     </div>
-    <script>
-        function showAlert() {
-            $("#inner-message").addClass("in");
-        }
+</div>
+<script>
+    function showAlert() {
+        $("#inner-message").addClass("in");
+    }
 
-        window.setTimeout(function () {
-            showAlert();
-        }, 250);
-    </script>
-<?php } ?>
-
+    window.setTimeout(function () {
+        showAlert();
+    }, 250);
+</script>

@@ -60,14 +60,13 @@ class LoginControladora
 
                         /** @noinspection PhpUnusedLocalVariableInspection */
                         $mensaje = new Mensaje('success', 'Ha iniciado sesión satisfactoriamente 
-                        ! Se ha logueado como' . ' ' . '<i><u>' . $usuario->getEmail() . '</i></u>');
+                        ! Se ha logueado como' . ' ' . '<i><strong>' . $usuario->getEmail() . '</strong></i>');
                     } else {
                         /** @noinspection PhpUnusedLocalVariableInspection */
                         $mensaje = new Mensaje('warning', 'Datos de inicio de sesión incorrectos !');
                     }
                 }
             } else {
-
                 /** @noinspection PhpUnusedLocalVariableInspection */
                 $mensaje = new Mensaje('danger', 'Error al iniciar sesión, intentelo más tarde !');
             }

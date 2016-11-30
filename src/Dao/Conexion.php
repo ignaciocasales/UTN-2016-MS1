@@ -28,13 +28,9 @@ class Conexion
 
 
         if ($dbh) {
-
             return $dbh;
-
         } else {
-
             throw new \PDOException;
-
         }
     }
 }
