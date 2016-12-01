@@ -65,13 +65,15 @@
                                     </label>
                                 </div>
                             </div>
-                            <form method='POST' action="/vehiculo/darAltaVehiculo/">
+                            <form method='POST' action="<?= '/vehiculo/alta/' ?>">
                                 <input type="hidden" name="dni" value="<?php echo $titular->getDni(); ?>" readonly>
                                 <div class="form-group">
                                     <label for="marcaModelo">Marca | Modelo</label><br>
                                     <select name="marcaModelo" id="marcaModelo" style="width: 100%;">
-                                        <?php foreach ($listado as $marcaModelo) { ?>
-                                            <option><?= $marcaModelo['marca'] . ' | ' . $marcaModelo['modelo'] ?></option>
+                                        <?php foreach ($this->listado as $marcaModelo) { ?>
+                                            <option>
+                                                <?= $marcaModelo['marca'] . ' | ' . $marcaModelo['modelo'] ?>
+                                            </option>
                                         <?php } ?>
                                     </select>
                                 </div>

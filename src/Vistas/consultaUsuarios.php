@@ -7,7 +7,9 @@
     Esta tabla esta pensada para los usuarios.
 -->
 <div class="container lower-box box-primary">
-    <h4 class="text-center">Usuarios del Sistema</h4>
+    <h4 class="text-center">
+        Usuarios registrados en el Sistema
+    </h4>
 </div>
 <div class="container">
     <div class="row">
@@ -16,42 +18,58 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th>Mail</th>
-                        <th>Password</th>
-                        <th>Privilegios</th>
+                        <th>
+                            Mail
+                        </th>
+                        <th>
+                            Password
+                        </th>
+                        <th>
+                            Privilegios
+                        </th>
                         <th></th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php
-                    foreach ($listado as $objeto) { ?>
+                    /** @var \Modelo\Usuario $objeto */
+                    foreach ($this->listado as $objeto) {
+                        ?>
                         <tr>
-                            <td><?= $objeto->getEmail(); ?></td>
-                            <td><?= $objeto->getPassword(); ?></td>
-                            <td><?php $o = $objeto->getRol();
-                                echo $o->getDescripcion(); ?></td>
-
-                            <td><a href="#" class="disabled"><span class="glyphicon glyphicon-pencil"
-                                                                   title="(NO IMPLEMENTADO)"
-                                                                   data-toggle="tooltip" data-placement="right">
-
+                            <td>
+                                <?= $objeto->getEmail(); ?>
+                            </td>
+                            <td>
+                                <?= $objeto->getPassword(); ?>
+                            </td>
+                            <td>
+                                <?php
+                                $o = $objeto->getRol();
+                                echo $o->getDescripcion();
+                                ?>
+                            </td>
+                            <td>
+                                <a href="#" class="disabled">
+                                    <span class="glyphicon glyphicon-pencil" title="No implementado..."
+                                          data-toggle="tooltip" data-placement="right">
                                     </span>
                                 </a>
                             </td>
-                            <td><a href="#" class="disabled"><span class="glyphicon glyphicon-trash"
-                                                                   title="(NO IMPLEMENTADO)"
-                                                                   data-toggle="tooltip" data-placement="right">
-
+                            <td>
+                                <a href="#" class="disabled">
+                                    <span class="glyphicon glyphicon-trash" title="No implementado..."
+                                          data-toggle="tooltip" data-placement="right">
                                     </span>
                                 </a>
                             </td>
                         </tr>
-                    <?php } ?>
+                        <?php
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-

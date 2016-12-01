@@ -3,13 +3,15 @@
 namespace Dao;
 
 
+use Modelo\CuentaCorriente;
+
 interface CuentaCorrienteIDao
 {
-    public function agregar($cuentaCorriente);
+    public function agregar(CuentaCorriente $cuentaCorriente);
 
     public function eliminar($id);
 
-    public function actualizar($cuentaCorriente);
+    public function actualizar(CuentaCorriente $cuentaCorriente);
 
     public function traerTodo();
 

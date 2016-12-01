@@ -12,11 +12,13 @@ use Modelo\Usuario;
 
 class TitularControladora
 {
+    //daos
     private $daoRol;
     private $daoUsuario;
     private $daoTitular;
     private $daoMarcaModelo;
 
+    private $listado;
     public function __construct()
     {
         /*
@@ -36,12 +38,12 @@ class TitularControladora
         $this->daoMarcaModelo = ModeloMarcaDao::getInstancia();
     }
 
-    public function buscarDni()
+    public function buscar()
     {
         require("../Vistas/verificarDni.php");
     }
 
-    public function darAltaTitular($nombre, $apellido, $dni, $telefono, $email, $password)
+    public function alta($nombre, $apellido, $dni, $telefono, $email, $password)
     {
 
         $daoR = $this->daoRol;
@@ -60,16 +62,12 @@ class TitularControladora
 
             $this->daoTitular->agregar($titular);
 
-            /** @noinspection PhpUnusedLocalVariableInspection */
             $nombre = "titular";
 
-            /** @noinspection PhpUnusedLocalVariableInspection */
             $mensaje = new Mensaje('success', 'Se registro un titular con éxito !');
 
             require("../Vistas/verificarDni.php");
         } catch (\Exception $error) {
-
-            /** @noinspection PhpUnusedLocalVariableInspection */
             $mensaje = new Mensaje('success', 'Hubo un error al procesar los datos !');
 
             require("../Vistas/verificarDni.php");
@@ -84,8 +82,7 @@ class TitularControladora
             if ($titular != null) {
                 $daoMarcaModelo = $this->daoMarcaModelo;
 
-                /** @noinspection PhpUnusedLocalVariableInspection */
-                $listado = $daoMarcaModelo->traerTodo();
+                $this->listado = $daoMarcaModelo->traerTodo();
 
                 include("../Vistas/altaVehiculo.php");
             } else {

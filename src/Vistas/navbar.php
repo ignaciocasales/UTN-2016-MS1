@@ -1,6 +1,7 @@
+<!-- Navbar -->
 <nav class="navbar navbar-default bg-pri">
     <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
+        <!-- Navbar Header -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#responsiveMenu" aria-expanded="false">
@@ -15,56 +16,107 @@
                      data-placement="bottom">
             </a>
         </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- /Navbar Header -->
+        <!-- Navbar Links -->
         <div class="collapse navbar-collapse" id="responsiveMenu">
             <?php
             if ((isset($_SESSION["mail"]) && $_SESSION["pwd"])) {
                 ?>
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-haspopup="true"
-                           aria-expanded="false">
-                            Consultas <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <?php if ($_SESSION["rol"] === 'titular') { ?>
-                                <li><a href="/consulta/usuarioVehiculos/">Vehículos</a></li>
-                            <?php } ?>
-                            <?php if ($_SESSION["rol"] === 'developer') { ?>
-                                <li><a href="/consulta/todosUsuarios/">Usuarios</a></li>
-                                <li><a href="/consulta/todosVehiculos/">Vehiculos</a></li>
-                                <li><a href="/consulta/sensoresPeaje/">Sensores de Peaje</a></li>
-                                <li><a href="/consulta/sensoresMulta/">Sensores de Multa</a></li>
-                                <li><a href="/consulta/tarifas/">Tarifas</a></li>
-                            <?php } ?>
-                            <?php if ($_SESSION["rol"] === 'empleado') { ?>
-                                <li><a href="/consulta/tarifas/">Tarifas</a></li>
-                            <?php } ?>
-                        </ul>
-                    </li>
-                    <li class="disabled">
-                        <?php if ($_SESSION["rol"] === 'titular') { ?>
-                            <a href="/index.php">
-                                Reclamos <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                <?php if ($_SESSION["rol"] === 'developer') { ?>
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                Consultas
+                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                             </a>
-                        <?php } ?>
-                    </li>
-                    <?php if ($_SESSION["rol"] === 'empleado' || $_SESSION["rol"] === 'developer') { ?>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="<?= '/consulta/usuarios/' ?>">Usuarios</a>
+                                </li>
+                                <li>
+                                    <a href="<?= '/consulta/vehiculos/' ?>">Vehiculos</a>
+                                </li>
+                                <li>
+                                    <a href="<?= '/consulta/sensoresPeaje/' ?>">Peajes</a>
+                                </li>
+                                <li>
+                                    <a href="<?= '/consulta/sensoresMulta/' ?>">Semáforos</a>
+                                </li>
+                                <li>
+                                    <a href="<?= '/consulta/tarifas/' ?>">Tarifas</a>
+                                </li>
+                            </ul>
+                        </li>
                         <li>
-                            <a href="/titular/buscarDni/">
-                                Registrar Vehiculo <span class="glyphicon glyphicon-plus-sign"
-                                                         aria-hidden="true"></span>
+                            <a href="<?= '/titular/buscar/' ?>">
+                                Registrar Vehiculo
+                                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
                             </a>
                         </li>
                         <li>
-                            <a href="/simulacion/simular/">
-                                Simulación <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
+                            <a href="<?= '/simulacion/cargar/' ?>">
+                                Simulación
+                                <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
                             </a>
                         </li>
-                    <?php } ?>
-                </ul>
+                    </ul>
+                <?php } ?>
+
+                <?php if ($_SESSION["rol"] === 'empleado') { ?>
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                Consultas
+                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="<?= '/consulta/tarifas/' ?>">Tarifas</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="<?= '/titular/buscar/' ?>">
+                                Registrar Vehiculo
+                                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= '/simulacion/cargar/' ?>">
+                                Simulación
+                                <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                    </ul>
+                <?php } ?>
+
+                <?php if ($_SESSION["rol"] === 'titular') { ?>
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                Consultas
+                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="<?= '/consulta/usuarioVehiculos/' ?>">Mis Vehículos</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="disabled">
+                            <a href="/">
+                                Reclamos
+                                <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                    </ul>
+                <?php } ?>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a href="/logout/terminar/">
@@ -85,25 +137,27 @@
                 <?php
             }
             ?>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+        <!-- /Navbar Links -->
+    </div>
 </nav>
-
-
+<!-- /Navbar-->
+<!-- Este espacio es para los mensajes a los usuarios -->
 <div id="message" class="container" style="min-height: 54px;">
     <div>
-        <div id="inner-message" class="alert <?php if (isset($mensaje)) { ?>
-                                                    <?php echo 'alert-' . $mensaje->getTipo(); ?>
+        <div id="inner-message" class="alert <?php if (isset($this->mensaje)) { ?>
+                                                    <?php echo 'alert-' . $this->mensaje->getTipo(); ?>
                                                     <?php } ?>
                                                     alert-dismissible fade"
              role="alert">
 
-            <?php if (isset($mensaje)) { ?>
-                <?= $mensaje->getMensaje(); ?>
+            <?php if (isset($this->mensaje)) { ?>
+                <?= $this->mensaje->getMensaje(); ?>
             <?php } ?>
         </div>
     </div>
 </div>
+<!-- Script que genera animación de 'fade in' sobre los alerts -->
 <script>
     function showAlert() {
         $("#inner-message").addClass("in");
@@ -113,3 +167,4 @@
         showAlert();
     }, 250);
 </script>
+<!-- / Mensajes -->

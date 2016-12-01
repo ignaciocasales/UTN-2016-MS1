@@ -2,24 +2,22 @@
 
 namespace Controladoras;
 
-use Dao\RolBdDao;
-use Dao\RolJsonDao;
-use Dao\TitularBdDao;
 use Dao\UsuarioBdDao;
-use Dao\UsuarioJsonDao;
-use Dao\VehiculoBdDao;
 use Modelo\LimpiarEntrada;
 use Modelo\Mensaje;
-use Modelo\Rol;
 use Modelo\Usuario;
 
 class LoginControladora
 {
+    //daos
     private $daoUsuario;
+
     private $mensaje;
+    private $limpiar;
 
     public function __construct()
     {
+        $this->limpiar= new LimpiarEntrada();
         /*
          * Los Json DAO no fueron implementados, pero en caso de habelo sido,
          * con descomentar las líneas de abajo hubiera debido el programa de
@@ -37,11 +35,9 @@ class LoginControladora
     public function logueando($mail, $pwd)
     {
         try {
-            $limpiar = new LimpiarEntrada();
+            $this->limpiar->cleanInput($mail);
 
-            $mail = $limpiar->cleanInput($mail);
-
-            $pwd = $limpiar->cleanInput($pwd);
+            $this->limpiar->cleanInput($pwd);
 
             if (isset($mail) && isset($pwd)) {
                 if ($mail === "" || $pwd === "") {
@@ -72,7 +68,7 @@ class LoginControladora
         } catch (\Exception $exception) {
             $this->mensaje = new Mensaje('danger', $exception->getMessage());
         }
-        //Siempre me vuelvo al login.
+        //Siempre llevo al usuario al login.
         require("../Vistas/login.php");
     }
 }

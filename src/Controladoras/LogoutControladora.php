@@ -2,8 +2,12 @@
 
 namespace Controladoras;
 
+use Modelo\Mensaje;
+
 class LogoutControladora
 {
+    private $mensaje;
+
     public function __construct()
     {
     }
@@ -28,6 +32,7 @@ class LogoutControladora
         // Elimino el archivo de sesión del servidor.
         session_destroy();
 
+        $this->mensaje = new Mensaje('info', 'Ha cerrado sesión !');
         require("../Vistas/login.php");
     }
 }

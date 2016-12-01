@@ -2,8 +2,11 @@
 
 namespace Controladoras;
 
+use Dao\CuentaCorrienteBdDao;
+use Dao\ModeloMarcaDao;
 use Dao\TitularBdDao;
 use Dao\VehiculoBdDao;
+use Modelo\CuentaCorriente;
 use Modelo\LimpiarEntrada;
 use Modelo\Mensaje;
 use Modelo\QR;
@@ -12,8 +15,14 @@ use Modelo\Vehiculo;
 
 class VehiculoControladora
 {
+    //daos
     private $daoTitular;
     private $daoVehiculo;
+    private $daoCuentaCorriente;
+    private $daoMarcaModelo;
+
+    private $mensaje;
+    private $listado;
 
     public function __construct()
     {
@@ -27,6 +36,11 @@ class VehiculoControladora
 
         $this->daoTitular = TitularBdDao::getInstancia();
         //$this->daoTitular = TitularJsonDao::getInstancia();
+
+        $this->daoCuentaCorriente = CuentaCorrienteBdDao::getInstancia();
+        //$this->daoCuentaCorriente = CuentaCorrientejsonDao::getInstancia();
+
+        $this->daoMarcaModelo = ModeloMarcaDao::getInstancia();
     }
 
     /**
@@ -36,12 +50,12 @@ class VehiculoControladora
      * @param $marcaModelo
      * @param $patente
      */
-    public function darAltaVehiculo($dni, $marcaModelo, $patente)
+    public function alta($dni, $marcaModelo, $patente)
     {
         /*
          * El único input por el usuario en el formulario
          * de alta de vehículo es el el dominio. Entonces
-         * lo valido con una función que cree.
+         * lo valido con la función 'validarDominio'.
          */
         $dominio = $this->validarDominio($patente);
 
@@ -75,31 +89,43 @@ class VehiculoControladora
 
             $vehiculo = new Vehiculo($dominio, $mm[0], $mm[1], $titular, $qrContenido);
 
+            $cuentaCorriente = new CuentaCorriente(
+                date('Y-m-d H:i:s', strtotime('2016-11-01 00:00:00')),
+                0,
+                0,
+                $vehiculo
+            );
+
             try {
                 /*
-                 * Hago persistir el vehículo creado.
+                 * Hago persistir el vehículo creado y su cuenta corriente.
                  */
                 $daoVehiculo = $this->daoVehiculo;
 
-                $daoVehiculo->agregar($vehiculo);
+                $vehiculo->setId($daoVehiculo->agregar($vehiculo));
+
+                $daoCC = $this->daoCuentaCorriente;
+
+                $daoCC->agregar($cuentaCorriente);
 
                 $qr = new QR();
                 $qr->generarQR($qrContenido, $vehiculo->getDominio());
 
-                /** @noinspection PhpUnusedLocalVariableInspection */
-                $mensaje = new Mensaje('success', 'Se ha cargado el vehiculo con éxito !');
+                $this->mensaje = new Mensaje('success', 'Se ha cargado el vehiculo con éxito !');
 
                 require("../Vistas/verificarDni.php");
             } catch (\PDOException $e) {
-                /** @noinspection PhpUnusedLocalVariableInspection */
-                $mensaje = new Mensaje('danger', 'Se ha producio un error. 
-                Posible Dominio duplicado / Campos vacíos !');
+                //1602 es el codigo para valores duplicados por una restriccion unique.
+                if ($e->errorInfo[1] === 1062) {
+                    $this->mensaje = new Mensaje('warning', 'Ha ingresado un dominio duplicado !');
+                } else {
+                    $this->mensaje = new Mensaje('danger', 'Se ha producio un error al intentar guardar el vehículo,
+                 intente más tarde o con nuevos !');
+                }
 
                 require('../Vistas/verificarDni.php');
             } catch (\Exception $error) {
-
-                /** @noinspection PhpUnusedLocalVariableInspection */
-                $mensaje = new Mensaje('danger', 'Se ha producio un error !');
+                $this->mensaje = new Mensaje('danger', 'Se ha producio un error !');
 
                 require('../Vistas/verificarDni.php');
             }
@@ -114,8 +140,11 @@ class VehiculoControladora
             /** @noinspection PhpUnusedLocalVariableInspection */
             $titular = $daoTitular->traerPorDni($dni);
 
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $mensaje = new Mensaje('warning', 'Verifique los campos !');
+            $this->mensaje = new Mensaje('warning', 'Verifique los campos !');
+
+            $daoMarcaModelo = $this->daoMarcaModelo;
+
+            $this->listado = $daoMarcaModelo->traerTodo();
 
             require('../Vistas/altaVehiculo.php');
         }
@@ -195,37 +224,28 @@ class VehiculoControladora
 
             $daoVehiculo->eliminarPorDominio($patente);
 
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $listado = $daoVehiculo->traerTodo();
-
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $mensaje = new Mensaje('success', 'Se elimino el vehiculo correctamente!');
-
-            require("../Vistas/consultaVehiculos.php");
+            $this->mensaje = new Mensaje('success', 'Se elimino el vehiculo correctamente!');
         } catch (\Exception $e) {
-
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $mensaje = new Mensaje('danger', 'No se pudo eliminar el vehiculo');
-
-            require('../Vistas/consultaVehiculos.php');
+            $this->mensaje = new Mensaje('danger', 'No se pudo eliminar el vehiculo');
         }
+        //Vuelvo a cargar la consulta...
+        $consultaVehiculos = new ConsultaControladora();
+        $consultaVehiculos->vehiculos();
     }
 
-    public function eliminarModal($idVehiculo)
+    public function modal($idVehiculo)
     {
         try {
             $daoVehiculoModal = $this->daoVehiculo;
 
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $listado = $daoVehiculoModal->traerTodo();
+            $this->listado = $daoVehiculoModal->traerTodo();
 
             /** @noinspection PhpUnusedLocalVariableInspection */
             $vehiculo = $daoVehiculoModal->traerPorId($idVehiculo);
 
             require("../Vistas/consultaVehiculos.php");
         } catch (\Exception $e) {
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $mensaje = new Mensaje('danger', 'Error inesperado, intente mas tarde');
+            $this->mensaje = new Mensaje('danger', 'Error inesperado, intente mas tarde');
 
             require('../Vistas/consultaVehiculos.php');
         }

@@ -22,17 +22,17 @@ VALUES
   ('dami_tano_95@hotmail.com', 'admin', '1'),
   ('davidddi.dn@gmail.com', 'navarroddi', '1'),
   ('empleado@dominio.com', 'empleado', '2'),
-  ('ArnaldoSalazar@dominio.com', '123', '3'),
-  ('FacundoLeiva@dominio.com', '123', '3'),
-  ('KevinSoto@dominio.com', '123', '3'),
-  ('YonathanSanchez@dominio.com', '123', '3'),
-  ('LouisMolina@dominio.com', '123', '3'),
-  ('DannyPerez@dominio.com', '123', '3'),
-  ('NehemiasTapia@dominio.com', '123', '3'),
-  ('JoshuaGutierrez@dominio.com', '123', '3'),
-  ('BastianCampos@dominio.com', '123', '3'),
-  ('MathiasReyes@dominio.com', '123', '3'),
-  ('KarimCarvajal@dominio.com', '123', '3');
+  ('arnaldo.salazar@dominio.com', '123', '3'),
+  ('facundo.leiva@dominio.com', '123', '3'),
+  ('kevin.soto@dominio.com', '123', '3'),
+  ('yonathan.sanchez@dominio.com', '123', '3'),
+  ('louis.molina@dominio.com', '123', '3'),
+  ('danny.perez@dominio.com', '123', '3'),
+  ('nehemias.tapia@dominio.com', '123', '3'),
+  ('joshua.gutierrez@dominio.com', '123', '3'),
+  ('bastian.campos@dominio.com', '123', '3'),
+  ('mathias.reyes@dominio.com', '123', '3'),
+  ('karim.carvajal@dominio.com', '123', '3');
 
 INSERT INTO titulares (id_usuarios, dni, nombre, apellido, telefono)
 VALUES
@@ -105,9 +105,9 @@ VALUES
 
 INSERT INTO sensores (fecha_alta, latitud, longitud, numeros_serie, id_tipos_sensores)
 VALUES
-  ('2015-01-01', '-38.05261', '-57.56142', '399912354', '1'),
-  ('2015-01-10', '-38.06079', '-57.57120', '333312354', '1'),
-  ('2015-01-22', '-38.04470', '-57.57180', '393432354', '1'),
+  ('2015-01-01', '-38.052618', '-57.561426', '399912354', '1'),
+  ('2015-01-10', '-38.060798', '-57.571206', '333312354', '1'),
+  ('2015-01-22', '-38.044708', '-57.571806', '393432354', '1'),
   ('2015-01-28', '-38.016587', '-57.530465', '499912354', '1'),
   ('2015-02-02', '-38.022655', '-57.527815', '565612354', '1'),
   ('2015-02-08', '-38.025529', '-57.531077', '699464354', '1'),

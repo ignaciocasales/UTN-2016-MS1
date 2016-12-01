@@ -2,7 +2,6 @@
 
 namespace Dao;
 
-
 use Modelo\CuentaCorriente;
 
 class CuentaCorrienteBdDao implements CuentaCorrienteIDao
@@ -14,23 +13,26 @@ class CuentaCorrienteBdDao implements CuentaCorrienteIDao
     public static function getInstancia()
     {
         if (!self::$instancia instanceof self) {
-
             self::$instancia = new self();
-
         }
 
         return self::$instancia;
     }
 
-    public function agregar($cuenta_corriente)
+    private function __construct()
     {
-        $sql = "INSERT INTO $this->tabla (fecha_ultima_actualizacion, maximo_credito, saldo, id_vehiculos) VALUES (:fecha_ultima_actualizacion, :maximo_credito, :saldo, :idVehiculo)";
+    }
+
+    public function agregar(CuentaCorriente $cuenta_corriente)
+    {
+        $sql = "INSERT INTO $this->tabla (fecha_ultima_actualizacion, maximo_credito, saldo, id_vehiculos) 
+        VALUES (:fecha_ultima_actualizacion, :maximo_credito, :saldo, :idVehiculo)";
 
         $conexion = Conexion::conectar();
 
         $sentencia = $conexion->prepare($sql);
 
-        $fecha_ultima_actualizacion = $cuenta_corriente->getFecha();
+        $fecha_ultima_actualizacion = $cuenta_corriente->getFechaUltimaActualizacion();
         $maximo_credito = $cuenta_corriente->getMaximoCredito();
         $saldo = $cuenta_corriente->getSaldo();
 
@@ -58,9 +60,10 @@ class CuentaCorrienteBdDao implements CuentaCorrienteIDao
         $sentencia->execute();
     }
 
-    public function actualizar($cuentaCorriente)
+    public function actualizar(CuentaCorriente $cuentaCorriente)
     {
-        $sql = "UPDATE $this->tabla SET fecha_ultima_actualizacion = :fechaUltimaActualizacion, saldo = :saldo WHERE id_cuentas_corrientes = :idCuentaCorriente";
+        $sql = "UPDATE $this->tabla SET fecha_ultima_actualizacion = :fechaUltimaActualizacion, saldo = :saldo 
+        WHERE id_cuentas_corrientes = :idCuentaCorriente";
 
         $conexion = Conexion::conectar();
 
@@ -77,7 +80,6 @@ class CuentaCorrienteBdDao implements CuentaCorrienteIDao
         $sentencia->bindParam(":idCuentaCorriente", $idCuentaCorriente);
 
         $sentencia->execute();
-
     }
 
     public function traerTodo()
@@ -91,8 +93,10 @@ class CuentaCorrienteBdDao implements CuentaCorrienteIDao
 
         $this->mapear($dataSet);
 
-        if (!empty($this->listado[0])) return $this->listado[0];
-
+        if (!empty($this->listado)) {
+            return $this->listado;
+        }
+        return null;
     }
 
     public function traerPorId($id)
@@ -109,7 +113,10 @@ class CuentaCorrienteBdDao implements CuentaCorrienteIDao
 
         $this->mapear($dataSet);
 
-        if (!empty($this->listado[0])) return $this->listado[0];
+        if (!empty($this->listado[0])) {
+            return $this->listado[0];
+        }
+        return null;
     }
 
     public function mapear($dataSet)
@@ -119,12 +126,16 @@ class CuentaCorrienteBdDao implements CuentaCorrienteIDao
 
             $daoVehiculo = VehiculoBdDao::getInstancia();
 
-            $cc = new CuentaCorriente($p['fecha_ultima_actualizacion'], $p['maximo_credito'], $p['saldo'], $daoVehiculo->traerPorId($p['id_vehiculos']));
+            $cc = new CuentaCorriente(
+                $p['fecha_ultima_actualizacion'],
+                $p['maximo_credito'],
+                $p['saldo'],
+                $daoVehiculo->traerPorId($p['id_vehiculos'])
+            );
 
             $cc->setId($p['id_cuentas_corrientes']);
 
             return $cc;
-
         }, $dataSet);
     }
 }

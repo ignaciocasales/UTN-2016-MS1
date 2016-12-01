@@ -10,25 +10,52 @@
                         <th>Privilegios</th>
                         <th></th>
                         <th></th>
-                        <th><a href="#"><span class="glyphicon glyphicon-plus" title="Añadir" data-toggle="tooltip"
-                                              data-placement="right"></span></a></th>
+                        <th>
+                            <a href="#">
+                                <span class="glyphicon glyphicon-plus" title="Añadir" data-toggle="tooltip"
+                                      data-placement="right">
+                                </span>
+                            </a>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php
-                    foreach ($listado as $objeto) { ?>
+                    /** @var \Modelo\Usuario $objeto */
+                    foreach ($listado as $objeto) {
+                        ?>
                         <tr>
-                            <td><?= $objeto->getEmail(); ?></td>
-                            <td><?= $objeto->getPassword(); ?></td>
-                            <td><?php $o = $objeto->getRol();
-                                echo $o->getDescripcion(); ?></td>
+                            <td>
+                                <?= $objeto->getEmail(); ?>
+                            </td>
+                            <td>
+                                <?= $objeto->getPassword(); ?>
+                            </td>
+                            <td>
+                                <?php
+                                $o = $objeto->getRol();
+                                echo $o->getDescripcion();
+                                ?>
+                            </td>
 
-                            <td><a href="#"><span class="glyphicon glyphicon-pencil" title="Modificar"
-                                                  data-toggle="tooltip" data-placement="right"></span></a></td>
-                            <td><a href="#"><span class="glyphicon glyphicon-trash" title="Eliiminar"
-                                                  data-toggle="tooltip" data-placement="right"></span></a></td>
+                            <td>
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-pencil" title="Modificar" data-toggle="tooltip"
+                                          data-placement="right">
+                                    </span>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-trash" title="Eliiminar" data-toggle="tooltip"
+                                          data-placement="right">
+                                    </span>
+                                </a>
+                            </td>
                         </tr>
-                    <?php } ?>
+                        <?php
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>

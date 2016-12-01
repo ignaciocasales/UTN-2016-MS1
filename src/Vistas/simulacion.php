@@ -7,7 +7,7 @@
             <hr>
         </div>
         <div class="col-sm-12">
-            <form action="/simulacion/verificar/" method="post">
+            <form action="<?= '/simulacion/generar/' ?>" method="post">
                 <div class="row">
                     <div class="col-sm-6 box-right-content">
                         <div class="form-group">
@@ -16,10 +16,12 @@
                                     <h3 class="panel-title">Seleccione patente</h3>
                                 </div>
                                 <div class="panel-body">
+                                    <label for="patente"></label>
                                     <select name="patente" id="patente" style="width: 23%;">
-                                        <?php foreach ($listado as $vehiculo) { ?>
-                                            <option><?= $vehiculo->getDominio() ?></option>
-                                        <?php } ?>
+                                        <?php /** @var \Modelo\Vehiculo $vehiculo */
+                                        foreach ($this->listado as $vehiculo) { ?>
+                                            <option><?= $vehiculo->getDominio() ?></option><?php
+                                        } ?>
                                     </select>
                                 </div>
                             </div>
@@ -30,7 +32,7 @@
                                     <h3 class="panel-title">Fecha del evento</h3>
                                 </div>
                                 <div class="panel-body">
-                                    <div class='input-group date' id='datetimepicker1'>
+                                    <div class='input-group date' id='datetimepicker'>
                                         <input onkeydown="return false" type='text' name="fecha" class="form-control"
                                                id="fecha"
                                                placeholder="Fecha del Evento..."
@@ -40,11 +42,12 @@
                                         </span>
                                     </div>
                                 </div>
+                                <!--suppress JSUnresolvedFunction -->
                                 <script type="text/javascript">
                                     $(function () {
-                                        $('#datetimepicker1').datetimepicker({
+                                        $('#datetimepicker').datetimepicker({
                                             format: 'YYYY-MM-DD HH:mm:ss',
-                                            minDate: '2016-11-01 00:00:00',
+                                            minDate: moment(),
                                             maxDate: '2016-12-31 23:59:59'
                                         });
                                     });
@@ -59,9 +62,12 @@
                                     <h3 class="panel-title">Evento</h3>
                                 </div>
                                 <div class="panel-body">
-                                    <input type="radio" name="evento" value="multa" checked="checked"> Semaforo en rojo
+                                    <label for="evento"></label>
+                                    <input id="evento" type="radio" name="evento" value="multa" checked="checked">
+                                    Semaforo en rojo
                                     <hr>
-                                    <input type="radio" name="evento" value="peaje"> Peaje
+                                    <input id="evento" type="radio" name="evento" value="peaje">
+                                    Peaje
                                 </div>
                             </div>
                         </div>
@@ -72,4 +78,3 @@
         </div>
     </div>
 </div>
-

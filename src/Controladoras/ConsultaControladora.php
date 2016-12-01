@@ -19,6 +19,7 @@ use Modelo\Vehiculo;
 
 class ConsultaControladora
 {
+    //daos
     private $daoUsuario;
     private $daoVehiculo;
     private $daoTitular;
@@ -27,6 +28,9 @@ class ConsultaControladora
     private $daoSensorMulta;
     private $daoMovimientoCuentaCorriente;
     private $daoTarifas;
+
+    private $mensaje;
+    private $listado;
 
     public function __construct()
     {
@@ -60,24 +64,22 @@ class ConsultaControladora
         //$this->daoTarifas = TarifaJsonDao::getInstancia();
     }
 
-    public function todosUsuarios()
+    public function usuarios()
     {
         if ($_SESSION["rol"] === 'developer') {
             $daoU = $this->daoUsuario;
 
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $listado = $daoU->traerTodo();
+            $this->listado = $daoU->traerTodo();
 
             require("../Vistas/consultaUsuarios.php");
         } else {
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $mensaje = new Mensaje('danger', 'No posee los permisos necesarios !');
+            $this->mensaje = new Mensaje('danger', 'No posee los permisos necesarios !');
 
             require("../Vistas/login.php");
         }
     }
 
-    public function usuarioVehiculos()
+    public function vehiculo()
     {
         if ($_SESSION["rol"] === 'titular') {
             $daoV = $this->daoVehiculo;
@@ -106,20 +108,19 @@ class ConsultaControladora
             }
             require("../Vistas/consultaVehiculos.php");
         } else {
-            $this->todosVehiculos();
+            $this->vehiculos();
         }
     }
 
-    public function todosVehiculos()
+    public function vehiculos()
     {
         try {
             if ($_SESSION["rol"] === 'developer') {
                 $daoV = $this->daoVehiculo;
 
-                /** @noinspection PhpUnusedLocalVariableInspection */
-                $listado = $daoV->traerTodo();
+                $this->listado = $daoV->traerTodo();
 
-                if (!$listado) {
+                if (!$this->listado) {
                     throw new \Exception('No hay vehiculos almacenados !');
                 }
 
@@ -128,14 +129,12 @@ class ConsultaControladora
                 throw new \Exception('No posee los permisos necesarios !');
             }
         } catch (\Exception $e) {
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $mensaje = new Mensaje('danger', $e->getMessage());
-
+            $this->mensaje = new Mensaje('danger', $e->getMessage());
             require("../Vistas/login.php");
         }
     }
 
-    public function vehiculo($id)
+    public function detalleVehiculo($id)
     {
         $daoV = $this->daoVehiculo;
 
@@ -160,14 +159,12 @@ class ConsultaControladora
             $listadoMovimientos = $daoMCC->traerTodoPorIdCuentaCorriente($cuentaCorriente->getId());
 
             if (!$listadoMovimientos) {
-                /** @noinspection PhpUnusedLocalVariableInspection */
-                $mensaje = new Mensaje('warning', 'No se registraron movimientos !');
+                $this->mensaje = new Mensaje('warning', 'No se registraron movimientos !');
             }
 
             require("../Vistas/consultaMovimientos.php");
         } else {
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $mensaje = new Mensaje('danger', 'No tiene permisos !');
+            $this->mensaje = new Mensaje('danger', 'No tiene permisos !');
 
             require("../Vistas/login.php");
         }
@@ -182,10 +179,8 @@ class ConsultaControladora
             $obtener = $maps->extraerLatitudLongitud($id);
 
             require("../Vistas/mapsSensor.php");
-
         } else {
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $mensaje = new Mensaje('danger', 'No posee los permisos necesarios !');
+            $this->mensaje = new Mensaje('danger', 'No posee los permisos necesarios !');
 
             require("../Vistas/login.php");
         }
@@ -196,17 +191,14 @@ class ConsultaControladora
         if ($_SESSION["rol"] === 'developer') {
             $daoSensorM = $this->daoSensorMulta;
 
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $listado = $daoSensorM->traerTodo();
+            $this->listado = $daoSensorM->traerTodo();
 
             /** @noinspection PhpUnusedLocalVariableInspection */
             $tipo = 'multa';
 
             require("../Vistas/consultaSensores.php");
-
         } else {
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $mensaje = new Mensaje('danger', 'No posee los permisos necesarios !');
+            $this->mensaje = new Mensaje('danger', 'No posee los permisos necesarios !');
 
             require("../Vistas/login.php");
         }
@@ -217,17 +209,14 @@ class ConsultaControladora
         if ($_SESSION["rol"] === 'developer') {
             $daoSensorP = $this->daoSensorPeaje;
 
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $listado = $daoSensorP->traerTodo();
+            $this->listado = $daoSensorP->traerTodo();
 
             /** @noinspection PhpUnusedLocalVariableInspection */
             $tipo = 'peaje';
 
             require("../Vistas/consultaSensores.php");
-
         } else {
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $mensaje = new Mensaje('danger', 'No posee los permisos necesarios !');
+            $this->mensaje = new Mensaje('danger', 'No posee los permisos necesarios !');
 
             require("../Vistas/login.php");
         }
@@ -237,15 +226,12 @@ class ConsultaControladora
     {
         if ($_SESSION["rol"] === 'developer' || $_SESSION["rol"] === 'empleado') {
             $daoTariffa = $this->daoTarifas;
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $listado = $daoTariffa->traeTodo();
 
+            $this->listado = $daoTariffa->traeTodo();
 
             require("../Vistas/consultaTarifas.php");
-
         } else {
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $mensaje = new Mensaje('danger', 'No posee los permisos necesarios !');
+            $this->mensaje = new Mensaje('danger', 'No posee los permisos necesarios !');
 
             require("../Vistas/login.php");
         }

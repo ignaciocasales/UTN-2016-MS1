@@ -1,16 +1,22 @@
-<?php include('navbar.php'); ?>
+<?php
+include('navbar.php');
+?>
 <div class="container lower-box box-primary">
     <div class="bg"></div>
     <div class="row altura">
-        <?php include("mensaje.php") ?>
-        <?php if ((isset($_SESSION["mail"]) && $_SESSION["pwd"])) { ?>
+        <?php
+        include("mensaje.php")
+        ?>
+        <?php
+        if ((isset($_SESSION["mail"]) && $_SESSION["pwd"])) {
+            ?>
             <div class="col-xs-12 col-sm-12 col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Su mail:</h3>
                     </div>
                     <div class="panel-body">
-                        <?php echo $_SESSION["mail"]; ?>
+                        <?= $_SESSION["mail"]; ?>
                     </div>
                 </div>
                 <div class="panel panel-default">
@@ -18,14 +24,16 @@
                         <h3 class="panel-title">Sus privilegios:</h3>
                     </div>
                     <div class="panel-body">
-                        <?php echo $_SESSION["rol"]; ?>
+                        <?= $_SESSION["rol"]; ?>
                     </div>
                 </div>
             </div>
-        <?php } else { ?>
+            <?php
+        } else {
+            ?>
             <div class="col-xs-12 col-sm-12 col-md-4">
                 <h3>Iniciar Sesión</h3>
-                <form method="post" action="/login/logueando/">
+                <form method="post" action="<?= '/login/logueando/' ?>">
                     <div class="form-group <?php include("estadosValidacionFormularios.php"); ?>">
                         <label for="usuario">Usuario</label>
                         <input type="email" name="mail" class="form-control" id="usuario"
@@ -51,7 +59,8 @@
                     <button type="submit" class="btn btn-primary pull-right">Inicie Sesión</button>
                 </form>
             </div>
-        <?php } ?>
+            <?php
+        }
+        ?>
     </div>
 </div>
-

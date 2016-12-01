@@ -12,7 +12,12 @@
         $('[data-toggle="tooltip"]').tooltip();
     });
 </script>
-
+<!-- POPOVERS -->
+<script>
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
+</script>
 </body>
 
 </html>

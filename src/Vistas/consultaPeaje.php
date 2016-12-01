@@ -16,7 +16,8 @@
                     </thead>
                     <tbody>
                     <?php
-                    foreach ($listado as $objeto) { ?>
+                    foreach ($listado as $objeto) {
+                        ?>
                         <tr>
                             <td><?= $objeto->getEmail(); ?></td>
                             <td><?= $objeto->getPassword(); ?></td>
@@ -28,7 +29,9 @@
                             <td><a href="#"><span class="glyphicon glyphicon-trash" title="Eliiminar"
                                                   data-toggle="tooltip" data-placement="right"></span></a></td>
                         </tr>
-                    <?php } ?>
+                    <?php
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>

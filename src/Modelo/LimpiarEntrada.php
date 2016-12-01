@@ -3,12 +3,13 @@
 namespace Modelo;
 
 /**
- * Esta clase fue creada para limpiar la entrada por consola,
- * y evitar que se inserte caracteres no deseados. Así como
- * también se trata de evitar SQL injections.
+ * Esta clase fue creada para limpiar la entrada por consola
+ * utilizando una serie de filtros, y evitar que se inserte
+ * caracteres no deseados. Así como también se trata de
+ * evitar SQL injections.
  *
- * Class limpiarEntrada
- * @package Controladoras
+ * Class LimpiarEntrada
+ * @package Modelo
  */
 class LimpiarEntrada
 {
@@ -18,12 +19,10 @@ class LimpiarEntrada
     }
 
     /**
-     * Esta función deberá recibir un string y devolverá un string.
-     *
-     * @param $value
-     * @return mixed|string
+     * @param $value string
+     * @return string
      */
-    public function cleanInput($value)
+    public function cleanInput(&$value)
     {
         //Hago una lista de los caracteres no deseados.
         $bad_chars = array("{", "}", "(", ")", ";", ":", "<", ">", "/", "$");

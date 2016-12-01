@@ -3,22 +3,14 @@
 
 namespace Controladoras;
 
-
 use Dao\CuentaCorrienteBdDao;
-use Dao\CuentaCorrienteJsonDao;
 use Dao\EventoMultaBdDao;
 use Dao\EventoPeajeBdDao;
-use Dao\EventoPeajeJsonDao;
 use Dao\MovimientoCuentaCorrienteBdDao;
-use Dao\MovimientoCuentaCorrienteJsonDao;
 use Dao\SensorPeajeBdDao;
-use Dao\SensorPeajeJsonDao;
 use Dao\SensorSemaforoBdDao;
-use Dao\SensorSemaforoJsonDao;
 use Dao\TarifaBdDao;
-use Dao\TarifaJsonDao;
 use Dao\VehiculoBdDao;
-use Dao\VehiculoJsonDao;
 use Modelo\CuentaCorriente;
 use Modelo\EventoMulta;
 use Modelo\EventoPeaje;
@@ -29,6 +21,7 @@ use Modelo\Vehiculo;
 
 class SimulacionControladora
 {
+    //daos
     private $daoVehiculo;
     private $daoCuentaCorriente;
     private $daoTarifa;
@@ -37,6 +30,9 @@ class SimulacionControladora
     private $daoSensorPeaje;
     private $daoEventoPeaje;
     private $daoMovimientoCuentaCorriente;
+
+    private $mensaje;
+    private $listado;
 
     public function __construct()
     {
@@ -70,24 +66,22 @@ class SimulacionControladora
         //$this->daoVehiculo = VehiculoJsonDao::getInstancia();
     }
 
-    public function simular()
+    public function cargar()
     {
-
-        if ($_SESSION['rol'] === 'developer' || $_SESSION["rol"] === 'empleado') {
-            $daoV = $this->daoVehiculo;
-
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $listado = $daoV->traerTodo();
-
-            require("../Vistas/simulacion.php");
-        } else {
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $mensaje = new Mensaje('danger', 'No tiene los permisos necesarios !');
+        try {
+            if ($_SESSION['rol'] === 'developer' || $_SESSION["rol"] === 'empleado') {
+                $this->cargarVehiculos();
+                require("../Vistas/simulacion.php");
+            } else {
+                throw new \Exception('No tiene los permisos necesarios !');
+            }
+        } catch (\Exception $e) {
+            $this->mensaje = new Mensaje('danger', $e->getMessage());
             require("../Vistas/login.php");
         }
     }
 
-    public function verificar($patente, $eventoFecha, $eventoTipo)
+    public function generar($patente, $eventoFecha, $eventoTipo)
     {
         try {
             $daoV = $this->daoVehiculo;
@@ -146,22 +140,17 @@ class SimulacionControladora
             $daoMovimientoCuentaCorriente = $this->daoMovimientoCuentaCorriente;
             $daoMovimientoCuentaCorriente->agregar($movimientoCuentaCorriente);
 
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $titular = $vehiculo->getTitular();
-
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $mensaje = new Mensaje('success', 'Se genero un evento ! ');
-
-            require("../Vistas/login.php");
+            $this->mensaje = new Mensaje('info', 'Se genero un evento ! ');
+            $this->cargarVehiculos();
+            require("../Vistas/simulacion.php");
         } catch (\Exception $e) {
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $mensaje = new Mensaje('danger', $e->getMessage());
+            $this->mensaje = new Mensaje('danger', $e->getMessage());
 
             require("../Vistas/login.php");
         }
     }
 
-    public function isHoraPico($hora, Tarifa $tarifa)
+    private function isHoraPico($hora, Tarifa $tarifa)
     {
         $horaPicoManianaDesde = strtotime('07:00:00');
         $horaPicoManianaHasta = strtotime('10:00:00');
@@ -179,5 +168,12 @@ class SimulacionControladora
         }
 
         return $importe;
+    }
+
+    private function cargarVehiculos()
+    {
+        $daoV = $this->daoVehiculo;
+
+        $this->listado = $daoV->traerTodo();
     }
 }
