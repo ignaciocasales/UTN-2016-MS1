@@ -105,7 +105,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="<?= '/consulta/usuarioVehiculos/' ?>">Mis Vehículos</a>
+                                    <a href="<?= '/consulta/vehiculo/' ?>">Mis Vehículos</a>
                                 </li>
                             </ul>
                         </li>
@@ -119,7 +119,7 @@
                 <?php } ?>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="/logout/terminar/">
+                        <a href="<?= '/logout/terminar/' ?>">
                             Cerrar Sesión <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
                         </a>
                     </li>
@@ -145,15 +145,18 @@
 <!-- Este espacio es para los mensajes a los usuarios -->
 <div id="message" class="container" style="min-height: 54px;">
     <div>
-        <div id="inner-message" class="alert <?php if (isset($this->mensaje)) { ?>
-                                                    <?php echo 'alert-' . $this->mensaje->getTipo(); ?>
-                                                    <?php } ?>
-                                                    alert-dismissible fade"
+        <div id="inner-message" class="alert <?php
+        if (isset($this->mensaje)) {
+            echo 'alert-' . $this->mensaje->getTipo();
+        }
+        ?> alert-dismissible fade"
              role="alert">
 
-            <?php if (isset($this->mensaje)) { ?>
-                <?= $this->mensaje->getMensaje(); ?>
-            <?php } ?>
+            <?php
+            if (isset($this->mensaje)) {
+                echo $this->mensaje->getMensaje();
+            }
+            ?>
         </div>
     </div>
 </div>

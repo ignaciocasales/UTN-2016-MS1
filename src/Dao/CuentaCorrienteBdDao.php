@@ -119,6 +119,26 @@ class CuentaCorrienteBdDao implements CuentaCorrienteIDao
         return null;
     }
 
+    public function traerPorVehiculo($id)
+    {
+        $sql = "SELECT * FROM $this->tabla WHERE id_vehiculos =  \"$id\"";
+
+        $conexion = Conexion::conectar();
+
+        $sentencia = $conexion->prepare($sql);
+
+        $sentencia->execute();
+
+        $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+
+        $this->mapear($dataSet);
+
+        if (!empty($this->listado[0])) {
+            return $this->listado[0];
+        }
+        return null;
+    }
+
     public function mapear($dataSet)
     {
         $dataSet = is_array($dataSet) ? $dataSet : [];

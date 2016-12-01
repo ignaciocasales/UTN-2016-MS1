@@ -88,7 +88,7 @@ try {
 
         //Me traigo la cuenta corriente del vehiculo seleccionado aleatoriamente en el paso anterior.
         /** @var \Modelo\CuentaCorriente $cuentaCorriente */
-        $cuentaCorriente = $daoCC->traerPorId($v->getId());
+        $cuentaCorriente = $daoCC->traerPorVehiculo($v->getId());
 
         //Me traigo la tarifa correspondie a la fecha aleatoria.
         /** @var \Modelo\Tarifa $tarifas */

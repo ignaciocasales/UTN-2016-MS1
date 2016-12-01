@@ -95,7 +95,7 @@ class ConsultaControladora
 
             $listadoVehiculos = $daoV->traerTodo();
 
-            $listado = [];
+            $this->listado = [];
 
             /** @var Vehiculo $vehiculo */
             foreach ($listadoVehiculos as $vehiculo) {
@@ -103,7 +103,7 @@ class ConsultaControladora
                 $t = $vehiculo->getTitular();
 
                 if ($t->getId() === $titular->getId()) {
-                    $listado[] = $vehiculo;
+                    $this->listado[] = $vehiculo;
                 }
             }
             require("../Vistas/consultaVehiculos.php");
@@ -153,7 +153,7 @@ class ConsultaControladora
 
             $daoCC = $this->daoCuentaCorriente;
             /** @var CuentaCorriente $cuentaCorriente */
-            $cuentaCorriente = $daoCC->traerPorId($vehiculo->getId());
+            $cuentaCorriente = $daoCC->traerPorVehiculo($vehiculo->getId());
 
             $daoMCC = $this->daoMovimientoCuentaCorriente;
             $listadoMovimientos = $daoMCC->traerTodoPorIdCuentaCorriente($cuentaCorriente->getId());

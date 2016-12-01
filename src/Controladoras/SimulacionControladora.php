@@ -90,7 +90,7 @@ class SimulacionControladora
 
             $daoCC = $this->daoCuentaCorriente;
             /** @var CuentaCorriente $cuentaCorriente */
-            $cuentaCorriente = $daoCC->traerPorId($vehiculo->getId());
+            $cuentaCorriente = $daoCC->traerPorVehiculo($vehiculo->getId());
 
             $daoTarifa = $this->daoTarifa;
             /** @var Tarifa $tarifa */

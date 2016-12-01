@@ -14,9 +14,7 @@ class MovimientoCuentaCorrienteBdDao
     public static function getInstancia()
     {
         if (!self::$instancia instanceof self) {
-
             self::$instancia = new self();
-
         }
 
         return self::$instancia;
@@ -24,7 +22,8 @@ class MovimientoCuentaCorrienteBdDao
 
     public function agregar($movimiento)
     {
-        $sql = "INSERT INTO $this->tabla (fecha_hora, importe, id_cuentas_corrientes, id_eventos) VALUES (:fecha_hora, :importe, :idCuentaCorriente, :idEvento)";
+        $sql = "INSERT INTO $this->tabla (fecha_hora, importe, id_cuentas_corrientes, id_eventos) 
+                VALUES (:fecha_hora, :importe, :idCuentaCorriente, :idEvento)";
 
         $conexion = Conexion::conectar();
 
@@ -37,21 +36,15 @@ class MovimientoCuentaCorrienteBdDao
         $idCuentaCorriente = $cuentaCorriente->getId();
 
         if ($movimiento->getEventoPeaje()) {
-
             $eventoPeaje = $movimiento->getEventoPeaje();
 
             $idEvento = $eventoPeaje->getId();
-
-        } else if ($movimiento->getEventoMulta()) {
-
+        } elseif ($movimiento->getEventoMulta()) {
             $eventoMulta = $movimiento->getEventoMulta();
 
             $idEvento = $eventoMulta->getId();
-
         } else {
-
             throw new \Exception('Se produjo un error');
-
         }
 
         $sentencia->bindParam("fecha_hora", $fechaYhora);
@@ -78,7 +71,10 @@ class MovimientoCuentaCorrienteBdDao
 
         $this->mapear($dataSet);
 
-        if (!empty($this->listado[0])) return $this->listado[0];
+        if (!empty($this->listado[0])) {
+            return $this->listado[0];
+        }
+        return null;
     }
 
     public function traerTodoPorIdCuentaCorriente($idCC)
@@ -95,7 +91,10 @@ class MovimientoCuentaCorrienteBdDao
 
         $this->mapear($dataSet);
 
-        if (!empty($this->listado)) return $this->listado;
+        if (!empty($this->listado)) {
+            return $this->listado;
+        }
+        return null;
     }
 
     public function traerTodo()
@@ -126,26 +125,23 @@ class MovimientoCuentaCorrienteBdDao
             $daoEventoPeaje = EventoPeajeBdDao::getInstancia();
             $eventoPeaje = $daoEventoPeaje->traerPorId($p['id_eventos']);
 
-            $mcc = new MovimientoCuentaCorriente($p['fecha_hora'], $p['importe'], $daoCuentaCorriente->traerPorId($p['id_cuentas_corrientes']));
+            $mcc = new MovimientoCuentaCorriente(
+                $p['fecha_hora'],
+                $p['importe'],
+                $daoCuentaCorriente->traerPorId($p['id_cuentas_corrientes'])
+            );
 
             $mcc->setId($p['id_movimientos']);
 
             if ($eventoMulta) {
-
                 $mcc->setEventoMulta($eventoMulta);
-
-            } else if ($eventoPeaje) {
-
+            } elseif ($eventoPeaje) {
                 $mcc->setEventoPeaje($eventoPeaje);
-
             } else {
-
                 echo 'error';
             }
 
-
             return $mcc;
-
         }, $dataSet);
     }
 }

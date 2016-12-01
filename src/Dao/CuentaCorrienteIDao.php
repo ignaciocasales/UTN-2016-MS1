@@ -17,5 +17,7 @@ interface CuentaCorrienteIDao
 
     public function traerPorId($id);
 
+    public function traerPorVehiculo($id);
+
     public function mapear($dataSet);
 }
