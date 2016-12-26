@@ -5,7 +5,7 @@ namespace Config;
 // Constantes Base de datos.
 define("DB_NAME", "trafimdq");
 define("DB_USER", "root");
-define("DB_PASS", "ckl123");
+define("DB_PASS", "Handball4");
 define("DB_HOST", "localhost");
 
 // Constantes front

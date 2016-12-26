@@ -5,11 +5,11 @@
 
 namespace Dao;
 
+use Modelo\Vehiculo;
 
 class VehiculoJsonDao implements VehiculoIDao
 {
-
-    public function agregar($vehiculo)
+    public function agregar(Vehiculo $vehiculo)
     {
         // TODO: Implement agregar() method.
     }
@@ -24,7 +24,7 @@ class VehiculoJsonDao implements VehiculoIDao
         // TODO: Implement eliminarPorDominio() method.
     }
 
-    public function actualizar($vehiculo)
+    public function actualizar(Vehiculo $vehiculo)
     {
         // TODO: Implement actualizar() method.
     }

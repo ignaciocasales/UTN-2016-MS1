@@ -2,14 +2,15 @@
 
 namespace Dao;
 
+use Modelo\Rol;
 
 interface RolIDao
 {
-    public function agregar($rol);
+    public function agregar(Rol $rol);
 
     public function eliminar($id);
 
-    public function actualizar($rol);
+    public function actualizar(Rol $rol);
 
     public function traeTodo();
 

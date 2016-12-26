@@ -5,11 +5,11 @@
 
 namespace Dao;
 
+use Modelo\Titular;
 
 class TitularJsonDao implements TitularIDao
 {
-
-    public function agregar($titular)
+    public function agregar(Titular $titular)
     {
         // TODO: Implement agregar() method.
     }
@@ -24,7 +24,7 @@ class TitularJsonDao implements TitularIDao
         // TODO: Implement eliminarPorDni() method.
     }
 
-    public function actualizar($titular)
+    public function actualizar(Titular $titular)
     {
         // TODO: Implement actualizar() method.
     }
@@ -32,6 +32,11 @@ class TitularJsonDao implements TitularIDao
     public function traeTodo()
     {
         // TODO: Implement traeTodo() method.
+    }
+
+    public function traerPorIdUsuario($idUsuario)
+    {
+        // TODO: Implement traerPorIdUsuario() method.
     }
 
     public function traerPorId($id)

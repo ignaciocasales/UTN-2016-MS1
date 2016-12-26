@@ -2,7 +2,6 @@
 
 namespace Dao;
 
-
 interface SensorIDao
 {
     public function agregar($sensor);

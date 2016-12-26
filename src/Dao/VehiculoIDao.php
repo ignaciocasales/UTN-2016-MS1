@@ -2,16 +2,17 @@
 
 namespace Dao;
 
+use Modelo\Vehiculo;
 
 interface VehiculoIDao
 {
-    public function agregar($vehiculo);
+    public function agregar(Vehiculo $vehiculo);
 
     public function eliminarPorId($id);
 
     public function eliminarPorDominio($dominio);
 
-    public function actualizar($vehiculo);
+    public function actualizar(Vehiculo $vehiculo);
 
     public function traerTodo();
 

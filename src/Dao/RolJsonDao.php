@@ -5,10 +5,11 @@
 
 namespace Dao;
 
+use Modelo\Rol;
 
 class RolJsonDao implements RolIDao
 {
-    public function agregar($rol)
+    public function agregar(Rol $rol)
     {
         // TODO: Implement agregar() method.
     }
@@ -18,7 +19,7 @@ class RolJsonDao implements RolIDao
         // TODO: Implement eliminar() method.
     }
 
-    public function actualizar($rol)
+    public function actualizar(Rol $rol)
     {
         // TODO: Implement actualizar() method.
     }

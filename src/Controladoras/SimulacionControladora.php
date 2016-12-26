@@ -6,7 +6,7 @@ namespace Controladoras;
 use Dao\CuentaCorrienteBdDao;
 use Dao\EventoMultaBdDao;
 use Dao\EventoPeajeBdDao;
-use Dao\MovimientoCuentaCorrienteBdDao;
+use Dao\MovimientoBdDao;
 use Dao\SensorPeajeBdDao;
 use Dao\SensorSemaforoBdDao;
 use Dao\TarifaBdDao;
@@ -41,7 +41,7 @@ class SimulacionControladora
          * con descomentar las líneas de abajo hubiera debido el programa de
          * funcionar correctamente.
          */
-        $this->daoMovimientoCuentaCorriente = MovimientoCuentaCorrienteBdDao::getInstancia();
+        $this->daoMovimientoCuentaCorriente = MovimientoBdDao::getInstancia();
         //$this->daoMovimientoCuentaCorriente = MovimientoCuentaCorrienteJsonDao::getInstancia();
 
         $this->daoEventoPeaje = EventoPeajeBdDao::getInstancia();
@@ -143,6 +143,10 @@ class SimulacionControladora
             $this->mensaje = new Mensaje('info', 'Se genero un evento ! ');
             $this->cargarVehiculos();
             require("../Vistas/simulacion.php");
+        } catch (\PDOException $e) {
+            $this->mensaje = new Mensaje('danger', 'Hubo un error al conectarse con la base de datos !');
+
+            require("../Vistas/login.php");
         } catch (\Exception $e) {
             $this->mensaje = new Mensaje('danger', $e->getMessage());
 

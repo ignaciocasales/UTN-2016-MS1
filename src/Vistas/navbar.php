@@ -22,6 +22,7 @@
             <?php
             if ((isset($_SESSION["mail"]) && $_SESSION["pwd"])) {
                 ?>
+                <!-- si la sesión es admin -->
                 <?php if ($_SESSION["rol"] === 'developer') { ?>
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
@@ -63,7 +64,7 @@
                         </li>
                     </ul>
                 <?php } ?>
-
+                <!-- si la sesión es empleado -->
                 <?php if ($_SESSION["rol"] === 'empleado') { ?>
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
@@ -93,7 +94,7 @@
                         </li>
                     </ul>
                 <?php } ?>
-
+                <!-- si la sesión es titular -->
                 <?php if ($_SESSION["rol"] === 'titular') { ?>
                     <ul class="nav navbar-nav">
                         <li class="dropdown">

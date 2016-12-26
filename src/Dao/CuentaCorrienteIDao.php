@@ -2,7 +2,6 @@
 
 namespace Dao;
 
-
 use Modelo\CuentaCorriente;
 
 interface CuentaCorrienteIDao

@@ -2,7 +2,6 @@
 
 namespace Dao;
 
-
 use Modelo\EventoPeaje;
 
 class EventoPeajeBdDao implements EventoIDao
@@ -14,25 +13,29 @@ class EventoPeajeBdDao implements EventoIDao
     public static function getInstancia()
     {
         if (!self::$instancia instanceof self) {
-
             self::$instancia = new self();
-
         }
-
         return self::$instancia;
     }
 
+    /**
+     * @param EventoPeaje $evento
+     * @return string
+     */
     public function agregar($evento)
     {
-        $sql = "INSERT INTO $this->tabla (fecha_hora, id_tipos_eventos, id_sensores) VALUES (:fechaHora, :idEvento, :idSensor)";
+        /** @noinspection SqlResolve */
+        $sql = "INSERT INTO $this->tabla (fehcaHora, idTipoEvento, idSensor) 
+                VALUES (:fechaHora, :idEvento, :idSensor)";
 
         $conexion = Conexion::conectar();
 
         $sentencia = $conexion->prepare($sql);
 
-        $idEvento = 2;
+        $idEvento = 2; //los eventos de peae tienen el id 2 !!!!!!
         $fechaHora = $evento->getFechaYhora();
 
+        /** @var EventoPeaje $s */
         $s = $evento->getSensorPeaje();
         $idSensor = $s->getId();
 
@@ -59,12 +62,16 @@ class EventoPeajeBdDao implements EventoIDao
 
         $this->mapear($dataSet);
 
-        if (!empty($this->listado)) return $this->listado;
+        if (!empty($this->listado)) {
+            return $this->listado;
+        }
+        return null;
     }
 
     public function traerPorId($id)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE id_eventos =  \"$id\" AND id_tipos_eventos = 2 LIMIT 1";
+        /** @noinspection SqlResolve */
+        $sql = "SELECT * FROM $this->tabla WHERE idEvento =  \"$id\" AND idTipoEvento = 2 LIMIT 1";
 
         $conexion = Conexion::conectar();
 
@@ -77,13 +84,9 @@ class EventoPeajeBdDao implements EventoIDao
         $this->mapear($dataSet);
 
         if (!empty($this->listado[0])) {
-
             return $this->listado[0];
-
-        } else {
-
-            return null;
         }
+        return null;
     }
 
     public function mapear($dataSet)
@@ -91,22 +94,14 @@ class EventoPeajeBdDao implements EventoIDao
         $dataSet = is_array($dataSet) ? $dataSet : [];
         $this->listado = array_map(function ($p) {
 
-            if ($p['id_eventos']) {
-
+            if ($p['idEvento']) {
                 $daoSensor = SensorPeajeBdDao::getInstancia();
-
-                $e = new EventoPeaje($p['fecha_hora'], $daoSensor->traerPorId($p{'id_sensores'}));
-
-                $e->setId($p['id_eventos']);
-
+                $e = new EventoPeaje($p['fechaHora'], $daoSensor->traerPorId($p{'idSensor'}));
+                $e->setId($p['idEvento']);
                 return $e;
-
             } else {
-
                 return null;
-
             }
-
         }, $dataSet);
     }
 }

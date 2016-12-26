@@ -5,10 +5,8 @@
 
 namespace Dao;
 
-
 class EventoPeajeJsonDao implements EventoIDao
 {
-
     public function agregar($evento)
     {
         // TODO: Implement agregar() method.

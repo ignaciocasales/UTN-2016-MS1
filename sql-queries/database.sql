@@ -1,230 +1,234 @@
-/*CREATE DATABASE TrafiMDQ;
+/*CREATE DATABASE trafimdq;
  USE TrafiMDQ; */
 
 CREATE TABLE roles
 (
-  id_roles    SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  idRol       SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
 
-  descripcion VARCHAR(20) UNIQUE,
+  descripcion VARCHAR(20) UNIQUE               NOT NULL,
 
-  CONSTRAINT pk_de_roles PRIMARY KEY (id_roles)
+  CONSTRAINT pkRol PRIMARY KEY (idRol)
 );
 
 
 CREATE TABLE usuarios
 (
-  id_usuarios SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  idUsuario SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
 
-  mail        VARCHAR(50) UNIQUE               NOT NULL,
+  correo    VARCHAR(50)                      NOT NULL,
 
-  pwd         VARCHAR(32)                      NOT NULL,
+  pwd       VARCHAR(32)                      NOT NULL,
 
-  id_roles    SMALLINT UNSIGNED,
+  idRol     SMALLINT UNSIGNED                NOT NULL,
 
-  CONSTRAINT pk_de_usuario PRIMARY KEY (id_usuarios),
+  CONSTRAINT pkUsuario PRIMARY KEY (idUsuario),
 
-  CONSTRAINT fk_de_rol FOREIGN KEY (id_roles) REFERENCES roles (id_roles)
-    ON DELETE CASCADE
+  CONSTRAINT fkRolesUsuarios FOREIGN KEY (idRol) REFERENCES roles (idRol)
+    ON DELETE CASCADE,
+
+  CONSTRAINT unqUsuarioCorreo UNIQUE (correo)
 );
 
 
 CREATE TABLE titulares
 (
-  id_titulares SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  idTitular SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
 
-  id_usuarios  SMALLINT UNSIGNED,
+  idUsuario SMALLINT UNSIGNED                NOT NULL,
 
-  dni          VARCHAR(10) UNIQUE               NOT NULL,
+  dni       VARCHAR(10)                      NOT NULL,
 
-  nombre       VARCHAR(20)                      NOT NULL,
+  nombre    VARCHAR(20)                      NOT NULL,
 
-  apellido     VARCHAR(20)                      NOT NULL,
+  apellido  VARCHAR(20)                      NOT NULL,
 
-  telefono     VARCHAR(40) UNIQUE,
+  telefono  VARCHAR(40)                      NOT NULL,
 
-  CONSTRAINT pk_de_id_titulares PRIMARY KEY (id_titulares),
+  CONSTRAINT pkTitular PRIMARY KEY (idTitular),
 
-  CONSTRAINT fk_de_usuario FOREIGN KEY (id_usuarios) REFERENCES usuarios (id_usuarios)
-    ON DELETE CASCADE
+  CONSTRAINT fkUsuariosTitulares FOREIGN KEY (idUsuario) REFERENCES usuarios (idUsuario)
+    ON DELETE CASCADE,
+
+  CONSTRAINT unqTitularDni UNIQUE (dni),
+
+  CONSTRAINT unqTitularTelefono UNIQUE (telefono),
+
+  CONSTRAINT unqTitularIdUsuario UNIQUE (idUsuario)
 );
 
 
 CREATE TABLE vehiculos
 (
-  id_vehiculos SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  idVehiculo SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
 
-  id_titulares SMALLINT UNSIGNED,
+  idTitular  SMALLINT UNSIGNED                NOT NULL,
 
-  dominio      VARCHAR(10) UNIQUE               NOT NULL,
+  dominio    VARCHAR(10)                      NOT NULL,
 
-  marca        VARCHAR(10)                      NOT NULL,
+  marca      VARCHAR(10)                      NOT NULL,
 
-  modelo       VARCHAR(10)                      NOT NULL,
+  modelo     VARCHAR(10)                      NOT NULL,
 
-  qr           VARCHAR(100) UNIQUE,
+  qr         VARCHAR(100),
 
-  CONSTRAINT pk_de_vehiculos PRIMARY KEY (id_vehiculos),
+  CONSTRAINT pkVehiculo PRIMARY KEY (idVehiculo),
 
-  CONSTRAINT fk_de_id_titular FOREIGN KEY (id_titulares) REFERENCES titulares (id_titulares)
-    ON DELETE CASCADE
+  CONSTRAINT fkTitularesVehiculos FOREIGN KEY (idTitular) REFERENCES titulares (idTitular)
+    ON DELETE CASCADE,
+
+  CONSTRAINT unqVehiculoDominio UNIQUE (dominio),
+
+  CONSTRAINT unqVehiculoQr UNIQUE (qr)
 );
 
 
 CREATE TABLE cuentas_corrientes
 (
-  id_cuentas_corrientes      SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  idCuentaCorriente   SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
 
-  fecha_ultima_actualizacion DATETIME                         NOT NULL,
+  ultimaActualizacion DATETIME                         NOT NULL,
 
-  maximo_credito             FLOAT UNSIGNED                   NOT NULL,
+  maximoCredito       FLOAT UNSIGNED                   NOT NULL,
 
-  saldo                      FLOAT                            NOT NULL,
+  saldo               FLOAT                            NOT NULL,
 
-  id_vehiculos               SMALLINT UNSIGNED,
+  idVehiculo          SMALLINT UNSIGNED                NOT NULL,
 
-  CONSTRAINT pk_de_id_cuentas_corrientes PRIMARY KEY (id_cuentas_corrientes),
+  CONSTRAINT pkCuentaCorriente PRIMARY KEY (idCuentaCorriente),
 
-  CONSTRAINT fk_de_id_vehiculos FOREIGN KEY (id_vehiculos) REFERENCES vehiculos (id_vehiculos)
-    ON DELETE CASCADE
+  CONSTRAINT fkVehiculosCuentasCorrientes FOREIGN KEY (idVehiculo) REFERENCES vehiculos (idVehiculo)
+    ON DELETE CASCADE,
+
+  CONSTRAINT unqCuentaCorrienteVehiculo UNIQUE (idVehiculo)
 );
 
 
 CREATE TABLE tipos_sensores
 (
-  id_tipos_sensores SMALLINT UNSIGNED AUTO_INCREMENT,
+  idTipoSensor SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
 
-  descripcion       VARCHAR(50) UNIQUE,
+  descripcion  VARCHAR(50)                      NOT NULL,
 
-  CONSTRAINT pk_de_id_tipos_sensores PRIMARY KEY (id_tipos_sensores)
+  CONSTRAINT pkTipoSensor PRIMARY KEY (idTipoSensor),
+
+  CONSTRAINT unqTipoSensorDescripcion UNIQUE (descripcion)
 );
 
 
 CREATE TABLE sensores
 (
-  id_sensores       SMALLINT UNSIGNED AUTO_INCREMENT,
+  idSensor     SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
 
-  fecha_alta        DATE,
+  fechaAlta    DATE                             NOT NULL,
 
-  latitud           FLOAT,
+  latitud      FLOAT                            NOT NULL,
 
-  longitud          FLOAT,
+  longitud     FLOAT                            NOT NULL,
 
-  numeros_serie     VARCHAR(30) UNIQUE NOT NULL,
+  numeroSerie  VARCHAR(30)                      NOT NULL,
 
-  id_tipos_sensores SMALLINT UNSIGNED,
+  idTipoSensor SMALLINT UNSIGNED                NOT NULL,
 
-  CONSTRAINT pk_id_sensores PRIMARY KEY (id_sensores),
+  CONSTRAINT pkSensor PRIMARY KEY (idSensor),
 
-  CONSTRAINT fk_tiposSensores_sensores FOREIGN KEY (id_tipos_sensores) REFERENCES tipos_sensores (id_tipos_sensores)
-    ON DELETE CASCADE
+  CONSTRAINT fkTiposSensoresSensores FOREIGN KEY (idTipoSensor) REFERENCES tipos_sensores (idTipoSensor)
+    ON DELETE CASCADE,
+
+  CONSTRAINT unqSensorNumeroSerie UNIQUE (numeroSerie)
 );
 
 
 CREATE TABLE tipos_eventos
 (
-  id_tipos_eventos SMALLINT UNSIGNED AUTO_INCREMENT,
+  idTipoEvento SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
 
-  descripcion      VARCHAR(50) UNIQUE,
+  descripcion  VARCHAR(50)                      NOT NULL,
 
-  CONSTRAINT pk_de_tipos_eventos PRIMARY KEY (id_tipos_eventos)
+  CONSTRAINT pkTipoEvento PRIMARY KEY (idTipoEvento),
+
+  CONSTRAINT unqTipoEventoDescripcion UNIQUE (descripcion)
 );
 
 
 CREATE TABLE eventos
 (
-  id_eventos       SMALLINT UNSIGNED AUTO_INCREMENT,
+  idEvento     SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
 
-  fecha_hora       DATETIME,
+  fehcaHora    DATETIME                         NOT NULL,
 
-  id_tipos_eventos SMALLINT UNSIGNED,
+  idTipoEvento SMALLINT UNSIGNED                NOT NULL,
 
-  id_sensores      SMALLINT UNSIGNED,
+  idSensor     SMALLINT UNSIGNED                NOT NULL,
 
-  CONSTRAINT pk_de_eventos PRIMARY KEY (id_eventos),
+  CONSTRAINT pkEvento PRIMARY KEY (idEvento),
 
-  CONSTRAINT fk_de_id_de_sensores FOREIGN KEY (id_sensores) REFERENCES sensores (id_sensores)
+  CONSTRAINT fkSensoresEventos FOREIGN KEY (idSensor) REFERENCES sensores (idSensor)
     ON DELETE CASCADE,
 
-  CONSTRAINT fk_tiposEventos_eventos FOREIGN KEY (id_tipos_eventos) REFERENCES tipos_eventos (id_tipos_eventos)
+  CONSTRAINT fkTipoEventoEvento FOREIGN KEY (idTipoEvento) REFERENCES tipos_eventos (idTipoEvento)
     ON DELETE CASCADE
 );
 
 
-CREATE TABLE movimientos_cuentas_corrientes
+CREATE TABLE movimientos
 (
-  id_movimientos        SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  idMovimiento      SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
 
-  fecha_hora            DATETIME                         NOT NULL,
+  fehchaHora        DATETIME                         NOT NULL,
 
-  importe               FLOAT UNSIGNED                   NOT NULL,
+  importe           FLOAT UNSIGNED                   NOT NULL,
 
-  id_cuentas_corrientes SMALLINT UNSIGNED,
+  idCuentaCorriente SMALLINT UNSIGNED                NOT NULL,
 
-  id_eventos            SMALLINT UNSIGNED,
+  idEvento          SMALLINT UNSIGNED                NOT NULL,
 
-  CONSTRAINT pk_de_id_movimientos PRIMARY KEY (id_movimientos),
+  CONSTRAINT pkMovimiento PRIMARY KEY (idMovimiento),
 
-  CONSTRAINT fk_de_id_cuentas_corrientes_de_cuentas FOREIGN KEY (id_cuentas_corrientes) REFERENCES cuentas_corrientes (id_cuentas_corrientes)
+  CONSTRAINT fkCuentasCorrientesMovimientos FOREIGN KEY (idCuentaCorriente) REFERENCES cuentas_corrientes (idCuentaCorriente)
     ON DELETE CASCADE,
 
-  CONSTRAINT fk_de_id_de_eventos_de_eventos FOREIGN KEY (id_eventos) REFERENCES eventos (id_eventos)
+  CONSTRAINT fkEventosMovimientos FOREIGN KEY (idEvento) REFERENCES eventos (idEvento)
     ON DELETE CASCADE
 
 );
-
-
-CREATE TABLE pagos
-(
-  id_pagos       SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
-
-  fecha          DATE                             NOT NULL,
-
-  id_movimientos SMALLINT UNSIGNED,
-
-  CONSTRAINT pk_id_pagos PRIMARY KEY (id_pagos),
-
-  CONSTRAINT fk_de_id_movimientos FOREIGN KEY (id_movimientos) REFERENCES movimientos_cuentas_corrientes (id_movimientos)
-    ON DELETE CASCADE
-);
-
 
 CREATE TABLE tarifas
 (
-  id_tarifas        SMALLINT UNSIGNED AUTO_INCREMENT       NOT NULL,
+  idTarifa        SMALLINT UNSIGNED AUTO_INCREMENT       NOT NULL,
 
-  fecha_desde       DATETIME UNIQUE                        NOT NULL,
+  fechaDesde      DATETIME UNIQUE                        NOT NULL,
 
-  fecha_hasta       DATETIME UNIQUE                        NOT NULL,
+  fechaHasta      DATETIME UNIQUE                        NOT NULL,
 
-  multa             FLOAT UNSIGNED                         NOT NULL,
+  multa           FLOAT UNSIGNED                         NOT NULL,
 
-  peaje_hora_normal FLOAT UNSIGNED                         NOT NULL,
+  peajeHoraNormal FLOAT UNSIGNED                         NOT NULL,
 
-  peaje_hora_pico   FLOAT UNSIGNED                         NOT NULL,
+  peajeHoraPico   FLOAT UNSIGNED                         NOT NULL,
 
-  CONSTRAINT pk_id_de_tarifas PRIMARY KEY (id_tarifas)
+  CONSTRAINT pkTarifa PRIMARY KEY (idTarifa)
 );
 
 CREATE TABLE marcas
 (
-  id_marcas SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  idMarca SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
 
-  nombre    VARCHAR(40)                      NOT NULL,
+  nombre  VARCHAR(40)                      NOT NULL,
 
-  CONSTRAINT pk_de_id_marcas PRIMARY KEY (id_marcas)
+  CONSTRAINT pkMarca PRIMARY KEY (idMarca)
 );
 
 
 CREATE TABLE modelos
 (
-  id_modelos SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  idModelo SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
 
-  id_marcas  SMALLINT UNSIGNED,
+  idMarca  SMALLINT UNSIGNED                NOT NULL,
 
-  nombre     VARCHAR(50)                      NOT NULL,
+  nombre   VARCHAR(50)                      NOT NULL,
 
-  CONSTRAINT pk_de_id_modelos PRIMARY KEY (id_modelos),
+  CONSTRAINT pkModelo PRIMARY KEY (idModelo),
 
-  CONSTRAINT pk_de_id_marca_modelos FOREIGN KEY (id_marcas) REFERENCES marcas (id_marcas)
+  CONSTRAINT fkMarcasModelos FOREIGN KEY (idMarca) REFERENCES marcas (idMarca)
     ON DELETE CASCADE
 );

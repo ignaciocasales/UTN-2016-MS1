@@ -22,14 +22,16 @@
         </table>
 
 
-        <a class="btn btn-primary" href="<?php if ($obtener['descripcion'] === 'multa') {
+        <a class="btn btn-primary" href="<?php
+        if ($obtener['descripcion'] === 'multa') {
             echo '/consulta/sensoresMulta/';
         } else {
             echo '/consulta/sensoresPeaje/';
-        } ?>" role="button"><span class="glyphicon glyphicon-arrow-left"></span>Volver</a>
+        }
+        ?>" role="button"><span class="glyphicon glyphicon-arrow-left"></span>Volver</a>
 
         <input class="btn btn-primary" type="button"
-               onclick="init(<?= $obtener['longitud'] ?>,<?= $obtener['latitud'] ?>)" value="Mostrar mapa">
+               onclick="init(<?= $obtener['longitud'] ?>,<?= $obtener['latitud'] ?>)" value="Mostrar en el mapa">
 
 
         <div id="map" style="width: 1137px; height: 373px; margin-top: 5px;"></div>

@@ -3,7 +3,7 @@
 namespace Controladoras;
 
 use Dao\CuentaCorrienteBdDao;
-use Dao\MovimientoCuentaCorrienteBdDao;
+use Dao\MovimientoBdDao;
 use Dao\SensorPeajeBdDao;
 use Dao\SensorSemaforoBdDao;
 use Dao\TarifaBdDao;
@@ -57,7 +57,7 @@ class ConsultaControladora
         $this->daoSensorMulta = SensorSemaforoBdDao::getInstancia();
         //$this->daoSensorMulta = SensorSemaforoJsonDao::getInstancia();
 
-        $this->daoMovimientoCuentaCorriente = MovimientoCuentaCorrienteBdDao::getInstancia();
+        $this->daoMovimientoCuentaCorriente = MovimientoBdDao::getInstancia();
         //$this->daoMovimientoCuentaCorriente = MovimientoCuentaCorrienteJsonDao::getInstancia();
 
         $this->daoTarifas = TarifaBdDao::getInstancia();

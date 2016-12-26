@@ -5,11 +5,12 @@
 
 namespace Dao;
 
+use Modelo\CuentaCorriente;
 
 class CuentaCorrienteJsonDao implements CuentaCorrienteIDao
 {
 
-    public function agregar($cuentaCorriente)
+    public function agregar(CuentaCorriente $cuentaCorriente)
     {
         // TODO: Implement agregar() method.
     }
@@ -19,7 +20,7 @@ class CuentaCorrienteJsonDao implements CuentaCorrienteIDao
         // TODO: Implement eliminar() method.
     }
 
-    public function actualizar($cuentaCorriente)
+    public function actualizar(CuentaCorriente $cuentaCorriente)
     {
         // TODO: Implement actualizar() method.
     }
@@ -32,6 +33,11 @@ class CuentaCorrienteJsonDao implements CuentaCorrienteIDao
     public function traerPorId($id)
     {
         // TODO: Implement traerPorId() method.
+    }
+
+    public function traerPorVehiculo($id)
+    {
+        // TODO: Implement traerPorVehiculo() method.
     }
 
     public function mapear($dataSet)

@@ -2,7 +2,6 @@
 
 namespace Dao;
 
-
 class ModeloMarcaDao implements MarcaModeloIDao
 {
     protected $listado;
@@ -11,17 +10,16 @@ class ModeloMarcaDao implements MarcaModeloIDao
     public static function getInstancia()
     {
         if (!self::$instancia instanceof self) {
-
             self::$instancia = new self();
-
         }
-
         return self::$instancia;
     }
 
     public function traerTodo()
     {
-        $sql = "SELECT marcas.nombre AS marca, modelos.nombre AS modelo FROM modelos INNER JOIN marcas ON marcas.id_marcas = modelos.id_marcas";
+        $sql = "SELECT marcas.nombre AS marca, modelos.nombre AS modelo 
+                FROM modelos 
+                    INNER JOIN marcas ON marcas.idMarca = modelos.idMarca";
 
         $conexion = Conexion::conectar();
 
@@ -31,6 +29,9 @@ class ModeloMarcaDao implements MarcaModeloIDao
 
         $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
 
-        if (!empty($dataSet)) return $dataSet;
+        if (!empty($dataSet)) {
+            return $dataSet;
+        }
+        return null;
     }
 }

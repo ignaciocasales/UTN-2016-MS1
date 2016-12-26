@@ -2,7 +2,6 @@
 
 namespace Dao;
 
-
 interface EventoIDao
 {
     public function agregar($evento);

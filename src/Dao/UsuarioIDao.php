@@ -2,16 +2,17 @@
 
 namespace Dao;
 
+use Modelo\Usuario;
 
 interface UsuarioIDao
 {
-    public function agregar($usuario);
+    public function agregar(Usuario $usuario);
 
     public function eliminarPorId($id);
 
     public function eliminarPorMail($mail);
 
-    public function actualizar($usuario);
+    public function actualizar(Usuario $usuario);
 
     public function traerTodo();
 

@@ -2,12 +2,13 @@
 
 namespace Dao;
 
+use Modelo\Tarifa;
 
 interface TarifaIDao
 {
-    public function agregar($tarifa);
+    public function agregar(Tarifa $tarifa);
 
-    public function actualizar($tarifa);
+    public function actualizar(Tarifa $tarifa);
 
     public function traeTodo();
 
@@ -16,5 +17,4 @@ interface TarifaIDao
     public function traerPorFecha($fecha);
 
     public function mapear($dataSet);
-
 }

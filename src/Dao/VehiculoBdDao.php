@@ -2,7 +2,6 @@
 
 namespace Dao;
 
-
 use Modelo\Vehiculo;
 
 class VehiculoBdDao implements VehiculoIDao
@@ -14,17 +13,16 @@ class VehiculoBdDao implements VehiculoIDao
     public static function getInstancia()
     {
         if (!self::$instancia instanceof self) {
-
             self::$instancia = new self();
-
         }
-
         return self::$instancia;
     }
 
-    public function agregar($vehiculo)
+    public function agregar(Vehiculo $vehiculo)
     {
-        $sql = "INSERT INTO $this->tabla (dominio, marca, modelo, id_titulares, qr) VALUES (:dominio, :marca, :modelo, :idTitular, :qr)";
+        /** @noinspection SqlResolve */
+        $sql = "INSERT INTO $this->tabla (dominio, marca, modelo, idTitular, qr) 
+                VALUES (:dominio, :marca, :modelo, :idTitular, :qr)";
 
         $conexion = Conexion::conectar();
 
@@ -52,7 +50,8 @@ class VehiculoBdDao implements VehiculoIDao
 
     public function eliminarPorId($id)
     {
-        $sql = "DELETE FROM $this->tabla WHERE id_vehiculos = \"$id\"";
+        /** @noinspection SqlResolve */
+        $sql = "DELETE FROM $this->tabla WHERE idVechiulo = \"$id\"";
 
         $conexion = Conexion::conectar();
 
@@ -63,6 +62,7 @@ class VehiculoBdDao implements VehiculoIDao
 
     public function eliminarPorDominio($dominio)
     {
+        /** @noinspection SqlResolve */
         $sql = "DELETE FROM $this->tabla WHERE dominio = \"$dominio\"";
 
         $conexion = Conexion::conectar();
@@ -72,9 +72,10 @@ class VehiculoBdDao implements VehiculoIDao
         $sentencia->execute();
     }
 
-    public function actualizar($vehiculo)
+    public function actualizar(Vehiculo $vehiculo)
     {
-        $sql = "UPDATE $this->tabla SET id_titulares = :idTitular WHERE id_vehiculos = :idVehiculo";
+        /** @noinspection SqlResolve */
+        $sql = "UPDATE $this->tabla SET idTitular = :idTitular WHERE idVechiulo = :idVehiculo";
 
         $conexion = Conexion::conectar();
 
@@ -105,12 +106,16 @@ class VehiculoBdDao implements VehiculoIDao
 
         $this->mapear($dataSet);
 
-        if (!empty($this->listado)) return $this->listado;
+        if (!empty($this->listado)) {
+            return $this->listado;
+        }
+        return null;
     }
 
     public function traerPorIdTitular($id)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE id_titular = '$id'";
+        /** @noinspection SqlResolve */
+        $sql = "SELECT * FROM $this->tabla WHERE idTitular = '$id'";
 
         $conexion = Conexion::conectar();
 
@@ -124,13 +129,16 @@ class VehiculoBdDao implements VehiculoIDao
 
         $this->mapear($dataSet);
 
-        if (!empty($this->listado[0])) return $this->listado[0];
-
+        if (!empty($this->listado[0])) {
+            return $this->listado[0];
+        }
+        return null;
     }
 
     public function traerPorId($id)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE id_vehiculos =  \"$id\" LIMIT 1";
+        /** @noinspection SqlResolve */
+        $sql = "SELECT * FROM $this->tabla WHERE idVehiculo =  \"$id\" LIMIT 1";
 
         $conexion = Conexion::conectar();
 
@@ -142,11 +150,15 @@ class VehiculoBdDao implements VehiculoIDao
 
         $this->mapear($dataSet);
 
-        if (!empty($this->listado[0])) return $this->listado[0];
+        if (!empty($this->listado[0])) {
+            return $this->listado[0];
+        }
+        return null;
     }
 
     public function traerPorDominio($dominio)
     {
+        /** @noinspection SqlResolve */
         $sql = "SELECT * FROM $this->tabla WHERE dominio =  \"$dominio\" LIMIT 1";
 
         $conexion = Conexion::conectar();
@@ -159,22 +171,26 @@ class VehiculoBdDao implements VehiculoIDao
 
         $this->mapear($dataSet);
 
-        if (!empty($this->listado[0])) return $this->listado[0];
+        if (!empty($this->listado[0])) {
+            return $this->listado[0];
+        }
+        return null;
     }
 
     public function mapear($dataSet)
     {
         $dataSet = is_array($dataSet) ? $dataSet : [];
         $this->listado = array_map(function ($p) {
-
             $daoTitular = TitularBdDao::getInstancia();
-
-            $v = new Vehiculo($p['dominio'], $p['marca'], $p['modelo'], $daoTitular->traerPorId($p['id_titulares']), $p['qr']);
-
-            $v->setId($p['id_vehiculos']);
-
+            $v = new Vehiculo(
+                $p['dominio'],
+                $p['marca'],
+                $p['modelo'],
+                $daoTitular->traerPorId($p['idTitular']),
+                $p['qr']
+            );
+            $v->setId($p['idVehiculo']);
             return $v;
-
         }, $dataSet);
     }
 }

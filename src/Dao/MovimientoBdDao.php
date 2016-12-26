@@ -2,12 +2,13 @@
 
 namespace Dao;
 
-use Modelo\Mensaje;
+use Modelo\EventoMulta;
+use Modelo\EventoPeaje;
 use Modelo\MovimientoCuentaCorriente;
 
-class MovimientoCuentaCorrienteBdDao
+class MovimientoBdDao implements MovimientoIDao
 {
-    protected $tabla = "movimientos_cuentas_corrientes";
+    protected $tabla = "movimientos";
     protected $listado;
     private static $instancia;
 
@@ -16,13 +17,13 @@ class MovimientoCuentaCorrienteBdDao
         if (!self::$instancia instanceof self) {
             self::$instancia = new self();
         }
-
         return self::$instancia;
     }
 
-    public function agregar($movimiento)
+    public function agregar(MovimientoCuentaCorriente $movimiento)
     {
-        $sql = "INSERT INTO $this->tabla (fecha_hora, importe, id_cuentas_corrientes, id_eventos) 
+        /** @noinspection SqlResolve */
+        $sql = "INSERT INTO $this->tabla (fehchaHora, importe, idCuentaCorriente, idEvento) 
                 VALUES (:fecha_hora, :importe, :idCuentaCorriente, :idEvento)";
 
         $conexion = Conexion::conectar();
@@ -36,10 +37,12 @@ class MovimientoCuentaCorrienteBdDao
         $idCuentaCorriente = $cuentaCorriente->getId();
 
         if ($movimiento->getEventoPeaje()) {
+            /** @var EventoPeaje $eventoPeaje */
             $eventoPeaje = $movimiento->getEventoPeaje();
 
             $idEvento = $eventoPeaje->getId();
         } elseif ($movimiento->getEventoMulta()) {
+            /** @var EventoMulta $eventoMulta */
             $eventoMulta = $movimiento->getEventoMulta();
 
             $idEvento = $eventoMulta->getId();
@@ -59,7 +62,8 @@ class MovimientoCuentaCorrienteBdDao
 
     public function traerPorId($id)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE id_movimientos =  \"$id\" LIMIT 1";
+        /** @noinspection SqlResolve */
+        $sql = "SELECT * FROM $this->tabla WHERE idMovimiento =  \"$id\" LIMIT 1";
 
         $conexion = Conexion::conectar();
 
@@ -79,7 +83,8 @@ class MovimientoCuentaCorrienteBdDao
 
     public function traerTodoPorIdCuentaCorriente($idCC)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE id_cuentas_corrientes =  \"$idCC\"";
+        /** @noinspection SqlResolve */
+        $sql = "SELECT * FROM $this->tabla WHERE idCuentaCorriente =  \"$idCC\"";
 
         $conexion = Conexion::conectar();
 
@@ -108,8 +113,10 @@ class MovimientoCuentaCorrienteBdDao
 
         $this->mapear($dataSet);
 
-        if (!empty($this->listado)) return $this->listado;
-
+        if (!empty($this->listado)) {
+            return $this->listado;
+        }
+        return null;
     }
 
     public function mapear($dataSet)
@@ -120,25 +127,25 @@ class MovimientoCuentaCorrienteBdDao
             $daoCuentaCorriente = CuentaCorrienteBdDao::getInstancia();
 
             $daoEventoMulta = EventoMultaBdDao::getInstancia();
-            $eventoMulta = $daoEventoMulta->traerPorId($p['id_eventos']);
+            $eventoMulta = $daoEventoMulta->traerPorId($p['idEvento']);
 
             $daoEventoPeaje = EventoPeajeBdDao::getInstancia();
-            $eventoPeaje = $daoEventoPeaje->traerPorId($p['id_eventos']);
+            $eventoPeaje = $daoEventoPeaje->traerPorId($p['idEvento']);
 
             $mcc = new MovimientoCuentaCorriente(
-                $p['fecha_hora'],
+                $p['fechaHora'],
                 $p['importe'],
-                $daoCuentaCorriente->traerPorId($p['id_cuentas_corrientes'])
+                $daoCuentaCorriente->traerPorId($p['idCuentaCorriente'])
             );
 
-            $mcc->setId($p['id_movimientos']);
+            $mcc->setId($p['idMovimiento']);
 
             if ($eventoMulta) {
                 $mcc->setEventoMulta($eventoMulta);
             } elseif ($eventoPeaje) {
                 $mcc->setEventoPeaje($eventoPeaje);
             } else {
-                echo 'error';
+                throw new \Exception('Se produjo un error !');
             }
 
             return $mcc;

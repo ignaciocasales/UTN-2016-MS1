@@ -5,11 +5,9 @@
 
 namespace Dao;
 
-
 class SensorPeajeJsonDao implements SensorIDao
 {
-
-    public function agregar($evento)
+    public function agregar($sensor)
     {
         // TODO: Implement agregar() method.
     }
@@ -24,13 +22,13 @@ class SensorPeajeJsonDao implements SensorIDao
         // TODO: Implement traerPorId() method.
     }
 
-    public function mapear($dataSet)
-    {
-        // TODO: Implement mapear() method.
-    }
-
     public function traerCualquiera()
     {
         // TODO: Implement traerCualquiera() method.
+    }
+
+    public function mapear($dataSet)
+    {
+        // TODO: Implement mapear() method.
     }
 }

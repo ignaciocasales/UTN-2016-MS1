@@ -5,15 +5,16 @@
 
 namespace Dao;
 
+use Modelo\Tarifa;
 
 class TarifaJsonDao implements TarifaIDao
 {
-    public function agregar($tarifa)
+    public function agregar(Tarifa $tarifa)
     {
         // TODO: Implement agregar() method.
     }
 
-    public function actualizar($tarifa)
+    public function actualizar(Tarifa $tarifa)
     {
         // TODO: Implement actualizar() method.
     }

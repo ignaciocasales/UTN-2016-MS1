@@ -5,7 +5,6 @@
 
 namespace Dao;
 
-
 class EventoMultaJsonDao implements EventoIDao
 {
 

@@ -2,10 +2,11 @@
 
 namespace Dao;
 
+use Modelo\MovimientoCuentaCorriente;
 
-interface MovimientoCuentaCorrienteIDao
+interface MovimientoIDao
 {
-    public function agregar($movimiento);
+    public function agregar(MovimientoCuentaCorriente $movimiento);
 
     public function traerTodo();
 

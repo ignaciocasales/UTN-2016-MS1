@@ -1,4 +1,6 @@
 <?php
+include "config_simulador.php";
+include "rand_date.php";
 //Para ejecutar por CLI: 'php simulador_nacho.php <cantidad>'
 
 //Se puede ejecutar tanto por CLI como por HTTP
@@ -9,11 +11,6 @@ if ($_GET) {
 }
 
 echo "Generando ... \n";
-
-//Defino constantes para almacenar las direcciones de las clases.
-define("SRC_CONFIG", '../src/Config/');
-define("SRC_DAO", '../src/Dao/');
-define("SRC_MODELO", '../src/Modelo/');
 
 //Incluyo todas las clases necesarias.
 require(SRC_CONFIG . "Config.php");
@@ -39,8 +36,8 @@ require(SRC_DAO . "CuentaCorrienteBdDao.php");
 require(SRC_DAO . "EventoIDao.php");
 require(SRC_DAO . "EventoMultaBdDao.php");
 require(SRC_DAO . "EventoPeajeBdDao.php");
-require(SRC_DAO . "MovimientoCuentaCorrienteIDao.php");
-require(SRC_DAO . "MovimientoCuentaCorrienteBdDao.php");
+require(SRC_DAO . "MovimientoIDao.php");
+require(SRC_DAO . "MovimientoBdDao.php");
 require(SRC_DAO . "RolIDao.php");
 require(SRC_DAO . "RolBdDao.php");
 require(SRC_DAO . "SensorIDao.php");
@@ -63,7 +60,7 @@ $daoSemaforo = \Dao\SensorSemaforoBdDao::getInstancia();
 $daoPeaje = \Dao\SensorPeajeBdDao::getInstancia();
 $daoEventoMulta = \Dao\EventoMultaBdDao::getInstancia();
 $daoEventoPeaje = \Dao\EventoPeajeBdDao::getInstancia();
-$daoMovimientoCuentaCorriente = \Dao\MovimientoCuentaCorrienteBdDao::getInstancia();
+$daoMovimientoCuentaCorriente = \Dao\MovimientoBdDao::getInstancia();
 
 //Defino los tipos de eventos que maneja el sistema.
 $eventos = array('multa', 'peaje');
@@ -100,6 +97,7 @@ try {
         //Si es multa, cargo el movimiento correspondiente con la tarifa correspondiente.
         //Si es peaje, cargo el movimiento correspondiente con la tarifa correspondiente
         // y además verifico si es hora pico u hora normal.
+        $movimientoCuentaCorriente = null;
         if ($eventos[$eventoKey] === 'multa') {
             $sensores = $daoSemaforo->traerCualquiera();
 
@@ -157,19 +155,13 @@ try {
 
         $progreso = floatval($numerador) / floatval($cantidad) * 100;
 
-        echo $progreso . "% \n";
+        if ((($progreso % 10) == 0) && $progreso > 1) {
+            echo $progreso . "%" . "completado... \n";
+        }
     }
     echo 'Se genero' . ' ' . $cantidad . ' ' . 'evento/s';
 } catch (\PDOException $e) {
     print_r($e->errorInfo);
-}
-
-function rand_date($min_date, $max_date)
-{
-    $min_epoch = strtotime($min_date);
-    $max_epoch = strtotime($max_date);
-
-    $rand_epoch = rand($min_epoch, $max_epoch);
-
-    return $rand_epoch;
+} catch (\Exception $e) {
+    echo 'error, deteniendo...';
 }

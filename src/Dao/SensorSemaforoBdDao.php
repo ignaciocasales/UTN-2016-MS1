@@ -2,7 +2,6 @@
 
 namespace Dao;
 
-
 use Modelo\SensorSemaforo;
 
 class SensorSemaforoBdDao implements SensorIDao
@@ -14,17 +13,20 @@ class SensorSemaforoBdDao implements SensorIDao
     public static function getInstancia()
     {
         if (!self::$instancia instanceof self) {
-
             self::$instancia = new self();
-
         }
-
         return self::$instancia;
     }
 
+    /**
+     * @param SensorSemaforo $sensor
+     * @return integer
+     */
     public function agregar($sensor)
     {
-        $sql = "INSERT INTO $this->tabla (fecha_alta, latitud, longitud, numeros_serie, id_tipos_sensores) VALUES (:fechaAlta, :latitud, :longitud, :numerosSerie, :idSensor)";
+        /** @noinspection SqlResolve */
+        $sql = "INSERT INTO $this->tabla (fechaAlta, latitud, longitud, numeroSerie, idTipoSensor) 
+                VALUES (:fechaAlta, :latitud, :longitud, :numerosSerie, :idSensor)";
 
         $conexion = Conexion::conectar();
 
@@ -49,7 +51,8 @@ class SensorSemaforoBdDao implements SensorIDao
 
     public function traerTodo()
     {
-        $sql = "SELECT * FROM $this->tabla WHERE id_tipos_sensores =  \"2\"";
+        /** @noinspection SqlResolve */
+        $sql = "SELECT * FROM $this->tabla WHERE idTipoSensor =  \"2\"";
 
         $conexion = Conexion::conectar();
 
@@ -61,12 +64,16 @@ class SensorSemaforoBdDao implements SensorIDao
 
         $this->mapear($dataSet);
 
-        if (!empty($this->listado)) return $this->listado;
+        if (!empty($this->listado)) {
+            return $this->listado;
+        }
+        return null;
     }
 
     public function traerPorId($id)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE id_sensores =  \"$id\" AND id_tipos_sensores =  \"2\" LIMIT 1";
+        /** @noinspection SqlResolve */
+        $sql = "SELECT * FROM $this->tabla WHERE idSensor =  \"$id\" AND idTipoSensor =  \"2\" LIMIT 1";
 
         $conexion = Conexion::conectar();
 
@@ -76,19 +83,20 @@ class SensorSemaforoBdDao implements SensorIDao
 
         $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
 
-        if ($dataSet[0] == false) {
-            return null;
-        } else {
+        if ($dataSet[0] != false) {
             $this->mapear($dataSet);
 
-            if (!empty($this->listado[0])) return $this->listado[0];
+            if (!empty($this->listado[0])) {
+                return $this->listado[0];
+            }
         }
-
+        return null;
     }
 
     public function traerCualquiera()
     {
-        $sql = "SELECT * FROM $this->tabla WHERE id_tipos_sensores =  \"2\" ORDER BY RAND() LIMIT 1";
+        /** @noinspection SqlResolve */
+        $sql = "SELECT * FROM $this->tabla WHERE idTipoSensor =  \"2\" ORDER BY RAND() LIMIT 1";
 
         $conexion = Conexion::conectar();
 
@@ -100,20 +108,19 @@ class SensorSemaforoBdDao implements SensorIDao
 
         $this->mapear($dataSet);
 
-        if (!empty($this->listado[0])) return $this->listado[0];
+        if (!empty($this->listado[0])) {
+            return $this->listado[0];
+        }
+        return null;
     }
 
     public function mapear($dataSet)
     {
         $dataSet = is_array($dataSet) ? $dataSet : [];
         $this->listado = array_map(function ($p) {
-
-            $s = new SensorSemaforo($p['fecha_alta'], $p['latitud'], $p['longitud'], $p['numeros_serie']);
-
-            $s->setId($p['id_sensores']);
-
+            $s = new SensorSemaforo($p['fechaAlta'], $p['latitud'], $p['longitud'], $p['numeroSerie']);
+            $s->setId($p['idSensor']);
             return $s;
-
         }, $dataSet);
     }
 }

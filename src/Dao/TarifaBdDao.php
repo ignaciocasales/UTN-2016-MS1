@@ -2,7 +2,6 @@
 
 namespace Dao;
 
-
 use Modelo\Tarifa;
 
 class TarifaBdDao implements TarifaIDao
@@ -14,16 +13,16 @@ class TarifaBdDao implements TarifaIDao
     public static function getInstancia()
     {
         if (!self::$instancia instanceof self) {
-
             self::$instancia = new self();
-
         }
         return self::$instancia;
     }
 
-    public function agregar($tarifa)
+    public function agregar(Tarifa $tarifa)
     {
-        $sql = "INSERT INTO $this->tabla (fecha_desde, fechaHasta, multa, peajeHoraNormal, peajeHoraPico) VALUES (:fechaDesde, :fechaHasta, :multa, :peajeHoraNormal, :peajeHoraPico)";
+        /** @noinspection SqlResolve */
+        $sql = "INSERT INTO $this->tabla (fechaDesde, fechaHasta, multa, peajeHoraNormal, peajeHoraPico) 
+                VALUES (:fechaDesde, :fechaHasta, :multa, :peajeHoraNormal, :peajeHoraPico)";
 
         $conexion = Conexion::conectar();
 
@@ -46,9 +45,17 @@ class TarifaBdDao implements TarifaIDao
         return $conexion->lastInsertId();
     }
 
-    public function actualizar($tarifa)
+    public function actualizar(Tarifa $tarifa)
     {
-        $sql = "UPDATE $this->tabla SET fechaDesde = :fechaDesde, fechaHasta = :fechaHasta, multa = :multa, peajeHoraNormal = :peajeHoraNormal, peajeHoraPico = :peajeHoraPico WHERE id_tarifas = :id";
+        /** @noinspection SqlResolve */
+        $sql = "UPDATE $this->tabla
+                  SET 
+                  fechaDesde = :fechaDesde,
+                  fechaHasta = :fechaHasta,
+                  multa = :multa,
+                  peajeHoraNormal = :peajeHoraNormal,
+                  peajeHoraPico = :peajeHoraPico 
+                WHERE idTarifa = :id";
 
         $conexion = Conexion::conectar();
 
@@ -85,12 +92,15 @@ class TarifaBdDao implements TarifaIDao
 
         $this->mapear($dataSet);
 
-        if (!empty($this->listado)) return $this->listado;
+        if (!empty($this->listado)) {
+            return $this->listado;
+        }
+        return null;
     }
 
     public function traerPorId($id)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE id_tarifas =  \"$id\" LIMIT 1";
+        $sql = "SELECT * FROM $this->tabla  WHERE idTarifa =  \"$id\" LIMIT 1";
 
         $conexion = Conexion::conectar();
 
@@ -102,12 +112,19 @@ class TarifaBdDao implements TarifaIDao
 
         $this->mapear($dataSet);
 
-        if (!empty($this->listado[0])) return $this->listado[0];
+        if (!empty($this->listado[0])) {
+            return $this->listado[0];
+        }
+        return null;
     }
 
     public function traerPorFecha($fecha)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE fecha_desde <=  \"$fecha\" AND fecha_hasta >= \"$fecha\" LIMIT 1";
+        /** @noinspection SqlResolve */
+        $sql = "SELECT * 
+                FROM $this->tabla 
+                WHERE fechaDesde <=  \"$fecha\" AND fechaHasta >= \"$fecha\" 
+                LIMIT 1";
 
         $conexion = Conexion::conectar();
 
@@ -119,20 +136,25 @@ class TarifaBdDao implements TarifaIDao
 
         $this->mapear($dataSet);
 
-        if (!empty($this->listado[0])) return $this->listado[0];
+        if (!empty($this->listado[0])) {
+            return $this->listado[0];
+        }
+        return null;
     }
 
     public function mapear($dataSet)
     {
         $dataSet = is_array($dataSet) ? $dataSet : [];
         $this->listado = array_map(function ($p) {
-
-            $t = new Tarifa($p['fecha_desde'], $p['fecha_hasta'], $p['multa'], $p['peaje_hora_normal'], $p['peaje_hora_pico']);
-
-            $t->setId($p['id_tarifas']);
-
+            $t = new Tarifa(
+                $p['fechaDesde'],
+                $p['fechaHasta'],
+                $p['multa'],
+                $p['peajeHoraNormal'],
+                $p['peajeHoraPico']
+            );
+            $t->setId($p['idTarifa']);
             return $t;
-
         }, $dataSet);
     }
 }

@@ -5,11 +5,11 @@
 
 namespace Dao;
 
+use Modelo\Usuario;
 
 class UsuarioJsonDao implements UsuarioIDao
 {
-
-    public function agregar($usuario)
+    public function agregar(Usuario $usuario)
     {
         // TODO: Implement agregar() method.
     }
@@ -24,7 +24,7 @@ class UsuarioJsonDao implements UsuarioIDao
         // TODO: Implement eliminarPorMail() method.
     }
 
-    public function actualizar($usuario)
+    public function actualizar(Usuario $usuario)
     {
         // TODO: Implement actualizar() method.
     }

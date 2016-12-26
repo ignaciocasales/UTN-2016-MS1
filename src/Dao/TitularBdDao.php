@@ -2,8 +2,6 @@
 
 namespace Dao;
 
-use Dao\IDao;
-use Dao\Conexion as Conexion;
 use Modelo\Titular;
 
 class TitularBdDao implements TitularIDao
@@ -20,10 +18,11 @@ class TitularBdDao implements TitularIDao
         return self::$instancia;
     }
 
-    public function agregar($titular)
+    public function agregar(Titular $titular)
     {
-
-        $sql = "INSERT INTO $this->tabla (nombre, apellido, dni, telefono, id_usuarios) VALUES (:nombre, :apellido, :dni, :telefono, :idUsuarios)";
+        /** @noinspection SqlResolve */
+        $sql = "INSERT INTO $this->tabla  (nombre, apellido, dni, telefono, idUsuario) 
+                VALUES (:nombre, :apellido, :dni, :telefono, :idUsuarios)";
 
         $conexion = Conexion::conectar();
 
@@ -49,7 +48,8 @@ class TitularBdDao implements TitularIDao
 
     public function eliminarPorId($id)
     {
-        $sql = "DELETE FROM $this->tabla WHERE dni = \"$id\"";
+        /** @noinspection SqlResolve */
+        $sql = "DELETE FROM $this->tabla WHERE idTitular = \"$id\"";
 
         $obj_pdo = new Conexion();
 
@@ -62,6 +62,7 @@ class TitularBdDao implements TitularIDao
 
     public function eliminarPorDni($dni)
     {
+        /** @noinspection SqlResolve */
         $sql = "DELETE FROM $this->tabla WHERE dni = \"$dni\"";
 
         $obj_pdo = new Conexion();
@@ -73,9 +74,12 @@ class TitularBdDao implements TitularIDao
         $sentencia->execute();
     }
 
-    public function actualizar($titular)
+    public function actualizar(Titular $titular)
     {
-        $sql = "UPDATE $this->tabla SET nombre = :nombre, apellido = :apellido, telefono = :telefono, dni = :dni  WHERE id_titulares = :id";
+        /** @noinspection SqlResolve */
+        $sql = "UPDATE $this->tabla 
+                SET nombre = :nombre, apellido = :apellido, telefono = :telefono, dni = :dni  
+                WHERE idTitular = :id";
 
         $conexion = Conexion::conectar();
 
@@ -110,12 +114,16 @@ class TitularBdDao implements TitularIDao
 
         $this->mapear($dataSet);
 
-        if (!empty($this->listado)) return $this->listado;
+        if (!empty($this->listado)) {
+            return $this->listado;
+        }
+        return null;
     }
 
     public function traerPorIdUsuario($idUsuario)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE id_usuarios = '$idUsuario'";
+        /** @noinspection SqlResolve */
+        $sql = "SELECT * FROM $this->tabla WHERE idUsuario = '$idUsuario'";
 
         $conexion = Conexion::conectar();
 
@@ -127,13 +135,16 @@ class TitularBdDao implements TitularIDao
 
         $this->mapear($dataSet);
 
-        if (!empty($this->listado[0])) return $this->listado[0];
-
+        if (!empty($this->listado[0])) {
+            return $this->listado[0];
+        }
+        return null;
     }
 
     public function traerPorId($id)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE id_titulares =  \"$id\" LIMIT 1";
+        /** @noinspection SqlResolve */
+        $sql = "SELECT * FROM $this->tabla WHERE idTitular =  \"$id\" LIMIT 1";
 
         $conexion = Conexion::conectar();
 
@@ -145,11 +156,15 @@ class TitularBdDao implements TitularIDao
 
         $this->mapear($dataSet);
 
-        if (!empty($this->listado[0])) return $this->listado[0];
+        if (!empty($this->listado[0])) {
+            return $this->listado[0];
+        }
+        return null;
     }
 
     public function traerPorDni($dni)
     {
+        /** @noinspection SqlResolve */
         $sql = "SELECT * FROM $this->tabla WHERE dni = \"$dni\"";
 
         $conexion = Conexion::conectar();
@@ -162,22 +177,26 @@ class TitularBdDao implements TitularIDao
 
         $this->mapear($dataSet);
 
-        if (!empty($this->listado[0])) return $this->listado[0];
+        if (!empty($this->listado[0])) {
+            return $this->listado[0];
+        }
+        return null;
     }
 
     public function mapear($dataSet)
     {
         $dataSet = is_array($dataSet) ? $dataSet : [];
         $this->listado = array_map(function ($p) {
-
             $usuarioDao = UsuarioBdDao::getInstancia();
-
-            $t = new Titular($p['nombre'], $p['apellido'], $p['dni'], $p['telefono'], $usuarioDao->traerPorId($p['id_usuarios']));
-
-            $t->setId($p['id_titulares']);
-
+            $t = new Titular(
+                $p['nombre'],
+                $p['apellido'],
+                $p['dni'],
+                $p['telefono'],
+                $usuarioDao->traerPorId($p['idUsuario'])
+            );
+            $t->setId($p['idTitular']);
             return $t;
-
         }, $dataSet);
     }
 }

@@ -16,7 +16,7 @@ VALUES
   ('multa'),
   ('peaje');
 
-INSERT INTO usuarios (mail, pwd, id_roles)
+INSERT INTO usuarios (correo, pwd, idRol)
 VALUES
   ('ignaciocasales_nacho@hotmail.com', 'admin', '1'),
   ('dami_tano_95@hotmail.com', 'admin', '1'),
@@ -34,7 +34,7 @@ VALUES
   ('mathias.reyes@dominio.com', '123', '3'),
   ('karim.carvajal@dominio.com', '123', '3');
 
-INSERT INTO titulares (id_usuarios, dni, nombre, apellido, telefono)
+INSERT INTO titulares (idUsuario, dni, nombre, apellido, telefono)
 VALUES
   ('5', '38831250', 'Arnaldo', 'Salazar', '555-551'),
   ('6', '40301023', 'Facundo', 'Leiva', '555-552'),
@@ -48,7 +48,7 @@ VALUES
   ('14', '22333153', 'Mathías', 'Reyes', '555-560'),
   ('15', '28111253', 'Karim', 'Carvajal', '555-561');
 
-INSERT INTO vehiculos (id_titulares, dominio, marca, modelo, qr)
+INSERT INTO vehiculos (idTitular, dominio, marca, modelo, qr)
 VALUES
   ('1', 'ARK-230', 'Renault', 'Twingo', 'Dominio: ARK-230'),
   ('1', 'YBB-799', 'Peugeot', '206', 'Dominio: YBB-799'),
@@ -70,7 +70,7 @@ VALUES
   ('11', 'LKL-123', 'Ford', 'Focus', 'Dominio: LKL-123');
 
 
-INSERT INTO tarifas (fecha_desde, fecha_hasta, multa, peaje_hora_normal, peaje_hora_pico)
+INSERT INTO tarifas (fechaDesde, fechaHasta, multa, peajeHoraNormal, peajeHoraPico)
 VALUES
   ('2016-11-01 00:00:00', '2016-11-27 23:59:59', '1000', '10', '25'),
   ('2016-11-28 00:00:00', '2016-11-28 23:59:59', '1000', '8', '8'),
@@ -81,7 +81,7 @@ VALUES
   ('2016-12-26 00:00:00', '2016-12-31 23:59:59', '1000', '10', '25');
 
 
-INSERT INTO cuentas_corrientes (fecha_ultima_actualizacion, maximo_credito, saldo, id_vehiculos)
+INSERT INTO cuentas_corrientes (ultimaActualizacion, maximoCredito, saldo, idVehiculo)
 VALUES
   ('2015-04-10 10:30:13', '100000', '0', '1'),
   ('2015-04-10 10:30:13', '100000', '0', '2'),
@@ -103,7 +103,7 @@ VALUES
   ('2015-12-21 08:17:23', '100000', '0', '18');
 
 
-INSERT INTO sensores (fecha_alta, latitud, longitud, numeros_serie, id_tipos_sensores)
+INSERT INTO sensores (fechaAlta, latitud, longitud, numeroSerie, idTipoSensor)
 VALUES
   ('2015-01-01', '-38.052618', '-57.561426', '399912354', '1'),
   ('2015-01-10', '-38.060798', '-57.571206', '333312354', '1'),
@@ -150,7 +150,7 @@ VALUES
   ('Fiat'),
   ('Volkswagen');
 
-INSERT INTO modelos (id_marcas, nombre)
+INSERT INTO modelos (idMarca, nombre)
 VALUES
   ('1', 'Focus'),
   ('1', 'Fiesta'),

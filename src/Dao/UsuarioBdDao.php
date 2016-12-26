@@ -2,9 +2,6 @@
 
 namespace Dao;
 
-
-use Dao\IDao;
-use Dao\Conexion as Conexion;
 use Modelo\Usuario;
 
 class UsuarioBdDao implements UsuarioIDao
@@ -16,17 +13,15 @@ class UsuarioBdDao implements UsuarioIDao
     public static function getInstancia()
     {
         if (!self::$instancia instanceof self) {
-
             self::$instancia = new self();
-
         }
-
         return self::$instancia;
     }
 
-    public function agregar($usuario)
+    public function agregar(Usuario $usuario)
     {
-        $sql = "INSERT INTO $this->tabla (mail, pwd, id_roles) VALUES (:mail, :pwd, :idRoles)";
+        /** @noinspection SqlResolve */
+        $sql = "INSERT INTO $this->tabla (correo, pwd, idRol) VALUES (:mail, :pwd, :idRoles)";
 
         $conexion = Conexion::conectar();
 
@@ -49,7 +44,8 @@ class UsuarioBdDao implements UsuarioIDao
 
     public function eliminarPorId($id)
     {
-        $sql = "DELETE FROM $this->tabla WHERE id_usuarios = \"$id\"";
+        /** @noinspection SqlResolve */
+        $sql = "DELETE FROM $this->tabla WHERE idUsuario = \"$id\"";
 
         $conexion = Conexion::conectar();
 
@@ -60,7 +56,8 @@ class UsuarioBdDao implements UsuarioIDao
 
     public function eliminarPorMail($mail)
     {
-        $sql = "DELETE FROM $this->tabla WHERE mail = \"$mail\"";
+        /** @noinspection SqlResolve */
+        $sql = "DELETE FROM $this->tabla WHERE correo = \"$mail\"";
 
         $conexion = Conexion::conectar();
 
@@ -69,9 +66,10 @@ class UsuarioBdDao implements UsuarioIDao
         $sentencia->execute();
     }
 
-    public function actualizar($usuario)
+    public function actualizar(Usuario $usuario)
     {
-        $sql = "UPDATE $this->tabla SET mail = :mail, pwd = :pwd, id_roles = :idRoles WHERE id_usuarios = :idUsuarios";
+        /** @noinspection SqlResolve */
+        $sql = "UPDATE $this->tabla SET correo = :mail, pwd = :pwd, idRol = :idRoles WHERE idUsuario = :idUsuarios";
 
         $conexion = Conexion::conectar();
 
@@ -106,12 +104,16 @@ class UsuarioBdDao implements UsuarioIDao
 
         $this->mapear($dataSet);
 
-        if (!empty($this->listado)) return $this->listado;
+        if (!empty($this->listado)) {
+            return $this->listado;
+        }
+        return null;
     }
 
     public function traerPorId($id)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE id_usuarios =  \"$id\" LIMIT 1";
+        /** @noinspection SqlResolve */
+        $sql = "SELECT * FROM $this->tabla WHERE idUsuario =  \"$id\" LIMIT 1";
 
         $conexion = Conexion::conectar();
 
@@ -123,12 +125,16 @@ class UsuarioBdDao implements UsuarioIDao
 
         $this->mapear($dataSet);
 
-        if (!empty($this->listado[0])) return $this->listado[0];
+        if (!empty($this->listado[0])) {
+            return $this->listado[0];
+        }
+        return null;
     }
 
     public function traerPorMail($mail)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE mail =  \"$mail\" LIMIT 1";
+        /** @noinspection SqlResolve */
+        $sql = "SELECT * FROM $this->tabla WHERE correo =  \"$mail\" LIMIT 1";
 
         $conexion = Conexion::conectar();
 
@@ -140,22 +146,24 @@ class UsuarioBdDao implements UsuarioIDao
 
         $this->mapear($dataSet);
 
-        if (!empty($this->listado[0])) return $this->listado[0];
+        if (!empty($this->listado[0])) {
+            return $this->listado[0];
+        }
+        return null;
     }
 
     public function mapear($dataSet)
     {
         $dataSet = is_array($dataSet) ? $dataSet : [];
         $this->listado = array_map(function ($p) {
-
             $daoRol = RolBdDao::getInstancia();
-
-            $u = new Usuario($p['mail'], $p['pwd'], $daoRol->traerPorId($p['id_roles']));
-
-            $u->setId($p['id_usuarios']);
-
+            $u = new Usuario(
+                $p['correo'],
+                $p['pwd'],
+                $daoRol->traerPorId($p['idRol'])
+            );
+            $u->setId($p['idUsuario']);
             return $u;
-
         }, $dataSet);
     }
 }

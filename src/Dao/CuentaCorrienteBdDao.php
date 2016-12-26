@@ -15,7 +15,6 @@ class CuentaCorrienteBdDao implements CuentaCorrienteIDao
         if (!self::$instancia instanceof self) {
             self::$instancia = new self();
         }
-
         return self::$instancia;
     }
 
@@ -25,22 +24,23 @@ class CuentaCorrienteBdDao implements CuentaCorrienteIDao
 
     public function agregar(CuentaCorriente $cuenta_corriente)
     {
-        $sql = "INSERT INTO $this->tabla (fecha_ultima_actualizacion, maximo_credito, saldo, id_vehiculos) 
-        VALUES (:fecha_ultima_actualizacion, :maximo_credito, :saldo, :idVehiculo)";
+        /** @noinspection SqlResolve */
+        $sql = "INSERT INTO $this->tabla (ultimaActualizacion, maximoCredito, saldo, idVehiculo) 
+                    VALUES (:ultimaActualizacion, :maximoCredito, :saldo, :idVehiculo)";
 
         $conexion = Conexion::conectar();
 
         $sentencia = $conexion->prepare($sql);
 
-        $fecha_ultima_actualizacion = $cuenta_corriente->getFechaUltimaActualizacion();
-        $maximo_credito = $cuenta_corriente->getMaximoCredito();
+        $ultimaActualizacion = $cuenta_corriente->getFechaUltimaActualizacion();
+        $maximoCredito = $cuenta_corriente->getMaximoCredito();
         $saldo = $cuenta_corriente->getSaldo();
 
         $vehiculo = $cuenta_corriente->getVehiculo();
         $idVehiculo = $vehiculo->getId();
 
-        $sentencia->bindParam(":fecha_ultima_actualizacion", $fecha_ultima_actualizacion);
-        $sentencia->bindParam(":maximo_credito", $maximo_credito);
+        $sentencia->bindParam(":ultimaActualizacion", $ultimaActualizacion);
+        $sentencia->bindParam(":maximoCredito", $maximoCredito);
         $sentencia->bindParam(":saldo", $saldo);
         $sentencia->bindParam(":idVehiculo", $idVehiculo);
 
@@ -51,7 +51,8 @@ class CuentaCorrienteBdDao implements CuentaCorrienteIDao
 
     public function eliminar($id)
     {
-        $sql = "DELETE FROM $this->tabla WHERE id_cuentas_corrientes = \"$id\")";
+        /** @noinspection SqlResolve */
+        $sql = "DELETE FROM $this->tabla WHERE idCuentaCorriente = \"$id\")";
 
         $conexion = Conexion::conectar();
 
@@ -62,8 +63,10 @@ class CuentaCorrienteBdDao implements CuentaCorrienteIDao
 
     public function actualizar(CuentaCorriente $cuentaCorriente)
     {
-        $sql = "UPDATE $this->tabla SET fecha_ultima_actualizacion = :fechaUltimaActualizacion, saldo = :saldo 
-        WHERE id_cuentas_corrientes = :idCuentaCorriente";
+        /** @noinspection SqlResolve */
+        $sql = "UPDATE $this->tabla
+                  SET ultimaActualizacion = :fechaUltimaActualizacion, saldo = :saldo 
+                WHERE idCuentaCorriente = :idCuentaCorriente";
 
         $conexion = Conexion::conectar();
 
@@ -85,6 +88,7 @@ class CuentaCorrienteBdDao implements CuentaCorrienteIDao
     public function traerTodo()
     {
         $sql = "SELECT * FROM $this->tabla";
+
         $sentencia = Conexion::conectar()->prepare($sql);
 
         $sentencia->execute();
@@ -101,7 +105,8 @@ class CuentaCorrienteBdDao implements CuentaCorrienteIDao
 
     public function traerPorId($id)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE id_cuentas_corrientes =  \"$id\"";
+        /** @noinspection SqlResolve */
+        $sql = "SELECT * FROM $this->tabla WHERE idCuentaCorriente =  \"$id\"";
 
         $conexion = Conexion::conectar();
 
@@ -121,7 +126,8 @@ class CuentaCorrienteBdDao implements CuentaCorrienteIDao
 
     public function traerPorVehiculo($id)
     {
-        $sql = "SELECT * FROM $this->tabla WHERE id_vehiculos =  \"$id\"";
+        /** @noinspection SqlResolve */
+        $sql = "SELECT * FROM $this->tabla WHERE idVehiculo =  \"$id\"";
 
         $conexion = Conexion::conectar();
 
@@ -147,13 +153,13 @@ class CuentaCorrienteBdDao implements CuentaCorrienteIDao
             $daoVehiculo = VehiculoBdDao::getInstancia();
 
             $cc = new CuentaCorriente(
-                $p['fecha_ultima_actualizacion'],
-                $p['maximo_credito'],
+                $p['ultimaActualizacion'],
+                $p['maximoCredito'],
                 $p['saldo'],
-                $daoVehiculo->traerPorId($p['id_vehiculos'])
+                $daoVehiculo->traerPorId($p['idVehiculo'])
             );
 
-            $cc->setId($p['id_cuentas_corrientes']);
+            $cc->setId($p['idCuentaCorriente']);
 
             return $cc;
         }, $dataSet);

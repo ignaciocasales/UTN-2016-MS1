@@ -37,7 +37,7 @@
                 <div class="col-xs-9">
                     <h6><b>Dominio: </b><?= $vehiculo->getDominio(); ?></h6>
                     <h6><b>Marca: </b><?= $vehiculo->getMarca(); ?></h6>
-                    <h6><b>Modelo </b><?= $vehiculo->getModelo(); ?></h6>
+                    <h6><b>Modelo: </b><?= $vehiculo->getModelo(); ?></h6>
                 </div>
             </div>
             <?php

@@ -2,16 +2,17 @@
 
 namespace Dao;
 
+use Modelo\Titular;
 
 interface TitularIDao
 {
-    public function agregar($titular);
+    public function agregar(Titular $titular);
 
     public function eliminarPorId($id);
 
     public function eliminarPorDni($dni);
 
-    public function actualizar($titular);
+    public function actualizar(Titular $titular);
 
     public function traeTodo();
 

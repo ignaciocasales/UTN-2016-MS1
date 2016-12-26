@@ -5,11 +5,11 @@
 
 namespace Dao;
 
+use Modelo\MovimientoCuentaCorriente;
 
-class MovimientoCuentaCorrienteJsonDao implements MovimientoCuentaCorrienteIDao
+class MovimientoJsonDao implements MovimientoIDao
 {
-
-    public function agregar($movimiento)
+    public function agregar(MovimientoCuentaCorriente $movimiento)
     {
         // TODO: Implement agregar() method.
     }
@@ -22,6 +22,11 @@ class MovimientoCuentaCorrienteJsonDao implements MovimientoCuentaCorrienteIDao
     public function traerPorId($id)
     {
         // TODO: Implement traerPorId() method.
+    }
+
+    public function traerTodoPorIdCuentaCorriente($idCC)
+    {
+        // TODO: Implement traerTodoPorIdCuentaCorriente() method.
     }
 
     public function mapear($dataSet)

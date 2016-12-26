@@ -2,7 +2,7 @@
 
 namespace Modelo;
 
-class Sensor
+abstract class Sensor
 {
     private $id;
     private $fechaAlta;
