@@ -18,6 +18,10 @@ class UsuarioBdDao implements UsuarioIDao
         return self::$instancia;
     }
 
+    private function __construct()
+    {
+    }
+
     public function agregar(Usuario $usuario)
     {
         /** @noinspection SqlResolve */

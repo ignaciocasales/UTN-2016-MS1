@@ -18,6 +18,10 @@ class SensorSemaforoBdDao implements SensorIDao
         return self::$instancia;
     }
 
+    private function __construct()
+    {
+    }
+
     /**
      * @param SensorSemaforo $sensor
      * @return integer

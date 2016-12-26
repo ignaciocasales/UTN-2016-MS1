@@ -15,6 +15,10 @@ class ModeloMarcaDao implements MarcaModeloIDao
         return self::$instancia;
     }
 
+    private function __construct()
+    {
+    }
+
     public function traerTodo()
     {
         $sql = "SELECT marcas.nombre AS marca, modelos.nombre AS modelo 

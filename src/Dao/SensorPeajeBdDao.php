@@ -19,6 +19,10 @@ class SensorPeajeBdDao implements SensorIDao
         return self::$instancia;
     }
 
+    private function __construct()
+    {
+    }
+
     /**
      * @param SensorPeaje $sensor
      * @return integer

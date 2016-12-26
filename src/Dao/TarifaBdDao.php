@@ -18,6 +18,10 @@ class TarifaBdDao implements TarifaIDao
         return self::$instancia;
     }
 
+    private function __construct()
+    {
+    }
+
     public function agregar(Tarifa $tarifa)
     {
         /** @noinspection SqlResolve */

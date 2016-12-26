@@ -18,6 +18,10 @@ class RolBdDao implements RolIDao
         return self::$instancia;
     }
 
+    private function __construct()
+    {
+    }
+
     public function agregar(Rol $rol)
     {
         /** @noinspection SqlResolve */

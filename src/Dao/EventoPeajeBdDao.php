@@ -18,6 +18,10 @@ class EventoPeajeBdDao implements EventoIDao
         return self::$instancia;
     }
 
+    private function __construct()
+    {
+    }
+
     /**
      * @param EventoPeaje $evento
      * @return string

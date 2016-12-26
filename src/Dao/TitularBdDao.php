@@ -18,6 +18,10 @@ class TitularBdDao implements TitularIDao
         return self::$instancia;
     }
 
+    private function __construct()
+    {
+    }
+
     public function agregar(Titular $titular)
     {
         /** @noinspection SqlResolve */

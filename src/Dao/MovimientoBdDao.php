@@ -20,6 +20,10 @@ class MovimientoBdDao implements MovimientoIDao
         return self::$instancia;
     }
 
+    private function __construct()
+    {
+    }
+
     public function agregar(MovimientoCuentaCorriente $movimiento)
     {
         /** @noinspection SqlResolve */

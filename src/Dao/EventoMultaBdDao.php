@@ -19,6 +19,10 @@ class EventoMultaBdDao implements EventoIDao
         return self::$instancia;
     }
 
+    private function __construct()
+    {
+    }
+
     /**
      * @param EventoMulta $evento
      * @return string

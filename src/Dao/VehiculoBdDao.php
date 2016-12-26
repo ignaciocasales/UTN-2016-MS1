@@ -18,6 +18,10 @@ class VehiculoBdDao implements VehiculoIDao
         return self::$instancia;
     }
 
+    private function __construct()
+    {
+    }
+
     public function agregar(Vehiculo $vehiculo)
     {
         /** @noinspection SqlResolve */
