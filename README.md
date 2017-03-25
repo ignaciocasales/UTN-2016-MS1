@@ -1,4 +1,4 @@
-**TP Integrador - Trafi MDQ**
+**Practica Profesional Supervisada - Universidad Tecnológica Nacional**
 
 
 **Autores:**
