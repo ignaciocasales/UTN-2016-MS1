@@ -154,7 +154,7 @@ CREATE TABLE eventos
 (
   idEvento     SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
 
-  fehcaHora    DATETIME                         NOT NULL,
+  fechaHora    DATETIME                         NOT NULL,
 
   idTipoEvento SMALLINT UNSIGNED                NOT NULL,
 
@@ -174,7 +174,7 @@ CREATE TABLE movimientos
 (
   idMovimiento      SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
 
-  fehchaHora        DATETIME                         NOT NULL,
+  fechaHora        DATETIME                         NOT NULL,
 
   importe           FLOAT UNSIGNED                   NOT NULL,
 

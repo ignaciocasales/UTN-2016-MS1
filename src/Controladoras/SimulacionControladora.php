@@ -144,7 +144,7 @@ class SimulacionControladora
             $this->cargarVehiculos();
             require("../Vistas/simulacion.php");
         } catch (\PDOException $e) {
-            $this->mensaje = new Mensaje('danger', 'Hubo un error al conectarse con la base de datos !');
+            $this->mensaje = new Mensaje('danger', $e->getMessage());
 
             require("../Vistas/login.php");
         } catch (\Exception $e) {
